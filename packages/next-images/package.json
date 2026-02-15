@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-images",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. Fork of next-images with TypeScript support.",
   "keywords": [
     "next.js",
@@ -40,7 +40,9 @@
   },
   "typesVersions": {
     "*": {
-      "global.d.ts": ["./src/global.d.ts"]
+      "global.d.ts": [
+        "./src/global.d.ts"
+      ]
     }
   },
   "main": "./dist/index.cjs",
