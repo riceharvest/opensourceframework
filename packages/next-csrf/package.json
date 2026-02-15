@@ -1,15 +1,20 @@
 {
   "name": "@opensourceframework/next-csrf",
-  "version": "0.0.0",
-  "description": "CSRF protection for Next.js applications",
+  "version": "0.2.2",
+  "description": "CSRF protection for Next.js applications - Maintained fork of next-csrf",
   "keywords": [
     "next.js",
     "csrf",
     "security",
     "csrf-token",
-    "nextjs"
+    "nextjs",
+    "csrf-protection",
+    "synchronizer-token"
   ],
-  "author": "OpenSource Framework Contributors",
+  "author": "OpenSource Framework Contributors (fork), Original: Juan Olvera (j0lv3r4)",
+  "contributors": [
+    "Juan Olvera <j0lv3r4@users.noreply.github.com> (https://github.com/j0lv3r4)"
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -44,12 +49,23 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage node_modules"
   },
-  "dependencies": {},
+  "dependencies": {
+    "cookie": "^0.7.0",
+    "cookie-signature": "^1.2.1",
+    "csrf": "^3.1.0"
+  },
   "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/cookie-signature": "^1.1.2",
+    "@types/csrf": "^3.1.3",
     "@types/node": "^22.0.0",
+    "next": "^14.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "next": ">=12.0.0"
   },
   "repository": {
     "type": "git",

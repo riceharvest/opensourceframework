@@ -1,14 +1,28 @@
 {
   "name": "@opensourceframework/next-images",
-  "version": "0.0.0",
-  "description": "Image optimization and handling for Next.js applications",
+  "version": "1.8.6",
+  "description": "Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. Fork of next-images with TypeScript support.",
   "keywords": [
     "next.js",
+    "nextjs",
     "images",
-    "image-optimization",
-    "nextjs"
+    "image-loader",
+    "file-loader",
+    "url-loader",
+    "webpack",
+    "svg",
+    "png",
+    "jpg",
+    "base64"
   ],
-  "author": "OpenSource Framework Contributors",
+  "author": "OpenSource Framework Contributors (original by Aref Aslani / twopluszero)",
+  "contributors": [
+    {
+      "name": "Aref Aslani (twopluszero)",
+      "url": "https://github.com/twopluszero",
+      "role": "Original author"
+    }
+  ],
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,13 +36,19 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./package.json": "./package.json"
+    "./global.d.ts": "./src/global.d.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "global.d.ts": ["./src/global.d.ts"]
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "src/global.d.ts",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
@@ -43,12 +63,26 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage node_modules"
   },
-  "dependencies": {},
+  "dependencies": {
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.0"
+  },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "webpack": "^4.0.0 || ^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "webpack": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",
@@ -61,5 +95,9 @@
   "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/opensourceframework"
   }
 }
