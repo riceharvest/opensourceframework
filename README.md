@@ -9,13 +9,17 @@
 
 OpenSource Framework is a monorepo dedicated to maintaining forks of abandoned npm packages. We ensure these valuable tools continue to receive security updates, bug fixes, and compatibility improvements.
 
-## Available Packages
+## Packages
 
-| Package | Original | Status | Description |
-|---------|----------|--------|-------------|
-| [@opensourceframework/next-csrf](./packages/next-csrf) | [next-csrf](https://www.npmjs.com/package/next-csrf) | ![Maintenance](https://img.shields.io/maintenance/yes/2026.svg) | CSRF protection for Next.js |
-| [@opensourceframework/next-images](./packages/next-images) | [next-images](https://www.npmjs.com/package/next-images) | ![Maintenance](https://img.shields.io/maintenance/yes/2026.svg) | Image optimization for Next.js |
-| [@opensourceframework/critters](./packages/critters) | [critters](https://www.npmjs.com/package/critters) | ![Maintenance](https://img.shields.io/maintenance/yes/2026.svg) | CSS inlining for SSR |
+| Package | Version | Description |
+|---------|---------|-------------|
+| [@opensourceframework/critters](packages/critters) | [![npm](https://img.shields.io/npm/v/@opensourceframework/critters.svg)](https://www.npmjs.com/package/@opensourceframework/critters) | CSS optimization for Next.js |
+| [@opensourceframework/next-csrf](packages/next-csrf) | [![npm](https://img.shields.io/npm/v/@opensourceframework/next-csrf.svg)](https://www.npmjs.com/package/@opensourceframework/next-csrf) | CSRF protection for Next.js |
+| [@opensourceframework/next-images](packages/next-images) | [![npm](https://img.shields.io/npm/v/@opensourceframework/next-images.svg)](https://www.npmjs.com/package/@opensourceframework/next-images) | Image handling for Next.js |
+| [@opensourceframework/next-circuit-breaker](packages/next-circuit-breaker) | [![npm](https://img.shields.io/npm/v/@opensourceframework/next-circuit-breaker.svg)](https://www.npmjs.com/package/@opensourceframework/next-circuit-breaker) | Circuit breaker pattern for Next.js API routes |
+| [@opensourceframework/react-a11y-utils](packages/react-a11y-utils) | [![npm](https://img.shields.io/npm/v/@opensourceframework/react-a11y-utils.svg)](https://www.npmjs.com/package/@opensourceframework/react-a11y-utils) | React accessibility utilities |
+| [@opensourceframework/seeded-rng](packages/seeded-rng) | [![npm](https://img.shields.io/npm/v/@opensourceframework/seeded-rng.svg)](https://www.npmjs.com/package/@opensourceframework/seeded-rng) | Seeded random number generator |
+| [@opensourceframework/next-json-ld](packages/next-json-ld) | [![npm](https://img.shields.io/npm/v/@opensourceframework/next-json-ld.svg)](https://www.npmjs.com/package/@opensourceframework/next-json-ld) | JSON-LD structured data helpers |
 
 ## Why OpenSource Framework?
 
@@ -98,13 +102,17 @@ pnpm lint
 
 ```
 opensourceframework/
-â packages/           # Forked packages
-â  â next-csrf/      # CSRF protection for Next.js
-â  â next-images/    # Image optimization for Next.js
-â  â critters/       # CSS inlining for SSR
-â tools/              # Shared tooling configurations
-â .github/            # GitHub templates and workflows
-â plans/             # Architecture and planning documents
+â packages/                    # All packages
+â  â critters/               # CSS optimization for Next.js
+â  â next-csrf/             # CSRF protection for Next.js
+â  â next-images/           # Image handling for Next.js
+â  â next-circuit-breaker/  # Circuit breaker pattern
+â  â react-a11y-utils/      # React accessibility utilities
+â  â seeded-rng/            # Seeded random number generator
+â  â next-json-ld/          # JSON-LD structured data helpers
+â tools/                       # Shared tooling configurations
+â .github/                     # GitHub templates and workflows
+â plans/                      # Architecture and planning documents
 ```
 
 ## Sponsoring

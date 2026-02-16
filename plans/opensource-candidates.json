@@ -1,0 +1,351 @@
+{
+  "evaluatedAt": "2026-02-15T11:40:00.000Z",
+  "scoringMatrix": {
+    "criteria": [
+      { "name": "reusability", "weight": 5, "description": "Can the module be used in different projects without modification?" },
+      { "name": "generalApplicability", "weight": 4, "description": "How broadly applicable is this module across different domains?" },
+      { "name": "codeQuality", "weight": 3, "description": "Is the code well-structured, typed, and follows best practices?" },
+      { "name": "documentationPotential", "weight": 3, "description": "Can the module be easily documented for public use?" },
+      { "name": "maintenanceBurden", "weight": 2, "description": "How much ongoing maintenance will be required? (5 = low burden, 1 = high burden)" },
+      { "name": "securitySensitivity", "weight": 1, "description": "Does the module handle sensitive data or have security implications? (5 = not sensitive, 1 = highly sensitive)" }
+    ],
+    "thresholds": {
+      "strong": 70,
+      "good": 50,
+      "weak": 30
+    }
+  },
+  "candidates": [
+    {
+      "moduleName": "circuitBreaker",
+      "sourceProject": "slotenmaker-master",
+      "sourcePath": "src/lib/circuitBreaker.ts",
+      "suggestedPackageName": "@opensourceframework/next-circuit-breaker",
+      "description": "Circuit Breaker pattern implementation for API resilience. Provides fault tolerance for external service calls.",
+      "scores": {
+        "reusability": 5,
+        "generalApplicability": 5,
+        "codeQuality": 4,
+        "documentationPotential": 5,
+        "maintenanceBurden": 5,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 25,
+        "generalApplicability": 20,
+        "codeQuality": 12,
+        "documentationPotential": 15,
+        "maintenanceBurden": 10,
+        "securitySensitivity": 5
+      },
+      "totalScore": 87,
+      "recommendation": "strong",
+      "securityConcerns": [],
+      "dependencies": [],
+      "estimatedExtractionEffort": "low",
+      "notes": "Classic design pattern implementation. Self-contained with no external dependencies beyond TypeScript. Highly valuable for any project making external API calls."
+    },
+    {
+      "moduleName": "accessibility",
+      "sourceProject": "slotenmaker-master",
+      "sourcePath": "src/lib/accessibility.ts",
+      "suggestedPackageName": "@opensourceframework/next-a11y-utils",
+      "description": "Accessibility utilities and ARIA helpers for building accessible React/Next.js applications.",
+      "scores": {
+        "reusability": 5,
+        "generalApplicability": 5,
+        "codeQuality": 4,
+        "documentationPotential": 4,
+        "maintenanceBurden": 4,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 25,
+        "generalApplicability": 20,
+        "codeQuality": 12,
+        "documentationPotential": 12,
+        "maintenanceBurden": 8,
+        "securitySensitivity": 5
+      },
+      "totalScore": 82,
+      "recommendation": "strong",
+      "securityConcerns": [],
+      "dependencies": ["react"],
+      "estimatedExtractionEffort": "low",
+      "notes": "Accessibility is a critical concern for web development. These utilities can help developers build WCAG-compliant applications more easily."
+    },
+    {
+      "moduleName": "rng",
+      "sourceProject": "tarkuv",
+      "sourcePath": "src/lib/game/rng.ts",
+      "suggestedPackageName": "@opensourceframework/seeded-rng",
+      "description": "Seeded Random Number Generator implementation for deterministic random sequences. Useful for games, simulations, and testing.",
+      "scores": {
+        "reusability": 5,
+        "generalApplicability": 4,
+        "codeQuality": 4,
+        "documentationPotential": 4,
+        "maintenanceBurden": 5,
+        "securitySensitivity": 4
+      },
+      "weightedScores": {
+        "reusability": 25,
+        "generalApplicability": 16,
+        "codeQuality": 12,
+        "documentationPotential": 12,
+        "maintenanceBurden": 10,
+        "securitySensitivity": 4
+      },
+      "totalScore": 79,
+      "recommendation": "strong",
+      "securityConcerns": [
+        {
+          "level": "info",
+          "description": "This is NOT a cryptographic random number generator. Should not be used for security-sensitive operations like token generation or encryption keys."
+        }
+      ],
+      "dependencies": [],
+      "estimatedExtractionEffort": "low",
+      "notes": "Seeded RNG is valuable for reproducible game states, procedural generation, and deterministic testing. Must clearly document that it's not cryptographically secure."
+    },
+    {
+      "moduleName": "structuredData",
+      "sourceProject": "slotenmaker-master",
+      "sourcePath": "src/lib/structuredData.ts",
+      "suggestedPackageName": "@opensourceframework/next-json-ld",
+      "description": "JSON-LD structured data generation utilities for SEO. Helps generate schema.org markup for better search engine visibility.",
+      "scores": {
+        "reusability": 4,
+        "generalApplicability": 4,
+        "codeQuality": 4,
+        "documentationPotential": 4,
+        "maintenanceBurden": 4,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 20,
+        "generalApplicability": 16,
+        "codeQuality": 12,
+        "documentationPotential": 12,
+        "maintenanceBurden": 8,
+        "securitySensitivity": 5
+      },
+      "totalScore": 73,
+      "recommendation": "strong",
+      "securityConcerns": [],
+      "dependencies": [],
+      "estimatedExtractionEffort": "low",
+      "notes": "SEO is important for public-facing websites. JSON-LD utilities can help developers implement structured data without deep knowledge of schema.org specifications."
+    },
+    {
+      "moduleName": "gameEngine",
+      "sourceProject": "tarkuv",
+      "sourcePath": "src/lib/game/",
+      "suggestedPackageName": "@opensourceframework/turn-based-game-engine",
+      "description": "Complete turn-based game engine with items, maps, ballistics, enemies, encounters, recipes, and skills systems.",
+      "scores": {
+        "reusability": 3,
+        "generalApplicability": 3,
+        "codeQuality": 4,
+        "documentationPotential": 3,
+        "maintenanceBurden": 2,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 15,
+        "generalApplicability": 12,
+        "codeQuality": 12,
+        "documentationPotential": 9,
+        "maintenanceBurden": 4,
+        "securitySensitivity": 5
+      },
+      "totalScore": 57,
+      "recommendation": "good",
+      "securityConcerns": [],
+      "dependencies": ["zustand", "react"],
+      "estimatedExtractionEffort": "high",
+      "notes": "Complex game engine with multiple interconnected systems. While valuable, the extraction effort is high and maintenance burden significant. Consider extracting individual systems (RNG, ballistics) separately first."
+    },
+    {
+      "moduleName": "gameComponents",
+      "sourceProject": "tarkuv",
+      "sourcePath": "src/components/game/",
+      "suggestedPackageName": "@opensourceframework/turn-based-game-ui",
+      "description": "Game-specific React components including StashGrid, RaidView, WeaponModdingPanel, and other game UI elements.",
+      "scores": {
+        "reusability": 3,
+        "generalApplicability": 3,
+        "codeQuality": 4,
+        "documentationPotential": 3,
+        "maintenanceBurden": 3,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 15,
+        "generalApplicability": 12,
+        "codeQuality": 12,
+        "documentationPotential": 9,
+        "maintenanceBurden": 6,
+        "securitySensitivity": 5
+      },
+      "totalScore": 59,
+      "recommendation": "good",
+      "securityConcerns": [],
+      "dependencies": ["react", "zustand", "lucide-react"],
+      "estimatedExtractionEffort": "medium",
+      "notes": "Coupled with the game engine. Best released as a companion package after the game engine is extracted. UI components are well-structured but domain-specific."
+    },
+    {
+      "moduleName": "whatsapp",
+      "sourceProject": "itsalive",
+      "sourcePath": "src/lib/whatsapp/",
+      "suggestedPackageName": "@opensourceframework/next-whatsapp",
+      "description": "WhatsApp Web.js integration for sending and receiving WhatsApp messages in Next.js applications.",
+      "scores": {
+        "reusability": 4,
+        "generalApplicability": 3,
+        "codeQuality": 3,
+        "documentationPotential": 3,
+        "maintenanceBurden": 2,
+        "securitySensitivity": 2
+      },
+      "weightedScores": {
+        "reusability": 20,
+        "generalApplicability": 12,
+        "codeQuality": 9,
+        "documentationPotential": 9,
+        "maintenanceBurden": 4,
+        "securitySensitivity": 2
+      },
+      "totalScore": 56,
+      "recommendation": "good",
+      "securityConcerns": [
+        {
+          "level": "warning",
+          "description": "WhatsApp Web.js uses an unofficial API. Meta may block or restrict access at any time. Not suitable for production-critical applications."
+        },
+        {
+          "level": "warning",
+          "description": "Handles message content which could contain sensitive user data. Requires careful data handling documentation."
+        }
+      ],
+      "dependencies": ["whatsapp-web.js"],
+      "estimatedExtractionEffort": "medium",
+      "notes": "Useful for prototyping and internal tools. Should clearly document the unofficial nature of the API and associated risks. May require significant maintenance as whatsapp-web.js evolves."
+    },
+    {
+      "moduleName": "sleepAnalyzer",
+      "sourceProject": "itsalive",
+      "sourcePath": "src/lib/analysis/sleepAnalyzer.ts",
+      "suggestedPackageName": "@opensourceframework/sleep-analysis",
+      "description": "Sleep analysis logic for processing and interpreting sleep data patterns.",
+      "scores": {
+        "reusability": 3,
+        "generalApplicability": 2,
+        "codeQuality": 3,
+        "documentationPotential": 3,
+        "maintenanceBurden": 4,
+        "securitySensitivity": 4
+      },
+      "weightedScores": {
+        "reusability": 15,
+        "generalApplicability": 8,
+        "codeQuality": 9,
+        "documentationPotential": 9,
+        "maintenanceBurden": 8,
+        "securitySensitivity": 4
+      },
+      "totalScore": 53,
+      "recommendation": "good",
+      "securityConcerns": [
+        {
+          "level": "info",
+          "description": "Handles health-related data which may be subject to HIPAA or other health data regulations depending on use case."
+        }
+      ],
+      "dependencies": [],
+      "estimatedExtractionEffort": "low",
+      "notes": "Niche but potentially valuable for health-tech applications. Consider combining with other health analysis utilities if more modules are discovered."
+    },
+    {
+      "moduleName": "canvas3D",
+      "sourceProject": "gabriel",
+      "sourcePath": "src/components/canvas/",
+      "suggestedPackageName": "@opensourceframework/react-three-portfolio",
+      "description": "Three.js/React Three Fiber components including EnergyWaves, Eye, HeroCanvas and other 3D visual effects for portfolio/landing pages.",
+      "scores": {
+        "reusability": 4,
+        "generalApplicability": 3,
+        "codeQuality": 4,
+        "documentationPotential": 3,
+        "maintenanceBurden": 3,
+        "securitySensitivity": 5
+      },
+      "weightedScores": {
+        "reusability": 20,
+        "generalApplicability": 12,
+        "codeQuality": 12,
+        "documentationPotential": 9,
+        "maintenanceBurden": 6,
+        "securitySensitivity": 5
+      },
+      "totalScore": 64,
+      "recommendation": "good",
+      "securityConcerns": [],
+      "dependencies": ["@react-three/fiber", "@react-three/drei", "three", "gsap"],
+      "estimatedExtractionEffort": "medium",
+      "notes": "Visually impressive 3D components for portfolio sites. Note: GSAP has a commercial license for certain uses - may need to make it an optional peer dependency or provide alternatives."
+    }
+  ],
+  "recommendations": {
+    "strongCandidates": [
+      "circuitBreaker (score: 87) - Classic pattern, low extraction effort, no dependencies",
+      "accessibility (score: 82) - High value for web developers, React-focused",
+      "rng (score: 79) - Simple, self-contained, useful for games/simulations",
+      "structuredData (score: 73) - SEO value, easy extraction"
+    ],
+    "goodCandidates": [
+      "canvas3D (score: 64) - Visual components, medium effort",
+      "gameComponents (score: 59) - Companion to game engine",
+      "gameEngine (score: 57) - Complex but valuable, high extraction effort",
+      "whatsapp (score: 56) - Useful but unofficial API risks",
+      "sleepAnalyzer (score: 53) - Niche health-tech utility"
+    ],
+    "weakCandidates": [],
+    "notRecommended": []
+  },
+  "extractionPriority": [
+    {
+      "phase": 1,
+      "title": "Quick Wins",
+      "description": "High score, low extraction effort, self-contained modules",
+      "modules": ["circuitBreaker", "rng", "structuredData"],
+      "estimatedTime": "1-2 weeks total"
+    },
+    {
+      "phase": 2,
+      "title": "Medium Complexity",
+      "description": "Good score with some dependencies or moderate extraction effort",
+      "modules": ["accessibility", "canvas3D", "sleepAnalyzer"],
+      "estimatedTime": "2-4 weeks total"
+    },
+    {
+      "phase": 3,
+      "title": "Complex Packages",
+      "description": "Higher extraction effort or maintenance burden",
+      "modules": ["gameEngine", "gameComponents", "whatsapp"],
+      "estimatedTime": "4-8 weeks total"
+    }
+  ],
+  "monorepoRecommendation": {
+    "decision": "monorepo",
+    "rationale": "All candidates are Next.js/React focused and share a common scope (@opensourceframework). Using the existing monorepo structure provides: unified tooling (Turborepo, changesets), consistent CI/CD, shared development standards, and easier cross-package testing. The packages are small enough that repository size is not a concern.",
+    "alternativeConsidered": "Polyrepo would only make sense for the game engine if it grows significantly or requires different maintainership in the future.",
+    "suggestedPackageStructure": {
+      "existing": ["@opensourceframework/critters", "@opensourceframework/next-csrf", "@opensourceframework/next-images"],
+      "phase1": ["@opensourceframework/next-circuit-breaker", "@opensourceframework/seeded-rng", "@opensourceframework/next-json-ld"],
+      "phase2": ["@opensourceframework/next-a11y-utils", "@opensourceframework/react-three-portfolio", "@opensourceframework/sleep-analysis"],
+      "phase3": ["@opensourceframework/turn-based-game-engine", "@opensourceframework/turn-based-game-ui", "@opensourceframework/next-whatsapp"]
+    }
+  }
+}

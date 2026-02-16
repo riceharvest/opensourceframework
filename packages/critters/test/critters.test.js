@@ -332,7 +332,8 @@ describe('Critters', () => {
         </body>
       </html>
     `);
-    expect(result).toContain('.excluded{color:red}');
+    // critters:exclude should exclude the rule from critical CSS
+    expect(result).not.toContain('.excluded{color:red}');
     expect(result).toContain('.included{color:blue}');
   });
 
@@ -405,8 +406,8 @@ describe('Critters', () => {
       </html>
     `);
     expect(result).toContain('h1{color:blue}');
-    // Should have JS-based loading
-    expect(result).toMatch(/<script>/);
+    // Should have JS-based loading (script tag with data-href attribute)
+    expect(result).toMatch(/<script[^>]*data-href/);
   });
 
   it('handles pruneSource option', async () => {

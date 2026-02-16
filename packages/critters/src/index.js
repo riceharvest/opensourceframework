@@ -29,6 +29,61 @@ import {
 import { createLogger, isSubpath } from './util.js';
 
 /**
+ * Regular expression to match dangerous URL schemes that could execute JavaScript
+ * @constant {RegExp}
+ */
+const DANGEROUS_URL_PATTERN = /^\s*(javascript|data\s*:\s*text\/html|data\s*:\s*text\/javascript)/i;
+
+/**
+ * Regular expression to match script tags that could execute code
+ * @constant {RegExp}
+ */
+const SCRIPT_TAG_PATTERN = /<script[^>]*>[\s\S]*?<\/script>/gi;
+
+/**
+ * Regular expression to match script-closing tags that could break out of style contexts
+ * @constant {RegExp}
+ */
+const SCRIPT_BREAKOUT_PATTERN = /<\/script>/gi;
+
+/**
+ * Sanitize a URL to prevent JavaScript execution
+ * @param {string} url - The URL to sanitize
+ * @returns {string} - Sanitized URL or empty string if dangerous
+ */
+function sanitizeUrl(url) {
+  if (!url) return url;
+  // Block dangerous schemes
+  if (DANGEROUS_URL_PATTERN.test(url)) {
+    return '';
+  }
+  return url;
+}
+
+/**
+ * Sanitize an attribute value to prevent XSS
+ * @param {string} value - The attribute value to sanitize
+ * @returns {string} - Sanitized value
+ */
+function sanitizeAttributeValue(value) {
+  if (!value) return value;
+  // Remove any script tags first
+  let sanitized = value.replace(SCRIPT_TAG_PATTERN, '');
+  // Also remove any remaining script breakout attempts
+  sanitized = sanitized.replace(SCRIPT_BREAKOUT_PATTERN, '');
+  return sanitized;
+}
+
+/**
+ * Check if an attribute name is a dangerous event handler
+ * @param {string} name - Attribute name
+ * @returns {boolean} - True if dangerous
+ */
+function isDangerousAttribute(name) {
+  return /^on/i.test(name);
+}
+
+/**
  * The mechanism to use for lazy-loading stylesheets.
  *
  * Note: <kbd>JS</kbd> indicates a strategy requiring JavaScript (falls back to `<noscript>` unless disabled).
@@ -261,7 +316,8 @@ export default class Critters {
     }
 
     // Process additional stylesheets
-    await this.embedAdditionalStylesheet(document);
+    const additionalStyles = await this.embedAdditionalStylesheet(document);
+    sheets.push(...additionalStyles);
 
     // Process all collected sheets
     for (const style of sheets) {
@@ -304,9 +360,11 @@ export default class Critters {
   /**
    * Embed additional stylesheets specified in options.
    * @param {Document} document
+   * @returns {Promise<Element[]>} Array of style elements created
    */
   async embedAdditionalStylesheet(document) {
     const additionalStylesheets = this.options.additionalStylesheets || [];
+    const styles = [];
     for (const cssFile of additionalStylesheets) {
       const sheet = await this.getCssAsset(cssFile);
       if (sheet) {
@@ -315,8 +373,10 @@ export default class Critters {
         style.$$external = true;
         style.textContent = sheet;
         document.head.appendChild(style);
+        styles.push(style);
       }
     }
+    return styles;
   }
 
   /**
@@ -334,10 +394,10 @@ export default class Critters {
       const media = link.getAttribute('media');
       const style = link.previousElementSibling;
 
-      // Validate media query if present
+      // Validate media query if present - remove invalid ones
       if (media && !validateMediaQuery(media)) {
         this.logger.warn(`Invalid media query: ${media}`);
-        continue;
+        link.removeAttribute('media');
       }
 
       // Get the associated style element
@@ -346,7 +406,7 @@ export default class Critters {
         styleElement = { $$links: [] };
       }
 
-      this.setupLinkPreload(link, href, media, styleElement, document, preloadMode);
+      this.setupLinkPreload(link, href, link.getAttribute('media'), styleElement, document, preloadMode);
     }
   }
 
@@ -373,17 +433,38 @@ export default class Critters {
     // Allow disabling any mutation of the stylesheet link:
     if (preloadMode === false) return;
 
+    // Remove any dangerous event handler attributes from the original link
+    const dangerousAttrs = [];
+    if (link.attribs) {
+      for (const attrName of Object.keys(link.attribs)) {
+        if (isDangerousAttribute(attrName)) {
+          dangerousAttrs.push(attrName);
+        }
+      }
+      dangerousAttrs.forEach(attr => link.removeAttribute(attr));
+    }
+
+    // Sanitize href to prevent script breakout
+    const safeHref = sanitizeAttributeValue(href);
+    if (safeHref !== href) {
+      link.setAttribute('href', safeHref);
+    }
+
     let noscriptFallback = false;
     let updateLinkToPreload = false;
     const noscriptLink = link.cloneNode(false);
+
+    // Also remove dangerous attributes from noscriptLink and sanitize its href
+    dangerousAttrs.forEach(attr => noscriptLink.removeAttribute(attr));
+    noscriptLink.setAttribute('href', safeHref);
 
     if (preloadMode === 'body') {
       document.body.appendChild(link);
     } else {
       if (preloadMode === 'js' || preloadMode === 'js-lazy') {
         const script = document.createElement('script');
-        script.setAttribute('data-href', href);
-        script.setAttribute('data-media', media || 'all');
+        script.setAttribute('data-href', safeHref);
+        script.setAttribute('data-media', sanitizeAttributeValue(media || 'all'));
         const js = `${cssLoaderPreamble}$loadcss(document.currentScript.dataset.href,document.currentScript.dataset.media)`;
         script.textContent = js;
         link.parentNode.insertBefore(script, link.nextSibling);
@@ -392,8 +473,10 @@ export default class Critters {
         noscriptFallback = true;
         updateLinkToPreload = true;
       } else if (preloadMode === 'media') {
+        // Validate and sanitize media value before using it
+        const safeMedia = media && validateMediaQuery(media) ? media : 'all';
         link.setAttribute('media', 'print');
-        link.setAttribute('onload', `this.media='${media || 'all'}'`);
+        link.setAttribute('onload', `this.media='${safeMedia.replace(/'/g, "\\'")}'`);
         noscriptFallback = true;
       } else if (preloadMode === 'swap-high') {
         link.setAttribute('rel', 'alternate stylesheet preload');
@@ -401,6 +484,8 @@ export default class Critters {
         link.setAttribute('onload', `this.title='';this.rel='stylesheet'`);
         noscriptFallback = true;
       } else if (preloadMode === 'swap') {
+        link.setAttribute('rel', 'preload');
+        link.setAttribute('as', 'style');
         link.setAttribute('onload', "this.rel='stylesheet'");
         noscriptFallback = true;
       } else {
@@ -417,7 +502,7 @@ export default class Critters {
     if (
       this.options.noscriptFallback !== false &&
       noscriptFallback &&
-      !href.includes('</noscript>')
+      !safeHref.includes('</noscript>')
     ) {
       const noscript = document.createElement('noscript');
       noscriptLink.removeAttribute('id');

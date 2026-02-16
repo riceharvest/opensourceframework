@@ -1,0 +1,80 @@
+{
+  "name": "@opensourceframework/next-json-ld",
+  "version": "0.1.0",
+  "description": "JSON-LD structured data helpers for Next.js SEO - Generate Schema.org markup for search engines",
+  "keywords": [
+    "next.js",
+    "json-ld",
+    "structured-data",
+    "seo",
+    "schema.org",
+    "semantic-web",
+    "rich-snippets",
+    "microdata"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage node_modules"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "next": ">=12.0.0",
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensourceframework/opensourceframework.git",
+    "directory": "packages/next-json-ld"
+  },
+  "bugs": {
+    "url": "https://github.com/opensourceframework/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-json-ld"
+  },
+  "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-json-ld#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

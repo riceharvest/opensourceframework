@@ -45,17 +45,19 @@ function hasEvilOnload(html) {
 describe('Security', () => {
   it('should not decode HTML entities', async () => {
     const critters = new Critters({});
+    // Test that encoded HTML entities are NOT decoded into executable scripts
+    // Input has encoded entities: &lt;script&gt; not actual <script> tags
     const html = await critters.process(`
       <html>
         <body>
-          <script>alert(1)</script>
+          &lt;script&gt;alert(1)&lt;/script&gt;
         </body>
       </html>
     `);
     expect(hasEvilScript(html)).toBe(false);
-    // Should still contain the encoded entities
-    expect(html).toContain('<script>');
-    expect(html).toContain('</script>');
+    // Should still contain the encoded entities (not decoded to actual script tags)
+    expect(html).toContain('&lt;script&gt;');
+    expect(html).toContain('&lt;/script&gt;');
   });
 
   it('should not create a new script tag from embedding linked stylesheets', async () => {

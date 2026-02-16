@@ -59,4 +59,4 @@ export interface NextCSRF {
 }
 
 // Import NextApiHandler type conditionally to support both Pages Router and standalone usage
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiHandler } from 'next';

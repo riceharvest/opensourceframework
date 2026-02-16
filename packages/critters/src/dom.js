@@ -79,6 +79,15 @@ export function createDocument(html) {
  * @param {HTMLDocument} document   A Document, such as one created via `createDocument()`
  */
 export function serializeDocument(document) {
+  // Remove the internal data-critters-container attribute before serializing
+  const htmlElement = document.documentElement;
+  if (htmlElement && htmlElement.hasAttribute('data-critters-container')) {
+    // Only remove if it was auto-added (empty value), not if user specified it
+    const value = htmlElement.getAttribute('data-critters-container');
+    if (value === '') {
+      htmlElement.removeAttribute('data-critters-container');
+    }
+  }
   return render(document, { decodeEntities: false });
 }
 

@@ -18,6 +18,41 @@ import { parse, stringify } from 'postcss';
 import mediaParser from 'postcss-media-query-parser';
 
 /**
+ * Regular expression to match dangerous URL schemes in CSS
+ * @constant {RegExp}
+ */
+const DANGEROUS_CSS_URL_PATTERN = /^\s*(javascript|data\s*:\s*text\/html|data\s*:\s*text\/javascript)/i;
+
+/**
+ * Sanitize a CSS URL value to prevent script injection
+ * @param {string} url - The URL to sanitize
+ * @returns {string} - Sanitized URL or empty string if dangerous
+ */
+function sanitizeCssUrl(url) {
+  if (!url) return url;
+  // Remove quotes and whitespace for checking
+  const cleanUrl = url.replace(/^['"]\s*|\s*['"]$/g, '').trim();
+  // Block dangerous schemes
+  if (DANGEROUS_CSS_URL_PATTERN.test(cleanUrl)) {
+    return "url('about:blank')"; // Safe fallback
+  }
+  return url;
+}
+
+/**
+ * Check if a CSS value contains dangerous content
+ * @param {string} value - CSS property value
+ * @returns {boolean} - True if dangerous content detected
+ */
+function hasDangerousContent(value) {
+  if (!value) return false;
+  // Check for script breakout attempts
+  if (/<\/style>/i.test(value)) return true;
+  if (/<script/i.test(value)) return true;
+  return false;
+}
+
+/**
  * Parse a textual CSS Stylesheet into a Stylesheet instance.
  * Stylesheet is a mutable postcss AST with format similar to CSSOM.
  * @see https://github.com/postcss/postcss/
@@ -40,8 +75,20 @@ export function serializeStylesheet(ast, options) {
   let cssStr = '';
 
   stringify(ast, (result, node, type) => {
-    if (node?.type === 'decl' && node.value.includes('</style>')) {
-      return;
+    // Skip declarations that contain dangerous content (script breakout attempts)
+    if (node?.type === 'decl') {
+      // Block </style> breakout attempts
+      if (node.value.includes('</style>')) {
+        return;
+      }
+      // Block any dangerous content
+      if (hasDangerousContent(node.value)) {
+        return;
+      }
+      // Sanitize javascript: URLs in CSS
+      if (node.value.includes('url(') && DANGEROUS_CSS_URL_PATTERN.test(node.value)) {
+        return;
+      }
     }
 
     if (!options.compress) {

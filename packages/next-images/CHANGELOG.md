@@ -1,5 +1,19 @@
 # @opensourceframework/next-images
 
+## 1.8.8
+
+### Patch Changes
+
+- Initial release of @opensourceframework/next-images - a maintained fork of the archived next-images package.
+
+  This fork provides:
+  - Continued maintenance for the original next-images package by Aref Aslani
+  - Next.js 12-16 support
+  - Full TypeScript support with type definitions
+  - Modern build tooling (tsup, vitest)
+
+  Note: This package is deprecated. Next.js 10+ includes a built-in Image component that provides automatic image optimization, lazy loading, and better performance. We recommend migrating to `next/image` for new projects.
+
 ## 1.8.6
 
 ### Added
@@ -28,25 +42,28 @@
 If you're migrating from the original `next-images` package:
 
 1. Update your package dependencies:
+
    ```bash
    npm uninstall next-images
    npm install @opensourceframework/next-images
    ```
 
 2. Update your `next.config.js`:
+
    ```js
    // Before
    const withImages = require('next-images');
-   
+
    // After
    const withImages = require('@opensourceframework/next-images');
    ```
 
 3. Update TypeScript references:
+
    ```ts
    // Before
    /// <reference types="next-images" />
-   
+
    // After
    /// <reference types="@opensourceframework/next-images" />
    ```
