@@ -218,4 +218,141 @@ describe('Factory Functions', () => {
       expect(props['aria-labelledby']).toBe('label-id');
     });
   });
+
+  describe('edge cases', () => {
+    describe('createLiveRegion', () => {
+      it('should handle empty options', () => {
+        const props = createLiveRegion({});
+        expect(props['aria-live']).toBe('polite');
+        expect(props['aria-atomic']).toBe('false');
+      });
+
+      it('should handle all valid live values', () => {
+        expect(createLiveRegion({ live: 'polite' })['aria-live']).toBe('polite');
+        expect(createLiveRegion({ live: 'assertive' })['aria-live']).toBe('assertive');
+      });
+
+      it('should handle all valid relevant values', () => {
+        expect(createLiveRegion({ relevant: 'additions' })['aria-relevant']).toBe('additions');
+        expect(createLiveRegion({ relevant: 'removals' })['aria-relevant']).toBe('removals');
+        expect(createLiveRegion({ relevant: 'text' })['aria-relevant']).toBe('text');
+        expect(createLiveRegion({ relevant: 'all' })['aria-relevant']).toBe('all');
+      });
+    });
+
+    describe('createSkipLinkProps', () => {
+      it('should handle various target IDs', () => {
+        expect(createSkipLinkProps('main').href).toBe('#main');
+        expect(createSkipLinkProps('content').href).toBe('#content');
+        expect(createSkipLinkProps('footer-nav').href).toBe('#footer-nav');
+      });
+
+      it('should always have tabIndex of 0', () => {
+        const props = createSkipLinkProps('any');
+        expect(props.tabIndex).toBe(0);
+      });
+    });
+
+    describe('createDisclosureProps', () => {
+      it('should handle various control IDs', () => {
+        const props = createDisclosureProps(true, 'panel-1');
+        expect(props['aria-controls']).toBe('panel-1');
+      });
+
+      it('should return correct boolean string values', () => {
+        expect(createDisclosureProps(true, 'id')['aria-expanded']).toBe('true');
+        expect(createDisclosureProps(false, 'id')['aria-expanded']).toBe('false');
+      });
+    });
+
+    describe('mergeA11yProps', () => {
+      it('should handle empty input', () => {
+        const merged = mergeA11yProps();
+        expect(Object.keys(merged).length).toBe(0);
+      });
+
+      it('should merge many props objects', () => {
+        const merged = mergeA11yProps(
+          { role: 'button', tabIndex: 0 },
+          { 'aria-label': 'Click me' },
+          { 'aria-describedby': 'tooltip' },
+          { 'aria-disabled': 'false' }
+        );
+        expect(merged.role).toBe('button');
+        expect(merged.tabIndex).toBe(0);
+        expect(merged['aria-label']).toBe('Click me');
+        expect(merged['aria-describedby']).toBe('tooltip');
+        expect(merged['aria-disabled']).toBe('false');
+      });
+
+      it('should not mutate original props', () => {
+        const original = { role: 'button' };
+        const result = mergeA11yProps(original, { 'aria-label': 'test' });
+        expect(original).toEqual({ role: 'button' });
+        expect(result).not.toBe(original);
+      });
+    });
+
+    describe('createDialogTriggerProps', () => {
+      it('should always have haspopup set to dialog', () => {
+        const propsOpen = createDialogTriggerProps('dialog', true);
+        const propsClosed = createDialogTriggerProps('dialog', false);
+        expect(propsOpen['aria-haspopup']).toBe('dialog');
+        expect(propsClosed['aria-haspopup']).toBe('dialog');
+      });
+
+      it('should handle various dialog IDs', () => {
+        const props = createDialogTriggerProps('modal-1', true);
+        expect(props['aria-controls']).toBe('modal-1');
+      });
+    });
+
+    describe('createFormFieldProps', () => {
+      it('should handle both required and invalid together', () => {
+        const props = createFormFieldProps(true, true);
+        expect(props['aria-required']).toBe('true');
+        expect(props['aria-invalid']).toBe('true');
+      });
+
+      it('should handle optional valid field', () => {
+        const props = createFormFieldProps(false, false);
+        expect(props['aria-required']).toBe('false');
+        expect(props['aria-invalid']).toBeUndefined();
+      });
+    });
+
+    describe('createDescribedByProps', () => {
+      it('should handle various description IDs', () => {
+        expect(createDescribedByProps('error-1')['aria-describedby']).toBe('error-1');
+        expect(createDescribedByProps('help-text')['aria-describedby']).toBe('help-text');
+      });
+    });
+
+    describe('createLabelledByProps', () => {
+      it('should handle various label IDs', () => {
+        expect(createLabelledByProps('title-1')['aria-labelledby']).toBe('title-1');
+        expect(createLabelledByProps('heading')['aria-labelledby']).toBe('heading');
+      });
+    });
+
+    describe('CSS property constants', () => {
+      it('srOnly should have all required properties', () => {
+        expect(srOnly).toHaveProperty('position', 'absolute');
+        expect(srOnly).toHaveProperty('width', '1px');
+        expect(srOnly).toHaveProperty('height', '1px');
+        expect(srOnly).toHaveProperty('overflow', 'hidden');
+        expect(srOnly).toHaveProperty('clip');
+        expect(srOnly).toHaveProperty('whiteSpace', 'nowrap');
+        expect(srOnly).toHaveProperty('borderWidth', '0');
+      });
+
+      it('srOnlyFocusable should have all required properties', () => {
+        expect(srOnlyFocusable).toHaveProperty('position', 'absolute');
+        expect(srOnlyFocusable).toHaveProperty('width', 'auto');
+        expect(srOnlyFocusable).toHaveProperty('height', 'auto');
+        expect(srOnlyFocusable).toHaveProperty('overflow', 'visible');
+        expect(srOnlyFocusable).toHaveProperty('clip', 'auto');
+      });
+    });
+  });
 });

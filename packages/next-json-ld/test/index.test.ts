@@ -10,6 +10,7 @@ import {
   createArticleSchema,
   createEventSchema,
   mergeSchemas,
+  type JSONLDSchema,
 } from '../src/index';
 
 describe('next-json-ld', () => {
@@ -457,6 +458,302 @@ describe('next-json-ld', () => {
       expect(merged).toHaveLength(2);
       expect(merged[0]['@type']).toBe('LocalBusiness');
       expect(merged[1]['@type']).toBe('FAQPage');
+    });
+  });
+
+  describe('edge cases', () => {
+    describe('createJsonLdScript', () => {
+      it('should handle empty object', () => {
+        const result = createJsonLdScript({ '@context': 'https://schema.org', '@type': 'Thing' });
+        expect(result).toContain('schema.org');
+        expect(result).toContain('Thing');
+      });
+
+      it('should handle deeply nested objects', () => {
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          offers: {
+            '@type': 'Offer',
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              price: 99.99,
+              minPrice: 49.99,
+              maxPrice: 149.99,
+            },
+          },
+        };
+        const result = createJsonLdScript(schema);
+        expect(result).toContain('PriceSpecification');
+        expect(result).toContain('99.99');
+      });
+
+      it('should handle special characters in strings', () => {
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: "Test & Sons \"Company\" <test@example.com>",
+          description: 'Special chars: éàüö 中文日本語',
+        };
+        const result = createJsonLdScript(schema);
+        expect(result).toContain('Test & Sons');
+        expect(result).toContain('中文日本語');
+      });
+
+      it('should handle Unicode characters', () => {
+        const schema = {
+          '@context': 'https://schema.org',
+          '@type': 'Event',
+          name: '🎉 New Year\'s Eve Party 🎊',
+          description: 'Celebrate! 🚀',
+        };
+        const result = createJsonLdScript(schema);
+        expect(result).toContain('🎉');
+        expect(result).toContain('🎊');
+        expect(result).toContain('🚀');
+      });
+    });
+
+    describe('createFAQSchema', () => {
+      it('should handle empty FAQ array', () => {
+        const schema = createFAQSchema([]);
+        expect(schema.mainEntity).toHaveLength(0);
+      });
+
+      it('should handle single FAQ', () => {
+        const schema = createFAQSchema([
+          { question: 'Q1', answer: 'A1' },
+        ]);
+        expect(schema.mainEntity).toHaveLength(1);
+        expect(schema.mainEntity[0].name).toBe('Q1');
+        expect(schema.mainEntity[0].acceptedAnswer.text).toBe('A1');
+      });
+
+      it('should handle FAQ with special characters', () => {
+        const schema = createFAQSchema([
+          { question: 'What is "CSRF"?', answer: 'It\'s <strong>secure</strong>!' },
+        ]);
+        expect(schema.mainEntity[0].name).toBe('What is "CSRF"?');
+        expect(schema.mainEntity[0].acceptedAnswer.text).toBe('It\'s <strong>secure</strong>!');
+      });
+    });
+
+    describe('createBreadcrumbSchema', () => {
+      it('should handle empty breadcrumb array', () => {
+        const schema = createBreadcrumbSchema([]);
+        expect(schema.itemListElement).toHaveLength(0);
+      });
+
+      it('should handle single breadcrumb', () => {
+        const schema = createBreadcrumbSchema([
+          { name: 'Home', url: 'https://example.com' },
+        ]);
+        expect(schema.itemListElement).toHaveLength(1);
+        expect(schema.itemListElement[0].position).toBe(1);
+      });
+
+      it('should handle URLs with special characters', () => {
+        const schema = createBreadcrumbSchema([
+          { name: 'Category', url: 'https://example.com/category?filter=price<100' },
+        ]);
+        expect(schema.itemListElement[0].item).toContain('filter=price');
+      });
+    });
+
+    describe('createProductSchema', () => {
+      it('should handle price without currency', () => {
+        const schema = createProductSchema({
+          name: 'Test',
+          description: 'Test product',
+          price: 29.99,
+        });
+        // Should not include offers if currency is missing
+        expect(schema.offers).toBeUndefined();
+      });
+
+      it('should handle currency without price', () => {
+        const schema = createProductSchema({
+          name: 'Test',
+          description: 'Test product',
+          priceCurrency: 'USD',
+        });
+        expect(schema.offers).toBeUndefined();
+      });
+
+      it('should handle price of zero', () => {
+        const schema = createProductSchema({
+          name: 'Free Item',
+          description: 'Free product',
+          price: 0,
+          priceCurrency: 'USD',
+        });
+        expect(schema.offers).toBeDefined();
+        expect(schema.offers?.price).toBe('0.00');
+      });
+
+      it('should handle all availability options', () => {
+        const inStock = createProductSchema({ name: 'a', description: 'b', price: 9.99, priceCurrency: 'USD', availability: 'InStock' });
+        const outOfStock = createProductSchema({ name: 'a', description: 'b', price: 9.99, priceCurrency: 'USD', availability: 'OutOfStock' });
+        const preOrder = createProductSchema({ name: 'a', description: 'b', price: 9.99, priceCurrency: 'USD', availability: 'PreOrder' });
+        const backorder = createProductSchema({ name: 'a', description: 'b', price: 9.99, priceCurrency: 'USD', availability: 'Backorder' });
+        const limited = createProductSchema({ name: 'a', description: 'b', price: 9.99, priceCurrency: 'USD', availability: 'LimitedAvailability' });
+
+        expect(inStock.offers?.availability).toContain('InStock');
+        expect(outOfStock.offers?.availability).toContain('OutOfStock');
+        expect(preOrder.offers?.availability).toContain('PreOrder');
+        expect(backorder.offers?.availability).toContain('Backorder');
+        expect(limited.offers?.availability).toContain('LimitedAvailability');
+      });
+    });
+
+    describe('createOrganizationSchema', () => {
+      it('should handle organization without optional fields', () => {
+        const schema = createOrganizationSchema({
+          organization: {
+            name: 'Test',
+            url: 'https://test.com',
+          },
+        });
+        expect(schema.name).toBe('Test');
+        expect(schema.url).toBe('https://test.com');
+        expect(schema.description).toBeUndefined();
+        expect(schema.telephone).toBeUndefined();
+      });
+
+      it('should handle areaServed with region and country', () => {
+        const schema = createOrganizationSchema({
+          organization: {
+            name: 'Test',
+            url: 'https://test.com',
+          },
+          areaServed: {
+            region: 'California',
+            country: 'USA',
+          },
+        });
+        // Only city and geoMidpoint/geoRadius are handled in current implementation
+        expect(schema.areaServed).toBeUndefined();
+      });
+
+      it('should handle opening hours without specification', () => {
+        const schema = createOrganizationSchema({
+          organization: {
+            name: 'Test',
+            url: 'https://test.com',
+          },
+        });
+        expect(schema.openingHours).toBeUndefined();
+        expect(schema.openingHoursSpecification).toBeUndefined();
+      });
+    });
+
+    describe('createReviewSchema', () => {
+      it('should handle review without reviews array', () => {
+        const schema = createReviewSchema({
+          organization: {
+            name: 'Test',
+            url: 'https://test.com',
+          },
+          reviewCount: 0,
+          ratingValue: 0,
+          reviews: [],
+        });
+        expect(schema.review).toHaveLength(0);
+      });
+
+      it('should handle default rating scale', () => {
+        const schema = createReviewSchema({
+          organization: {
+            name: 'Test',
+            url: 'https://test.com',
+          },
+          reviewCount: 10,
+          ratingValue: 3,
+          reviews: [],
+        });
+        expect(schema.aggregateRating?.bestRating).toBe(5);
+        expect(schema.aggregateRating?.worstRating).toBe(1);
+      });
+    });
+
+    describe('createArticleSchema', () => {
+      it('should handle article without optional fields', () => {
+        const schema = createArticleSchema({
+          headline: 'Test Headline',
+          datePublished: '2024-01-01',
+          author: 'Author Name',
+          publisher: 'Publisher Name',
+        });
+        expect(schema.headline).toBe('Test Headline');
+        expect(schema.description).toBeUndefined();
+        expect(schema.image).toBeUndefined();
+        expect(schema.dateModified).toBeUndefined();
+      });
+
+      it('should handle URL without other optional fields', () => {
+        const schema = createArticleSchema({
+          headline: 'Test',
+          datePublished: '2024-01-01',
+          author: 'Author',
+          publisher: 'Publisher',
+          url: 'https://example.com/article',
+        });
+        expect(schema.mainEntityOfPage).toBeDefined();
+        expect(schema.mainEntityOfPage?.['@id']).toBe('https://example.com/article');
+      });
+    });
+
+    describe('createEventSchema', () => {
+      it('should handle event with only required fields', () => {
+        const schema = createEventSchema({
+          name: 'Test Event',
+          startDate: '2024-06-15T09:00:00Z',
+        });
+        expect(schema.name).toBe('Test Event');
+        expect(schema.startDate).toBe('2024-06-15T09:00:00Z');
+        expect(schema.description).toBeUndefined();
+        expect(schema.endDate).toBeUndefined();
+        expect(schema.location).toBeUndefined();
+      });
+
+      it('should handle all event status options', () => {
+        const scheduled = createEventSchema({ name: 'a', startDate: '2024-01-01', eventStatus: 'EventScheduled' });
+        const cancelled = createEventSchema({ name: 'a', startDate: '2024-01-01', eventStatus: 'EventCancelled' });
+        const postponed = createEventSchema({ name: 'a', startDate: '2024-01-01', eventStatus: 'EventPostponed' });
+        const rescheduled = createEventSchema({ name: 'a', startDate: '2024-01-01', eventStatus: 'EventRescheduled' });
+
+        expect(scheduled.eventStatus).toContain('EventScheduled');
+        expect(cancelled.eventStatus).toContain('EventCancelled');
+        expect(postponed.eventStatus).toContain('EventPostponed');
+        expect(rescheduled.eventStatus).toContain('EventRescheduled');
+      });
+
+      it('should handle all event attendance mode options', () => {
+        const offline = createEventSchema({ name: 'a', startDate: '2024-01-01', eventAttendanceMode: 'OfflineEventAttendanceMode' });
+        const online = createEventSchema({ name: 'a', startDate: '2024-01-01', eventAttendanceMode: 'OnlineEventAttendanceMode' });
+        const mixed = createEventSchema({ name: 'a', startDate: '2024-01-01', eventAttendanceMode: 'MixedEventAttendanceMode' });
+
+        expect(offline.eventAttendanceMode).toContain('OfflineEventAttendanceMode');
+        expect(online.eventAttendanceMode).toContain('OnlineEventAttendanceMode');
+        expect(mixed.eventAttendanceMode).toContain('MixedEventAttendanceMode');
+      });
+    });
+
+    describe('mergeSchemas', () => {
+      it('should handle empty array', () => {
+        const merged = mergeSchemas([]);
+        expect(merged).toHaveLength(0);
+      });
+
+      it('should handle many schemas', () => {
+        const schemas = Array(10).fill(null).map((_, i) =>
+          createOrganizationSchema({
+            organization: { name: `Org ${i}`, url: `https://org${i}.com` },
+          })
+        );
+        const merged = mergeSchemas(schemas);
+        expect(merged).toHaveLength(10);
+      });
     });
   });
 });

@@ -113,10 +113,11 @@ describe('nextCsrf', () => {
       expect(setCookieCalls.length).toBeGreaterThan(0);
 
       // Verify cookies contain csrfSecret and token
-      const cookies = setCookieCalls[0][1] as string[];
-      expect(cookies.length).toBe(2);
-      expect(cookies[0]).toMatch(/csrfSecret=/);
-      expect(cookies[1]).toMatch(/XSRF-TOKEN=/);
+      const cookies = setCookieCalls[0]?.[1] as string[] | undefined;
+      expect(cookies).toBeDefined();
+      expect(cookies?.length).toBe(2);
+      expect(cookies?.[0]).toMatch(/csrfSecret=/);
+      expect(cookies?.[1]).toMatch(/XSRF-TOKEN=/);
     });
 
     it('should call the original handler after setting cookies', async () => {
@@ -147,8 +148,9 @@ describe('nextCsrf', () => {
       const setCookieCalls = res.setHeader.mock.calls.filter(
         (call) => call[0] === 'Set-Cookie'
       );
-      const cookies = setCookieCalls[0][1] as string[];
-      expect(cookies.length).toBe(2);
+      const cookies = setCookieCalls[0]?.[1] as string[] | undefined;
+      expect(cookies).toBeDefined();
+      expect(cookies?.length).toBe(2);
     });
   });
 
@@ -335,6 +337,135 @@ describe('nextCsrf', () => {
       // 2. Client makes POST with cookies
       // 3. CSRF middleware validates
       // This integration test focuses on the middleware structure
+    });
+  });
+
+  describe('edge cases', () => {
+    const secret = 'test-secret-key-12345';
+    const tokenKey = 'XSRF-TOKEN';
+
+    it('should reject requests with empty cookie string', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('POST', {}, { cookie: '' });
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      expect(res.status).toHaveBeenCalledWith(403);
+    });
+
+    it('should reject requests with malformed cookies', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('POST', {}, { cookie: 'invalid=cookie; malformed' });
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      // Should reject because csrfSecret cookie is missing
+      expect(res.status).toHaveBeenCalledWith(403);
+    });
+
+    it('should reject requests when token exists but csrfSecret is missing', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('POST', {
+        'XSRF-TOKEN': 'some-token',
+        // csrfSecret is missing
+      });
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      expect(res.status).toHaveBeenCalledWith(403);
+    });
+
+    it('should reject requests when csrfSecret exists but token is missing', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('POST', {
+        csrfSecret: 'some-secret',
+        // XSRF-TOKEN is missing
+      });
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      expect(res.status).toHaveBeenCalledWith(403);
+    });
+
+    it('should handle custom cookie options correctly', async () => {
+      const customCookieOptions = {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict' as const,
+        path: '/api',
+        maxAge: 3600,
+      };
+      const { setup } = nextCsrf({ secret, tokenKey, cookieOptions: customCookieOptions });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('GET');
+      const res = createMockResponse();
+
+      const wrappedHandler = setup(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      // Verify cookies were set with custom options
+      const setCookieCalls = res.setHeader.mock.calls.filter(
+        (call) => call[0] === 'Set-Cookie'
+      );
+      expect(setCookieCalls.length).toBeGreaterThan(0);
+    });
+
+    it('should reject DELETE method with valid token', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      // By default DELETE is not in ignoredMethods
+      const req = createMockRequest('DELETE');
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      // Should reject since DELETE is not ignored by default
+      expect(res.status).toHaveBeenCalledWith(403);
+    });
+
+    it('should allow PATCH method when included in ignoredMethods', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey, ignoredMethods: ['GET', 'PATCH'] });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('PATCH');
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      expect(mockHandler).toHaveBeenCalled();
+    });
+
+    it('should handle case-insensitive method matching', async () => {
+      const { csrf } = nextCsrf({ secret, tokenKey, ignoredMethods: ['get', 'head', 'options'] });
+
+      const mockHandler = vi.fn().mockResolvedValue(undefined);
+      const req = createMockRequest('get'); // lowercase
+      const res = createMockResponse();
+
+      const wrappedHandler = csrf(mockHandler as unknown as ReturnType<typeof mockHandler>);
+      await wrappedHandler(req as NextApiRequest, res as NextApiResponse);
+
+      expect(mockHandler).toHaveBeenCalled();
     });
   });
 });
