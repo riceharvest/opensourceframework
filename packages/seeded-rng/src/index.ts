@@ -351,7 +351,9 @@ export class SecureSeededRNG {
       try {
         // Try to use crypto.getRandomValues
         const array = new Uint32Array(1);
-        (globalThis as any).crypto?.getRandomValues?.(array);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const cryptoObj = (globalThis as any).crypto as { getRandomValues?: (arr: Uint32Array) => Uint32Array } | undefined;
+        cryptoObj?.getRandomValues?.(array);
         if (array[0] !== undefined) {
           randomSeed = array[0];
         }
@@ -404,13 +406,13 @@ export class SecureSeededRNG {
    * ISAAC algorithm - generates 256 random 32-bit values
    */
   private isaac(): void {
-    let i, x, y;
+    let i, _x, y;
     
     this.randB = (this.randB + (this.randC + 1) | 0) | 0;
     this.randC = (this.randC + 1) | 0;
     
     for (i = 0; i < 256; i++) {
-      x = this.randRsl[i];
+      _x = this.randRsl[i];
       
       switch (i & 3) {
         case 0:
