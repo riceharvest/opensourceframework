@@ -51,7 +51,7 @@ const SCRIPT_BREAKOUT_PATTERN = /<\/script>/gi;
  * @param {string} url - The URL to sanitize
  * @returns {string} - Sanitized URL or empty string if dangerous
  */
-function sanitizeUrl(url) {
+function _sanitizeUrl(url) {
   if (!url) return url;
   // Block dangerous schemes
   if (DANGEROUS_URL_PATTERN.test(url)) {
@@ -254,7 +254,7 @@ export default class Critters {
     // Try reading the file from disk
     try {
       return await this.readFile(filename);
-    } catch (e) {
+    } catch {
       this.logger.warn(`Unable to locate stylesheet: ${normalizedPath}`);
     }
   }
@@ -283,7 +283,7 @@ export default class Critters {
         const href = link.getAttribute('href');
         if (!href) continue;
 
-        const media = link.getAttribute('media');
+        const _media = link.getAttribute('media');
         const style = document.createElement('style');
         style.$$name = href;
         style.$$external = true;
@@ -618,7 +618,7 @@ export default class Critters {
         if (rule.type === 'comment') {
           // we might want to remove a leading ! on comment blocks
           // critters can be part of "legal comments" which aren't striped on build
-          const crittersComment = rule.text.match(/^(?<!\! )critters:(.*)/);
+          const crittersComment = rule.text.match(/^(?<! )critters:(.*)/);
           const command = crittersComment && crittersComment[1];
 
           if (command) {
@@ -697,8 +697,8 @@ export default class Critters {
 
             try {
               return crittersContainer.exists(sel);
-            } catch (e) {
-              failedSelectors.push(sel + ' -> ' + e.message);
+            } catch (err) {
+              failedSelectors.push(sel + ' -> ' + err.message);
               return false;
             }
           });

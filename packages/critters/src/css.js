@@ -28,7 +28,7 @@ const DANGEROUS_CSS_URL_PATTERN = /^\s*(javascript|data\s*:\s*text\/html|data\s*
  * @param {string} url - The URL to sanitize
  * @returns {string} - Sanitized URL or empty string if dangerous
  */
-function sanitizeCssUrl(url) {
+function _sanitizeCssUrl(url) {
   if (!url) return url;
   // Remove quotes and whitespace for checking
   const cleanUrl = url.replace(/^['"]\s*|\s*['"]$/g, '').trim();

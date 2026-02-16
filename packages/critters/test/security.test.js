@@ -36,7 +36,7 @@ function hasEvilScript(html) {
  * @param {string} html - HTML string to check
  * @returns {boolean} - True if evil onload is found
  */
-function hasEvilOnload(html) {
+function _hasEvilOnload(html) {
   // Check for onload attributes containing alert
   const onloadMatch = html.match(/onload\s*=\s*["'][^"']*alert\([^)]*\)[^"']*["']/gi);
   return onloadMatch !== null && onloadMatch.length > 0;

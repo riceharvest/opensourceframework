@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import Critters from '../src/index.js';
 import fs from 'fs';
 import path from 'path';
@@ -193,7 +193,7 @@ describe('Critters', () => {
   });
 
   it('Skip invalid path', async () => {
-    const consoleSpy = vi.spyOn(console, 'warn');
+    const consoleSpy = vi.spyOn(globalThis.console, 'warn');
 
     const critters = new Critters({
       reduceInlineStyles: false,
