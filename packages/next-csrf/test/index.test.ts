@@ -5,9 +5,10 @@
  * Tests for the nextCsrf function and middleware
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { nextCsrf, HttpError } from '../src/index';
 import type { NextApiRequest, NextApiResponse } from 'next';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { IncomingMessage, ServerResponse } from 'http';
 
 // Mock Next.js types and request/response
@@ -316,7 +317,7 @@ describe('nextCsrf', () => {
     it('should support a complete token lifecycle', async () => {
       const secret = 'workflow-test-secret';
       const tokenKey = 'XSRF-TOKEN';
-      const { setup, csrf } = nextCsrf({ secret, tokenKey });
+      const { setup } = nextCsrf({ secret, tokenKey });
 
       // Step 1: Setup middleware creates tokens
       const setupHandler = vi.fn().mockResolvedValue(undefined);

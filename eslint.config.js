@@ -8,12 +8,14 @@ export default tseslint.config(
   prettier,
   {
     ignores: [
-      'node_modules/',
-      'dist/',
-      'coverage/',
+      '**/node_modules/',
+      '**/dist/',
+      '**/coverage/',
       '*.js',
       '*.mjs',
-      '!eslint.config.js'
+      '*.cjs',
+      '!eslint.config.js',
+      '!tsconfig*.json'
     ]
   },
   {

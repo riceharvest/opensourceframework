@@ -27,6 +27,7 @@
 
 /**
  * Options for weighted random selection
+ * @since 0.1.0
  */
 export interface WeightedItem<T> {
   /** The item to potentially select */
@@ -37,6 +38,7 @@ export interface WeightedItem<T> {
 
 /**
  * Options for creating an RNG instance
+ * @since 0.1.0
  */
 export interface RNGOptions {
   /** The seed value for deterministic randomness */
@@ -47,6 +49,7 @@ export interface RNGOptions {
 
 /**
  * Statistics about the RNG state
+ * @since 0.1.0
  */
 export interface RNGStats {
   /** The initial seed value */
@@ -84,6 +87,7 @@ export interface RNGStats {
  * rng.reset();
  * console.log(rng.nextInt(1, 100)); // Same as first call
  * ```
+ * @since 0.1.0
  */
 export class SeededRNG {
   private seed: number;
@@ -309,6 +313,7 @@ export class SeededRNG {
  * const rng = new SecureSeededRNG();
  * const password = rng.nextSecureHex(32); // 32 bytes of secure randomness
  * ```
+ * @since 0.1.0
  */
 export class SecureSeededRNG {
   private seed: number;
@@ -699,6 +704,7 @@ export class SecureSeededRNG {
  * 
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random|Math.random}
  * @group Seeded RNG
+ * @since 0.1.0
  */
 export function createRNG(seed?: number | null): SeededRNG {
   return new SeededRNG(seed ?? undefined);
@@ -731,6 +737,7 @@ export function createRNG(seed?: number | null): SeededRNG {
  * 
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues|crypto.getRandomValues}
  * @group Secure RNG
+ * @since 0.1.0
  */
 export function createSecureRNG(seed?: number | null): SecureSeededRNG {
   return new SecureSeededRNG(seed ?? undefined);
@@ -757,6 +764,7 @@ export function createSecureRNG(seed?: number | null): SecureSeededRNG {
  * ```
  * 
  * @see {@link SeededRNG.nextInt}
+ * @since 0.1.0
  */
 export function seededInt(seed: number, min: number, max: number): number {
   const rng = new SeededRNG(seed);
@@ -784,6 +792,7 @@ export function seededInt(seed: number, min: number, max: number): number {
  * ```
  * 
  * @see {@link SeededRNG.nextFloat}
+ * @since 0.1.0
  */
 export function seededFloat(seed: number, min: number, max: number): number {
   const rng = new SeededRNG(seed);
@@ -812,6 +821,7 @@ export function seededFloat(seed: number, min: number, max: number): number {
  * ```
  * 
  * @see {@link SeededRNG.shuffle}
+ * @since 0.1.0
  */
 export function seededShuffle<T>(seed: number, array: T[]): T[] {
   const rng = new SeededRNG(seed);
@@ -842,6 +852,7 @@ export function seededShuffle<T>(seed: number, array: T[]): T[] {
  * ```
  * 
  * @see {@link SeededRNG.pick}
+ * @since 0.1.0
  */
 export function seededPick<T>(seed: number, array: T[]): T | undefined {
   const rng = new SeededRNG(seed);
@@ -870,6 +881,7 @@ export function seededPick<T>(seed: number, array: T[]): T | undefined {
  * ```
  * 
  * @see {@link SecureSeededRNG.nextInt}
+ * @since 0.1.0
  */
 export function seededSecureInt(seed: number, min: number, max: number): number {
   const rng = new SecureSeededRNG(seed);
@@ -903,6 +915,7 @@ export function seededSecureInt(seed: number, min: number, max: number): number 
  * ```
  * 
  * @see {@link SecureSeededRNG.nextHex}
+ * @since 0.1.0
  */
 export function seededSecureHex(seed: number, length: number): string {
   const rng = new SecureSeededRNG(seed);

@@ -1,49 +1,54 @@
 {
-  "name": "opensourceframework",
-  "version": "0.0.0",
+  "name": "@opensourceframework/monorepo",
+  "version": "1.0.0",
   "private": true,
-  "description": "Maintained forks of abandoned npm packages",
-  "keywords": [
-    "npm",
-    "forks",
-    "maintenance",
-    "open-source"
+  "description": "OpenSourceFramework - A collection of maintained Next.js packages",
+  "workspaces": [
+    "packages/*",
+    "tools/*"
   ],
-  "author": "OpenSource Framework Contributors",
-  "license": "MIT",
-  "type": "module",
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
-  },
-  "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "prepare": "husky install",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "test:ci": "turbo run test:ci",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
-    "clean": "turbo run clean && rm -rf node_modules",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "turbo run build && changeset publish",
-    "release:canary": "turbo run build && changeset publish --tag canary"
+    "build": "turbo run build",
+    "build:all": "turbo run build",
+    "clean": "turbo run clean",
+    "clean:all": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "release": "changeset version && pnpm install && pnpm build",
+    "publish": "changeset publish",
+    "audit": "pnpm audit --audit-level=moderate"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.0",
-    "@commitlint/cli": "^19.0.0",
-    "@commitlint/config-conventional": "^19.0.0",
-    "@types/node": "^22.0.0",
-    "eslint": "^9.0.0",
-    "husky": "^9.0.0",
-    "pnpm": "^9.15.0",
-    "prettier": "^3.0.0",
-    "tsup": "^8.0.0",
-    "turbo": "^2.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^2.0.0"
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
+    "@types/node": "^20.11.0",
+    "eslint": "^8.56.0",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.1",
+    "prettier": "^3.2.4",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "pnpm": {
+    "overrides": {
+      "ws@<7.5.9": ">=7.5.9",
+      "ua-parser-js@<0.7.33": ">=0.7.33",
+      "terser@<5.14.2": ">=5.14.2",
+      "minimist@<1.2.8": ">=1.2.8",
+      "json5@<2.2.2": ">=2.2.2"
+    }
   }
 }

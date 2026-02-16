@@ -67,6 +67,11 @@
   "peerDependencies": {
     "next": ">=12.0.0"
   },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riceharvest/opensourceframework.git",

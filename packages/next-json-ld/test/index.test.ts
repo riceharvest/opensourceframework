@@ -13,6 +13,10 @@ import {
   type JSONLDSchema,
 } from '../src/index';
 
+// Type alias for test schemas - used for documentation purposes
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type TestSchema = JSONLDSchema;
+
 describe('next-json-ld', () => {
   describe('createJsonLdScript', () => {
     it('should stringify a single schema', () => {

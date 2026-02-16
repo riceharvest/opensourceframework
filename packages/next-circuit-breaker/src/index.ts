@@ -6,11 +6,13 @@
 
 /**
  * Circuit breaker states
+ * @since 0.1.0
  */
 export type CircuitState = 'CLOSED' | 'OPEN' | 'HALF_OPEN';
 
 /**
  * Options for configuring the circuit breaker
+ * @since 0.1.0
  */
 export interface CircuitBreakerOptions {
   /** Number of failures before opening the circuit (default: 3) */
@@ -29,6 +31,7 @@ export interface CircuitBreakerOptions {
 
 /**
  * Type for async functions that can be wrapped by the circuit breaker
+ * @since 0.1.0
  */
 export type AsyncFunction<TArgs extends unknown[], TResult> = (
   ...args: TArgs
@@ -36,6 +39,7 @@ export type AsyncFunction<TArgs extends unknown[], TResult> = (
 
 /**
  * Circuit breaker state information
+ * @since 0.1.0
  */
 export interface CircuitBreakerState {
   state: CircuitState;
@@ -76,6 +80,7 @@ export interface CircuitBreakerState {
  *   }
  * }
  * ```
+ * @since 0.1.0
  */
 export class CircuitBreaker<TArgs extends unknown[], TResult> {
   private state: CircuitState = 'CLOSED';
@@ -258,6 +263,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
  * // Use like a normal async function
  * const data = await protectedFetch('/api/data');
  * ```
+ * @since 0.1.0
  */
 export const withCircuitBreaker = <TArgs extends unknown[], TResult>(
   handler: AsyncFunction<TArgs, TResult>,
@@ -290,6 +296,7 @@ export const withCircuitBreaker = <TArgs extends unknown[], TResult>(
  *   timeout: 30000,
  * });
  * ```
+ * @since 0.1.0
  */
 export const withApiCircuitBreaker = <TArgs extends unknown[], TResult>(
   handler: AsyncFunction<TArgs, TResult>,
