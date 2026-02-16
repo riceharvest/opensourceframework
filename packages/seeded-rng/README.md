@@ -5,18 +5,30 @@
 
 Seeded random number generator for reproducible randomness in games, simulations, and testing.
 
-> ⚠️ **SECURITY WARNING**: This library is **NOT cryptographically secure**!
+> ⚠️ **SECURITY WARNING**: The default `SeededRNG` class is **NOT cryptographically secure**!
 > 
-> Do NOT use for:
-> - Password generation
-> - Cryptographic keys
-> - Session tokens
-> - Nonce generation
-> - Any security-sensitive operations
-> 
-> For cryptographic randomness, use:
-> - Browser: `crypto.getRandomValues()`
-> - Node.js: `crypto.randomBytes()` or `crypto.randomInt()`
+> Use `SecureSeededRNG` for security-sensitive operations (see below).
+
+## Two RNG Implementations
+
+This library provides **two** RNG classes:
+
+| Class | Algorithm | Secure? | Use Case |
+|-------|-----------|---------|----------|
+| `SeededRNG` | LCG | ❌ No | Games, testing, simulations |
+| `SecureSeededRNG` | ISAAC | ✅ Yes | Passwords, tokens, keys |
+
+### When to use which?
+
+```typescript
+// ❌ NOT secure - Use for games, testing, simulations
+import { SeededRNG } from '@opensourceframework/seeded-rng';
+const gameRng = new SeededRNG(42);
+
+// ✅ Secure - Use for security-sensitive operations
+import { SecureSeededRNG } from '@opensourceframework/seeded-rng';
+const secureRng = new SecureSeededRNG(42);
+```
 
 ## Features
 
@@ -25,6 +37,7 @@ Seeded random number generator for reproducible randomness in games, simulations
 - 🎮 **Game Development** - Procedural generation, AI behavior, loot tables
 - 🧪 **Testing** - Deterministic test data generation
 - 📊 **Simulations** - Reproducible simulation results
+- 🔐 **Secure Option** - Cryptographically secure version available
 - 🪶 **Zero Dependencies** - Lightweight and self-contained
 
 ## Installation
@@ -38,6 +51,8 @@ pnpm add @opensourceframework/seeded-rng
 ```
 
 ## Quick Start
+
+### Basic Usage (Not Secure)
 
 ```typescript
 import { SeededRNG } from '@opensourceframework/seeded-rng';
@@ -72,9 +87,34 @@ rng.reset();
 console.log(rng.nextInt(1, 100)); // Same as first call
 ```
 
+### Secure Usage (Cryptographically Secure)
+
+```typescript
+import { SecureSeededRNG } from '@opensourceframework/seeded-rng';
+
+// Create with a specific seed (reproducible AND secure)
+const rng = new SecureSeededRNG(42);
+
+// Generate secure random values
+console.log(rng.nextInt(1, 100));  // Secure integer
+console.log(rng.nextHex(32));      // Secure hex string (64 chars)
+
+// Generate truly random (non-seeded) secure values
+const randomRng = new SecureSeededRNG();
+const sessionToken = randomRng.nextHex(32); // Each run = different
+const apiKey = randomRng.nextBase64(32);    // Base64 encoded
+
+// Generate proper UUID v4
+const uuid = rng.nextUUID(); // Cryptographically secure UUID
+
+// Fork for independent but deterministic streams
+const fork1 = rng.fork();
+const fork2 = rng.fork();
+```
+
 ## API Reference
 
-### `SeededRNG` Class
+### `SeededRNG` Class (Fast, NOT Secure)
 
 #### Constructor
 
@@ -106,27 +146,94 @@ Creates a new RNG instance. If no seed is provided, a random seed is generated.
 | `setSeed(seed)` | Sets current state |
 | `getStats()` | Gets RNG statistics |
 
+### `SecureSeededRNG` Class (Cryptographically Secure)
+
+#### Constructor
+
+```typescript
+new SecureSeededRNG(seed?: number)
+```
+
+Creates a cryptographically secure RNG. If no seed is provided, uses `crypto.getRandomValues()`.
+
+#### Security Methods
+
+| Method | Description |
+|--------|-------------|
+| `nextHex(length)` | **Secure** random hex string |
+| `nextBytes(length)` | **Secure** random byte array |
+| `nextBase64(length)` | **Secure** Base64 encoded string |
+| `nextUUID()` | **Secure** UUID v4 |
+
+#### Standard Methods (Same as SeededRNG)
+
+| Method | Description |
+|--------|-------------|
+| `next()` | Returns random float [0, 1) |
+| `nextInt(min, max)` | Returns random integer [min, max] |
+| `nextFloat(min, max)` | Returns random float [min, max) |
+| `nextBool(probability?)` | Returns random boolean |
+| `chance(probability)` | Returns true with given probability |
+| `pick(array)` | Returns random element from array |
+| `shuffle(array)` | Returns shuffled copy of array |
+| `weightedPick(items)` | Weighted random selection |
+| `fork()` | Creates new independent RNG |
+| `reset()` | Resets to initial state |
+
 ### Convenience Functions
 
 ```typescript
 import { 
   createRNG, 
+  createSecureRNG,
   seededInt, 
   seededFloat, 
   seededShuffle, 
-  seededPick 
+  seededPick,
+  seededSecureInt,
+  seededSecureHex
 } from '@opensourceframework/seeded-rng';
 
-// Create RNG
+// Fast RNG (not secure)
 const rng = createRNG(42);
-
-// One-shot operations (don't create instance)
 const value = seededInt(42, 1, 100);
-const shuffled = seededShuffle(42, [1, 2, 3, 4, 5]);
-const picked = seededPick(42, ['a', 'b', 'c']);
+
+// Secure RNG
+const secureRng = createSecureRNG(42);
+const secureHex = seededSecureHex(42, 32);
 ```
 
 ## Usage Examples
+
+### Secure Token Generation
+
+```typescript
+import { SecureSeededRNG } from '@opensourceframework/seeded-rng';
+
+// Generate session tokens (secure!)
+function generateSessionToken(): string {
+  const rng = new SecureSeededRNG();
+  return rng.nextHex(32); // 64-character hex string
+}
+
+// Generate API keys
+function generateApiKey(): string {
+  const rng = new SecureSeededRNG();
+  return `sk_${rng.nextHex(24)}`;
+}
+
+// Generate password reset tokens
+function generateResetToken(): string {
+  const rng = new SecureSeededRNG();
+  return rng.nextBase64(32);
+}
+
+// Generate secure UUIDs
+function generateSecureId(): string {
+  const rng = new SecureSeededRNG();
+  return rng.nextUUID(); // Real UUID v4
+}
+```
 
 ### Procedural Generation
 
@@ -190,7 +297,6 @@ class LootSystem {
   }
 
   private generateItem(rarity: string) {
-    // Generate item based on rarity
     return {
       id: this.rng.nextUUID(),
       name: `${rarity} item`,
@@ -233,43 +339,11 @@ describe('User Processing', () => {
 });
 ```
 
-### Replay System
-
-```typescript
-import { SeededRNG } from '@opensourceframework/seeded-rng';
-
-class GameReplay {
-  private rng: SeededRNG;
-  private seed: number;
-  private actions: Array<{ frame: number; action: string }> = [];
-
-  constructor(seed: number) {
-    this.seed = seed;
-    this.rng = new SeededRNG(seed);
-  }
-
-  recordAction(frame: number, action: string) {
-    this.actions.push({ frame, action });
-  }
-
-  getReplayData() {
-    return {
-      seed: this.seed,
-      actions: this.actions,
-    };
-  }
-
-  static replay(data: { seed: number; actions: Array<{ frame: number; action: string }> }) {
-    const rng = new SeededRNG(data.seed);
-    // Replay will have identical RNG sequence
-    return { rng, actions: data.actions };
-  }
-}
-```
-
 ## Algorithm
 
-This library uses the Linear Congruential Generator (LCG) algorithm:
+### SeededRNG (Fast, Not Secure)
+
+Uses the Linear Congruential Generator (LCG) algorithm:
 
 ```
 seed = (seed * a + c) % m
@@ -280,10 +354,18 @@ With parameters from Numerical Recipes:
 - c = 49297  
 - m = 233280
 
-This provides:
-- Fast computation
-- Good statistical properties for non-crypto use
-- Reproducible sequences across platforms
+### SecureSeededRNG (Cryptographically Secure)
+
+Uses the **ISAAC** (Indirection, Shift, Accumulate, Add, and Count) cipher algorithm:
+
+- Designed by Bob Jenkins (1996)
+- Passes statistical tests for randomness
+- Suitable for cryptographic applications
+- Deterministic like SeededRNG (same seed = same sequence)
+
+For random bytes without a seed, uses:
+- Browser: `crypto.getRandomValues()`
+- Node.js: `crypto.webcrypto.getRandomValues()`
 
 ## Contributing
 

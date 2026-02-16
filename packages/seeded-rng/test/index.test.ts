@@ -2,10 +2,13 @@ import { describe, it, expect } from 'vitest';
 import {
   SeededRNG,
   createRNG,
+  createSecureRNG,
   seededInt,
   seededFloat,
   seededShuffle,
   seededPick,
+  seededSecureInt,
+  seededSecureHex,
 } from '../src/index';
 
 describe('SeededRNG', () => {
@@ -291,6 +294,28 @@ describe('Convenience Functions', () => {
       const rng = createRNG(null);
       expect(typeof rng.getInitialSeed()).toBe('number');
     });
+
+    it('should create an RNG without argument', () => {
+      const rng = createRNG();
+      expect(typeof rng.getInitialSeed()).toBe('number');
+    });
+  });
+
+  describe('createSecureRNG', () => {
+    it('should create a secure RNG with the given seed', () => {
+      const rng = createSecureRNG(42);
+      expect(rng.getInitialSeed()).toBe(42);
+    });
+
+    it('should create a secure RNG with random seed if not provided', () => {
+      const rng = createSecureRNG();
+      expect(typeof rng.getInitialSeed()).toBe('number');
+    });
+
+    it('should create a secure RNG with null', () => {
+      const rng = createSecureRNG(null);
+      expect(typeof rng.getInitialSeed()).toBe('number');
+    });
   });
 
   describe('seededInt', () => {
@@ -299,6 +324,19 @@ describe('Convenience Functions', () => {
       const value2 = seededInt(42, 1, 100);
       expect(value1).toBe(value2);
     });
+
+    it('should handle edge case with same min and max', () => {
+      const value = seededInt(42, 5, 5);
+      expect(value).toBe(5);
+    });
+
+    it('should work with negative numbers', () => {
+      const value1 = seededInt(123, -10, -1);
+      const value2 = seededInt(123, -10, -1);
+      expect(value1).toBe(value2);
+      expect(value1).toBeGreaterThanOrEqual(-10);
+      expect(value1).toBeLessThanOrEqual(-1);
+    });
   });
 
   describe('seededFloat', () => {
@@ -306,6 +344,11 @@ describe('Convenience Functions', () => {
       const value1 = seededFloat(42, 0, 1);
       const value2 = seededFloat(42, 0, 1);
       expect(value1).toBe(value2);
+    });
+
+    it('should handle edge case with same min and max', () => {
+      const value = seededFloat(42, 5.5, 5.5);
+      expect(value).toBe(5.5);
     });
   });
 
@@ -316,6 +359,23 @@ describe('Convenience Functions', () => {
       const shuffled2 = seededShuffle(42, arr);
       expect(shuffled1).toEqual(shuffled2);
     });
+
+    it('should not modify the original array', () => {
+      const original = [1, 2, 3, 4, 5];
+      const originalCopy = [...original];
+      seededShuffle(42, original);
+      expect(original).toEqual(originalCopy);
+    });
+
+    it('should handle empty array', () => {
+      const result = seededShuffle(42, []);
+      expect(result).toEqual([]);
+    });
+
+    it('should handle single element array', () => {
+      const result = seededShuffle(42, [1]);
+      expect(result).toEqual([1]);
+    });
   });
 
   describe('seededPick', () => {
@@ -324,6 +384,43 @@ describe('Convenience Functions', () => {
       const pick1 = seededPick(42, arr);
       const pick2 = seededPick(42, arr);
       expect(pick1).toBe(pick2);
+    });
+
+    it('should return undefined for empty array', () => {
+      const result = seededPick(42, []);
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('seededSecureInt', () => {
+    it('should return a deterministic secure integer', () => {
+      const value1 = seededSecureInt(42, 1, 1000);
+      const value2 = seededSecureInt(42, 1, 1000);
+      expect(value1).toBe(value2);
+    });
+
+    it('should return value in range', () => {
+      const value = seededSecureInt(42, 100, 200);
+      expect(value).toBeGreaterThanOrEqual(100);
+      expect(value).toBeLessThanOrEqual(200);
+    });
+  });
+
+  describe('seededSecureHex', () => {
+    it('should return a deterministic secure hex string', () => {
+      const hex1 = seededSecureHex(42, 16);
+      const hex2 = seededSecureHex(42, 16);
+      expect(hex1).toBe(hex2);
+    });
+
+    it('should return correct length', () => {
+      const hex = seededSecureHex(42, 32);
+      expect(hex).toHaveLength(64); // 32 bytes = 64 hex chars
+    });
+
+    it('should only contain hex characters', () => {
+      const hex = seededSecureHex(42, 16);
+      expect(/^[0-9a-f]+$/.test(hex)).toBe(true);
     });
   });
 });

@@ -113,14 +113,16 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
    *
    * @param args - Arguments to pass to the wrapped function
    * @returns The result of the wrapped function
-   * @throws Error if the circuit is open, or re-throws errors from the wrapped function
+   * @throws {Error} 'Circuit breaker is OPEN' if the circuit is open and hasn't transitioned to half-open
+   * @throws Re-throws any errors from the wrapped function
    */
   async fire(...args: TArgs): Promise<TResult> {
     if (this.state === 'OPEN') {
       if (Date.now() > this.nextAttemptTime) {
         this.transitionToHalfOpen();
       } else {
-        throw new Error('Circuit breaker is OPEN');
+        const timeUntilRetry = Math.ceil((this.nextAttemptTime - Date.now()) / 1000);
+        throw new Error(`Circuit breaker is OPEN. Retry after ${timeUntilRetry} seconds.`);
       }
     }
 
@@ -134,6 +136,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Gets the current state of the circuit breaker
+   * @returns The current circuit state: 'CLOSED', 'OPEN', or 'HALF_OPEN'
    */
   getState(): CircuitState {
     return this.state;
@@ -141,6 +144,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Gets detailed state information for monitoring
+   * @returns Object containing current state, failure count, success count, and next attempt time
    */
   getStats(): CircuitBreakerState {
     return {
@@ -153,6 +157,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Checks if the circuit is currently open
+   * @returns true if the circuit is open, false otherwise
    */
   isOpen(): boolean {
     return this.state === 'OPEN';
@@ -160,6 +165,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Checks if the circuit is currently closed
+   * @returns true if the circuit is closed, false otherwise
    */
   isClosed(): boolean {
     return this.state === 'CLOSED';
@@ -167,6 +173,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Checks if the circuit is currently half-open
+   * @returns true if the circuit is half-open, false otherwise
    */
   isHalfOpen(): boolean {
     return this.state === 'HALF_OPEN';
@@ -174,6 +181,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Manually opens the circuit (useful for maintenance)
+   * This immediately trips the circuit without waiting for failures
    */
   trip(): void {
     this.open();
@@ -181,6 +189,7 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 
   /**
    * Manually resets the circuit to closed state
+   * Clears all failure/success counts and transitions to CLOSED state
    */
   reset(): void {
     this.failureCount = 0;
