@@ -60,13 +60,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opensourceframework/opensourceframework.git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
     "directory": "packages/react-a11y-utils"
   },
   "bugs": {
-    "url": "https://github.com/opensourceframework/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-a11y-utils"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-a11y-utils"
   },
-  "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/react-a11y-utils#readme",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-a11y-utils#readme",
   "publishConfig": {
     "access": "public"
   }

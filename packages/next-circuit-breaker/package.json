@@ -62,13 +62,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opensourceframework/opensourceframework.git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
     "directory": "packages/next-circuit-breaker"
   },
   "bugs": {
-    "url": "https://github.com/opensourceframework/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-circuit-breaker"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-circuit-breaker"
   },
-  "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-circuit-breaker#readme",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-circuit-breaker#readme",
   "publishConfig": {
     "access": "public"
   }
