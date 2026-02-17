@@ -15,7 +15,7 @@ The original `critters` package was **archived by GoogleChromeLabs in October 20
 
 - 🔄 **Continued Maintenance**: Ongoing updates and bug fixes
 - 🔒 **Security Updates**: Prompt patches for vulnerabilities
-- � **Modern Tooling**: Updated dependencies and build tools
+- 🔧 **Modern Tooling**: Updated dependencies and build tools
 - 🧪 **Test Coverage**: Comprehensive test suite
 - 📖 **Documentation**: Improved and up-to-date documentation
 

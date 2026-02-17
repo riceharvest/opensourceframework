@@ -74,5 +74,9 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
   }
 }
