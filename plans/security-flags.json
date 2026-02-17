@@ -1,0 +1,82 @@
+{
+  "scannedAt": "2026-02-15T11:27:00.000Z",
+  "securityFlags": [
+    {
+      "project": "itsalive",
+      "path": "/home/dario/Documents/dev workspace/itsalive",
+      "severity": "medium",
+      "type": "hardcoded_fallback_secret",
+      "description": "JWT_SECRET has hardcoded fallback value in multiple files",
+      "files": [
+        "src/app/api/contacts/route.ts",
+        "src/app/api/auth/login/route.ts",
+        "src/app/api/auth/me/route.ts",
+        "src/lib/auth-server.ts"
+      ],
+      "recommendation": "Remove hardcoded fallback secrets. Use proper secret management and fail if JWT_SECRET is not set in production."
+    },
+    {
+      "project": "tarkuv",
+      "path": "/home/dario/Documents/dev workspace/tarkuv",
+      "severity": "high",
+      "type": "exposed_credentials_in_env_file",
+      "description": "Real credentials found in .env.local file (CLERK_SECRET_KEY and VERCEL_OIDC_TOKEN)",
+      "files": [
+        ".env.local"
+      ],
+      "recommendation": "The .env.local file is properly gitignored, but ensure these credentials are rotated if they were ever committed. Consider using a secrets manager for production."
+    },
+    {
+      "project": "tarkuv",
+      "path": "/home/dario/Documents/dev workspace/tarkuv",
+      "severity": "low",
+      "type": "admin_password_env_var",
+      "description": "Admin password stored in NEXT_PUBLIC_ADMIN_PASSWORD environment variable",
+      "files": [
+        "src/lib/types/admin.ts",
+        "src/lib/stores/slices/adminSlice.ts"
+      ],
+      "recommendation": "NEXT_PUBLIC_ variables are exposed to the client. Consider using a server-side validation approach for admin features."
+    }
+  ],
+  "gitignoreStatus": {
+    "boeloe": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "status": "secure"
+    },
+    "gabriel": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "status": "secure"
+    },
+    "itsalive": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "status": "secure"
+    },
+    "jamal": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "status": "secure"
+    },
+    "slotenmaker-master": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "status": "secure"
+    },
+    "tarkuv": {
+      "hasGitignore": true,
+      "envPatternsIgnored": true,
+      "envFilesTracked": [".env.example", ".env.local.example"],
+      "envFilesNotTracked": [".env.local"],
+      "status": "secure"
+    }
+  },
+  "recommendations": [
+    "Rotate all secrets found in .env.local files if they were ever committed to version control",
+    "Remove hardcoded fallback secrets from source code",
+    "Consider using a secrets management solution for production deployments",
+    "Add pre-commit hooks to prevent accidental commit of sensitive files"
+  ]
+}

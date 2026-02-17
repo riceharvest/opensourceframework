@@ -1,0 +1,39 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/critters/src/index.ts",
+    "packages/next-csrf/src/index.ts",
+    "packages/next-images/src/index.ts",
+    "packages/next-json-ld/src/index.ts",
+    "packages/next-circuit-breaker/src/index.ts",
+    "packages/react-a11y-utils/src/index.ts",
+    "packages/seeded-rng/src/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "name": "OpenSourceFramework",
+  "includeVersion": true,
+  "readme": "README.md",
+  "plugin": [
+    "typedoc-plugin-merge-modules",
+    "typedoc-plugin-versions"
+  ],
+  "theme": "default",
+  "navigationLinks": {
+    "GitHub": "https://github.com/opensourceframework/monorepo",
+    "Discord": "https://discord.gg/opensourceframework"
+  },
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "excludeExternals": false,
+  "treatWarningsAsErrors": false,
+  "emit": true,
+  "skipErrorChecking": false,
+  "sourceLinkTemplate": "https://github.com/opensourceframework/monorepo/blob/main/{path}#L{line}",
+  "customFooterHtml": "<p>© 2024 OpenSourceFramework. MIT License.</p>",
+  "validation": {
+    "invalidLink": true,
+    "notExported": true,
+    "notDocumented": true
+  }
+}

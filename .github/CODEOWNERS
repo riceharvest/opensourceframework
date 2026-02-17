@@ -1,0 +1,44 @@
+# CODEOWNERS - OpenSourceFramework Monorepo
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @dario
+
+# Repository configuration and tooling
+/.github/ @dario
+/.husky/ @dario
+/tools/ @dario
+/package.json @dario
+/pnpm-lock.yaml @dario
+/pnpm-workspace.yaml @dario
+/tsconfig.json @dario
+/turbo.json @dario
+/eslint.config.js @dario
+
+# Security-critical files - require maintainer review
+/SECURITY.md @dario
+/.github/SECURITY.md @dario
+/.github/workflows/security-audit.yml @dario
+/.github/workflows/release.yml @dario
+
+# Changeset configuration
+/.changeset/ @dario
+
+# Security-critical packages - require enhanced review
+/packages/next-csrf/ @dario
+/packages/seeded-rng/ @dario
+
+# Standard packages
+/packages/next-images/ @dario
+/packages/critters/ @dario
+/packages/next-json-ld/ @dario
+/packages/next-circuit-breaker/ @dario
+/packages/react-a11y-utils/ @dario
+
+# Documentation
+/README.md @dario
+/CONTRIBUTING.md @dario
+/CONTRIBUTING_LADDER.md @dario
+/CODE_OF_CONDUCT.md @dario
+/PUBLISHING.md @dario
+/LICENSE @dario

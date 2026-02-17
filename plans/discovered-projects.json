@@ -1,0 +1,60 @@
+{
+  "discoveredAt": "2026-02-15T11:21:00.000Z",
+  "workspacePath": "/home/dario/Documents/dev workspace",
+  "projects": [
+    {
+      "name": "boeloe",
+      "path": "/home/dario/Documents/dev workspace/boeloe",
+      "type": "nextjs-app-router",
+      "packageManager": "bun",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "16.1.6"
+    },
+    {
+      "name": "gabriel",
+      "path": "/home/dario/Documents/dev workspace/gabriel",
+      "type": "nextjs-app-router",
+      "packageManager": "npm",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "16.1.1"
+    },
+    {
+      "name": "itsalive",
+      "path": "/home/dario/Documents/dev workspace/itsalive",
+      "type": "nextjs-app-router",
+      "packageManager": "npm",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "^14.2.35"
+    },
+    {
+      "name": "jamal",
+      "path": "/home/dario/Documents/dev workspace/jamal",
+      "type": "nextjs-app-router",
+      "packageManager": "npm",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "16.0.10"
+    },
+    {
+      "name": "slotenmaker-master",
+      "path": "/home/dario/Documents/dev workspace/slotenmaker-master",
+      "type": "nextjs-app-router",
+      "packageManager": "npm",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "^16.1.6"
+    },
+    {
+      "name": "tarkuv",
+      "path": "/home/dario/Documents/dev workspace/tarkuv",
+      "type": "nextjs-app-router",
+      "packageManager": "bun",
+      "hasGitRepo": true,
+      "isMonorepo": false,
+      "nextVersion": "16.1.6"
+    }
+  ]
+}

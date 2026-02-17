@@ -1,0 +1,361 @@
+{
+  "auditedAt": "2026-02-15T11:46:00.000Z",
+  "auditScope": {
+    "description": "Security audit for open-source candidate modules before extraction",
+    "projectsScanned": [
+      "slotenmaker-master",
+      "tarkuv",
+      "gabriel",
+      "itsalive"
+    ],
+    "totalModules": 9
+  },
+  "modules": [
+    {
+      "name": "circuitBreaker",
+      "sourcePath": "/home/dario/Documents/dev workspace/slotenmaker-master/src/lib/circuitBreaker.ts",
+      "sourceProject": "slotenmaker-master",
+      "status": "cleared",
+      "findings": [],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [],
+      "notes": "Pure TypeScript implementation of Circuit Breaker pattern. No external dependencies, no sensitive data. Ready for open-sourcing."
+    },
+    {
+      "name": "accessibility",
+      "sourcePath": "/home/dario/Documents/dev workspace/slotenmaker-master/src/lib/accessibility.ts",
+      "sourceProject": "slotenmaker-master",
+      "status": "cleared",
+      "findings": [],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [],
+      "notes": "Pure TypeScript accessibility utility functions. No sensitive data. Ready for open-sourcing."
+    },
+    {
+      "name": "rng",
+      "sourcePath": "/home/dario/Documents/dev workspace/tarkuv/src/lib/game/rng.ts",
+      "sourceProject": "tarkuv",
+      "status": "cleared",
+      "findings": [
+        {
+          "type": "security-note",
+          "severity": "info",
+          "line": null,
+          "description": "This is NOT a cryptographic random number generator. Uses Linear Congruential Generator (LCG) algorithm.",
+          "recommendation": "Document clearly that this should not be used for security-sensitive operations like token generation or encryption keys."
+        }
+      ],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [
+        "Add prominent documentation that this is not cryptographically secure"
+      ],
+      "notes": "Pure algorithmic implementation for deterministic game behavior. No sensitive data. Ready for open-sourcing with proper documentation."
+    },
+    {
+      "name": "structuredData",
+      "sourcePath": "/home/dario/Documents/dev workspace/slotenmaker-master/src/lib/structuredData.ts",
+      "sourceProject": "slotenmaker-master",
+      "status": "needs-sanitization",
+      "findings": [
+        {
+          "type": "hardcoded-business-data",
+          "severity": "medium",
+          "line": 11,
+          "description": "Hardcoded business information: name 'Master Locksmith Amsterdam', URL 'https://masterlocksmith.nl'",
+          "recommendation": "Replace with configurable parameters or remove business-specific defaults"
+        },
+        {
+          "type": "hardcoded-business-data",
+          "severity": "medium",
+          "line": 14,
+          "description": "Hardcoded phone number: '+31657873128'",
+          "recommendation": "Remove hardcoded phone number, make it a required parameter"
+        },
+        {
+          "type": "hardcoded-business-data",
+          "severity": "medium",
+          "line": 15,
+          "description": "Hardcoded email address: 'masterlocksmith020@hotmail.com'",
+          "recommendation": "Remove hardcoded email, make it a required parameter"
+        },
+        {
+          "type": "hardcoded-business-data",
+          "severity": "low",
+          "line": 23,
+          "description": "Hardcoded social media URLs: Facebook and Instagram links",
+          "recommendation": "Make social media links configurable or remove defaults"
+        },
+        {
+          "type": "hardcoded-business-data",
+          "severity": "low",
+          "line": 95,
+          "description": "Service schema references 'Master Locksmith Amsterdam' and 'https://masterlocksmith.nl'",
+          "recommendation": "Make provider information configurable parameters"
+        }
+      ],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": true,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [
+        "Remove hardcoded business name, phone, email, and URLs from getOrganizationSchema()",
+        "Refactor to accept organization data as parameters",
+        "Remove business-specific defaults from getServiceSchema() and getReviewSchema()"
+      ],
+      "notes": "Contains hardcoded business information specific to the source project. Must be sanitized before open-sourcing. The utility functions themselves are valuable and reusable."
+    },
+    {
+      "name": "canvas3D",
+      "sourcePath": "/home/dario/Documents/dev workspace/gabriel/src/components/canvas/",
+      "sourceProject": "gabriel",
+      "filesScanned": [
+        "EnergyWaves.tsx",
+        "Eye.tsx",
+        "HeroCanvas.tsx",
+        "HeroOrb.tsx",
+        "LightningEffect.tsx",
+        "SparkleEffect.tsx",
+        "PostProcessing.tsx"
+      ],
+      "status": "cleared",
+      "findings": [],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [],
+      "notes": "Pure visual/3D rendering components using React Three Fiber. No sensitive data. Ready for open-sourcing. Note: GSAP has commercial license considerations."
+    },
+    {
+      "name": "gameEngine",
+      "sourcePath": "/home/dario/Documents/dev workspace/tarkuv/src/lib/game/",
+      "sourceProject": "tarkuv",
+      "filesScanned": [
+        "engine.ts",
+        "ballistics.ts",
+        "encounters.ts",
+        "enemies.ts",
+        "items.ts",
+        "items_expansion.ts",
+        "maps.ts",
+        "quests.ts",
+        "recipes.ts",
+        "skills.ts",
+        "traders.ts"
+      ],
+      "status": "cleared",
+      "findings": [],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [],
+      "notes": "Pure game logic implementation. No sensitive data, no external API calls. Ready for open-sourcing."
+    },
+    {
+      "name": "gameComponents",
+      "sourcePath": "/home/dario/Documents/dev workspace/tarkuv/src/components/game/",
+      "sourceProject": "tarkuv",
+      "filesScanned": [
+        "ArmorRepairPanel.tsx",
+        "GameInitializer.tsx",
+        "LoadoutSelector.tsx",
+        "RaidContent.tsx",
+        "RaidContentSimple.tsx",
+        "RaidSummaryView.tsx",
+        "RaidView.tsx",
+        "StashGrid.tsx",
+        "WeaponModdingPanel.tsx"
+      ],
+      "status": "cleared",
+      "findings": [],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [],
+      "notes": "Pure UI components for game interface. No sensitive data. Ready for open-sourcing."
+    },
+    {
+      "name": "whatsapp",
+      "sourcePath": "/home/dario/Documents/dev workspace/itsalive/src/lib/whatsapp/",
+      "sourceProject": "itsalive",
+      "filesScanned": [
+        "client.ts",
+        "service.ts"
+      ],
+      "status": "needs-sanitization",
+      "findings": [
+        {
+          "type": "internal-import",
+          "severity": "medium",
+          "line": 2,
+          "description": "Imports prisma from '../database/client' - project-specific database connection",
+          "recommendation": "Refactor to accept database client as a dependency injection parameter"
+        },
+        {
+          "type": "internal-import",
+          "severity": "low",
+          "line": 3,
+          "description": "Imports logger from '../utils/validation' - project-specific logging utility",
+          "recommendation": "Replace with configurable logger or remove dependency"
+        }
+      ],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [
+        "Refactor to use dependency injection for database client",
+        "Make logger configurable or use console-based fallback",
+        "Document that whatsapp-web.js uses unofficial WhatsApp API"
+      ],
+      "notes": "No hardcoded secrets in the module itself. The source project (itsalive) has JWT_SECRET fallbacks in other files but those are not part of this module. Requires refactoring for standalone use."
+    },
+    {
+      "name": "sleepAnalyzer",
+      "sourcePath": "/home/dario/Documents/dev workspace/itsalive/src/lib/analysis/sleepAnalyzer.ts",
+      "sourceProject": "itsalive",
+      "status": "needs-sanitization",
+      "findings": [
+        {
+          "type": "internal-import",
+          "severity": "medium",
+          "line": 1,
+          "description": "Imports prisma from '../database/client' - project-specific database connection",
+          "recommendation": "Refactor to accept data access interface as dependency injection"
+        },
+        {
+          "type": "internal-import",
+          "severity": "low",
+          "line": 4,
+          "description": "Imports logger from '../utils/validation' - project-specific logging utility",
+          "recommendation": "Replace with configurable logger or remove dependency"
+        },
+        {
+          "type": "health-data-note",
+          "severity": "info",
+          "line": null,
+          "description": "Module handles health-related sleep data which may be subject to HIPAA or other health data regulations",
+          "recommendation": "Add documentation about health data handling considerations"
+        }
+      ],
+      "scanDetails": {
+        "hardcodedSecrets": false,
+        "envVarReferences": false,
+        "internalUrls": false,
+        "userDataReferences": false,
+        "thirdPartyIdentifiers": false
+      },
+      "canBeOpenSourced": true,
+      "requiredActions": [
+        "Refactor to use dependency injection for data access layer",
+        "Make logger configurable or use console-based fallback",
+        "Add documentation about health data privacy considerations"
+      ],
+      "notes": "No hardcoded secrets. Requires refactoring to be database-agnostic for open-sourcing. The analysis logic itself is reusable."
+    }
+  ],
+  "gitHistoryCheck": {
+    "status": "completed",
+    "findings": [
+      {
+        "project": "itsalive",
+        "severity": "medium",
+        "description": "JWT_SECRET with hardcoded fallback found in project (not in candidate modules)",
+        "files": [
+          "src/app/api/contacts/route.ts",
+          "src/app/api/auth/login/route.ts",
+          "src/app/api/auth/me/route.ts",
+          "src/lib/auth-server.ts"
+        ],
+        "note": "These files are NOT part of the candidate modules (whatsapp, sleepAnalyzer)"
+      },
+      {
+        "project": "tarkuv",
+        "severity": "high",
+        "description": "Real credentials found in .env.local file (CLERK_SECRET_KEY, VERCEL_OIDC_TOKEN)",
+        "note": "File is properly gitignored and not part of any candidate module"
+      }
+    ],
+    "recommendation": "No secrets found in git history for the specific candidate module files. The security flags in source projects are in files outside the candidate modules."
+  },
+  "summary": {
+    "cleared": 6,
+    "needsSanitization": 3,
+    "blocked": 0,
+    "totalModules": 9,
+    "readyForExtraction": [
+      "circuitBreaker",
+      "accessibility",
+      "rng",
+      "canvas3D",
+      "gameEngine",
+      "gameComponents"
+    ],
+    "requiresSanitization": [
+      "structuredData",
+      "whatsapp",
+      "sleepAnalyzer"
+    ]
+  },
+  "recommendations": {
+    "immediate": [
+      "Extract cleared modules (circuitBreaker, accessibility, rng, canvas3D, gameEngine, gameComponents) immediately",
+      "Sanitize structuredData by removing hardcoded business information",
+      "Refactor whatsapp and sleepAnalyzer to use dependency injection for external dependencies"
+    ],
+    "beforePublishing": [
+      "Add comprehensive README files with security considerations for each package",
+      "Document that rng module is NOT cryptographically secure",
+      "Document health data considerations for sleepAnalyzer",
+      "Document unofficial API risks for whatsapp module"
+    ],
+    "ongoing": [
+      "Set up pre-commit hooks to prevent accidental commit of secrets",
+      "Consider using secret scanning tools in CI/CD pipeline",
+      "Rotate credentials if any were ever committed to git history"
+    ]
+  }
+}

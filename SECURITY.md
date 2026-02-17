@@ -2,58 +2,107 @@
 
 ## Supported Versions
 
-| Package | Version | Supported |
-| ------- | ------- | --------- |
-| @opensourceframework/next-csrf | >= 1.0.0 | :white_check_mark: |
-| @opensourceframework/next-images | >= 1.0.0 | :white_check_mark: |
-| @opensourceframework/critters | >= 1.0.0 | :white_check_mark: |
+We actively support and provide security updates for the following versions:
 
-## Security-First Approach
-
-Given that we maintain security-critical packages like `next-csrf`, we take security seriously:
-
-1. **Regular dependency audits** - Automated scanning for vulnerable dependencies
-2. **Code review** - All changes require review before merge
-3. **Automated testing** - Security-related tests in CI pipeline
-4. **Responsible disclosure** - Private reporting before public disclosure
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.x.x   | ✅ Yes             |
+| < 1.0   | ❌ No              |
 
 ## Reporting a Vulnerability
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+We take security vulnerabilities seriously. If you discover a security issue, please report it responsibly.
 
-Instead, please report them through GitHub Security Advisories:
+### How to Report
 
-1. Go to the [Security Advisories page](https://github.com/opensourceframework/opensourceframework/security/advisories/new)
-2. Click "Report a vulnerability"
-3. Fill out the form with details about the vulnerability
-
-### What to Include
-
-- Description of the vulnerability
-- Steps to reproduce
-- Affected package and version(s)
-- Potential impact
-- Suggested fix (if any)
+1. **DO NOT** create a public GitHub issue for security vulnerabilities
+2. Email the security team directly at: [security@opensourceframework.dev](mailto:security@opensourceframework.dev)
+3. Include the following in your report:
+   - Description of the vulnerability
+   - Steps to reproduce the issue
+   - Potential impact assessment
+   - Any suggested fixes (optional)
 
 ### Response Timeline
 
-- **Initial Response**: Within 48 hours
-- **Status Update**: Within 7 days
-- **Fix Timeline**: Depends on severity
-  - Critical: Within 7 days
-  - High: Within 14 days
-  - Medium: Within 30 days
-  - Low: Next scheduled release
+| Timeline      | Action                                                |
+|---------------|-------------------------------------------------------|
+| < 24 hours   | Acknowledgment of receipt                            |
+| < 7 days     | Initial assessment and triage                        |
+| < 30 days    | Fix development and testing                          |
+| < 60 days    | Public disclosure and patch release                  |
 
-## Security Best Practices
+### Disclosure Policy
 
-When using our packages:
+- We follow a **coordinated disclosure** process
+- We request that you give us reasonable time to fix the vulnerability before public disclosure
+- We will credit reporters in the security advisory (with permission)
 
-1. Always use the latest supported version
-2. Review security advisories before upgrading
-3. Subscribe to GitHub Security Alerts
-4. Report any suspicious behavior
+## Security Advisories
 
-## Acknowledgments
+We publish security advisories for all fixed vulnerabilities:
 
-We appreciate responsible disclosure and will acknowledge security researchers who help keep our packages secure.
+- [GitHub Security Advisories](https://github.com/opensourceframework/security/advisories)
+- [npm Advisory Database](https://www.npmjs.com/advisories)
+
+## Supported Packages
+
+This policy applies to all packages in the `@opensourceframework` scope:
+
+- `@opensourceframework/critters`
+- `@opensourceframework/next-csrf`
+- `@opensourceframework/next-images`
+- `@opensourceframework/next-json-ld`
+- `@opensourceframework/next-circuit-breaker`
+- `@opensourceframework/react-a11y-utils`
+- `@opensourceframework/seeded-rng`
+
+## Security Requirements
+
+### For Production Use
+
+1. **Always use the latest stable version**
+2. **Review dependencies regularly** - Use Dependabot or similar tools
+3. **Enable security scanning** in your CI/CD pipeline
+4. **Follow least privilege** - Don't give packages more permissions than needed
+
+### For Security-Critical Applications
+
+The `seeded-rng` package provides two implementations:
+
+| Class           | Use Case                                    |
+|-----------------|---------------------------------------------|
+| `SeededRNG`     | Games, testing, simulations (NOT secure)    |
+| `SecureSeededRNG`| Passwords, tokens, keys (cryptographically secure) |
+
+**Never use `SeededRNG` for security-sensitive operations!**
+
+## Dependencies
+
+We regularly audit dependencies for vulnerabilities:
+
+- GitHub Dependabot for automated updates
+- Snyk for dependency scanning
+- npm audit for runtime checks
+- GitHub Advanced Security
+
+## Best Practices
+
+1. **Keep packages updated** - Security fixes are released regularly
+2. **Use lockfiles** - Ensures consistent installs
+3. **Audit your dependencies** - Run `npm audit` or `pnpm audit` regularly
+4. **Subscribe to security advisories** - Get notified of new vulnerabilities
+
+## Bug Bounty
+
+We currently do not have a formal bug bounty program, but we appreciate responsible disclosure and may offer public recognition for significant findings.
+
+## Contact
+
+For security-related inquiries:
+- Email: [security@opensourceframework.dev](mailto:security@opensourceframework.dev)
+- GitHub: [https://github.com/opensourceframework](https://github.com/opensourceframework)
+
+---
+
+**Last Updated:** February 2026
