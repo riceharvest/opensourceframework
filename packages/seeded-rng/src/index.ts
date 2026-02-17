@@ -250,11 +250,11 @@ export class SeededRNG {
    */
   nextHex(length: number): string {
     const chars = '0123456789abcdef';
-    let result = '';
+    const result = new Array(length);
     for (let i = 0; i < length; i++) {
-      result += chars[this.nextInt(0, 15)];
+      result[i] = chars[this.nextInt(0, 15)];
     }
-    return result;
+    return result.join('');
   }
 
   /**
@@ -311,7 +311,7 @@ export class SeededRNG {
  * ```typescript
  * // Generate a secure random password
  * const rng = new SecureSeededRNG();
- * const password = rng.nextSecureHex(32); // 32 bytes of secure randomness
+ * const password = rng.nextHex(32); // 32 bytes of secure randomness
  * ```
  * @since 0.1.0
  */
@@ -356,11 +356,13 @@ export class SecureSeededRNG {
       try {
         // Try to use crypto.getRandomValues
         const array = new Uint32Array(1);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const cryptoObj = (globalThis as any).crypto as { getRandomValues?: (arr: Uint32Array) => Uint32Array } | undefined;
-        cryptoObj?.getRandomValues?.(array);
-        if (array[0] !== undefined) {
-          randomSeed = array[0];
+        // Use type-safe check for crypto.getRandomValues
+        if (typeof globalThis !== 'undefined' && 'crypto' in globalThis) {
+          const maybeCrypto = globalThis as { crypto?: { getRandomValues?: (arr: Uint32Array) => Uint32Array } };
+          maybeCrypto.crypto?.getRandomValues?.(array);
+          if (array[0] !== undefined) {
+            randomSeed = array[0];
+          }
         }
       } catch {
         // Fallback to Math.random
@@ -603,16 +605,17 @@ export class SecureSeededRNG {
    */
   nextHex(length: number): string {
     const chars = '0123456789abcdef';
-    let result = '';
+    const result = new Array(length * 2);
     
     // Always use ISAAC for deterministic behavior when seeded
     // crypto.getRandomValues would break determinism
+    let idx = 0;
     for (let i = 0; i < length; i++) {
       const byte = this.rand() & 0xff;
-      result += chars[(byte >> 4) & 0x0f];
-      result += chars[byte & 0x0f];
+      result[idx++] = chars[(byte >> 4) & 0x0f];
+      result[idx++] = chars[byte & 0x0f];
     }
-    return result;
+    return result.join('');
   }
 
   /**
@@ -639,12 +642,11 @@ export class SecureSeededRNG {
    */
   nextBase64(length: number): string {
     const bytes = this.nextBytes(length);
-    let binary = '';
+    const binary = new Array(bytes.length);
     for (let i = 0; i < bytes.length; i++) {
-      const byte = bytes[i] ?? 0;
-      binary += String.fromCharCode(byte);
+      binary[i] = String.fromCharCode(bytes[i] ?? 0);
     }
-    return btoa(binary);
+    return btoa(binary.join(''));
   }
 
   /**
@@ -732,7 +734,7 @@ export function createRNG(seed?: number | null): SeededRNG {
  * 
  * // Without seed (cryptographically random each time)
  * const rng2 = createSecureRNG();
- * const password = rng2.nextSecureHex(32); // 32-byte secure password
+ * const password = rng2.nextHex(32); // 32-byte secure password
  * ```
  * 
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues|crypto.getRandomValues}

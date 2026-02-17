@@ -28,10 +28,8 @@ export class HttpError extends Error {
     this.message = message;
 
     // Maintains proper stack trace for where the error was thrown (only available on V8)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((Error as any).captureStackTrace) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (Error as any).captureStackTrace(this, HttpError);
+    if ('captureStackTrace' in Error) {
+      (Error as typeof Error & { captureStackTrace: (target: object, constructor: Function) => void }).captureStackTrace(this, HttpError);
     }
   }
 }
