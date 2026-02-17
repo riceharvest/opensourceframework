@@ -39,3 +39,6 @@ coverage/
 # Misc
 *.tgz
 .eslintcache
+
+# npm config (contains sensitive tokens)
+.npmrc

@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/react-a11y-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React accessibility utility functions and hooks for building accessible user interfaces",
   "keywords": [
     "react",

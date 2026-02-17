@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/seeded-rng",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Seeded random number generator for reproducible randomness - NOT cryptographically secure",
   "keywords": [
     "random",
