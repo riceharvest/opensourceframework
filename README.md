@@ -75,7 +75,7 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 18+
 - pnpm 9+
 
 ### Setup

@@ -1,45 +1,106 @@
-name: Feature Request
-description: Request a new feature for one of our packages
-labels: ['enhancement', 'needs-triage']
+name: 🚀 Feature Request
+description: Suggest a new feature or improvement
+title: '[Feature]: '
+labels: ['enhancement']
+projects: []
+assignees: []
+
 body:
-  - type: dropdown
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your feature request!
+
+        Please fill out this template to help us understand your proposal.
+
+  - type: input
     id: package
     attributes:
-      label: Affected Package
-      description: Which package should this feature be added to?
-      options:
-        - '@opensourceframework/next-csrf'
-        - '@opensourceframework/next-images'
-        - '@opensourceframework/critters'
-        - New Package Suggestion
+      label: Package Name
+      description: Which package would benefit from this feature?
+      placeholder: '@opensourceframework/next-csrf'
     validations:
       required: true
 
   - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A brief description of the feature
+      placeholder: |
+        Example: Add support for custom CSRF token generators
+
+  - type: textarea
     id: problem
     attributes:
-      label: Problem Statement
-      description: Is your feature request related to a problem? Please describe.
-      placeholder: I'm always frustrated when...
-    validations:
-      required: true
+      label: Problem
+      description: |
+        Describe the problem this feature would solve.
+        Why is this needed? What pain point does it address?
+      placeholder: |
+        Currently, I can only use the default token generator...
 
   - type: textarea
     id: solution
     attributes:
       label: Proposed Solution
-      description: Describe the solution you'd like to see
-    validations:
-      required: true
+      description: |
+        Describe your proposed solution.
+        How should it work? What API would you like to see?
+      placeholder: |
+        Add a `customGenerator` option to the config...
 
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives Considered
-      description: Describe any alternative solutions or features you've considered
+      label: Alternatives
+      description: |
+        Describe any alternative solutions you've considered.
+        What are the trade-offs?
+      placeholder: |
+        I could implement my own token generator, but...
 
   - type: textarea
-    id: additional
+    id: usage
     attributes:
-      label: Additional Context
-      description: Add any other context or screenshots about the feature request here
+      label: Usage Example
+      description: |
+        Show how you would use this feature
+      placeholder: |
+        ```typescript
+        const csrf = createCSRF({
+          customGenerator: async () => {
+            return generateCustomToken();
+          }
+        });
+        ```
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for existing feature requests
+          required: true
+        - label: This is a genuine feature request
+          required: true
+        - label: I understand this will be reviewed by maintainers
+          required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - Nice to have
+        - Important
+        - Critical (blocking my project)
+      default: 0
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        **Note:** For security vulnerabilities, please see our [Security Policy](SECURITY.md) - do not create a public issue.

@@ -1,43 +1,59 @@
-name: Bug Report
-description: Report a bug in one of our packages
-labels: ['needs-triage']
+name: 🐛 Bug Report
+description: Report a bug to help us improve
+title: '[Bug]: '
+labels: ['bug']
+projects: []
+assignees: []
+
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report this bug! Please fill out the sections below.
-        
-  - type: dropdown
+        Thank you for taking the time to report this bug!
+
+        Please fill out this template completely to help us understand and fix the issue faster.
+
+  - type: input
     id: package
     attributes:
-      label: Affected Package
-      description: Which package is affected?
-      options:
-        - '@opensourceframework/next-csrf'
-        - '@opensourceframework/next-images'
-        - '@opensourceframework/critters'
-        - Other
+      label: Package Name
+      description: Which package is this bug in?
+      placeholder: '@opensourceframework/next-csrf'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      description: What version of the package are you using?
+      placeholder: '1.2.3'
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: Bug Description
-      description: A clear description of what the bug is
+      label: Description
+      description: A clear and concise description of what the bug is
+      placeholder: |
+        Example: When I use next-csrf with middleware, I get an error...
     validations:
       required: true
 
   - type: textarea
-    id: reproduction
+    id: steps
     attributes:
-      label: Reproduction Steps
-      description: Steps to reproduce the behavior
-      placeholder: |
-        1. Install package '...'
-        2. Configure with '...'
-        3. Run '...'
-        4. See error
+      label: Steps to Reproduce
+      description: |
+        Steps to reproduce the behavior:
+        1. Go to '...'
+        2. Click on '....'
+        3. See error
+      value: |
+        1.
+        2.
+        3.
     validations:
       required: true
 
@@ -46,43 +62,73 @@ body:
     attributes:
       label: Expected Behavior
       description: What did you expect to happen?
-    validations:
-      required: true
+      placeholder: |
+        Example: The CSRF token should be validated and return 200 OK
 
   - type: textarea
     id: actual
     attributes:
       label: Actual Behavior
       description: What actually happened?
-    validations:
-      required: true
-
-  - type: input
-    id: version
-    attributes:
-      label: Package Version
-      placeholder: e.g., 1.0.0
-    validations:
-      required: true
-
-  - type: input
-    id: node-version
-    attributes:
-      label: Node.js Version
-      placeholder: e.g., 20.10.0
-    validations:
-      required: true
-
-  - type: input
-    id: os
-    attributes:
-      label: Operating System
-      placeholder: e.g., macOS 14, Windows 11, Ubuntu 22.04
-    validations:
-      required: true
+      placeholder: |
+        Example: Returns 403 Forbidden with error message...
 
   - type: textarea
-    id: additional
+    id: environment
     attributes:
-      label: Additional Context
-      description: Add any other context, logs, or screenshots about the problem here
+      label: Environment
+      description: |
+        Tell us about your environment:
+        - Node.js version:
+        - Next.js version:
+        - Operating system:
+        - Package manager (npm/pnpm/yarn):
+      placeholder: |
+        Node.js: v20.10.0
+        Next.js: 14.2.0
+        OS: macOS 14.0
+        Package Manager: pnpm
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs
+      description: Include any relevant error messages or stack traces
+      placeholder: |
+        ```
+        Error: ...
+        at ...
+        ```
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Snippet
+      description: |
+        Share a minimal code snippet that reproduces the issue.
+        Use triple backticks for code blocks.
+      placeholder: |
+        ```typescript
+        // Your code here
+        ```
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched for existing issues
+          required: true
+        - label: I have included a minimal reproduction
+          required: true
+        - label: I have included all relevant information
+          required: true
+        - label: I understand this will be triaged quickly
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        **Privacy Note:** This issue tracker is public. Do not share sensitive information like API keys or passwords.
