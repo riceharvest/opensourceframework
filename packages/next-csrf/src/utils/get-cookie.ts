@@ -14,15 +14,18 @@ import type { IncomingMessage } from 'http';
  * Extracts a cookie value by name from an incoming request
  * @param req - The incoming HTTP request
  * @param name - The name of the cookie to extract
- * @returns The cookie value or empty string if not found
+ * @returns The cookie value, empty string if cookie exists but is empty, or null if not found
  */
-function getCookie(req: IncomingMessage, name: string): string {
+function getCookie(req: IncomingMessage, name: string): string | null {
   if (req.headers.cookie != null) {
     const parsedCookie = parse(req.headers.cookie);
-    return parsedCookie[name] || '';
+    if (Object.prototype.hasOwnProperty.call(parsedCookie, name)) {
+      return parsedCookie[name] as string;
+    }
+    return null;
   }
 
-  return '';
+  return null;
 }
 
 export { getCookie };

@@ -120,7 +120,7 @@ export interface CheckedProps extends AccessibilityProps {
 /**
  * CSS Properties type for style objects
  */
-export type CSSProperties = Record<string, string | number | undefined>;
+export type A11yCSSProperties = Record<string, string | number | undefined>;
 
 // ============================================================================
 // Screen Reader Utilities
@@ -135,7 +135,7 @@ export type CSSProperties = Record<string, string | number | undefined>;
  * <span style={srOnly}>Skip to main content</span>
  * ```
  */
-export const srOnly: CSSProperties = {
+export const srOnly: A11yCSSProperties = {
   position: 'absolute',
   width: '1px',
   height: '1px',
@@ -156,7 +156,7 @@ export const srOnly: CSSProperties = {
  * <a href="#main" style={srOnlyFocusable}>Skip to main content</a>
  * ```
  */
-export const srOnlyFocusable: CSSProperties = {
+export const srOnlyFocusable: A11yCSSProperties = {
   position: 'absolute',
   width: 'auto',
   height: 'auto',

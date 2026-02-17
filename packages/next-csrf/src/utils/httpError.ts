@@ -17,7 +17,7 @@ export class HttpError extends Error {
 
   /**
    * Creates a new HttpError instance
-   * @param status - HTTP status code (default: 403)
+   * @param status - HTTP status code
    * @param message - Error message
    */
   constructor(status: number = 403, message: string) {

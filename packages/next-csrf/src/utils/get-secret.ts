@@ -18,7 +18,7 @@ import type { IncomingMessage } from 'http';
  * @returns The CSRF secret or empty string if not found
  */
 const getSecret = (req: IncomingMessage, tokenKey: string): string => {
-  return getCookie(req, tokenKey.toLowerCase());
+  return getCookie(req, tokenKey.toLowerCase()) ?? '';
 };
 
 export { getSecret };

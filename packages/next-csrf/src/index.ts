@@ -45,7 +45,7 @@ const defaultOptions: Required<Omit<NextCsrfOptions, 'secret'>> = {
  * - `csrf`: Validates CSRF tokens on protected routes (use on API routes)
  * 
  * @param userOptions - Configuration options for CSRF protection
- * @returns Object containing setup and csrf middleware functions
+ * @returns {NextCSRF} Object containing setup and csrf middleware functions
  * 
  * @example
  * ```typescript

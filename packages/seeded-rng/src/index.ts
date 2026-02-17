@@ -372,8 +372,8 @@ export class SecureSeededRNG {
             randomSeed = array[0];
           }
         }
-      } catch {
-        // Fallback to Math.random
+      } catch (error) {
+        console.warn('SecureSeededRNG: crypto.getRandomValues not available, falling back to Math.random:', error);
       }
       
       seed = randomSeed;
