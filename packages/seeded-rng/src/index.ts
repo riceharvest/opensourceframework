@@ -170,15 +170,23 @@ export class SeededRNG {
 
   /**
    * Generates a random integer in range [min, max] (inclusive)
+   * @throws {Error} If min is greater than max
    */
   nextInt(min: number, max: number): number {
+    if (min > max) {
+      throw new Error('min must be less than or equal to max');
+    }
     return Math.floor(this.next() * (max - min + 1)) + min;
   }
 
   /**
    * Generates a random float in range [min, max)
+   * @throws {Error} If min is greater than max
    */
   nextFloat(min: number, max: number): number {
+    if (min > max) {
+      throw new Error('min must be less than max');
+    }
     return this.next() * (max - min) + min;
   }
 
@@ -516,22 +524,34 @@ export class SecureSeededRNG {
 
   /**
    * Generates a random integer in range [min, max] (inclusive)
+   * @throws {Error} If min is greater than max
    */
   nextInt(min: number, max: number): number {
+    if (min > max) {
+      throw new Error('min must be less than or equal to max');
+    }
     return Math.floor(this.next() * (max - min + 1)) + min;
   }
 
   /**
    * Generates a random float in range [min, max)
+   * @throws {Error} If min is greater than max
    */
   nextFloat(min: number, max: number): number {
+    if (min > max) {
+      throw new Error('min must be less than max');
+    }
     return this.next() * (max - min) + min;
   }
 
   /**
    * Returns true with the given probability (0-1)
+   * @throws {Error} If probability is not between 0 and 1
    */
   chance(probability: number): boolean {
+    if (probability < 0 || probability > 1) {
+      throw new Error('probability must be between 0 and 1');
+    }
     return this.next() < probability;
   }
 

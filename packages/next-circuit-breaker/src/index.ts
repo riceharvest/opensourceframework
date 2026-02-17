@@ -95,6 +95,9 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
   private readonly onClose?: () => void;
   private readonly onHalfOpen?: () => void;
 
+  // Track timeout ID for cleanup to prevent memory leaks
+  private timeoutId?: ReturnType<typeof setTimeout>;
+
   /**
    * Creates a new CircuitBreaker instance
    *
@@ -105,6 +108,17 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
     private readonly request: AsyncFunction<TArgs, TResult>,
     options: CircuitBreakerOptions = {}
   ) {
+    // Validate options
+    if (options.failureThreshold !== undefined && options.failureThreshold <= 0) {
+      throw new Error('failureThreshold must be a positive number');
+    }
+    if (options.successThreshold !== undefined && options.successThreshold <= 0) {
+      throw new Error('successThreshold must be a positive number');
+    }
+    if (options.timeout !== undefined && options.timeout <= 0) {
+      throw new Error('timeout must be a positive number');
+    }
+
     this.failureThreshold = options.failureThreshold ?? 3;
     this.successThreshold = options.successThreshold ?? 2;
     this.timeout = options.timeout ?? 10000;
@@ -226,7 +240,11 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
     this.nextAttemptTime = Date.now() + this.timeout;
     this.onOpen?.();
     // Schedule automatic transition to half-open
-    setTimeout(() => this.transitionToHalfOpen(), this.timeout);
+    // Clear any existing timeout to prevent memory leaks
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+    this.timeoutId = setTimeout(() => this.transitionToHalfOpen(), this.timeout);
   }
 
   private transitionToHalfOpen(): void {
@@ -234,6 +252,19 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
       this.state = 'HALF_OPEN';
       this.successCount = 0;
       this.onHalfOpen?.();
+    }
+    // Clear the timeout ID after transition
+    this.timeoutId = undefined;
+  }
+
+  /**
+   * Cleans up the circuit breaker, clearing any pending timeouts.
+   * Call this when the circuit breaker is no longer needed to prevent memory leaks.
+   */
+  destroy(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = undefined;
     }
   }
 }

@@ -74,5 +74,8 @@
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-a11y-utils#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
