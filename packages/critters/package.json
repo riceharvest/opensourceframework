@@ -75,7 +75,7 @@
     "css-what": "^6.1.0",
     "dom-serializer": "^2.0.0",
     "domhandler": "^5.0.3",
-    "htmlparser2": "^8.0.2",
+    "htmlparser2": "^10.1.0",
     "postcss": "^8.4.38",
     "postcss-media-query-parser": "^0.2.3"
   },
