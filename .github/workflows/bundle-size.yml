@@ -1,0 +1,46 @@
+name: Bundle Size
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  bundle-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build packages
+        run: pnpm build
+      
+      - name: Check bundle sizes
+        run: |
+          npx bundle-phobia-cli @opensourceframework/next-compose-plugins --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-transpile-modules --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-cookies --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-seo --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-session --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-iron-session --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-https-redirect --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-health-check --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-transpile-modules --limit 10
+          npx bundle-phobia-cli @opensourceframework/next-react-icons --limit 10
+      
+      - name: Upload bundle size report
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-size-report
+          path: bundle-size-report.json
+          retention-days: 30

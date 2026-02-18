@@ -120,7 +120,6 @@ opensourceframework/
 Help sustain this project by becoming a sponsor:
 
 - [GitHub Sponsors](https://github.com/sponsors/opensourceframework)
-- [Open Collective](https://opencollective.com/opensourceframework)
 
 Sponsors get:
 - Recognition in README and releases
