@@ -1,0 +1,12 @@
+{
+  "include": ["src/next-transpile-modules.js"],
+  "ignore": ["src/__tests__"],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "target": "ES2015",
+    "moduleResolution": "node",
+    "skipLibCheck": true
+  }
+}
