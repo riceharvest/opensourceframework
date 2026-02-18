@@ -1,0 +1,74 @@
+name: tests
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        node: [16, 18]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Information
+        run: npm version
+
+      - name: Install Puppeteer dependencies
+        run: bash .github/workflows/setup_puppeteer.sh
+        if: startsWith(matrix.os,'ubuntu')
+
+      - name: Tests setup
+        run: node src/__tests__/setup.js
+
+      - name: 'Test: linting'
+        run: yarn run test:lint
+
+      - name: 'Test: formatting'
+        run: yarn run test:formatting
+        env:
+          CI: true
+
+      - name: 'Test: typings'
+        run: yarn run typings
+
+      - name: Install tests apps dependencies (npm-basic)
+        run: npm ci --prefix=src/__tests__/__apps__/npm-basic
+
+      - name: Install tests apps dependencies (yarn workspaces)
+        run: yarn --frozen-lockfile --cwd src/__tests__/__apps__/yarn-workspaces
+
+      - name: Install tests apps dependencies (yarn workspaces symlinks)
+        run: yarn --frozen-lockfile --cwd src/__tests__/__apps__/yarn-workspaces-symlinks
+
+      - name: Install tests apps dependencies (pnpn workspaces)
+        run: npx pnpm i --frozen-lockfile --prefix src/__tests__/__apps__/pnpm
+
+      - name: Install tests apps dependencies (swc)
+        run: yarn --frozen-lockfile --cwd src/__tests__/__apps__/swc
+
+      - name: Install tests apps dependencies (with-app-dir)
+        run: yarn --frozen-lockfile --cwd src/__tests__/__apps__/with-app-dir
+
+      - name: Build test apps
+        run: yarn run test:prepare
+
+      - name: 'Test: unit & integration tests'
+        run: npm test
