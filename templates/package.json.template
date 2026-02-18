@@ -1,25 +1,17 @@
 {
-  "name": "@opensourceframework/next-json-ld",
-  "version": "0.2.0",
-  "description": "JSON-LD structured data helpers for Next.js SEO - Generate Schema.org markup for search engines",
+  "name": "@opensourceframework/{package-name}",
+  "version": "0.0.0-placeholder",
+  "description": "{brief-description}",
   "keywords": [
     "next.js",
-    "json-ld",
-    "structured-data",
-    "seo",
-    "schema.org",
-    "semantic-web",
-    "rich-snippets",
-    "microdata"
+    "react",
+    "{keywords}"
   ],
-  "author": "OpenSource Framework Contributors",
+  "author": "OpenSource Framework Contributors (fork), Original: {original-author}",
   "contributors": [
-    {
-      "name": "Rice Harvest",
-      "url": "https://github.com/riceharvest"
-    }
+    "{original-author} <{original-author-email}> ({original-repo-url})"
   ],
-  "license": "MIT",
+  "license": "{original-license}",
   "type": "module",
   "exports": {
     ".": {
@@ -53,33 +45,33 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage node_modules"
   },
+  "dependencies": {
+    "{dependencies}"
+  },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "next": "^{nextjs-version}",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0"
   },
   "peerDependencies": {
-    "next": ">=12.0.0",
-    "react": ">=18.0.0"
+    "next": "{peer-dependencies-range}"
   },
   "peerDependenciesMeta": {
     "next": {
-      "optional": true
-    },
-    "react": {
       "optional": true
     }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riceharvest/opensourceframework.git",
-    "directory": "packages/next-json-ld"
+    "directory": "packages/{package-name}"
   },
   "bugs": {
-    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-json-ld"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+{package-name}"
   },
-  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-json-ld#readme",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/{package-name}#readme",
   "publishConfig": {
     "access": "public"
   },

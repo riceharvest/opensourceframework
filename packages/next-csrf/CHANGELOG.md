@@ -1,5 +1,17 @@
 # @opensourceframework/next-csrf
 
+## 0.3.0
+
+### Minor Changes
+
+- 8d7f5c3: v0.2.5 release - Complete CSRF middleware implementation
+
+  Full implementation of CSRF protection for Next.js with:
+  - Token generation and validation
+  - Middleware integration for Next.js App Router
+  - Configurable cookie and header options
+  - Comprehensive test suite
+
 ## 0.2.5
 
 ### Patch Changes

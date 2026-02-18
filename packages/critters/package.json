@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/critters",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Inline critical CSS and lazy-load the rest. Forked from GoogleChromeLabs/critters.",
   "keywords": [
     "critters",

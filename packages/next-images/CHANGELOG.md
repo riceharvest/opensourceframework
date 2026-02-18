@@ -1,5 +1,17 @@
 # @opensourceframework/next-images
 
+## 1.9.0
+
+### Minor Changes
+
+- 8d7f5c3: v1.8.8 release - Full image loader implementation
+
+  Complete implementation of image optimization for Next.js with:
+  - Custom image loader configuration
+  - Support for various image formats
+  - Responsive image handling
+  - Comprehensive test suite
+
 ## 1.8.8
 
 ### Patch Changes

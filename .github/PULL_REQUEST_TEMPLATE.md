@@ -22,6 +22,20 @@ Fixes #
 - [ ] @opensourceframework/next-csrf
 - [ ] @opensourceframework/next-images
 - [ ] @opensourceframework/critters
+- [ ] @opensourceframework/next-json-ld
+- [ ] @opensourceframework/next-circuit-breaker
+- [ ] @opensourceframework/react-a11y-utils
+- [ ] @opensourceframework/seeded-rng
+- [ ] @opensourceframework/next-seo
+- [ ] @opensourceframework/next-transpile-modules
+- [ ] @opensourceframework/next-compose-plugins
+- [ ] @opensourceframework/next-cookies
+- [ ] @opensourceframework/next-auth
+- [ ] @opensourceframework/next-pwa
+- [ ] @opensourceframework/react-virtualized
+- [ ] @opensourceframework/next-session
+- [ ] @opensourceframework/next-iron-session
+- [ ] @opensourceframework/next-mdx
 - [ ] Repository/tooling
 
 ## Checklist

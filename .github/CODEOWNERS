@@ -27,6 +27,15 @@
 # Security-critical packages - require enhanced review
 /packages/next-csrf/ @dario
 /packages/seeded-rng/ @dario
+/packages/next-auth/ @dario
+/packages/next-session/ @dario
+/packages/next-iron-session/ @dario
+
+# High-impact packages
+/packages/next-seo/ @dario
+/packages/next-transpile-modules/ @dario
+/packages/next-pwa/ @dario
+/packages/react-virtualized/ @dario
 
 # Standard packages
 /packages/next-images/ @dario
@@ -34,6 +43,9 @@
 /packages/next-json-ld/ @dario
 /packages/next-circuit-breaker/ @dario
 /packages/react-a11y-utils/ @dario
+/packages/next-compose-plugins/ @dario
+/packages/next-cookies/ @dario
+/packages/next-mdx/ @dario
 
 # Documentation
 /README.md @dario

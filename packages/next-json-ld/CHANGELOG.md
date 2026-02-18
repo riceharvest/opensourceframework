@@ -1,5 +1,18 @@
 # @opensourceframework/next-json-ld
 
+## 0.2.0
+
+### Minor Changes
+
+- 8d7f5c3: Initial release - JSON-LD structured data helpers for Next.js
+
+  Implementation of JSON-LD structured data utilities for SEO with:
+  - Schema.org type definitions and helpers
+  - Support for Article, BreadcrumbList, Organization, Person, Product, and more
+  - TypeScript support with full type definitions
+  - Easy integration with Next.js metadata API
+  - Comprehensive test suite
+
 ## 0.1.0
 
 ### Minor Changes
