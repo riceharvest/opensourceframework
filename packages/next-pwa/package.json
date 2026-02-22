@@ -1,0 +1,102 @@
+{
+  "name": "@opensourceframework/next-pwa",
+  "version": "5.6.0",
+  "description": "Zero config PWA plugin for Next.js with Turbopack compatibility",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-pwa"
+  },
+  "author": "OpenSource Framework Contributors (fork), Original: Shadow Walker",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "nextjs",
+    "pwa",
+    "workbox",
+    "web",
+    "service-worker",
+    "turbopack"
+  ],
+  "files": [
+    "dist",
+    "register.js",
+    "fallback.js",
+    "cache.js",
+    "build-custom-worker.js",
+    "build-fallback-worker.js"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage"
+  },
+  "dependencies": {
+    "globby": "^11.0.4",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.3",
+    "workbox-webpack-plugin": "^6.5.4",
+    "workbox-window": "^6.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "next": "^12 || ^13 || ^14 || ^15 || ^16 || ^17",
+    "react": "^17 || ^18 || ^19",
+    "react-dom": "^17 || ^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "contributors": [
+    {
+      "name": "Shadow Walker",
+      "url": "https://github.com/shadowwalker"
+    }
+  ],
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-pwa#readme",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-pwa"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}

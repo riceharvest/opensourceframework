@@ -23,17 +23,12 @@ OpenSource Framework is a monorepo dedicated to maintaining forks of abandoned n
 
 ## Why OpenSource Framework?
 
-Many npm packages become abandoned over time, leaving projects vulnerable to:
-- **Security vulnerabilities** - No security patches for discovered vulnerabilities
-- **Compatibility issues** - No updates for new Node.js or framework versions
-- **Bug persistence** - Known bugs remain unfixed
-- **TypeScript gaps** - Missing or outdated type definitions
+Many npm packages become abandoned over time, leaving projects vulnerable to security risks and framework obsolescence. OpenSource Framework provides a **"Safe Haven"** for critical utilities with a focus on:
 
-OpenSource Framework solves these problems by:
-- **Active maintenance** - Regular updates and security patches
-- **Community-driven** - Open to contributions and feedback
-- **Transparency** - Clear provenance and changelogs for all packages
-- **Quality standards** - Enforced code standards, testing, and CI/CD
+- **Legacy Preservation:** We maintain "stable-forever" forks of popular versions (like NextAuth v3) that official maintainers have abandoned, ensuring legacy apps don't break as frameworks like Next.js evolve.
+- **Modern Standards:** Every fork is migrated to modern tooling (`tsup`, `vitest`, `ESM`) and strictly tested against the latest Next.js versions (including Next.js 16/17 compatibility).
+- **Unified Ecosystem:** A single namespace (`@opensourceframework`) for a collection of drop-in replacements, reducing dependency fragmentation and audit fatigue.
+- **Simplicity over Complexity:** While other forks (like Serwist) shift philosophies, we prioritize maintaining the original, simple APIs that developers already know and love.
 
 ## Quick Start
 

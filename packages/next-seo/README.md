@@ -17,6 +17,15 @@ Get traffic and outrank competitors with Backlinks & SEO-optimized content while
 
 Next SEO is a plugin that makes managing your SEO easier in Next.js projects. It provides components for structured data (JSON-LD) that helps search engines understand your content better.
 
+## 🛡️ Why this @opensourceframework Fork?
+
+While Next.js now provides a native Metadata API for standard tags, **Next SEO** remains the most robust solution for **JSON-LD Structured Data**. 
+
+Our fork ensures:
+- **Comprehensive JSON-LD:** Support for 20+ specialized Schema.org types (JobPosting, Quiz, Dataset, etc.) that the native API handles poorly.
+- **Cross-Framework Consistency:** A stable API that works identically across Pages Router and App Router.
+- **Modern Standards:** Fully rewritten in TypeScript with a performance-optimized `tsup` build pipeline and `vitest` suite.
+
 ## 📋 Table of Contents
 
 _Looking for v6 documentation? [View Here](https://github.com/garmeeh/@opensourceframework/next-seo/tree/master)_
