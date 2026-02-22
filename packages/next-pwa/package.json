@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-pwa",
-  "version": "5.6.0",
+  "version": "5.6.2",
   "description": "Zero config PWA plugin for Next.js with Turbopack compatibility",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

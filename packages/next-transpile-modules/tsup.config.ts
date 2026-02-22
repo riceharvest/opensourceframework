@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/next-transpile-modules.js'],
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
@@ -13,12 +13,12 @@ export default defineConfig({
   esbuildOptions(options) {
     options.banner = {
       js: `/**
- * @opensourceframework/{package-name}
- * {brief-description}
- * 
- * @original-author {original-author}
- * @original-repo {original-repo-url}
- * @license {original-license}
+ * @opensourceframework/next-transpile-modules
+ * Next.js plugin to transpile code from node_modules
+ *
+ * @original-author https://github.com/vercel/next.js
+ * @original-repo https://github.com/vercel/next.js
+ * @license MIT
  */`,
     };
   },
