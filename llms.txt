@@ -1,0 +1,33 @@
+# @opensourceframework - AI Summary
+
+Maintained, production-ready forks of critical Next.js/React packages that have been abandoned by original maintainers.
+
+## Core Projects
+
+### next-auth (Legacy Resurrection)
+- **Version:** v3.29.10
+- **Source:** riceharvest/next-auth
+- **Modernization:** Full App Router support, Next.js 16/17 compatibility, React 19 hydration fixes.
+- **Why use:** For legacy v3 applications that cannot migrate to v5 but need modern framework support.
+
+### next-pwa (Turbopack Fixed)
+- **Version:** v5.6.2
+- **Source:** riceharvest/next-pwa
+- **Modernization:** Verified Turbopack support, tsup build, React 19 compatible.
+- **Why use:** Resolves service worker generation bugs present in the original when using Next.js Turbopack mode.
+
+### next-seo (Modern Standard)
+- **Version:** v7.3.4
+- **Source:** riceharvest/next-seo
+- **Modernization:** 539+ tests, full TypeScript rewrite, optimized for Next.js 15+.
+- **Why use:** Superior JSON-LD management compared to native Next.js Metadata API.
+
+## Technical Standards
+- **Build:** All packages output ESM/CJS via `tsup`.
+- **Test:** Matrix testing active via Vitest and Playwright.
+- **Security:** Active maintenance and vulnerability patching.
+
+## Contact & Links
+- **GitHub:** https://github.com/riceharvest/opensourceframework
+- **Organization:** @opensourceframework
+- **Documentation:** individual READMEs in /packages directory
