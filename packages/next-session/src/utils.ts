@@ -8,21 +8,21 @@ export function hash(sess: SessionData) {
   );
 }
 
+export function parseTime(time: number | string): number {
+  if (typeof time === "number") return time;
+  // This is a simple implementation, you might want to use a library like `ms`
+  // but for now let's just support seconds as numbers.
+  return parseInt(time, 10);
+}
+
 export function commitHeader(
   res: ServerResponse,
   name: string,
-  { cookie, id }: Pick<Session, 'cookie' | 'id' >,
+  session: Session,
   encodeFn?: Options["encode"]
 ) {
   if (res.headersSent) return;
-  const cookieStr = c.serialize(name, encodeFn ? encodeFn(id) : id, {
-    path: cookie.path,
-    httpOnly: cookie.httpOnly,
-    expires: cookie.expires,
-    domain: cookie.domain,
-    sameSite: cookie.sameSite,
-    secure: cookie.secure,
-  });
+  const cookieStr = c.serialize(name, encodeFn ? encodeFn(session.id) : session.id, session.cookie);
 
   const prevSetCookie = res.getHeader("set-cookie");
 

@@ -1,70 +1,59 @@
-import c from "cookie";
 import { IncomingMessage, ServerResponse } from "http";
 import { nanoid } from "nanoid";
-import MemoryStore from "./memory-store";
+import { parse } from "cookie";
 import { isDestroyed, isNew, isTouched } from "./symbol";
-import { Options, Session, SessionRecord } from "./types";
-import { commitHeader, hash } from "./utils";
+import MemoryStore from "./memory-store";
+import { hash, parseTime, commitHeader } from "./utils";
+import { Options, Session, SessionData, SessionRecord } from "./types";
 
-export default function session<T extends SessionRecord = SessionRecord>(options: Options = {}) {
-  type TypedSession = Session<T>;
-
+export default function nextSession<T extends SessionRecord = SessionRecord>(
+  options: Options = {}
+) {
   const name = options.name || "sid";
   const store = options.store || new MemoryStore();
-  const genId = options.genid || nanoid;
+  const genid = options.genid || (() => nanoid());
   const encode = options.encode;
   const decode = options.decode;
-  const touchAfter = options.touchAfter ?? -1;
-  const autoCommit = options.autoCommit ?? true;
-  const cookieOpts = options.cookie || {};
+  const touchAfter =
+    options.touchAfter !== undefined ? parseTime(options.touchAfter) : -1;
+  const cookieOptions = options.cookie || {};
+  const autoCommit =
+    options.autoCommit !== undefined ? options.autoCommit : true;
+
+  type TypedSession = Session<T>;
 
   function decorateSession(
-    req: IncomingMessage & { session?: TypedSession },
+    req: IncomingMessage,
     res: ServerResponse,
     session: TypedSession,
-    id: string,
-    _now: number
+    sessionId: string,
+    now: number
   ) {
-    Object.defineProperties(session, {
-      commit: {
-        value: async function commit(this: TypedSession) {
-          commitHeader(res, name, this, encode);
-          await store.set(this.id, this);
-        },
-      },
-      touch: {
-        value: async function commit(this: TypedSession) {
-          this.cookie.expires = new Date(_now + this.cookie.maxAge! * 1000);
-          this[isTouched] = true;
-        },
-      },
-      destroy: {
-        value: async function destroy(this: TypedSession) {
-          this[isDestroyed] = true;
-          this.cookie.expires = new Date(1);
-          await store.destroy(this.id);
-          if (!autoCommit) commitHeader(res, name, this, encode);
-          delete req.session;
-        },
-      },
-      id: { value: id },
-    });
+    session.id = sessionId;
+    session.touch = function touch() {
+      this.cookie.expires = new Date(now + (this.cookie.maxAge || 0) * 1000);
+      this[isTouched] = true;
+    };
+    session.destroy = function destroy() {
+      this[isDestroyed] = true;
+      return store.destroy(this.id);
+    };
+    session.commit = async function commit() {
+      return commitHeader(res, name, this, encode);
+    };
   }
 
-  return async function sessionHandle(
-    req: IncomingMessage & { session?: TypedSession },
+  return async function getSession(
+    req: IncomingMessage,
     res: ServerResponse
   ): Promise<TypedSession> {
-    if (req.session) return req.session;
+    if ((req as any).session) return (req as any).session;
 
     const _now = Date.now();
 
-    let sessionId = req.headers?.cookie
-      ? c.parse(req.headers.cookie)[name]
-      : null;
-    if (sessionId && decode) {
-      sessionId = decode(sessionId);
-    }
+    const cookies = parse(req.headers.cookie || "");
+    const rawSid = cookies[name];
+    const sessionId = rawSid ? (decode ? decode(rawSid) : rawSid) : null;
 
     const _session = sessionId ? await store.get(sessionId) : null;
 
@@ -72,66 +61,47 @@ export default function session<T extends SessionRecord = SessionRecord>(options
     if (_session) {
       session = _session as TypedSession;
       // Some store return cookie.expires as string, convert it to Date
-      if (typeof session.cookie.expires === "string") {
-        session.cookie.expires = new Date(session.cookie.expires);
+      if (typeof (session.cookie as any).expires === "string") {
+        (session.cookie as any).expires = new Date((session.cookie as any).expires);
       }
 
       // Add session methods
       decorateSession(req, res, session, sessionId as string, _now);
 
       // Extends the expiry of the session if options.touchAfter is sastified
-      if (touchAfter >= 0 && session.cookie.expires) {
+      if (touchAfter >= 0 && session.cookie.expires && session.cookie.maxAge) {
         const lastTouchedTime =
           session.cookie.expires.getTime() - session.cookie.maxAge * 1000;
-        if (_now - lastTouchedTime >= touchAfter * 1000) {
-          session.touch();
-        }
+        if (_now - lastTouchedTime >= touchAfter * 1000) session.touch();
       }
     } else {
-      sessionId = genId();
+      const newSessionId = genid();
       session = {
-        [isNew]: true,
         cookie: {
-          path: cookieOpts.path || "/",
-          httpOnly: cookieOpts.httpOnly ?? true,
-          domain: cookieOpts.domain || undefined,
-          sameSite: cookieOpts.sameSite,
-          secure: cookieOpts.secure || false,
+          path: cookieOptions.path || "/",
+          httpOnly:
+            cookieOptions.httpOnly !== undefined
+              ? cookieOptions.httpOnly
+              : true,
+          domain: cookieOptions.domain,
+          sameSite: cookieOptions.sameSite,
+          secure: cookieOptions.secure || false,
+          maxAge: cookieOptions.maxAge,
+          expires: cookieOptions.maxAge
+            ? new Date(_now + cookieOptions.maxAge * 1000)
+            : (undefined as any),
         },
       } as TypedSession;
-      if (cookieOpts.maxAge) {
-        session.cookie.maxAge = cookieOpts.maxAge;
-        session.cookie.expires = new Date(_now + cookieOpts.maxAge * 1000);
-      }
-
-      // Add session methods
-      decorateSession(req, res, session, sessionId, _now);
+      (session as any)[isNew] = true;
+      decorateSession(req, res, session, newSessionId, _now);
     }
 
-    req.session = session;
+    const prevHash = hash(session);
 
-    // prevSessStr is used to compare the session later
-    // in autoCommit -- that is, we only save the
-    // session if it has changed.
-    let prevHash: string | undefined;
-    if (autoCommit) {
-      prevHash = hash(session);
-    }
-
-    // autocommit: We commit the header and save the session automatically
-    // by "proxying" res.writeHead and res.end methods. After committing, we
-    // call the original res.writeHead and res.end.
     if (autoCommit) {
       const _writeHead = res.writeHead;
       res.writeHead = function resWriteHeadProxy(...args: any) {
-        // Commit the header if either:
-        // - session is new and has been populated
-        // - session is flagged to commit header (touched or destroyed)
-        if (
-          (session[isNew] && Object.keys(session).length > 1) ||
-          session[isTouched] ||
-          session[isDestroyed]
-        ) {
+        if (!res.headersSent && (session[isNew] || session[isTouched])) {
           commitHeader(res, name, session, encode);
         }
         return _writeHead.apply(this, args);
@@ -148,11 +118,12 @@ export default function session<T extends SessionRecord = SessionRecord>(options
         } else {
           done();
         }
+        return this as any;
       };
     }
+
+    (req as any).session = session;
 
     return session;
   };
 }
-
-export type { Options, SessionStore } from "./types";

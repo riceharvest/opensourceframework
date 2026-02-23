@@ -29,7 +29,7 @@
     "./errors": "./dist/lib/errors.js"
   },
   "scripts": {
-    "build": "tsup --config tsup.config.js",
+    "build": "node scripts/prebuild.js && tsup --config tsup.config.js",
     "build:js": "tsup --config tsup.config.js",
     "build:css": "postcss --config config/postcss.config.js src/**/*.css --base src --dir dist && node config/wrap-css.js",
     "dev:setup": "npm i && npm run build:css && cd app && npm i",

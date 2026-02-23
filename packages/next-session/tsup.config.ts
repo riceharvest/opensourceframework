@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: ['src/session.ts'],
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
@@ -9,16 +9,16 @@ export default defineConfig({
   clean: true,
   minify: false,
   treeshake: true,
-  external: ['next', 'cookie','nanoid'],
+  external: ['next', 'cookie', 'nanoid'],
   esbuildOptions(options) {
     options.banner = {
       js: `/**
- * @opensourceframework/{package-name}
- * {brief-description}
+ * @opensourceframework/next-session
+ * Simple promise-based session for Next.js
  * 
- * @original-author {original-author}
- * @original-repo {original-repo-url}
- * @license {original-license}
+ * @original-author Unknown
+ * @original-repo https://github.com/hoangvvo/next-session
+ * @license MIT
  */`,
     };
   },

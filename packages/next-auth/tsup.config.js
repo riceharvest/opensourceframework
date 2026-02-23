@@ -53,10 +53,6 @@ async function createModuleEntries() {
 }
 
 export default defineConfig({
-  async beforeBuild() {
-    await buildProvidersIndex()
-    await createModuleEntries()
-  },
   entry: {
     "server/index": "src/server/index.js",
     "lib/jwt": "src/lib/jwt.js",
