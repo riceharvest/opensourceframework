@@ -40,7 +40,7 @@
     "dev": "tsup --watch",
     "lint": "eslint src --ext ts --ignore-path .gitignore",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
