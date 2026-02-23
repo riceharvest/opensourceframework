@@ -1,0 +1,54 @@
+# @opensourceframework - AI Summary
+
+Maintained, production-ready forks of critical Next.js/React packages that have been abandoned by original maintainers.
+
+## Package Directory
+
+### Core Resurrections (Production Ready)
+
+| Package | Version | Original Repo | npm Package |
+|---------|---------|--------------|-------------|
+| next-auth (Legacy) | v3.29.10 | [nextauthjs/next-auth](https://github.com/nextauthjs/next-auth) | [next-auth](https://www.npmjs.com/package/next-auth) |
+| next-pwa (Turbopack Fixed) | v5.6.2 | [shadowwalker/next-pwa](https://github.com/shadowwalker/next-pwa) | [next-pwa](https://www.npmjs.com/package/next-pwa) |
+| next-seo (Modern Standard) | v7.3.4 | [hoangvvo/next-seo](https://github.com/hoangvvo/next-seo) | [next-seo](https://www.npmjs.com/package/next-seo) |
+| critters | - | [GoogleChromeLabs/critters](https://github.com/GoogleChromeLabs/critters) | [critters](https://www.npmjs.com/package/critters) |
+| next-iron-session | - | [vvo/iron-session](https://github.com/vvo/iron-session) | [iron-session](https://www.npmjs.com/package/iron-session) |
+| react-virtualized | - | [bvaughn/react-virtualized](https://github.com/bvaughn/react-virtualized) | [react-virtualized](https://www.npmjs.com/package/react-virtualized) |
+
+### Additional Packages
+
+- next-cookies ([hoangvvo/next-cookies](https://github.com/hoangvvo/next-cookies))
+- next-session ([hoangvvo/next-session](https://github.com/hoangvvo/next-session))
+- next-compose-plugins ([hoangvvo/next-compose-plugins](https://github.com/hoangvvo/next-compose-plugins))
+- next-transpile-modules ([martpie/next-transpile-modules](https://github.com/martpie/next-transpile-modules))
+- next-csrf
+- next-images
+- next-json-ld
+- next-circuit-breaker
+- react-a11y-utils
+
+### Next Batch Candidates (Researching)
+
+- **next-connect** - [hoangvvo/next-connect](https://github.com/hoangvvo/next-connect)
+- **react-query-auth** - [manfredsteyer/react-query-auth](https://github.com/manfredsteyer/react-query-auth)
+- **next-optimized-images** - [fromnode/fromnode_repo](https://github.com/fromnode/fromnode_repo)
+
+## Technical Standards
+
+- **Build:** All packages output ESM/CJS via `tsup`.
+- **Test:** Matrix testing active via Vitest and Playwright.
+- **Security:** Active maintenance and vulnerability patching.
+- **Migration:** Each package includes MIGRATION.md for easy switching from original packages.
+
+## Why Use These Packages?
+
+- **Legacy Preservation:** Maintain "stable-forever" forks of popular versions that official maintainers have abandoned.
+- **Modern Standards:** Migrated to modern tooling (`tsup`, `vitest`, `ESM`) and tested against latest Next.js versions.
+- **Unified Ecosystem:** Single namespace (`@opensourceframework`) reduces dependency fragmentation.
+- **Simplicity:** Prioritize original, simple APIs that developers know and love.
+
+## Contact & Links
+
+- **GitHub:** https://github.com/opensourceframework/opensourceframework
+- **Organization:** @opensourceframework
+- **npm Organization:** https://www.npmjs.com/org/opensourceframework

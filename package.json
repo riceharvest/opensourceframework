@@ -17,8 +17,7 @@
     "typecheck": "turbo run typecheck",
     "build": "turbo run build",
     "build:all": "turbo run build",
-    "clean": "turbo run clean",
-    "clean:all": "turbo run clean && rm -rf node_modules",
+    "bundle-size": "pnpm run build && bundle-phobia-cli @opensourceframework/next-compose-plugins --limit 10",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "release": "changeset version && pnpm install && pnpm build",
@@ -38,7 +37,7 @@
     "turbo": "^1.12.4",
     "typescript-eslint": "^8.0.0",
     "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "vitest": "^4.0.18"
   },
   "engines": {
     "node": ">=18",

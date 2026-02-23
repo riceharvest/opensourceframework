@@ -1,0 +1,51 @@
+# @opensourceframework/next-transpile-modules - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/next-transpile-modules
+- **Version:** v10.0.2
+- **Forked from:** next-transpile-modules
+- **Purpose:** Next.js plugin to transpile code from node_modules
+
+## Key Capabilities
+
+### Module Transpilation
+- Transpile packages from node_modules
+- Support for ESM and CommonJS packages
+- Babel-based transformation pipeline
+- Compatible with various package managers
+
+### Use Cases
+- Using ESM-only packages in Next.js
+- Transpiling packages not compatible with Next.js webpack config
+- Supporting packages that require specific Babel configurations
+
+### Test Coverage
+- npm-basic
+- yarn workspaces
+- pnpm workspaces
+- SWC
+- App directory (Next.js 13+)
+
+## Modernization Updates
+- tsup-based build system
+- Updated for Next.js 14-22
+- React 18/19/20/21 support
+- Jest test suite maintained
+
+## Installation
+```bash
+npm install @opensourceframework/next-transpile-modules
+# or
+pnpm add @opensourceframework/next-transpile-modules
+```
+
+## Migration from Original
+Replace `next-transpile-modules` with `@opensourceframework/next-transpile-modules` in your dependencies.
+
+## Configuration
+```javascript
+// next.config.js
+const withTM = require('@opensourceframework/next-transpile-modules')(['some-package'])
+
+module.exports = withTM({})
+```

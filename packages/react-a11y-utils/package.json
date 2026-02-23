@@ -54,9 +54,16 @@
     "clean": "rm -rf dist coverage node_modules"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.8.0",
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/react": "^16.0.0",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "jsdom": "^24.0.0",
     "react": "^19.0.0",
+    "react-dom": "^19.2.4",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0"

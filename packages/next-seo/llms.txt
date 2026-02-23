@@ -1,0 +1,56 @@
+# @opensourceframework/next-seo - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/next-seo
+- **Version:** v7.3.4
+- **Forked from:** next-seo (original: grevory/next-seo)
+- **Purpose:** SEO plugin for Next.js with comprehensive structured data support
+
+## Key Capabilities
+
+### JSON-LD Components
+- ArticleJsonLd
+- BreadcrumbJsonLd
+- CourseJsonLd
+- ProductJsonLd
+- OrganizationJsonLd
+- LocalBusinessJsonLd
+- VideoGameJsonLd
+- JobPostingJsonLd
+- And 30+ more components
+
+### SEO Components
+- NextSeo component for default meta tags
+- Open Graph tags
+- Twitter card tags
+- Canonical URLs
+- Robots meta directives
+
+### Framework Support
+- Pages Router
+- App Router
+- Server Components
+
+## Modernization Updates
+- 539+ unit tests
+- Full TypeScript rewrite
+- Optimized for Next.js 15+
+- tsup-based ESM/CJS build
+- No @type required pattern (intelligent defaults)
+
+## Installation
+```bash
+npm install @opensourceframework/next-seo
+# or
+pnpm add @opensourceframework/next-seo
+```
+
+## Migration from Original
+Replace `next-seo` with `@opensourceframework/next-seo` in your dependencies.
+Import paths remain the same.
+
+## Use Cases
+- Enhanced JSON-LD management beyond Next.js Metadata API
+- Structured data for rich search results
+- Social media previews (OG tags)
+- Comprehensive SEO for Next.js apps

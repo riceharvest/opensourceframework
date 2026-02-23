@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-seo",
-  "version": "7.3.1",
+  "version": "7.3.4",
   "description": "SEO plugin for Next.js projects",
   "sideEffects": false,
   "repository": {

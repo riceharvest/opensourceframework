@@ -1,0 +1,107 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  pages: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+  publish:
+    name: Publish to npm
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Publish to npm
+        run: pnpm publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  sync-to-standalone:
+    name: Sync to standalone repo
+    needs: publish
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Trigger standalone repo sync
+        run: |
+          echo "Syncing to standalone repository..."
+          echo "This workflow should be triggered from the monorepo after successful publish."
+          echo "Tag: ${{ github.ref }}"
+          echo "Repository: ${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,32 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  codecov: codecov/codecov@3.2.3
+
+jobs:
+  build_and_test:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: false
+          node-version: "18.4"
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test
+          name: Run tests
+      - run:
+          command: npm run build
+          name: Build app
+      - run:
+          command: npm run coverage
+          name: Report coverage
+
+workflows:
+  build_test_coverage:
+    jobs:
+      - build_and_test:
+          post-steps:
+            - codecov/upload

@@ -3,11 +3,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
     "moduleResolution": "bundler",
-    "types": ["node"],
+    "types": ["node", "@testing-library/jest-dom"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

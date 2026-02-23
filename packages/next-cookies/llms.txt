@@ -1,0 +1,64 @@
+# @opensourceframework/next-cookies - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/next-cookies
+- **Version:** v2.1.2
+- **Forked from:** next-cookies (original: hoangvvo/next-cookies)
+- **Purpose:** Cookie utility for Next.js - get cookies on both client & server
+
+## Key Capabilities
+
+### Server-Side Cookies
+- Get cookies in getServerSideProps
+- Get cookies in API routes (req/res)
+- Get cookies in getStaticProps / getStaticPaths (preview mode)
+
+### Client-Side Cookies
+- Get cookies in React components
+- Set cookies from client
+- Universal cookie access
+
+### Cookie Operations
+- Read cookies
+- Set cookies
+- Remove cookies
+- Cookie serialization
+
+## Modernization Updates
+- tsup-based ESM/CJS build
+- TypeScript type definitions
+- Next.js 12-16 support
+- React 18/19 support
+- universal-cookie dependency
+
+## Installation
+```bash
+npm install @opensourceframework/next-cookies
+# or
+pnpm add @opensourceframework/next-cookies
+```
+
+## Migration from Original
+Replace `next-cookies` with `@opensourceframework/next-cookies` in your dependencies.
+
+## Usage
+```javascript
+import { cookies } from 'next/headers'
+import { parseCookies, setCookie, removeCookie } from '@opensourceframework/next-cookies'
+
+// Server-side
+export async function getServerSideProps({ req, res }) {
+  const cookieStore = cookies()
+  const token = cookieStore.get('token')
+  
+  // Or using parseCookies
+  const allCookies = parseCookies(req)
+}
+
+// API Route
+export default function handler(req, res) {
+  const cookies = parseCookies(req)
+  setCookie(res, 'token', 'value', { path: '/' })
+  removeCookie(res, 'token')
+}
+```

@@ -1,0 +1,55 @@
+# @opensourceframework/next-pwa - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/next-pwa
+- **Version:** v5.6.2
+- **Forked from:** next-pwa (original: shadowwalker/next-pwa)
+- **Purpose:** Zero-config PWA plugin for Next.js with Turbopack support
+
+## Key Capabilities
+
+### Service Worker Generation
+- Automatic service worker registration
+- Workbox integration for caching strategies
+- Offline support for static and dynamic assets
+- Runtime caching for API calls and images
+
+### Build Integration
+- Webpack plugin-based architecture
+- Automatic manifest.json generation
+- PWA configuration via next.config.js
+
+## Modernization Updates
+- Verified Turbopack support
+- tsup-based build system
+- React 19 compatible
+- Fixed service worker generation bugs with Turbopack
+
+## Installation
+```bash
+npm install @opensourceframework/next-pwa
+# or
+pnpm add @opensourceframework/next-pwa
+```
+
+## Migration from Original
+Replace `next-pwa` with `@opensourceframework/next-pwa` in your dependencies.
+All existing configuration options work identically.
+
+## Use Cases
+- Next.js apps requiring PWA capabilities
+- Projects using Turbopack (original has bugs)
+- Offline-first applications
+- Progressive web app certification
+
+## Configuration
+```javascript
+// next.config.js
+const withPWA = require('@opensourceframework/next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+})
+
+module.exports = withPWA({})
+```

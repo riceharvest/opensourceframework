@@ -1,28 +1,3 @@
-**Outrank**
-
-Get traffic and outrank competitors with Backlinks & SEO-optimized content while you sleep! I've been keeping a close eye on this new tool and it seems to be gaining a lot of traction and delivering great results. [Try it now!](https://outrank.so/?via=@opensourceframework/next-seo)
-
-[![image](https://github.com/user-attachments/assets/14c0f4c0-aad0-4d2d-8a14-6edad232a4dc)](https://outrank.so/?via=@opensourceframework/next-seo)
-
-**Have you seen the new Next.js newsletter?**
-
-[<img alt="NextjsWeekly banner" src="./next-js-weekly.png">](https://dub.sh/nextjsweekly)
-
-# Next SEO
-
-![npm](https://img.shields.io/npm/dw/@opensourceframework/next-seo?style=flat-square)
-![npm version](https://img.shields.io/npm/v/@opensourceframework/next-seo?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=flat-square)
-![License](https://img.shields.io/npm/l/@opensourceframework/next-seo?style=flat-square)
-
-Next SEO is a plugin that makes managing your SEO easier in Next.js projects. It provides components for structured data (JSON-LD) that helps search engines understand your content better.
-
-## 📋 Table of Contents
-
-_Looking for v6 documentation? [View Here](https://github.com/garmeeh/@opensourceframework/next-seo/tree/master)_
-
-_Still using <NextSeo /> component in Pages? View docs here [/src/pages/README.md]_
-
 ## 🚀 Quick Start
 
 #### Attribution
@@ -70,16 +45,6 @@ export default function BlogPost() {
 > **Note**: For standard meta tags (`<meta>`, `<title>`), use Next.js's built-in [`generateMetadata`](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) function.
 
 > **Pages Router Support**: If you're using Next.js Pages Router, import components from `@opensourceframework/next-seo/pages`. See the [Pages Router documentation](./src/pages/README.md) for details.
-
-## Support This Project
-
-**Feel like supporting this free plugin?**
-
-It takes a lot of time to maintain an open source project so any small contribution is greatly appreciated.
-
-Coffee fuels coding ☕️
-
-<a href="https://www.buymeacoffee.com/garmeeh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## Components
 
@@ -4783,4 +4748,8 @@ See the **[Custom Components Guide](./CUSTOM_COMPONENTS.md)**
 
 [Contributing Guide](./CONTRIBUTING.md)
 
-A massive thank you to [everyone who contributes](https://github.com/garmeeh/@opensourceframework/next-seo/graphs/contributors) to this project 👏
+A massive thank you to everyone who contributes to this project 👏
+
+---
+
+This package is part of the [OpenSource Framework](https://github.com/riceharvest/opensourceframework) monorepo.

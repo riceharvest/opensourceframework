@@ -1,0 +1,22 @@
+{
+  "name": "next-pwa-test-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "playwright": "^1.40.0"
+  }
+}
