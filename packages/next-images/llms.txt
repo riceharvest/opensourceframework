@@ -1,0 +1,60 @@
+# @opensourceframework/next-images
+
+Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. A maintained fork of the original next-images with TypeScript support and compatibility with Next.js 12-16.
+
+> **Notice**: This package is primarily for legacy support or specific use cases. Next.js 10+ includes a built-in [Image component](https://nextjs.org/docs/api-reference/next/image) that provides automatic image optimization.
+
+## Install
+
+```bash
+npm install @opensourceframework/next-images
+```
+
+## Setup
+
+```javascript
+// next.config.js
+const withImages = require('@opensourceframework/next-images');
+module.exports = withImages();
+```
+
+## Usage
+
+```jsx
+import img from './my-image.jpg';
+
+export default function MyComponent() {
+  return <img src={img} alt="My Image" />;
+}
+```
+
+## Features
+
+- **Local & Remote Loading**: Load images from local filesystem or remote CDN (via `assetPrefix`).
+- **Base64 Inlining**: Automatically inline small images (default < 8KB) to reduce HTTP requests.
+- **Cache Busting**: Content hash in filenames (`[name]-[hash].[ext]`).
+- **TypeScript**: Built-in type definitions and support for image imports.
+- **Configurable**: Customize extensions, limits, output names, and more.
+
+## Configuration Options
+
+- `inlineImageLimit`: Max size in bytes for Base64 inlining (default: `8192`).
+- `assetPrefix`: CDN/external domain prefix.
+- `basePath`: Application base path.
+- `fileExtensions`: Array of extensions to handle.
+- `exclude`: Path to exclude from this loader.
+- `name`: Output filename template (default: `[name]-[hash].[ext]`).
+- `esModule`: Use ES modules syntax for output (default: `false`).
+
+## TypeScript Support
+
+Add to `additional.d.ts`:
+```typescript
+/// <reference types="@opensourceframework/next-images" />
+```
+
+## Links
+
+- [Documentation](https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images#readme)
+- [GitHub](https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images)
+- [NPM](https://www.npmjs.com/package/@opensourceframework/next-images)
