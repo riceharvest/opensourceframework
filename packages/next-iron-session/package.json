@@ -12,6 +12,7 @@
     "next.js",
     "node.js"
   ],
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-iron-session#readme",
   "bugs": "https://github.com/vvo/iron-session/issues",
   "repository": "github:vvo/iron-session",
   "funding": [
@@ -20,6 +21,12 @@
   ],
   "license": "MIT",
   "author": "OpenSource Framework Contributors (fork), Original: Unknown",
+  "contributors": [
+    {
+      "name": "Unknown",
+      "url": "https://github.com/next-iron-session"
+    }
+  ],
   "sideEffects": false,
   "type": "module",
   "exports": {
@@ -34,7 +41,7 @@
     "build": "tsup",
     "dev": "pnpm build && concurrently \"pnpm build --watch\" \"pnpm --filter=next-example dev\" ",
     "lint": "tsc --noEmit && tsc --noEmit -p examples/next/tsconfig.json && pnpm eslint . && publint",
-    "prepare": "pnpm build && tsc --noEmit",
+    "prepare": "pnpm build",
     "start": "turbo start --filter=next-example",
     "test": "vitest run && pnpm build",
     "test:watch": "vitest"
@@ -73,17 +80,10 @@
     "vitest": "^4.0.18"
   },
   "packageManager": "pnpm@9.6.0",
-  "publishConfig": {
-    "access": "public"
-  },
-  "contributors": [
-    {
-      "name": "Unknown",
-      "url": "https://github.com/next-iron-session"
-    }
-  ],
-  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-iron-session#readme",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
