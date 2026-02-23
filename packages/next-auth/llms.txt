@@ -1,0 +1,49 @@
+# @opensourceframework/next-auth - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/next-auth
+- **Version:** v3.29.10
+- **Forked from:** next-auth (original: nextauthjs/next-auth)
+- **Purpose:** Complete authentication solution for Next.js applications
+
+## Key Capabilities
+
+### Authentication Providers
+- OAuth 1.0, 1.0A, and 2.0 support
+- Built-in providers for Google, Apple, GitHub, Facebook, Twitter, etc.
+- Email/passwordless authentication
+- Custom provider implementation
+
+### Session Management
+- JSON Web Tokens (JWT)
+- Database sessions (Prisma, TypeORM, MongoDB, etc.)
+- Session synchronization across tabs/windows
+
+### Security Features
+- CSRF protection
+- Secure cookie policies
+- JWS signing with HS512 (configurable)
+- JWT encryption (JWE) support
+
+## Modernization Updates
+- Full App Router support
+- Next.js 16/17 compatibility
+- React 19 hydration fixes
+- TypeScript type definitions maintained
+- tsup-based build system
+
+## Installation
+```bash
+npm install @opensourceframework/next-auth
+# or
+pnpm add @opensourceframework/next-auth
+```
+
+## Migration from Original
+Replace `next-auth` with `@opensourceframework/next-auth` in your dependencies.
+All existing APIs are compatible with the v3.x series.
+
+## Use Cases
+- Legacy v3 applications that cannot migrate to v5
+- Projects requiring full control over authentication
+- Applications needing OAuth + database session support

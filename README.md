@@ -97,16 +97,6 @@ pnpm test
 pnpm lint
 ```
 
-## Sponsoring
-
-Help sustain this project by becoming a sponsor:
-
-- [GitHub Sponsors](https://github.com/sponsors/riceharvest)
-
-## Security
-
-We take security seriously. Please see our [Security Policy](./SECURITY.md) for details on reporting vulnerabilities.
-
 ## License
 
 This repository is licensed under the [MIT License](./LICENSE). Individual packages may retain their original licenses if different.
@@ -115,7 +105,6 @@ This repository is licensed under the [MIT License](./LICENSE). Individual packa
 
 - Original package authors for their valuable contributions
 - All contributors who help maintain these packages
-- Our sponsors for financial support
 
 ---
 

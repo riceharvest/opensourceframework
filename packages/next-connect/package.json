@@ -1,0 +1,83 @@
+{
+  "type": "module",
+  "name": "@opensourceframework/next-connect",
+  "version": "1.0.0",
+  "description": "The method routing and middleware layer for Next.js (and many others)",
+  "keywords": [
+    "javascript",
+    "nextjs",
+    "middleware",
+    "router",
+    "connect"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./node": {
+      "import": "./dist/node.js",
+      "require": "./dist/node.cjs"
+    },
+    "./edge": {
+      "import": "./dist/edge.js",
+      "require": "./dist/edge.cjs"
+    },
+    "./express": {
+      "import": "./dist/express.js",
+      "require": "./dist/express.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext ts --ignore-path .gitignore",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-connect"
+  },
+  "author": "OpenSource Framework Contributors (fork), Original: Hoang Vo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-connect"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-connect#readme",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  },
+  "dependencies": {
+    "regexparam": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "contributors": [
+    {
+      "name": "Hoang Vo",
+      "url": "https://github.com/hoangvvo/next-connect"
+    }
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}

@@ -270,17 +270,6 @@ export class CircuitBreaker<TArgs extends unknown[], TResult> {
 }
 
 /**
- * Result of wrapping a function with circuit breaker protection
- * @since 0.1.0
- */
-export interface CircuitBreakerWrapper<TArgs extends unknown[], TResult> {
-  /** The wrapped function with circuit breaker protection */
-  fn: (...args: TArgs) => Promise<TResult>;
-  /** Cleanup method to clear pending timeouts and prevent memory leaks */
-  destroy: () => void;
-}
-
-/**
  * Creates a circuit breaker wrapper for an async function
  *
  * This is a convenience function that creates a CircuitBreaker instance
@@ -289,13 +278,13 @@ export interface CircuitBreakerWrapper<TArgs extends unknown[], TResult> {
  *
  * @param handler - The async function to wrap
  * @param options - Circuit breaker options
- * @returns An object containing the wrapped function and a destroy method
+ * @returns A function that is augmented with a destroy method
  *
  * @example
  * ```typescript
  * import { withCircuitBreaker } from '@opensourceframework/next-circuit-breaker';
  *
- * const { fn: protectedFetch, destroy } = withCircuitBreaker(
+ * const protectedFetch = withCircuitBreaker(
  *   async (url: string) => {
  *     const response = await fetch(url);
  *     return response.json();
@@ -307,19 +296,19 @@ export interface CircuitBreakerWrapper<TArgs extends unknown[], TResult> {
  * const data = await protectedFetch('/api/data');
  *
  * // Clean up when no longer needed (e.g., on component unmount)
- * destroy();
+ * protectedFetch.destroy();
  * ```
  * @since 0.1.0
  */
 export const withCircuitBreaker = <TArgs extends unknown[], TResult>(
   handler: AsyncFunction<TArgs, TResult>,
   options?: CircuitBreakerOptions
-): CircuitBreakerWrapper<TArgs, TResult> => {
+): AsyncFunction<TArgs, TResult> & { destroy: () => void } => {
   const circuit = new CircuitBreaker<TArgs, TResult>(handler, options);
-  return {
-    fn: async (...args: TArgs) => circuit.fire(...args),
+  const fn = async (...args: TArgs) => circuit.fire(...args);
+  return Object.assign(fn, {
     destroy: () => circuit.destroy(),
-  };
+  });
 };
 
 /**
@@ -327,7 +316,7 @@ export const withCircuitBreaker = <TArgs extends unknown[], TResult>(
  *
  * @param handler - Next.js API route handler
  * @param options - Circuit breaker options
- * @returns An object containing the wrapped handler and a destroy method
+ * @returns A function that is augmented with a destroy method
  *
  * @example
  * ```typescript
@@ -340,21 +329,21 @@ export const withCircuitBreaker = <TArgs extends unknown[], TResult>(
  *   res.status(200).json(data);
  * }
  *
- * const { fn: protectedHandler, destroy } = withApiCircuitBreaker(handler, {
+ * const protectedHandler = withApiCircuitBreaker(handler, {
  *   failureThreshold: 5,
  *   timeout: 30000,
  * });
  *
  * export default protectedHandler;
  *
- * // Call destroy() when the server shuts down or during cleanup
+ * // Call protectedHandler.destroy() when the server shuts down or during cleanup
  * ```
  * @since 0.1.0
  */
 export const withApiCircuitBreaker = <TArgs extends unknown[], TResult>(
   handler: AsyncFunction<TArgs, TResult>,
   options?: CircuitBreakerOptions
-): CircuitBreakerWrapper<TArgs, TResult> => {
+): AsyncFunction<TArgs, TResult> & { destroy: () => void } => {
   return withCircuitBreaker(handler, options);
 };
 

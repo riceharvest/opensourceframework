@@ -1,0 +1,79 @@
+{
+  "type": "module",
+  "name": "@opensourceframework/next-session",
+  "version": "4.0.4",
+  "description": "Simple promise-based session for Next.js",
+  "keywords": [
+    "nextjs",
+    "session",
+    "promise",
+    "express-session"
+  ],
+  "main": "./lib/session.cjs",
+  "exports": {
+    ".": {
+      "import": "./lib/session.js",
+      "require": "./lib/session.cjs"
+    },
+    "./lib/compat": {
+      "import": "./lib/compat.js",
+      "require": "./lib/compat.cjs"
+    }
+  },
+  "types": "lib/session.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext ts --ignore-path .gitignore",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-session"
+  },
+  "author": "OpenSource Framework Contributors (fork), Original: Unknown",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-session"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-session#readme",
+  "devDependencies": {
+    "@types/cookie": "^0.4.1",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "light-my-request": "^6.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  },
+  "dependencies": {
+    "cookie": "^0.4.1",
+    "nanoid": "^3.1.25"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "contributors": [
+    {
+      "name": "Unknown",
+      "url": "https://github.com/next-session"
+    }
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}
