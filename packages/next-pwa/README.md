@@ -23,7 +23,6 @@ This plugin is powered by [workbox](https://developer.chrome.com/docs/workbox/) 
 - 🐞 Debug service worker with confidence in development mode without caching
 - 🌏 Internationalization (a.k.a I18N) with `next-i18next` [example](https://github.com/shadowwalker/@opensourceframework/next-pwa/tree/master/examples/next-i18next)
 - 🛠 Configurable by the same [workbox configuration options](https://developer.chrome.com/docs/workbox/modules/workbox-webpack-plugin) for [GenerateSW](https://developer.chrome.com/docs/workbox/modules/workbox-webpack-plugin/#generatesw-plugin) and [InjectManifest](https://developer.chrome.com/docs/workbox/modules/workbox-webpack-plugin/#injectmanifest-plugin)
-- 🚀 Spin up a [GitPod](https://gitpod.io/#https://github.com/shadowwalker/@opensourceframework/next-pwa/) and try out examples in rocket speed
 - ⚡ Support [blitz.js](https://blitzjs.com/) (simply add to `blitz.config.js`)
 - 🔩 (Experimental) precaching `.module.js` when `next.config.js` has `experimental.modern` set to `true`
 
@@ -33,7 +32,6 @@ This plugin is powered by [workbox](https://developer.chrome.com/docs/workbox/) 
 
 ---
 
-[![Open in Gitpod](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/shadowwalker/@opensourceframework/next-pwa/)
 
 ## Install
 
