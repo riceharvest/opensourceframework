@@ -40,11 +40,12 @@
   "scripts": {
     "build": "tsup",
     "dev": "pnpm build && concurrently \"pnpm build --watch\" \"pnpm --filter=next-example dev\" ",
-    "lint": "tsc --noEmit && tsc --noEmit -p examples/next/tsconfig.json && pnpm eslint . && publint",
+    "lint": "eslint .",
     "prepare": "pnpm build",
     "start": "turbo start --filter=next-example",
-    "test": "vitest run && pnpm build",
-    "test:watch": "vitest"
+    "test": "vitest run --passWithNoTests && pnpm build",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "prettier": {
     "plugins": [

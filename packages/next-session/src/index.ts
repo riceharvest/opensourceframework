@@ -4,7 +4,7 @@ import { parse } from "cookie";
 import { isDestroyed, isNew, isTouched } from "./symbol";
 import MemoryStore from "./memory-store";
 import { hash, parseTime, commitHeader } from "./utils";
-import { Options, Session, SessionData, SessionRecord } from "./types";
+import { Options, Session, SessionRecord } from "./types";
 
 export default function nextSession<T extends SessionRecord = SessionRecord>(
   options: Options = {}
@@ -29,18 +29,30 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     sessionId: string,
     now: number
   ) {
-    session.id = sessionId;
-    session.touch = function touch() {
-      this.cookie.expires = new Date(now + (this.cookie.maxAge || 0) * 1000);
-      this[isTouched] = true;
-    };
-    session.destroy = function destroy() {
-      this[isDestroyed] = true;
-      return store.destroy(this.id);
-    };
-    session.commit = async function commit() {
-      return commitHeader(res, name, this, encode);
-    };
+    Object.defineProperties(session, {
+      id: { value: sessionId, enumerable: true, writable: true },
+      touch: {
+        value: function touch() {
+          this.cookie.expires = new Date(now + (this.cookie.maxAge || 0) * 1000);
+          this[isTouched] = true;
+        },
+        enumerable: false,
+      },
+      destroy: {
+        value: function destroy() {
+          this[isDestroyed] = true;
+          delete (req as any).session;
+          return store.destroy(this.id);
+        },
+        enumerable: false,
+      },
+      commit: {
+        value: async function commit() {
+          return commitHeader(res, name, this, encode);
+        },
+        enumerable: false,
+      },
+    });
   }
 
   return async function getSession(
@@ -51,7 +63,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
 
     const _now = Date.now();
 
-    const cookies = parse(req.headers.cookie || "");
+    const cookies = parse(req.headers?.cookie || "");
     const rawSid = cookies[name];
     const sessionId = rawSid ? (decode ? decode(rawSid) : rawSid) : null;
 
@@ -89,7 +101,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
           maxAge: cookieOptions.maxAge,
           expires: cookieOptions.maxAge
             ? new Date(_now + cookieOptions.maxAge * 1000)
-            : (undefined as any),
+            : undefined,
         },
       } as TypedSession;
       (session as any)[isNew] = true;

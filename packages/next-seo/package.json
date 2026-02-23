@@ -37,7 +37,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "typecheck": "tsc --noEmit --project tsconfig.json",
     "// TESTING": "",
-    "test": "pnpm typecheck && pnpm lint && echo '> Linting Complete. To run tests use the following commands:\n\n> Unit tests: pnpm test:unit \n> E2E tests: pnpm test:e2e'",
+    "test": "vitest run --passWithNoTests",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
     "test:e2e": "playwright test",

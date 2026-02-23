@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import type { RequestHandler } from "./node.js";
+import { NodeRouter } from "./node.js";
 import type { Nextable } from "./types.js";
 
 type NextFunction = (err?: any) => void;
@@ -9,6 +10,11 @@ type ExpressRequestHandler<Req, Res> = (
   res: Res,
   next: NextFunction
 ) => void;
+
+export class ExpressRouter<
+  Req extends IncomingMessage,
+  Res extends ServerResponse
+> extends NodeRouter<Req, Res> {}
 
 export function expressWrapper<
   Req extends IncomingMessage,

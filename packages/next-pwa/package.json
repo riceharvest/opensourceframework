@@ -44,10 +44,10 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint .",
+    "lint": "eslint . --ignore-pattern test-app",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run --passWithNoTests && cd test-app && pnpm test:e2e",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage"

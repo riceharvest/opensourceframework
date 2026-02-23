@@ -3,7 +3,7 @@ import { vi } from "vitest";
 import { createServer, IncomingMessage, request, ServerResponse } from "http";
 import { inject } from "light-my-request";
 import MemoryStore from "../src/memory-store";
-import session from "../src/session";
+import session from "../src/index";
 import { isNew, isTouched } from "../src/symbol";
 import { Session } from "../src/types";
 
@@ -394,7 +394,7 @@ describe("session()", () => {
   });
   test("should convert to date if store returns session.cookies.expires as string", async () => {
     const store = {
-      get: async (id: string) => {
+      get: async (_id: string) => {
         //  force sess.cookie.expires to be string
         return JSON.parse(
           JSON.stringify({
@@ -402,8 +402,8 @@ describe("session()", () => {
           })
         );
       },
-      set: async (sid: string, sess: SessionData) => undefined,
-      destroy: async (id: string) => undefined,
+      set: async (_sid: string, _sess: SessionData) => undefined,
+      destroy: async (_id: string) => undefined,
     };
     await inject(
       async (req, res) => {

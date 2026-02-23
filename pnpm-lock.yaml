@@ -79,12 +79,6 @@ importers:
         specifier: ^0.2.3
         version: 0.2.3
     devDependencies:
-      '@opensourceframework/eslint-config':
-        specifier: workspace:*
-        version: link:../../tools/eslint-config
-      '@opensourceframework/tsconfig':
-        specifier: workspace:*
-        version: link:../../tools/tsconfig
       tsup:
         specifier: ^8.0.0
         version: 8.5.1(@swc/core@1.15.11)(jiti@2.6.1)(postcss@8.5.6)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
@@ -20663,7 +20657,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:

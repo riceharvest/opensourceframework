@@ -42,7 +42,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint src/",
+    "lint": "eslint . --ignore-pattern examples",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
@@ -55,6 +55,7 @@
     "csrf": "^3.1.0"
   },
   "devDependencies": {
+    "@opensourceframework/eslint-config": "^1.0.0",
     "@types/cookie": "^0.6.0",
     "@types/cookie-signature": "^1.1.2",
     "@types/csrf": "^3.1.3",

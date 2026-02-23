@@ -1,5 +1,5 @@
 import { vi } from "vitest";
-import session from "../src/session";
+import session from "../src/index";
 import { commitHeader, hash } from "../src/utils";
 
 describe("hash()", () => {
