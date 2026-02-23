@@ -11,9 +11,12 @@ Maintained, production-ready forks of critical Next.js/React packages that have 
 | next-auth (Legacy) | v3.29.10 | [nextauthjs/next-auth](https://github.com/nextauthjs/next-auth) | [next-auth](https://www.npmjs.com/package/next-auth) |
 | next-pwa (Turbopack Fixed) | v5.6.2 | [shadowwalker/next-pwa](https://github.com/shadowwalker/next-pwa) | [next-pwa](https://www.npmjs.com/package/next-pwa) |
 | next-seo (Modern Standard) | v7.3.4 | [hoangvvo/next-seo](https://github.com/hoangvvo/next-seo) | [next-seo](https://www.npmjs.com/package/next-seo) |
-| critters | - | [GoogleChromeLabs/critters](https://github.com/GoogleChromeLabs/critters) | [critters](https://www.npmjs.com/package/critters) |
-| next-iron-session | - | [vvo/iron-session](https://github.com/vvo/iron-session) | [iron-session](https://www.npmjs.com/package/iron-session) |
-| react-virtualized | - | [bvaughn/react-virtualized](https://github.com/bvaughn/react-virtualized) | [react-virtualized](https://www.npmjs.com/package/react-virtualized) |
+| next-connect | v1.0.0 | [hoangvvo/next-connect](https://github.com/hoangvvo/next-connect) | [next-connect](https://www.npmjs.com/package/next-connect) |
+| next-iron-session | v8.0.4 | [vvo/iron-session](https://github.com/vvo/iron-session) | [iron-session](https://www.npmjs.com/package/iron-session) |
+| next-optimized-images | v2.6.2 | [cyrilwanner/next-optimized-images](https://github.com/cyrilwanner/next-optimized-images) | [next-optimized-images](https://www.npmjs.com/package/next-optimized-images) |
+| react-query-auth | v2.4.3 | [alan2207/react-query-auth](https://github.com/alan2207/react-query-auth) | [react-query-auth](https://www.npmjs.com/package/react-query-auth) |
+| react-virtualized | v9.22.7 | [bvaughn/react-virtualized](https://github.com/bvaughn/react-virtualized) | [react-virtualized](https://www.npmjs.com/package/react-virtualized) |
+| critters | v2.0.0 | [GoogleChromeLabs/critters](https://github.com/GoogleChromeLabs/critters) | [critters](https://www.npmjs.com/package/critters) |
 
 ### Additional Packages
 
@@ -21,17 +24,12 @@ Maintained, production-ready forks of critical Next.js/React packages that have 
 - next-session ([hoangvvo/next-session](https://github.com/hoangvvo/next-session))
 - next-compose-plugins ([hoangvvo/next-compose-plugins](https://github.com/hoangvvo/next-compose-plugins))
 - next-transpile-modules ([martpie/next-transpile-modules](https://github.com/martpie/next-transpile-modules))
-- next-csrf
-- next-images
-- next-json-ld
-- next-circuit-breaker
+- next-csrf ([j0lv3r4/next-csrf](https://github.com/j0lv3r4/next-csrf))
+- next-images ([twopluszero/next-images](https://github.com/twopluszero/next-images))
+- next-json-ld ([garmeeh/next-json-ld](https://github.com/garmeeh/next-json-ld))
+- next-circuit-breaker ([j0lv3r4/next-circuit-breaker](https://github.com/j0lv3r4/next-circuit-breaker))
 - react-a11y-utils
-
-### Next Batch Candidates (Researching)
-
-- **next-connect** - [hoangvvo/next-connect](https://github.com/hoangvvo/next-connect)
-- **react-query-auth** - [manfredsteyer/react-query-auth](https://github.com/manfredsteyer/react-query-auth)
-- **next-optimized-images** - [fromnode/fromnode_repo](https://github.com/fromnode/fromnode_repo)
+- seeded-rng
 
 ## Technical Standards
 
@@ -49,6 +47,6 @@ Maintained, production-ready forks of critical Next.js/React packages that have 
 
 ## Contact & Links
 
-- **GitHub:** https://github.com/opensourceframework/opensourceframework
+- **GitHub:** https://github.com/riceharvest/opensourceframework
 - **Organization:** @opensourceframework
 - **npm Organization:** https://www.npmjs.com/org/opensourceframework
