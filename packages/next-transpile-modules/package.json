@@ -18,7 +18,7 @@
     "prepublishOnly": "npm run build && npm run typings",
     "pretest": "npm run setup",
     "quickie": "node --trace-uncaught src/__tests__/setup.js && yarn --cwd src/__tests__/__apps__/swc/app run dev",
-    "test": "jest --forceExit",
+    "test": "vitest run --passWithNoTests",
     "test:unit": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js --testPathPattern='unit.test.js' --testEnvironment=node --testPathIgnorePatterns='__apps__' --forceExit",
     "test:debug": "jest --detectOpenHandles --forceExit",
     "test:lint": "eslint .",
