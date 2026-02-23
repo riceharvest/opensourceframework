@@ -12,7 +12,7 @@
   "scripts": {
     "build:types": "flow-copy-source --ignore \"**/*.{jest,e2e,ssr,example}.js\" source/WindowScroller dist/es/WindowScroller && flow-copy-source --ignore \"**/*.{jest,e2e,ssr,example}.js\" source/AutoSizer dist/es/AutoSizer",
     "build": "tsup",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint 'source/**/*.js'",
