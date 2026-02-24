@@ -1,3 +1,4 @@
+/* global process */
 const commonjs = process.env.BUILD_MODULE === "commonjs";
 
 export default {

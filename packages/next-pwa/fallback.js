@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use strict'
 
 self.fallback = async request => {

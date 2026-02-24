@@ -91,7 +91,8 @@
     "rewire": "^6.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5.1.6",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "vitest": "^4.0.18"
   },
   "contributors": [
     {

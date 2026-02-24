@@ -1,12 +1,14 @@
 {
   "name": "@opensourceframework/tsconfig",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "main": "index.json",
   "exports": {
     ".": "./index.json",
     "./base.json": "./base.json",
     "./react.json": "./react.json"
   },
-  "files": ["*.json"]
+  "files": [
+    "*.json"
+  ]
 }

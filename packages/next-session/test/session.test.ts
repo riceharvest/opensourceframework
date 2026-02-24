@@ -13,6 +13,8 @@ const defaultCookie = {
   path: "/",
   sameSite: undefined,
   secure: false,
+  expires: undefined,
+  maxAge: undefined,
 };
 
 describe("session()", () => {
@@ -26,6 +28,7 @@ describe("session()", () => {
         expect(sess).toEqual({
           cookie: defaultCookie,
           [isNew]: true,
+          id: expect.any(String),
         });
         expect(req.session).toBe(sess);
         res.end();
@@ -87,6 +90,7 @@ describe("session()", () => {
       foo: "bar",
       cookie: defaultCookie,
       [isNew]: true,
+      id,
     });
     await inject(
       async (req, res) => {
@@ -120,6 +124,7 @@ describe("session()", () => {
       foo: "bar",
       cookie: defaultCookie,
       [isNew]: true,
+      id,
     });
     await inject(
       async (req, res) => {
@@ -151,12 +156,13 @@ describe("session()", () => {
     );
     expect(res.headers).toHaveProperty("set-cookie");
     expect(res.headers["set-cookie"]).toBe(
-      `sid=${id}; Path=/; Expires=${expires.toUTCString()}; HttpOnly`
+      `sid=${id}; Max-Age=10; Path=/; Expires=${expires.toUTCString()}; HttpOnly`
     );
     expect(store.set).toHaveBeenCalledWith(id, {
       foo: "bar",
       cookie: { ...defaultCookie, expires, maxAge: 10 },
       [isNew]: true,
+      id,
     });
     await inject(
       async (req, res) => {
@@ -191,7 +197,7 @@ describe("session()", () => {
     expect(store.set).not.toHaveBeenCalled();
     expect(store.touch).not.toHaveBeenCalled();
     expect(res.headers["set-cookie"]).toBe(
-      `sid=${sid}; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly`
+      `sid=${sid}; Max-Age=-1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly`
     );
   });
   test("should destroy session and unset cookie (autoCommit=false)", async () => {
@@ -218,7 +224,7 @@ describe("session()", () => {
     expect(store.set).not.toHaveBeenCalled();
     expect(store.touch).not.toHaveBeenCalled();
     expect(res.headers["set-cookie"]).toBe(
-      `sid=${sid}; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly`
+      `sid=${sid}; Max-Age=-1; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly`
     );
   });
   test("not to modify res.writeHead and res.end if autoCommit = false", async () => {
@@ -278,11 +284,12 @@ describe("session()", () => {
     );
     expect(newExpires.getTime()).toBeGreaterThan(expires.getTime());
     expect(res.headers["set-cookie"]).toEqual(
-      `sid=foo; Path=/; Expires=${newExpires.toUTCString()}; HttpOnly`
+      `sid=foo; Max-Age=5; Path=/; Expires=${newExpires.toUTCString()}; HttpOnly`
     );
     expect(store.touch).toHaveBeenCalledWith("foo", {
       cookie: { ...defaultCookie, expires: newExpires, maxAge: 5 },
       [isTouched]: true,
+      id: "foo",
     });
   });
   test("not touch session life time < touchAfter", async () => {

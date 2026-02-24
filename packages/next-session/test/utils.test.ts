@@ -10,7 +10,11 @@ describe("hash()", () => {
       autoCommit: false,
     })(req, res);
     req.session.foo = "bar";
-    expect(hash(req.session)).toEqual(`{"foo":"bar"}`);
+    const sessionHash = hash(req.session);
+    expect(JSON.parse(sessionHash)).toEqual({
+      foo: "bar",
+      id: expect.any(String),
+    });
   });
 });
 

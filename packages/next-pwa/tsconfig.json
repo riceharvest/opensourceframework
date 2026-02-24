@@ -2,8 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": ".",
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": false,
+    "strict": false,
+    "skipLibCheck": true,
+    "lib": ["ESNext", "DOM", "WebWorker"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+  "include": ["*.js", "global.d.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "test-app/**/*"]
 }

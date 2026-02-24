@@ -4,9 +4,9 @@ import MemoryStore from "./memory-store";
 import { SessionStore } from "./types";
 
 // no-op for compat
-function expressSession(options?: any): any {}
+function expressSession(options?: Options): any {}
 
-function ExpressStore(this: any) {
+function ExpressStore(this: EventEmitter) {
   EventEmitter.call(this);
 }
 inherits(ExpressStore, EventEmitter);
@@ -26,7 +26,7 @@ expressSession.MemoryStore = CallbackMemoryStore;
 
 export { expressSession };
 
-export function promisifyStore(connectStore: any): SessionStore {
+export function promisifyStore(connectStore: unknown): SessionStore {
   return {
     get: promisify(connectStore.get).bind(connectStore),
     set: promisify(connectStore.set).bind(connectStore),

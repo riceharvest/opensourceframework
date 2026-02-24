@@ -41,14 +41,18 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
       destroy: {
         value: function destroy() {
           this[isDestroyed] = true;
-          delete (req as any).session;
+          delete (req as unknown as { session: TypedSession }).session;
+          this.cookie.maxAge = -1;
+          this.cookie.expires = new Date(0);
+          commitHeader(res, name, this, encode);
           return store.destroy(this.id);
         },
         enumerable: false,
       },
       commit: {
         value: async function commit() {
-          return commitHeader(res, name, this, encode);
+          await commitHeader(res, name, this, encode);
+          await store.set(this.id, this);
         },
         enumerable: false,
       },
@@ -59,7 +63,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     req: IncomingMessage,
     res: ServerResponse
   ): Promise<TypedSession> {
-    if ((req as any).session) return (req as any).session;
+    if ((req as unknown as { session: TypedSession }).session) return (req as unknown as { session: TypedSession }).session;
 
     const _now = Date.now();
 
@@ -104,7 +108,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
             : undefined,
         },
       } as TypedSession;
-      (session as any)[isNew] = true;
+      (session as unknown as { [isNew]: boolean })[isNew] = true;
       decorateSession(req, res, session, newSessionId, _now);
     }
 
@@ -112,29 +116,29 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
 
     if (autoCommit) {
       const _writeHead = res.writeHead;
-      res.writeHead = function resWriteHeadProxy(...args: any) {
-        if (!res.headersSent && (session[isNew] || session[isTouched])) {
+      res.writeHead = function resWriteHeadProxy(...args: unknown[]) {
+        if (!res.headersSent && (session[isTouched] || (session[isNew] && hash(session) !== prevHash))) {
           commitHeader(res, name, session, encode);
         }
-        return _writeHead.apply(this, args);
+        return _writeHead.apply(this, args as any);
       };
       const _end = res.end;
-      res.end = function resEndProxy(...args: any) {
-        const done = () => _end.apply(this, args);
+      res.end = function resEndProxy(...args: unknown[]) {
+        const done = () => _end.apply(this, args as any);
         if (session[isDestroyed]) {
-          done();
+          return done();
         } else if (hash(session) !== prevHash) {
           store.set(session.id, session).finally(done);
         } else if (session[isTouched] && store.touch) {
           store.touch(session.id, session).finally(done);
         } else {
-          done();
+          return done();
         }
-        return this as any;
+        return this as unknown as ServerResponse;
       };
     }
 
-    (req as any).session = session;
+    (req as unknown as { session: TypedSession }).session = session;
 
     return session;
   };
