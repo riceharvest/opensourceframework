@@ -29,12 +29,12 @@
     "./errors": "./dist/lib/errors.js"
   },
   "scripts": {
-    "build": "node scripts/prebuild.js && tsup --config tsup.config.js",
-    "build:js": "tsup --config tsup.config.js",
+    "build": "node scripts/prebuild.mjs && tsup --config tsup.config.mjs",
+    "build:js": "tsup --config tsup.config.mjs",
     "build:css": "postcss --config config/postcss.config.js src/**/*.css --base src --dir dist && node config/wrap-css.js",
     "dev:setup": "npm i && npm run build:css && cd app && npm i",
     "dev": "cd app && npm run dev",
-    "watch": "tsup --config tsup.config.js --watch",
+    "watch": "tsup --config tsup.config.mjs --watch",
     "test": "vitest run --config vitest.config.js --passWithNoTests",
     "test:e2e": "playwright test --config playwright.config.js",
     "test:ci": "npm run lint && npm run test:types && npm run test",

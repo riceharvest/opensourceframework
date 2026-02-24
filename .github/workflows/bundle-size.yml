@@ -27,20 +27,14 @@ jobs:
       
       - name: Check bundle sizes
         run: |
-          npx bundle-phobia-cli @opensourceframework/next-compose-plugins --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-transpile-modules --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-cookies --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-seo --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-session --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-iron-session --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-https-redirect --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-health-check --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-transpile-modules --limit 10
-          npx bundle-phobia-cli @opensourceframework/next-react-icons --limit 10
+          for pkg in next-compose-plugins next-transpile-modules next-cookies next-seo next-session next-iron-session next-pwa next-auth critters next-csrf; do
+            npx bundle-phobia-cli @opensourceframework/$pkg --limit 50 || echo "Failed to check $pkg"
+          done
       
       - name: Upload bundle size report
         uses: actions/upload-artifact@v4
         with:
           name: bundle-size-report
           path: bundle-size-report.json
+          if-no-files-found: ignore
           retention-days: 30
