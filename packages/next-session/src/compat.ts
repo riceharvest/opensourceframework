@@ -4,7 +4,7 @@ import MemoryStore from "./memory-store";
 import { SessionStore } from "./types";
 
 // no-op for compat
-function expressSession(options?: Options): any {}
+function expressSession(_options?: Options): void {}
 
 function ExpressStore(this: EventEmitter) {
   EventEmitter.call(this);

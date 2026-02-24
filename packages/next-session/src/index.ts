@@ -77,8 +77,8 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     if (_session) {
       session = _session as TypedSession;
       // Some store return cookie.expires as string, convert it to Date
-      if (typeof (session.cookie as any).expires === "string") {
-        (session.cookie as any).expires = new Date((session.cookie as any).expires);
+      if (typeof (session.cookie as unknown as { expires: unknown }).expires === "string") {
+        (session.cookie as unknown as { expires: unknown }).expires = new Date((session.cookie as unknown as { expires: unknown }).expires);
       }
 
       // Add session methods
@@ -120,11 +120,11 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
         if (!res.headersSent && (session[isTouched] || (session[isNew] && hash(session) !== prevHash))) {
           commitHeader(res, name, session, encode);
         }
-        return _writeHead.apply(this, args as any);
+        return _writeHead.apply(this, args as unknown[]);
       };
       const _end = res.end;
       res.end = function resEndProxy(...args: unknown[]) {
-        const done = () => _end.apply(this, args as any);
+        const done = () => _end.apply(this, args as unknown[]);
         if (session[isDestroyed]) {
           return done();
         } else if (hash(session) !== prevHash) {
