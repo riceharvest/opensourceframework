@@ -2,7 +2,7 @@
 
 ## Package Overview
 - **Package:** @opensourceframework/next-pwa
-- **Version:** v5.6.2
+- **Version:** v5.6.3
 - **Forked from:** next-pwa (original: shadowwalker/next-pwa)
 - **Purpose:** Zero-config PWA plugin for Next.js with Turbopack support
 

@@ -2,7 +2,7 @@
 
 ## Package Overview
 - **Package:** @opensourceframework/next-auth
-- **Version:** v3.29.10
+- **Version:** v3.29.11
 - **Forked from:** next-auth (original: nextauthjs/next-auth)
 - **Purpose:** Complete authentication solution for Next.js applications
 

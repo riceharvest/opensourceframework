@@ -2,7 +2,7 @@
 
 ## Package Overview
 - **Package:** @opensourceframework/next-transpile-modules
-- **Version:** v10.0.2
+- **Version:** v10.0.3
 - **Forked from:** next-transpile-modules
 - **Purpose:** Next.js plugin to transpile code from node_modules
 

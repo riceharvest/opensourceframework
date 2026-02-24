@@ -2,7 +2,7 @@
 
 ## Package Overview
 - **Package:** @opensourceframework/next-seo
-- **Version:** v7.3.4
+- **Version:** v7.3.5
 - **Forked from:** next-seo (original: grevory/next-seo)
 - **Purpose:** SEO plugin for Next.js with comprehensive structured data support
 
