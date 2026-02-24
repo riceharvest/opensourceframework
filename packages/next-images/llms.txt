@@ -45,6 +45,7 @@ export default function MyComponent() {
 - `exclude`: Path to exclude from this loader.
 - `name`: Output filename template (default: `[name]-[hash].[ext]`).
 - `esModule`: Use ES modules syntax for output (default: `false`).
+- `dynamicAssetPrefix`: Enable dynamic asset prefix resolution at runtime (default: `false`).
 
 ## TypeScript Support
 
@@ -55,6 +56,6 @@ Add to `additional.d.ts`:
 
 ## Links
 
-- [Documentation](https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images#readme)
-- [GitHub](https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images)
+- [Documentation](https://github.com/riceharvest/opensourceframework/tree/main/packages/next-images#readme)
+- [GitHub](https://github.com/riceharvest/opensourceframework/tree/main/packages/next-images)
 - [NPM](https://www.npmjs.com/package/@opensourceframework/next-images)

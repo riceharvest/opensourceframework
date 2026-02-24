@@ -39,7 +39,8 @@
     "fallback.js",
     "cache.js",
     "build-custom-worker.js",
-    "build-fallback-worker.js"
+    "build-fallback-worker.js",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",

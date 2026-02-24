@@ -8,7 +8,8 @@
   "module": "dist/next-transpile-modules.mjs",
   "types": "dist/next-transpile-modules.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",

@@ -58,7 +58,8 @@
     "errors.d.ts",
     "jwt.js",
     "jwt.d.ts",
-    "internals"
+    "internals",
+    "llms.txt"
   ],
   "license": "ISC",
   "dependencies": {
