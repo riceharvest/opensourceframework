@@ -1,4 +1,4 @@
-/// <reference types="axe-core" />
+import 'axe-core';
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import * as axe from 'axe-core';
