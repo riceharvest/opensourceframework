@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 /**
  * Unit tests for next-transpile-modules
  * These tests focus on the core functionality without requiring integration test setup
@@ -98,7 +99,7 @@ describe('createLogger', () => {
   let consoleSpy;
 
   beforeEach(() => {
-    consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
+    consoleSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -205,7 +206,7 @@ describe('createWebpackMatcher', () => {
     let consoleSpy;
 
     beforeEach(() => {
-      consoleSpy = jest.spyOn(console, 'info').mockImplementation(() => {});
+      consoleSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
     });
 
     afterEach(() => {

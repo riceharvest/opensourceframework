@@ -32,10 +32,10 @@ describe('Critters', () => {
   it('Basic Usage', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': trim`
+      [path.resolve('/style.css')]: trim`
         h1 { color: blue; }
         h2.unused { color: red; }
         p { color: purple; }
@@ -79,10 +79,10 @@ describe('Critters', () => {
   it('Does not encode HTML entities', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': trim`
+      [path.resolve('/style.css')]: trim`
         h1 { color: blue; }
       `
     };
@@ -106,11 +106,11 @@ describe('Critters', () => {
   it('should keep existing link tag attributes in the noscript link', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/',
+      path: path.resolve('/'),
       preload: 'media'
     });
     const assets = {
-      '/style.css': trim`
+      [path.resolve('/style.css')]: trim`
         h1 { color: blue; }
       `
     };
@@ -135,10 +135,10 @@ describe('Critters', () => {
   it('should keep existing link tag attributes', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': trim`
+      [path.resolve('/style.css')]: trim`
         h1 { color: blue; }
       `
     };
@@ -224,9 +224,9 @@ describe('Critters', () => {
             <body></body>
         </html>
     `);
-    expect(readFileSpy).toHaveBeenCalledWith('/var/www/file.css');
+    expect(readFileSpy).toHaveBeenCalledWith(path.resolve('/var/www/file.css'));
     expect(readFileSpy).not.toHaveBeenCalledWith(
-      '/company-secrets/secret.css'
+      path.resolve('/company-secrets/secret.css')
     );
   });
 
@@ -256,10 +256,10 @@ describe('Critters', () => {
   it('extracts critical CSS for elements in document', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': `
+      [path.resolve('/style.css')]: `
         .used-class { color: red; }
         .unused-class { color: blue; }
         h1 { font-size: 20px; }
@@ -285,12 +285,12 @@ describe('Critters', () => {
 
   it('handles additionalStylesheets option', async () => {
     const critters = new Critters({
-      path: '/',
+      path: path.resolve('/'),
       additionalStylesheets: ['/extra.css']
     });
     const assets = {
-      '/style.css': 'h1 { color: blue; }',
-      '/extra.css': 'p { color: green; }'
+      [path.resolve('/style.css')]: 'h1 { color: blue; }',
+      [path.resolve('/extra.css')]: 'p { color: green; }'
     };
     critters.readFile = (filename) => assets[filename];
     const result = await critters.process(`
@@ -311,10 +311,10 @@ describe('Critters', () => {
   it('respects critters:exclude comment', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': `
+      [path.resolve('/style.css')]: `
         /* critters:exclude */
         .excluded { color: red; }
         .included { color: blue; }
@@ -340,10 +340,10 @@ describe('Critters', () => {
   it('respects critters:include comment', async () => {
     const critters = new Critters({
       reduceInlineStyles: false,
-      path: '/'
+      path: path.resolve('/')
     });
     const assets = {
-      '/style.css': `
+      [path.resolve('/style.css')]: `
         /* critters:include */
         .always-included { color: red; }
         .maybe-used { color: blue; }
@@ -364,11 +364,11 @@ describe('Critters', () => {
 
   it('handles preload: swap option', async () => {
     const critters = new Critters({
-      path: '/',
+      path: path.resolve('/'),
       preload: 'swap'
     });
     const assets = {
-      '/style.css': 'h1 { color: blue; }'
+      [path.resolve('/style.css')]: 'h1 { color: blue; }'
     };
     critters.readFile = (filename) => assets[filename];
     const result = await critters.process(`
@@ -388,11 +388,11 @@ describe('Critters', () => {
 
   it('handles preload: js option', async () => {
     const critters = new Critters({
-      path: '/',
+      path: path.resolve('/'),
       preload: 'js'
     });
     const assets = {
-      '/style.css': 'h1 { color: blue; }'
+      [path.resolve('/style.css')]: 'h1 { color: blue; }'
     };
     critters.readFile = (filename) => assets[filename];
     const result = await critters.process(`
@@ -412,11 +412,11 @@ describe('Critters', () => {
 
   it('handles pruneSource option', async () => {
     const critters = new Critters({
-      path: '/',
+      path: path.resolve('/'),
       pruneSource: true
     });
     const assets = {
-      '/style.css': `
+      [path.resolve('/style.css')]: `
         h1 { color: blue; }
         h2 { color: red; }
       `

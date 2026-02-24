@@ -4,7 +4,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['src/**/*.test.ts', 'test/**/*.test.ts'],
+    include: ['src/**/*.test.{js,ts}', 'test/**/*.test.{js,ts}'],
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/src/__tests__/integrations.test.js',
+      '**/*.d.ts',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -12,8 +18,8 @@ export default defineConfig({
         'node_modules/',
         'dist/',
         '**/*.d.ts',
-        '**/*.test.ts',
-        '**/*.config.ts',
+        '**/*.test.{js,ts}',
+        '**/*.config.{js,ts}',
       ],
     },
   },
