@@ -21,10 +21,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Install Playwright Browsers
-        run: cd test-app && npx playwright install --with-deps
+        run: npx playwright install --with-deps
       - name: Build library
         run: pnpm build
-      - name: Build test app
-        run: cd test-app && pnpm build
+      - name: Build apps
+        run: |
+          cd app && pnpm build
+          cd ../test-app && pnpm build
       - name: Test
         run: pnpm test
