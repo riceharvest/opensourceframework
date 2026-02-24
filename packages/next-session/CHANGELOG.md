@@ -1,6 +1,6 @@
-# CHANGELOG
+# @opensourceframework/next-session
 
-## 3.29.11
+## 4.0.5
 
 ### Patch Changes
 
@@ -9,7 +9,3 @@
   - Fixed lint rules and CI/CD unblocking
   - Added llms.txt for AI-First Discovery
   - Include llms.txt in published files
-
-The changelog is automatically updated using
-[semantic-release](https://github.com/semantic-release/semantic-release). You
-can see it on the [releases page](../../releases).

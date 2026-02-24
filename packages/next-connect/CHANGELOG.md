@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- Modernization and stabilization fixes:
+  - Standardized scripts and CI/CD lockfiles
+  - Fixed lint rules and CI/CD unblocking
+  - Added llms.txt for AI-First Discovery
+  - Include llms.txt in published files
+
 ## 1.0.0-next.4
 
 - fix: correct clone() type by @hoangvvo in https://github.com/hoangvvo/next-connect/commit/da2a5b19b471a8ff893825c6f7e03fba26617ed8

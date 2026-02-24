@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 5.6.3
+
+### Patch Changes
+
+- Modernization and stabilization fixes:
+  - Standardized scripts and CI/CD lockfiles
+  - Fixed lint rules and CI/CD unblocking
+  - Added llms.txt for AI-First Discovery
+  - Include llms.txt in published files
+
 **NOTE: for newer changelog, go to [release page](https://github.com/shadowwalker/next-pwa/releases) instead.**
 
 ## 5.5.0

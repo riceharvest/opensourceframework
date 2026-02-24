@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-iron-session",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "description": "Secure, stateless, and cookie-based session library for JavaScript",
   "keywords": [
     "session",
@@ -44,8 +44,8 @@
     "prepare": "pnpm build",
     "start": "turbo start --filter=next-example",
     "test": "vitest run --passWithNoTests && pnpm build",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "prettier": {
     "plugins": [

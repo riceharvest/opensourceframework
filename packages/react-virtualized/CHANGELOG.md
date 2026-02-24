@@ -1,5 +1,15 @@
 ## Changelog
 
+## 9.22.8
+
+### Patch Changes
+
+- Modernization and stabilization fixes:
+  - Standardized scripts and CI/CD lockfiles
+  - Fixed lint rules and CI/CD unblocking
+  - Added llms.txt for AI-First Discovery
+  - Include llms.txt in published files
+
 ##### NEXT
 
 - Update peer dependencies to allow React 17 ([levenleven](https://github.com/levenleven) - [#1625](https://github.com/bvaughn/react-virtualized/pull/1625))
