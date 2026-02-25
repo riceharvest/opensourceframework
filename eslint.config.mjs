@@ -42,7 +42,11 @@ export default tseslint.config(
   {
     files: [
       "packages/next-auth/src/client/**/*.{js,mjs,cjs,ts,tsx,jsx}",
-      "packages/next-auth/app/**/*.{js,mjs,cjs,ts,tsx,jsx}",
+      "packages/next-auth/www/**/*.{js,mjs,cjs,ts,tsx,jsx}",
+      "packages/next-auth/app/pages/**/*.{js,mjs,cjs,ts,tsx,jsx}",
+    ],
+    ignores: [
+      "packages/next-auth/app/pages/api/**/*.{js,mjs,cjs,ts,tsx,jsx}",
     ],
     languageOptions: {
       globals: {
