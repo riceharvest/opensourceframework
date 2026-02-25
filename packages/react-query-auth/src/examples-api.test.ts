@@ -5,6 +5,7 @@ import {
   loginWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from "../examples/vite/src/lib/api";
+import { getUser, setUser, validatePassword } from "../examples/vite/src/mocks/db";
 import { storage } from "../examples/vite/src/lib/utils";
 
 describe("examples/vite api helpers", () => {
@@ -102,5 +103,25 @@ describe("examples/vite api helpers", () => {
         headers: { "Content-Type": "application/json" },
       })
     );
+  });
+
+  test("mock db does not persist passwords in localStorage", () => {
+    const created = setUser({
+      email: "db@example.com",
+      name: "DB User",
+      password: "secret",
+    });
+
+    expect(created).toEqual({
+      id: "db@example.com",
+      email: "db@example.com",
+      name: "DB User",
+    });
+    expect(getUser("db@example.com")).toEqual(created);
+    expect(validatePassword("db@example.com", "secret")).toBe(true);
+
+    const rawDb = window.localStorage.getItem("db_users");
+    expect(rawDb).toBeTruthy();
+    expect(rawDb).not.toContain("secret");
   });
 });

@@ -48,6 +48,7 @@
     "eslint-plugin-jest": "^29.15.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^2.1.9",
     "vitest": "^2.1.9"
   },
   "repository": {
@@ -61,5 +62,9 @@
   "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.0"
   }
 }

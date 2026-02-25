@@ -61,6 +61,7 @@
     "eslint-plugin-jest": "^29.15.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^1.6.1",
     "vitest": "^1.6.1"
   },
   "peerDependencies": {

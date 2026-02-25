@@ -1,7 +1,17 @@
 import { http, HttpResponse, delay } from 'msw'
 import { setupWorker } from 'msw/browser'
 import { storage } from '@/lib/utils'
-import { DBUser, getUser, setUser } from './db'
+import { DBUser, getUser, setUser, validatePassword } from './db'
+
+async function parseRequestBody(request: Request): Promise<Partial<DBUser> | null> {
+  try {
+    const parsed = await request.json()
+    if (!parsed || typeof parsed !== "object") return null
+    return parsed as Partial<DBUser>
+  } catch {
+    return null
+  }
+}
 
 const handlers = [
   http.get('/auth/me', async ({ request }) => {
@@ -13,47 +23,52 @@ const handlers = [
   }),
 
   http.post('/auth/login', async ({ request }) => {
-    const parsedBody = (await request.json()) as DBUser
-    const user = getUser(parsedBody.email)
+    const parsedBody = await parseRequestBody(request)
+    const email = typeof parsedBody?.email === "string" ? parsedBody.email : null
+    const password =
+      typeof parsedBody?.password === "string" ? parsedBody.password : null
 
     await delay(1000);
 
-    if (user && user.password === parsedBody.password) {
+    if (validatePassword(email, password) && email) {
+      const user = getUser(email)
       return HttpResponse.json({
-        jwt: user.email,
+        jwt: email,
         user,
       })
     }
 
     return HttpResponse.json(
-      { message: 'Unauthorized' },
+      { message: 'Invalid credentials' },
       { status: 401 }
     )
   }),
 
   http.post('/auth/register', async ({ request }) => {
-    const parsedBody = (await request.json()) as DBUser
-    const user = getUser(parsedBody?.email)
+    const parsedBody = await parseRequestBody(request)
+    const email = typeof parsedBody?.email === "string" ? parsedBody.email : null
+    const name = typeof parsedBody?.name === "string" ? parsedBody.name : null
+    const password =
+      typeof parsedBody?.password === "string" ? parsedBody.password : null
 
     await delay(1000);
 
-    if (!user && parsedBody) {
-      const newUser = setUser(parsedBody)
+    if (!email || !name || !password) {
+      return HttpResponse.json({ message: 'Registration failed' }, { status: 400 })
+    }
+
+    if (!getUser(email)) {
+      const newUser = setUser({ email, name, password })
       if (newUser) {
         return HttpResponse.json({
           jwt: newUser.email,
-          user: getUser(newUser.email),
+          user: newUser,
         })
       }
-
-      return HttpResponse.json(
-        { message: 'Registration failed!' },
-        { status: 403 }
-      )
     }
 
     return HttpResponse.json(
-      { message: 'The user already exists!' },
+      { message: 'Registration failed' },
       { status: 400 }
     )
   }),
