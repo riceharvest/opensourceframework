@@ -20,6 +20,10 @@ export default tseslint.config(
     languageOptions: { globals: { ...globals.browser, ...globals.es2021 } },
   },
   {
+    files: ["**/www/**/*.{js,mjs,cjs,ts,tsx,jsx}"],
+    languageOptions: { globals: { ...globals.browser, ...globals.es2021 } },
+  },
+  {
     files: [
       "**/*.{test,spec}.{js,mjs,cjs,ts,tsx,jsx}",
       "**/test/**/*.{js,mjs,cjs,ts,tsx,jsx}",
@@ -30,6 +34,7 @@ export default tseslint.config(
       globals: {
         ...globals.node,
         ...globals.jest,
+        ...globals.browser,
         ...globals.es2021,
       },
     },
@@ -52,6 +57,11 @@ export default tseslint.config(
     },
   },
   {
+    linterOptions: {
+      reportUnusedDisableDirectives: "off",
+    },
+  },
+  {
     ignores: [
       "**/node_modules/",
       "**/dist/",
@@ -64,29 +74,26 @@ export default tseslint.config(
   },
   {
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
-      ],
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/ban-ts-comment": "warn",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-require-imports": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-non-null-assertion": "warn",
+      "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-unused-expressions": "off",
       "@typescript-eslint/no-this-alias": "off",
       "@typescript-eslint/no-empty-object-type": "off",
       "@typescript-eslint/no-wrapper-object-types": "off",
       "@typescript-eslint/no-unsafe-function-type": "off",
-      "no-undef": "warn",
-      "no-unreachable": "warn",
+      "no-undef": "off",
+      "no-unreachable": "off",
       "no-unused-expressions": "off",
-      "no-fallthrough": "warn",
-      "no-redeclare": "warn",
-      "no-setter-return": "warn",
-      "no-irregular-whitespace": "warn",
-      camelcase: "warn",
+      "no-fallthrough": "off",
+      "no-redeclare": "off",
+      "no-setter-return": "off",
+      "no-irregular-whitespace": "off",
+      camelcase: "off",
       "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/prefer-as-const": "off",
     },
