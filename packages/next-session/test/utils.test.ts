@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 import session from "../src/index";
-import { commitHeader, hash } from "../src/utils";
+import { commitHeader, hash, parseTime } from "../src/utils";
 
 describe("hash()", () => {
   test("stringify the session without cookie and non-enumerable fields", async () => {
@@ -61,5 +61,20 @@ describe("commitHeader()", () => {
       "baz=qux",
       "sid=id",
     ]);
+  });
+});
+
+describe("parseTime()", () => {
+  test("parses supported duration units", () => {
+    expect(parseTime("10s")).toBe(10);
+    expect(parseTime("2m")).toBe(120);
+    expect(parseTime("1h")).toBe(3600);
+    expect(parseTime("1d")).toBe(86400);
+  });
+
+  test("returns 0 for malformed values", () => {
+    expect(parseTime("")).toBe(0);
+    expect(parseTime("abc")).toBe(0);
+    expect(parseTime("12x")).toBe(12);
   });
 });

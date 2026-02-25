@@ -10,19 +10,23 @@ export function hash(sess: SessionData) {
 
 export function parseTime(time: number | string): number {
   if (typeof time === "number") return time;
-  const unit = time.slice(-1);
-  const value = parseInt(time.slice(0, -1), 10);
+  const trimmed = time.trim();
+  if (!trimmed) return 0;
+  const unit = trimmed.slice(-1);
+  const value = parseInt(trimmed.slice(0, -1), 10);
   switch (unit) {
     case "s":
-      return value;
+      return Number.isFinite(value) ? value : 0;
     case "m":
-      return value * 60;
+      return Number.isFinite(value) ? value * 60 : 0;
     case "h":
-      return value * 60 * 60;
+      return Number.isFinite(value) ? value * 60 * 60 : 0;
     case "d":
-      return value * 60 * 60 * 24;
-    default:
-      return parseInt(time, 10);
+      return Number.isFinite(value) ? value * 60 * 60 * 24 : 0;
+    default: {
+      const parsed = parseInt(trimmed, 10);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
   }
 }
 
