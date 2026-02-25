@@ -73,7 +73,7 @@ files.forEach((file) => {
 
     importLines += `import ${functionName} from "./${file}"\n`
     exportLines += `  ${functionName},\n`
-  } catch (error) {
+  } catch {
     console.error(
       [
         `\nThe provider file '${file}' should have a single named default export`,

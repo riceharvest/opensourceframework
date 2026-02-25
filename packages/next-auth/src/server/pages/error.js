@@ -1,5 +1,4 @@
 // @ts-check
-import { h } from 'preact' // eslint-disable-line no-unused-vars
 
 /**
  * Renders an error page.

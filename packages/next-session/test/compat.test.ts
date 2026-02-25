@@ -5,28 +5,28 @@ import MemoryStore from "../src/memory-store";
 
 describe("expressSession", () => {
   test("expressSession.Store extends EventEmitter", () => {
-    // @ts-ignore
+    // @ts-expect-error - legacy compat typing
     expect(new expressSession.Store()).toBeInstanceOf(EventEmitter);
   });
   test("allow expressSession.Store subclasses to use Store.call(this)", () => {
     // Some express-compatible stores use this pattern like
     // https://github.com/voxpelli/node-connect-pg-simple/blob/master/index.js
     function SubStore() {
-      // @ts-ignore
+      // @ts-expect-error - legacy compat typing
       expressSession.Store.call(this);
     }
-    // eslint-disable-next-line no-unused-vars
-    // @ts-ignore
+     
+    // @ts-expect-error - legacy compat typing
     const store = new SubStore();
   });
   test("expressSession.MemoryStore extends expressSession.Store", () => {
-    // @ts-ignore
+    // @ts-expect-error - legacy compat typing
     expect(new expressSession.MemoryStore()).toBeInstanceOf(
       expressSession.Store
     );
   });
   describe("expressSession.MemoryStore basic functionalities", () => {
-    // @ts-ignore
+    // @ts-expect-error - legacy compat typing
     const memoryStore = new expressSession.MemoryStore();
     it("get()", async () => {
       await new Promise<void>((resolve, reject) => {
@@ -57,7 +57,7 @@ describe("expressSession", () => {
 
 describe("promisifyStore", () => {
   it("promisify store methods and maintain this context", async () => {
-    // @ts-ignore
+    // @ts-expect-error - legacy compat typing
     const memoryStore = new expressSession.MemoryStore();
     delete memoryStore.touch;
     memoryStore.store.set("foo", JSON.stringify({ cookie: {}, foo: "bar" }));

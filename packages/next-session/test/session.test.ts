@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { vi } from "vitest";
 import { createServer, IncomingMessage, request, ServerResponse } from "http";

@@ -20,7 +20,7 @@ const icons = [
   '/img/providers/twitter.svg'
 ]
 
-const ProviderMarquee = React.memo(({ size }) => {
+const ProviderMarquee = React.memo(({ size: _size }) => {
   let scale = 0.4
 
   if (typeof window !== 'undefined') {

@@ -7,7 +7,7 @@ const prefix = `${chalk.gray('next-optimized-images')} ${chalk.red(figures.point
  * Output a warning when images should get optimized (prod build) but no optimization
  * package is installed.
  */
-const showWarning = () => console.log( // eslint-disable-line no-console
+const showWarning = () => console.log(
   `${prefix} ${chalk.red('WARNING!')}
 ${prefix} ${chalk.red('No package found which can optimize images.')}
 ${prefix} Starting from version ${chalk.cyan('2')} of ${chalk.cyan('next-optimized-images')}, all optimization is optional and you can choose which ones you want to use.

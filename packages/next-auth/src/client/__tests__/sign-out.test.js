@@ -19,7 +19,7 @@ beforeAll(() => {
 })
 
 beforeEach(() => {
-  // eslint-disable-next-line no-proto
+   
   jest.spyOn(window.localStorage.__proto__, "setItem")
 })
 

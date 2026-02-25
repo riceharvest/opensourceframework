@@ -6,7 +6,7 @@ export const OPTIONAL_SYMBOL = Symbol('__NEXT_COMPOSE_PLUGINS_OPTIONAL');
  * @param {function} plugin - function which requires a plugin
  */
 export const markOptional = (plugin) => {
-  plugin[OPTIONAL_SYMBOL] = true; // eslint-disable-line no-param-reassign
+  plugin[OPTIONAL_SYMBOL] = true;  
 
   return plugin;
 };

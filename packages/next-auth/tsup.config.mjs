@@ -5,7 +5,7 @@ import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-async function buildProvidersIndex() {
+async function _buildProvidersIndex() {
   const providersDir = path.join(__dirname, "src/providers")
 
   const files = fs
@@ -36,7 +36,7 @@ async function buildProvidersIndex() {
   console.log("[build] generated providers/index.js")
 }
 
-async function createModuleEntries() {
+async function _createModuleEntries() {
   const entries = {
     "index.js": 'module.exports = require("./dist/server").default\n',
     "client.js": 'module.exports = require("./dist/client").default\n',

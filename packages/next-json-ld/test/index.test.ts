@@ -14,7 +14,7 @@ import {
 } from '../src/index';
 
 // Type alias for test schemas - used for documentation purposes
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 type TestSchema = JSONLDSchema;
 
 describe('next-json-ld', () => {

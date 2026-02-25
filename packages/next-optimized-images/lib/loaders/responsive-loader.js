@@ -15,7 +15,7 @@ const getResponsiveLoaderOptions = ({
   let adapter = responsive ? responsive.adapter : undefined;
 
   if (!adapter && detectedLoaders.responsiveAdapter === 'sharp') {
-    adapter = require(`${detectedLoaders.responsive}${path.sep}sharp`); // eslint-disable-line
+    adapter = require(`${detectedLoaders.responsive}${path.sep}sharp`);
   }
 
   return {

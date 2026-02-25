@@ -56,6 +56,34 @@ export default tseslint.config(
     },
   },
   {
+    files: ["packages/react-virtualized/**/*.{js,mjs,cjs,ts,tsx,jsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+        ...globals.node,
+        ...globals.es2021,
+        vi: "readonly",
+        jest: "readonly",
+        describe: "readonly",
+        it: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        HTMLElement: "readonly",
+        HTMLInputElement: "readonly",
+        Element: "readonly",
+      },
+    },
+    rules: {
+      "no-undef": "off",
+      "no-redeclare": "off",
+      "no-irregular-whitespace": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
+  {
     files: [
       "**/*.{test,spec}.{js,mjs,cjs,ts,tsx,jsx}",
       "**/test/**/*.{js,mjs,cjs,ts,tsx,jsx}",
@@ -137,6 +165,13 @@ export default tseslint.config(
     files: ["packages/next-pwa/fallback.js"],
     rules: {
       "no-fallthrough": "off",
+    },
+  },
+  {
+    files: ["packages/react-virtualized/**/*.{js,mjs,cjs,ts,tsx,jsx}"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-setter-return": "off",
     },
   },
 );

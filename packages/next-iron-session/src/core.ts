@@ -212,9 +212,13 @@ export function createSealData(_crypto: any) {
     const mostRecentPasswordId = Math.max(
       ...Object.keys(passwordsMap).map(Number),
     );
+    const mostRecentPasswordSecret = passwordsMap[mostRecentPasswordId];
+    if (typeof mostRecentPasswordSecret !== "string") {
+      throw new Error("No valid password configured for sealing data.");
+    }
     const passwordForSeal = {
       id: mostRecentPasswordId.toString(),
-      secret: passwordsMap[mostRecentPasswordId]!,
+      secret: mostRecentPasswordSecret,
     };
 
     const seal = await ironSeal(_crypto as any, data, passwordForSeal, {

@@ -55,7 +55,7 @@ export default function oAuthClient(provider) {
     oauth1Client.getOAuthAccessToken.bind(oauth1Client)
   oauth1Client.getOAuthAccessToken = (...args) => {
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line camelcase
+       
       originalGetOAuth1AccessToken(
         ...args,
         (error, oauth_token, oauth_token_secret, params) => {
@@ -83,7 +83,7 @@ export default function oAuthClient(provider) {
     oauth1Client.getOAuthRequestToken.bind(oauth1Client)
   oauth1Client.getOAuthRequestToken = (params = {}) => {
     return new Promise((resolve, reject) => {
-      // eslint-disable-next-line camelcase
+       
       originalGetOAuthRequestToken(
         params,
         (error, oauth_token, oauth_token_secret, params) => {

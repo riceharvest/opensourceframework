@@ -259,7 +259,7 @@ describe('next-compose-plugins/compose', () => {
     }));
 
     const plugin2 = jest.fn((nextConfig) => {
-      nextConfig.illegallyUpdated = true; // eslint-disable-line no-param-reassign
+      nextConfig.illegallyUpdated = true;  
 
       return {
         ...nextConfig,

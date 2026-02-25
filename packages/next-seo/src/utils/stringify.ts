@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 // Some of the code below is borrowed from react-schemaorg after the author of the package
 // kindly reached out to let me know this was a better way of doing things. ❤️
 // https://github.com/google/react-schemaorg/blob/main/src/json-ld.tsx#L173

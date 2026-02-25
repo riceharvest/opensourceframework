@@ -15,7 +15,7 @@ const isModuleInstalled = (name, resolvePath) => {
     require.resolve(name, resolvePath ? { paths: [resolvePath] } : undefined);
 
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };

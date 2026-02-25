@@ -190,7 +190,7 @@ self.addEventListener('fetch', (event) => {
       const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
       CleanWebpackPlugin = CWP;
       WorkboxPlugin = { GenerateSW, InjectManifest };
-    } catch (e) {
+    } catch {
       console.warn(
         '> [PWA] Warning: workbox-webpack-plugin not installed. Run: npm install workbox-webpack-plugin'
       );
@@ -374,7 +374,7 @@ self.addEventListener('fetch', (event) => {
             additionalManifestEntries: dev ? [] : manifestEntries,
             exclude: [
               ...buildExcludes,
-              ({ asset, compilation }) => {
+              ({ asset }) => {
                 if (
                   asset.name.startsWith('server/') ||
                   asset.name.match(/^(build-manifest\.json|react-loadable-manifest\.json)$/)
@@ -457,7 +457,7 @@ self.addEventListener('fetch', (event) => {
                   cacheName: 'start-url',
                   plugins: [
                     {
-                      cacheWillUpdate: async ({ request, response, event, state }) => {
+                      cacheWillUpdate: async ({ response }) => {
                         if (response && response.type === 'opaqueredirect') {
                           return new Response(response.body, {
                             status: 200,
