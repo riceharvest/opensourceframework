@@ -29,16 +29,6 @@ const runAxe = async (element: HTMLElement) => {
   return await axe.run(element);
 };
 
-// Helper component to test props application
-interface TestPropsComponentProps {
-  children: React.ReactNode;
-  [key: string]: unknown;
-}
-
-const TestPropsComponent = ({ children, ...props }: TestPropsComponentProps) => {
-  return <div {...props}>{children}</div>;
-};
-
 describe('Accessibility Tests with axe-core', () => {
   describe('Basic ARIA Props', () => {
     it('should have no violations when using decorative props', async () => {
@@ -367,7 +357,7 @@ describe('Accessibility Tests with axe-core', () => {
       const Toast = ({
         message,
         type,
-        autoDismiss = false,
+        autoDismiss: _autoDismiss = false,
       }: {
         message: string;
         type: 'success' | 'error' | 'info';
