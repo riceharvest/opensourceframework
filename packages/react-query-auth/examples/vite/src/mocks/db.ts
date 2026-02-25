@@ -37,7 +37,20 @@ function readStoredUsers(): Record<string, PublicUser> {
 const users: Record<string, PublicUser> = readStoredUsers();
 const credentials: Record<string, string> = {};
 
-export function setUser(data: DBUser) {
+async function hashPassword(password: string): Promise<string> {
+  if (globalThis.crypto?.subtle) {
+    const encoded = new TextEncoder().encode(password);
+    const digest = await globalThis.crypto.subtle.digest("SHA-256", encoded);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+  }
+
+  // Fallback for environments without SubtleCrypto (example-only code path).
+  return `plain:${password}`;
+}
+
+export async function setUser(data: DBUser) {
   if (!data?.email || !data?.name || !data?.password) return null;
 
   const email = data.email.trim();
@@ -47,7 +60,7 @@ export function setUser(data: DBUser) {
 
   const safeUser: PublicUser = { id: email, email, name };
   users[email] = safeUser;
-  credentials[email] = password;
+  credentials[email] = await hashPassword(password);
   window.localStorage.setItem("db_users", JSON.stringify(users));
 
   return safeUser;
@@ -58,7 +71,13 @@ export function getUser(email: string | null) {
   return users[email];
 }
 
-export function validatePassword(email: string | null, password: string | null) {
+export async function validatePassword(
+  email: string | null,
+  password: string | null
+) {
   if (!email || !password) return false;
-  return credentials[email] === password;
+  const storedHash = credentials[email];
+  if (!storedHash) return false;
+  const providedHash = await hashPassword(password);
+  return storedHash === providedHash;
 }

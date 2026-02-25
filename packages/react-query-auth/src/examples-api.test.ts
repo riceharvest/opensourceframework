@@ -105,8 +105,8 @@ describe("examples/vite api helpers", () => {
     );
   });
 
-  test("mock db does not persist passwords in localStorage", () => {
-    const created = setUser({
+  test("mock db does not persist passwords in localStorage", async () => {
+    const created = await setUser({
       email: "db@example.com",
       name: "DB User",
       password: "secret",
@@ -118,7 +118,7 @@ describe("examples/vite api helpers", () => {
       name: "DB User",
     });
     expect(getUser("db@example.com")).toEqual(created);
-    expect(validatePassword("db@example.com", "secret")).toBe(true);
+    await expect(validatePassword("db@example.com", "secret")).resolves.toBe(true);
 
     const rawDb = window.localStorage.getItem("db_users");
     expect(rawDb).toBeTruthy();

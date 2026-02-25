@@ -30,7 +30,7 @@ const handlers = [
 
     await delay(1000);
 
-    if (validatePassword(email, password) && email) {
+    if ((await validatePassword(email, password)) && email) {
       const user = getUser(email)
       return HttpResponse.json({
         jwt: email,
@@ -58,7 +58,7 @@ const handlers = [
     }
 
     if (!getUser(email)) {
-      const newUser = setUser({ email, name, password })
+      const newUser = await setUser({ email, name, password })
       if (newUser) {
         return HttpResponse.json({
           jwt: newUser.email,
