@@ -7,7 +7,7 @@
  * @license MIT
  */
 
-import type { CookieSerializeOptions } from 'cookie';
+import type { SerializeOptions } from 'cookie';
 
 /**
  * Configuration options for the nextCsrf function
@@ -44,7 +44,7 @@ export interface NextCsrfOptions {
    * Important: The sameSite: 'lax' setting provides additional CSRF protection by
    * preventing cookies from being sent with cross-site POST requests.
    */
-  cookieOptions?: CookieSerializeOptions;
+  cookieOptions?: SerializeOptions;
   /** Secret key for signing cookies. Optional but recommended for production. */
   secret?: string;
   /**
@@ -62,7 +62,7 @@ export interface NextCsrfOptions {
  * Extends NextCsrfOptions with required fields
  */
 export interface MiddlewareArgs extends Required<Omit<NextCsrfOptions, 'secret'>> {
-  cookieOptions: CookieSerializeOptions;
+  cookieOptions: SerializeOptions;
   secret?: string;
 }
 
@@ -71,7 +71,7 @@ export interface MiddlewareArgs extends Required<Omit<NextCsrfOptions, 'secret'>
  */
 export interface SetupMiddlewareArgs {
   tokenKey: string;
-  cookieOptions: CookieSerializeOptions;
+  cookieOptions: SerializeOptions;
   secret?: string;
 }
 

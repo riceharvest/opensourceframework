@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use strict';
 
 const path = require('path');
@@ -271,7 +270,7 @@ self.addEventListener('fetch', (event) => {
             minify: !dev,
           });
 
-          if (!!customWorkerScriptName) {
+          if (customWorkerScriptName) {
             importScripts.unshift(customWorkerScriptName);
           }
 

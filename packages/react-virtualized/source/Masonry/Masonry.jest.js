@@ -124,7 +124,7 @@ describe('Masonry', () => {
     it('should not measure cells while scrolling until they are needed', () => {
       // Expected to measure 9 cells
       const cellMeasurerCache = createCellMeasurerCache();
-      const renderCallback = jest.fn().mockImplementation(index => index);
+      const renderCallback = vi.fn().mockImplementation(index => index);
       const cellRenderer = createCellRenderer(
         cellMeasurerCache,
         renderCallback,
@@ -141,7 +141,7 @@ describe('Masonry', () => {
 
     it('should measure additional cells on scroll when it runs out of measured cells', () => {
       const cellMeasurerCache = createCellMeasurerCache();
-      const renderCallback = jest.fn().mockImplementation(index => index);
+      const renderCallback = vi.fn().mockImplementation(index => index);
       const cellRenderer = createCellRenderer(
         cellMeasurerCache,
         renderCallback,
@@ -384,7 +384,7 @@ describe('Masonry', () => {
   describe('isScrolling', () => {
     it('should be true for cellRenderer while scrolling is in progress', () => {
       const cellMeasurerCache = createCellMeasurerCache();
-      const renderCallback = jest.fn().mockImplementation(index => index);
+      const renderCallback = vi.fn().mockImplementation(index => index);
       const cellRenderer = createCellRenderer(
         cellMeasurerCache,
         renderCallback,
@@ -399,7 +399,7 @@ describe('Masonry', () => {
 
     it('should be reset after a small debounce when scrolling stops', () => {
       const cellMeasurerCache = createCellMeasurerCache();
-      const renderCallback = jest.fn().mockImplementation(index => index);
+      const renderCallback = vi.fn().mockImplementation(index => index);
       const cellRenderer = createCellRenderer(
         cellMeasurerCache,
         renderCallback,
@@ -417,7 +417,7 @@ describe('Masonry', () => {
 
   describe('callbacks', () => {
     it('should call onCellsRendered when rendered cells change', () => {
-      const onCellsRendered = jest.fn();
+      const onCellsRendered = vi.fn();
       const rendered = findDOMNode(render(getMarkup({onCellsRendered})));
       expect(onCellsRendered.mock.calls).toEqual([
         [{startIndex: 0, stopIndex: 8}],
@@ -434,7 +434,7 @@ describe('Masonry', () => {
     });
 
     it('should call onScroll when scroll position changes', () => {
-      const onScroll = jest.fn();
+      const onScroll = vi.fn();
       const rendered = findDOMNode(render(getMarkup({onScroll})));
       expect(onScroll.mock.calls).toEqual([
         [{clientHeight: 100, scrollHeight: 16900, scrollTop: 0}],
@@ -455,7 +455,7 @@ describe('Masonry', () => {
 
   describe('keyMapper', () => {
     it('should pass the correct key to rendered cells', () => {
-      const keyMapper = jest.fn().mockImplementation(index => `key:${index}`);
+      const keyMapper = vi.fn().mockImplementation(index => `key:${index}`);
       const cellRenderer = jest
         .fn()
         .mockImplementation(({index, key, style}) => (

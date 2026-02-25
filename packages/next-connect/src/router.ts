@@ -77,8 +77,12 @@ export class Router<H extends FunctionLike> {
     ...args: Parameters<H>
   ): Promise<unknown> {
     let i = 0;
-    const next = () => fns[++i](...args, next);
-    return fns[i](...args, next);
+    const next: any = () => {
+      const fn = fns[++i];
+      if (fn) return (fn as any)(...args, next);
+    };
+    const first = fns[i];
+    return first ? (first as any)(...args, next) : Promise.resolve();
   }
 
   find(method: HttpMethod, pathname: string): FindResult<H> {
@@ -105,13 +109,16 @@ export class Router<H extends FunctionLike> {
           const matches = route.pattern.exec(pathname);
           if (matches === null) continue;
           if (matches.groups !== void 0)
-            for (const k in matches.groups) params[k] = matches.groups[k];
+            for (const k in matches.groups) params[k] = matches.groups[k] as string;
           matched = true;
-        } else if (route.keys.length > 0) {
+        } else if (route.keys && route.keys.length > 0) {
           const matches = route.pattern.exec(pathname);
           if (matches === null) continue;
-          for (let j = 0; j < route.keys.length; )
-            params[route.keys[j]] = matches[++j];
+          for (let j = 0; j < route.keys.length; ) {
+            const key = route.keys[j];
+            if (key) params[key] = matches[++j] as string;
+            else j++;
+          }
           matched = true;
         } else if (route.pattern.test(pathname)) {
           matched = true;

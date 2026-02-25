@@ -1,21 +1,21 @@
 import * as ReactDOM from 'react-dom';
 
-let _mountNode = null;
-
 /**
  * Helper method for testing components that may use Portal and thus require cleanup.
  * This helper method renders components to a transient node that is destroyed after the test completes.
  * Note that rendering twice within the same test method will update the same element (rather than recreate it).
  */
 export function render(markup) {
-  if (!_mountNode) {
-    _mountNode = document.createElement('div');
+  if (!render._mountNode) {
+    render._mountNode = document.createElement('div');
 
     // Unless we attach the mount-node to body, getBoundingClientRect() won't work
-    document.body.appendChild(_mountNode);
+    document.body.appendChild(render._mountNode);
+
+    afterEach(render.unmount);
   }
 
-  return ReactDOM.render(markup, _mountNode);
+  return ReactDOM.render(markup, render._mountNode);
 }
 
 /**
@@ -23,20 +23,11 @@ export function render(markup) {
  * Use this method manually to test the componentWillUnmount() lifecycle method.
  */
 render.unmount = function() {
-  if (_mountNode) {
-    ReactDOM.unmountComponentAtNode(_mountNode);
+  if (render._mountNode) {
+    ReactDOM.unmountComponentAtNode(render._mountNode);
 
-    if (_mountNode.parentNode) {
-      _mountNode.parentNode.removeChild(_mountNode);
-    }
+    document.body.removeChild(render._mountNode);
 
-    _mountNode = null;
+    render._mountNode = null;
   }
 };
-
-// Auto-cleanup after each test
-if (typeof afterEach === 'function') {
-  afterEach(() => {
-    render.unmount();
-  });
-}

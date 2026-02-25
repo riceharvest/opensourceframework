@@ -150,3 +150,8 @@ ISC
 ---
 
 This package is part of the [OpenSource Framework](https://github.com/riceharvest/opensourceframework) monorepo.
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

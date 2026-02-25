@@ -321,3 +321,8 @@ Contributions are welcome! Please read the [contributing guide](../../CONTRIBUTI
 ## License
 
 MIT © [Open Source Framework](https://github.com/opensourceframework)
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

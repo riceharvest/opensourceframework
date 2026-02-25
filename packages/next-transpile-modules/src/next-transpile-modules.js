@@ -64,36 +64,19 @@ const createLogger = (enable) => {
  * @returns {(path: string) => boolean}
  */
 const createWebpackMatcher = (modulesToTranspile, logger = createLogger(false)) => {
-  // Normalize paths to use forward slashes for internal matching
-  const normalize = (p) => p.replace(/\\/g, '/');
-
-  const normalizedModules = modulesToTranspile.map((modulePath) => {
-    const p = normalize(modulePath);
-    return {
-      path: p,
-      depth: (p.match(/node_modules/g) || []).length,
-    };
-  });
+  // create an array of tuples with each passed in module to transpile and its node_modules depth
+  // example: ['/full/path/to/node_modules/button/node_modules/icon', 2]
+  const modulePathsWithDepth = modulesToTranspile.map((modulePath) => [
+    modulePath,
+    (modulePath.match(/node_modules/g) || []).length,
+  ]);
 
   return (filePath) => {
-    // Basic path traversal protection: don't match if path contains ..
-    if (filePath.includes('..')) {
-      // In a real webpack environment, paths are usually normalized already
-      // but we should still be safe
-      const segments = filePath.split(/[\\\/]/);
-      if (segments.includes('..')) return false;
-    }
+    const nodeModulesDepth = (filePath.match(/node_modules/g) || []).length;
 
-    const normalizedFilePath = normalize(filePath);
-    const nodeModulesDepth = (normalizedFilePath.match(/node_modules/g) || []).length;
-
-    return normalizedModules.some(({ path: modulePath, depth: moduleDepth }) => {
-      const isSubPath = normalizedFilePath.startsWith(modulePath);
-      const isAtBoundary =
-        normalizedFilePath.length === modulePath.length ||
-        normalizedFilePath[modulePath.length] === '/';
-
-      const transpiled = isSubPath && isAtBoundary && nodeModulesDepth === moduleDepth;
+    return modulePathsWithDepth.some(([modulePath, moduleDepth]) => {
+      // Ensure we aren't implicitly transpiling nested dependencies by comparing depths of modules to be transpiled and the module being checked
+      const transpiled = filePath.startsWith(modulePath) && nodeModulesDepth === moduleDepth;
       if (transpiled) logger(`transpiled: ${filePath}`);
       return transpiled;
     });

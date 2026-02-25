@@ -146,7 +146,7 @@ describe('AutoSizer', () => {
 
   describe('onResize and (re)render', () => {
     it('should trigger when size changes', async done => {
-      const onResize = jest.fn();
+      const onResize = vi.fn();
       const ChildComponent = jest
         .fn()
         .mockImplementation(DefaultChildComponent);
@@ -169,7 +169,7 @@ describe('AutoSizer', () => {
     });
 
     it('should only trigger when height changes for disableWidth == true', async done => {
-      const onResize = jest.fn();
+      const onResize = vi.fn();
       const ChildComponent = jest
         .fn()
         .mockImplementation(DefaultChildComponent);
@@ -196,7 +196,7 @@ describe('AutoSizer', () => {
     });
 
     it('should only trigger when width changes for disableHeight == true', async done => {
-      const onResize = jest.fn();
+      const onResize = vi.fn();
       const ChildComponent = jest
         .fn()
         .mockImplementation(DefaultChildComponent);

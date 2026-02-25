@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-transpile-modules",
-  "version": "10.0.3",
+  "version": "10.0.2",
   "license": "MIT",
   "author": "OpenSource Framework Contributors (fork), Original: Unknown",
   "description": "Next.js plugin to transpile code from node_modules",
@@ -8,8 +8,7 @@
   "module": "dist/next-transpile-modules.mjs",
   "types": "dist/next-transpile-modules.d.ts",
   "files": [
-    "dist",
-    "llms.txt"
+    "dist"
   ],
   "scripts": {
     "build": "tsup",
@@ -20,9 +19,9 @@
     "pretest": "npm run setup",
     "quickie": "node --trace-uncaught src/__tests__/setup.js && yarn --cwd src/__tests__/__apps__/swc/app run dev",
     "test": "vitest run --passWithNoTests",
-    "test:unit": "vitest run",
+    "test:unit": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js --testPathPattern='unit.test.js' --testEnvironment=node --testPathIgnorePatterns='__apps__' --forceExit",
     "test:debug": "jest --detectOpenHandles --forceExit",
-    "test:lint": "eslint .",
+    "test:lint": "eslint . --ignore-pattern examples",
     "test:formatting": "prettier --check \"**/*.js\"",
     "test:formatting:fix": "prettier --check \"**/*.js\" --write",
     "test:prepare:npm-basic": "npm run build --prefix=src/__tests__/__apps__/npm-basic",
@@ -72,27 +71,19 @@
   },
   "devDependencies": {
     "@types/jest-environment-puppeteer": "5.0.3",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-config-semistandard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-jest": "^29.15.0",
     "fs-extra": "^11.1.1",
     "jest": "^29.6.1",
     "jest-environment-node": "^29.6.1",
     "jest-environment-puppeteer": "^9.0.0",
     "jest-puppeteer": "^9.0.0",
     "prettier": "^3.0.0",
-    "prettier-eslint": "^15.0.1",
     "puppeteer": "20.9.0",
     "rewire": "^6.0.0",
     "tsup": "^8.5.1",
-    "typescript": "^5.1.6",
-    "webpack": "^5.88.2",
-    "vitest": "^4.0.18"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18",
+    "webpack": "^5.88.2"
   },
   "contributors": [
     {

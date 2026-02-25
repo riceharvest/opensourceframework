@@ -92,7 +92,7 @@ describe('Table', () => {
     );
   }
 
-  beforeEach(() => jest.resetModules());
+  beforeEach(() => vi.resetModules());
 
   describe('children', () => {
     it('should accept Column children', () => {
@@ -605,7 +605,7 @@ describe('Table', () => {
 
   describe('headerRowRenderer', () => {
     it('should render a custom header row if one is provided', () => {
-      const headerRowRenderer = jest.fn().mockReturnValue(<div>foo bar</div>);
+      const headerRowRenderer = vi.fn().mockReturnValue(<div>foo bar</div>);
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -684,7 +684,7 @@ describe('Table', () => {
 
     it('should honor :onHeaderClick for custom header', () => {
       const columnData = {foo: 'foo', bar: 'bar'};
-      const onHeaderClick = jest.fn();
+      const onHeaderClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -733,7 +733,7 @@ describe('Table', () => {
 
   describe('onColumnClick', () => {
     it('should call :onColumnClick with the correct arguments when a column is clicked', () => {
-      const onColumnClick = jest.fn();
+      const onColumnClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -757,7 +757,7 @@ describe('Table', () => {
 
   describe('onHeaderClick', () => {
     it('should call :onHeaderClick with the correct arguments when a column header is clicked and sorting is disabled', () => {
-      const onHeaderClick = jest.fn();
+      const onHeaderClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -780,7 +780,7 @@ describe('Table', () => {
     });
 
     it('should call :onHeaderClick with the correct arguments when a column header is clicked and sorting is enabled', () => {
-      const onHeaderClick = jest.fn();
+      const onHeaderClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -805,7 +805,7 @@ describe('Table', () => {
 
   describe('onRowClick', () => {
     it('should call :onRowClick with the correct :rowIndex when a row is clicked', () => {
-      const onRowClick = jest.fn();
+      const onRowClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -823,7 +823,7 @@ describe('Table', () => {
 
   describe('onRowDoubleClick', () => {
     it('should call :onRowDoubleClick with the correct :rowIndex when a row is clicked', () => {
-      const onRowDoubleClick = jest.fn();
+      const onRowDoubleClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -844,7 +844,7 @@ describe('Table', () => {
 
   describe('onRowRightClick', () => {
     it('should call :onRowRightClick with the correct :rowIndex when a row is right-clicked', () => {
-      const onRowRightClick = jest.fn();
+      const onRowRightClick = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -865,8 +865,8 @@ describe('Table', () => {
 
   describe('onRowMouseOver/Out', () => {
     it('should call :onRowMouseOver and :onRowMouseOut with the correct :rowIndex when the mouse is moved over rows', () => {
-      let onRowMouseOver = jest.fn();
-      let onRowMouseOut = jest.fn();
+      let onRowMouseOver = vi.fn();
+      let onRowMouseOut = vi.fn();
       const rendered = findDOMNode(
         render(
           getMarkup({
@@ -1176,7 +1176,7 @@ describe('Table', () => {
 
   describe('overscanRowCount', () => {
     it('should not overscan by default', () => {
-      const mock = jest.fn();
+      const mock = vi.fn();
       mock.mockImplementation(overscanIndicesGetter);
 
       render(
@@ -1189,7 +1189,7 @@ describe('Table', () => {
     });
 
     it('should overscan the specified amount', () => {
-      const mock = jest.fn();
+      const mock = vi.fn();
       mock.mockImplementation(overscanIndicesGetter);
 
       render(
@@ -1390,7 +1390,7 @@ describe('Table', () => {
 
     it('should set aria-sort to "none" if the column is sortable but not the current sort', () => {
       const rendered = findDOMNode(
-        render(getMarkup({disableSort: true, sort: jest.fn()})),
+        render(getMarkup({disableSort: true, sort: vi.fn()})),
       );
       const headers = rendered.querySelectorAll(
         '.ReactVirtualized__Table__headerColumn',
@@ -1559,7 +1559,7 @@ describe('Table', () => {
   });
 
   it('should relay the Grid :parent param to the Column :cellRenderer', () => {
-    const cellRenderer = jest.fn().mockReturnValue(null);
+    const cellRenderer = vi.fn().mockReturnValue(null);
     findDOMNode(render(getMarkup({cellRenderer})));
     expect(cellRenderer.mock.calls[0][0].parent).not.toBeUndefined();
   });

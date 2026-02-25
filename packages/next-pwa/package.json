@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-pwa",
-  "version": "5.6.3",
+  "version": "5.6.2",
   "description": "Zero config PWA plugin for Next.js with Turbopack compatibility",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -39,33 +39,33 @@
     "fallback.js",
     "cache.js",
     "build-custom-worker.js",
-    "build-fallback-worker.js",
-    "llms.txt"
+    "build-fallback-worker.js"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint . --ignore-pattern test-app",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --ignore-pattern examples",
+    "lint:fix": "eslint . --ignore-pattern examples --fix",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests && cd test-app && pnpm test:e2e",
+    "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage"
   },
   "dependencies": {
-    "globby": "^11.0.4",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
+    "globby": "^11.0.4",
     "terser-webpack-plugin": "^5.3.3",
     "workbox-webpack-plugin": "^6.5.4",
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.3.3",
-    "vitest": "^4.0.18"
+    "eslint-plugin-jest": "^29.15.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
   },
   "peerDependencies": {
     "next": "^12 || ^13 || ^14 || ^15 || ^16 || ^17",

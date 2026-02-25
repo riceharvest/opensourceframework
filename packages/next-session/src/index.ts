@@ -4,7 +4,7 @@ import { parse } from "cookie";
 import { isDestroyed, isNew, isTouched } from "./symbol";
 import MemoryStore from "./memory-store";
 import { hash, parseTime, commitHeader } from "./utils";
-import { Options, Session, SessionRecord } from "./types";
+import { Options, Session, SessionRecord, SessionData, SessionStore } from "./types";
 
 export default function nextSession<T extends SessionRecord = SessionRecord>(
   options: Options = {}
@@ -33,26 +33,29 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
       id: { value: sessionId, enumerable: true, writable: true },
       touch: {
         value: function touch() {
-          this.cookie.expires = new Date(now + (this.cookie.maxAge || 0) * 1000);
-          this[isTouched] = true;
+          if ((this as any).cookie.maxAge) {
+            (this as any).cookie.expires = new Date(now + (this as any).cookie.maxAge * 1000);
+          }
+          (this as any)[isTouched] = true;
         },
         enumerable: false,
       },
       destroy: {
         value: function destroy() {
-          this[isDestroyed] = true;
-          delete (req as unknown as { session: TypedSession }).session;
-          this.cookie.maxAge = -1;
-          this.cookie.expires = new Date(0);
-          commitHeader(res, name, this, encode);
-          return store.destroy(this.id);
+          (this as any)[isDestroyed] = true;
+          // @ts-ignore
+          delete req.session;
+          (this as any).cookie.maxAge = -1;
+          (this as any).cookie.expires = new Date(0);
+          commitHeader(res, name, this as any, encode);
+          return store.destroy((this as any).id);
         },
         enumerable: false,
       },
       commit: {
         value: async function commit() {
-          await commitHeader(res, name, this, encode);
-          await store.set(this.id, this);
+          await commitHeader(res, name, this as any, encode);
+          await store.set((this as any).id, this as any);
         },
         enumerable: false,
       },
@@ -63,7 +66,8 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     req: IncomingMessage,
     res: ServerResponse
   ): Promise<TypedSession> {
-    if ((req as unknown as { session: TypedSession }).session) return (req as unknown as { session: TypedSession }).session;
+    // @ts-ignore
+    if (req.session) return req.session;
 
     const _now = Date.now();
 
@@ -77,17 +81,17 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     if (_session) {
       session = _session as TypedSession;
       // Some store return cookie.expires as string, convert it to Date
-      if (typeof (session.cookie as unknown as { expires: unknown }).expires === "string") {
-        (session.cookie as unknown as { expires: unknown }).expires = new Date((session.cookie as unknown as { expires: unknown }).expires);
+      if (typeof (session.cookie as any).expires === "string") {
+        (session.cookie as any).expires = new Date((session.cookie as any).expires);
       }
 
       // Add session methods
       decorateSession(req, res, session, sessionId as string, _now);
 
       // Extends the expiry of the session if options.touchAfter is sastified
-      if (touchAfter >= 0 && session.cookie.expires && session.cookie.maxAge) {
+      if (touchAfter >= 0 && (session.cookie as any).expires && (session.cookie as any).maxAge) {
         const lastTouchedTime =
-          session.cookie.expires.getTime() - session.cookie.maxAge * 1000;
+          (session.cookie as any).expires.getTime() - (session.cookie as any).maxAge * 1000;
         if (_now - lastTouchedTime >= touchAfter * 1000) session.touch();
       }
     } else {
@@ -108,7 +112,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
             : undefined,
         },
       } as TypedSession;
-      (session as unknown as { [isNew]: boolean })[isNew] = true;
+      (session as any)[isNew] = true;
       decorateSession(req, res, session, newSessionId, _now);
     }
 
@@ -116,15 +120,19 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
 
     if (autoCommit) {
       const _writeHead = res.writeHead;
-      res.writeHead = function resWriteHeadProxy(...args: unknown[]) {
-        if (!res.headersSent && (session[isTouched] || (session[isNew] && hash(session) !== prevHash))) {
-          commitHeader(res, name, session, encode);
+      res.writeHead = function resWriteHeadProxy(
+        this: ServerResponse,
+        statusCode: number,
+        ...args: any[]
+      ) {
+        if (!this.headersSent && (session[isTouched] || (session[isNew] && hash(session) !== prevHash))) {
+          commitHeader(this, name, session, encode);
         }
-        return _writeHead.apply(this, args as unknown[]);
-      };
+        return _writeHead.apply(this, [statusCode, ...args] as any);
+      } as any;
       const _end = res.end;
-      res.end = function resEndProxy(...args: unknown[]) {
-        const done = () => _end.apply(this, args as unknown[]);
+      res.end = function resEndProxy(this: ServerResponse, ...args: any[]) {
+        const done = () => _end.apply(this, args as any);
         if (session[isDestroyed]) {
           return done();
         } else if (hash(session) !== prevHash) {
@@ -134,12 +142,15 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
         } else {
           return done();
         }
-        return this as unknown as ServerResponse;
-      };
+        return this;
+      } as any;
     }
 
-    (req as unknown as { session: TypedSession }).session = session;
+    // @ts-ignore
+    req.session = session;
 
     return session;
   };
 }
+
+export type { Options, SessionData, SessionStore, Session };

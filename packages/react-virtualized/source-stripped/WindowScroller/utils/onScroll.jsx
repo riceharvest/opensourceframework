@@ -47,20 +47,9 @@ function enablePointerEventsAfterDelay() {
   );
 }
 
-function isWindow(obj) {
-  if (!obj) return false;
-  return (
-    obj === window ||
-    obj.constructor.name === 'Window' ||
-    typeof obj.scrollTo === 'function'
-  );
-}
-
 function onScrollWindow(event       ) {
-  const currentTargetIsWindow = isWindow(event.currentTarget);
-
   if (
-    currentTargetIsWindow &&
+    event.currentTarget === window &&
     originalBodyPointerEvents == null &&
     document.body
   ) {
@@ -70,13 +59,7 @@ function onScrollWindow(event       ) {
   }
   enablePointerEventsAfterDelay();
   mountedInstances.forEach(instance => {
-    const scrollElement = instance.props.scrollElement;
-    const isInstanceScrollElementWindow = isWindow(scrollElement);
-
-    if (
-      scrollElement === event.currentTarget ||
-      (currentTargetIsWindow && isInstanceScrollElementWindow)
-    ) {
+    if (instance.props.scrollElement === event.currentTarget) {
       instance.__handleWindowScrollEvent();
     }
   });

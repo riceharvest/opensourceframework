@@ -10,11 +10,11 @@ function mockGetBoundingClientRectForHeader({
 }) {
   // Mock the WindowScroller element and window separately
   // The only way to mock the former (before its created) is globally
-  Element.prototype.getBoundingClientRect = jest.fn(() => ({
+  Element.prototype.getBoundingClientRect = vi.fn(() => ({
     top: height,
     left: width,
   }));
-  document.documentElement.getBoundingClientRect = jest.fn(() => ({
+  document.documentElement.getBoundingClientRect = vi.fn(() => ({
     top: documentOffset,
     left: documentOffset,
   }));
@@ -92,7 +92,7 @@ describe('WindowScroller', () => {
       top: 300,
       left: 350,
     });
-    const renderFn = jest.fn();
+    const renderFn = vi.fn();
     const component = render(getMarkup({scrollElement, renderFn}));
     renderFn.mock.calls[0][0].registerChild(child);
     expect(component._positionFromTop).toEqual(300 + 100 - 200);
@@ -100,8 +100,8 @@ describe('WindowScroller', () => {
   });
 
   it('should warn on passing non-element or not null', () => {
-    const warnFn = jest.spyOn(console, 'warn');
-    const renderFn = jest.fn();
+    const warnFn = vi.spyOn(console, 'warn');
+    const renderFn = vi.fn();
 
     render(getMarkup({renderFn}));
 
@@ -132,7 +132,7 @@ describe('WindowScroller', () => {
   });
 
   it('inherits the window height and passes it to child component', () => {
-    const renderFn = jest.fn();
+    const renderFn = vi.fn();
     const component = render(getMarkup({renderFn}));
 
     expect(component.state.height).toEqual(window.innerHeight);
@@ -166,7 +166,7 @@ describe('WindowScroller', () => {
 
   describe('onScroll', () => {
     it('should trigger callback when window scrolls', async () => {
-      const onScroll = jest.fn();
+      const onScroll = vi.fn();
       render(getMarkup({onScroll}));
 
       simulateWindowScroll({scrollY: 5000});
@@ -194,7 +194,7 @@ describe('WindowScroller', () => {
     });
 
     it('should update :scrollTop when window is scrolled', async () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       const component = render(getMarkup({renderFn}));
 
       // Initial load of the component should have 0 scrollTop
@@ -219,7 +219,7 @@ describe('WindowScroller', () => {
     });
 
     it('should specify :isScrolling when scrolling and reset after scrolling', async () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       render(getMarkup({renderFn}));
 
       simulateWindowScroll({scrollY: 5000});
@@ -240,7 +240,7 @@ describe('WindowScroller', () => {
     });
 
     it('should support a custom :scrollingResetTimeInterval prop', async () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       render(
         getMarkup({
           scrollingResetTimeInterval: 500,
@@ -290,7 +290,7 @@ describe('WindowScroller', () => {
 
   describe('onResize', () => {
     it('should trigger callback on init and when window resizes', () => {
-      const resizeFn = jest.fn();
+      const resizeFn = vi.fn();
       render(getMarkup({onResize: resizeFn}));
 
       simulateWindowResize({height: 1000, width: 1024});
@@ -300,7 +300,7 @@ describe('WindowScroller', () => {
     });
 
     it('should update height when window resizes', () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       const component = render(getMarkup({renderFn}));
 
       // Initial load of the component should have the same window height = 500
@@ -410,7 +410,7 @@ describe('WindowScroller', () => {
     });
 
     it('should scroll the scrollElement (when it is window) the desired amount', () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       let windowScroller;
 
       render(
@@ -428,13 +428,13 @@ describe('WindowScroller', () => {
     });
 
     it('should not scroll the scrollElement if trying to scroll to where we already are', () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
 
       render(getMarkup({renderFn}));
 
       simulateWindowScroll({scrollY: 200});
 
-      window.scrollTo = jest.fn();
+      window.scrollTo = vi.fn();
 
       renderFn.mock.calls[0][0].onChildScroll({scrollTop: 200});
 
@@ -443,7 +443,7 @@ describe('WindowScroller', () => {
 
     it('should scroll the scrollElement (when it is an element) the desired amount', () => {
       let windowScroller;
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
       const divEl = document.createElement('div');
 
       render(
@@ -462,7 +462,7 @@ describe('WindowScroller', () => {
     });
 
     it('should update own scrollTop', () => {
-      const renderFn = jest.fn();
+      const renderFn = vi.fn();
 
       render(getMarkup({renderFn}));
 
