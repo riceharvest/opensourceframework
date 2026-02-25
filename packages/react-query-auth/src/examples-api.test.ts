@@ -124,4 +124,38 @@ describe("examples/vite api helpers", () => {
     expect(rawDb).toBeTruthy();
     expect(rawDb).not.toContain("secret");
   });
+
+  test("mock db rejects invalid user payloads", async () => {
+    await expect(
+      setUser({ email: "", name: "Name", password: "secret" })
+    ).resolves.toBeNull();
+    await expect(
+      setUser({ email: "ok@example.com", name: "", password: "secret" })
+    ).resolves.toBeNull();
+    await expect(
+      setUser({ email: "ok@example.com", name: "Name", password: "" })
+    ).resolves.toBeNull();
+  });
+
+  test("mock db helpers handle missing users and invalid credentials", async () => {
+    expect(getUser(null)).toBeUndefined();
+    expect(getUser("missing@example.com")).toBeUndefined();
+
+    await expect(validatePassword(null, "secret")).resolves.toBe(false);
+    await expect(validatePassword("missing@example.com", "secret")).resolves.toBe(false);
+
+    await setUser({
+      email: "alice@example.com",
+      name: "Alice",
+      password: "password-1",
+    });
+    await expect(validatePassword("alice@example.com", "bad-password")).resolves.toBe(false);
+  });
+
+  test("storage setToken and clearToken round-trip", () => {
+    storage.setToken("roundtrip-token");
+    expect(storage.getToken()).toBe("roundtrip-token");
+    storage.clearToken();
+    expect(storage.getToken()).toBeNull();
+  });
 });
