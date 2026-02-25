@@ -41,18 +41,15 @@ import { getSecret } from '../utils/get-secret';
  * });
  */
 
-type Setup = {
-  (handler: NextApiHandler, options: SetupMiddlewareArgs): (
-    req: NextApiRequest,
-    res: NextApiResponse
-  ) => Promise<void>;
-  <P extends { [key: string]: unknown } = { [key: string]: unknown }>(
-    handler: (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>,
-    options: SetupMiddlewareArgs
-  ): (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>;
-};
-
-export const setup: Setup = function setup(
+export function setup(
+  handler: NextApiHandler,
+  options: SetupMiddlewareArgs
+): (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+export function setup<P extends { [key: string]: unknown } = { [key: string]: unknown }>(
+  handler: (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>,
+  options: SetupMiddlewareArgs
+): (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>;
+export function setup(
   handler: NextApiHandler | ((context: GetServerSidePropsContext) => Promise<unknown>),
   { secret, tokenKey, cookieOptions }: SetupMiddlewareArgs
 ): ((req: NextApiRequest, res: NextApiResponse) => Promise<void>) | ((context: GetServerSidePropsContext) => Promise<unknown>) {
@@ -106,4 +103,4 @@ export const setup: Setup = function setup(
       return (handler as (context: GetServerSidePropsContext) => Promise<unknown>)(args[0]);
     }
   };
-};
+}
