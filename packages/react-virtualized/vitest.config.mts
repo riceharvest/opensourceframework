@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    include: ['source-stripped/**/*.jest.jsx'],
+    include: ['test/**/*.test.ts'],
     setupFiles: ['./vitest.setup.ts'],
   },
   esbuild: {
