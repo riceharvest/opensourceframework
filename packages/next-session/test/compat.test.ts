@@ -28,14 +28,29 @@ describe("expressSession", () => {
   describe("expressSession.MemoryStore basic functionalities", () => {
     // @ts-ignore
     const memoryStore = new expressSession.MemoryStore();
-    it("get()", (done) => {
-      memoryStore.get("foo", done);
+    it("get()", async () => {
+      await new Promise<void>((resolve, reject) => {
+        memoryStore.get("foo", (err: unknown) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
     });
-    it("set()", (done) => {
-      memoryStore.set("foo", {}, done);
+    it("set()", async () => {
+      await new Promise<void>((resolve, reject) => {
+        memoryStore.set("foo", {}, (err: unknown) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
     });
-    it("destroy()", (done) => {
-      memoryStore.destroy("foo", done);
+    it("destroy()", async () => {
+      await new Promise<void>((resolve, reject) => {
+        memoryStore.destroy("foo", (err: unknown) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
     });
   });
 });

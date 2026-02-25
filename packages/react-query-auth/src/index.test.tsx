@@ -65,7 +65,12 @@ describe('useRegister', () => {
 			result.current.mutate(registerCredentials)
 		})
 
-		await waitFor(() => expect(config.registerFn).toHaveBeenCalledWith(registerCredentials))
+		await waitFor(() =>
+			expect(config.registerFn).toHaveBeenCalledWith(
+				registerCredentials,
+				expect.any(Object)
+			)
+		)
 		expect(result.current.data).toEqual(user)
 	})
 })
@@ -85,7 +90,12 @@ describe('useLogin', () => {
 			result.current.mutate(loginCredentials)
 		})
 
-		await waitFor(() => expect(config.loginFn).toHaveBeenCalledWith(loginCredentials))
+		await waitFor(() =>
+			expect(config.loginFn).toHaveBeenCalledWith(
+				loginCredentials,
+				expect.any(Object)
+			)
+		)
 		expect(result.current.data).toEqual(user)
 	})
 })

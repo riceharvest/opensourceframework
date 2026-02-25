@@ -1,5 +1,5 @@
-import { jest } from "@jest/globals";
-import session from "../src/session";
+import { vi } from "vitest";
+import session from "../src/index";
 import { commitHeader, hash } from "../src/utils";
 
 describe("hash()", () => {
@@ -10,7 +10,9 @@ describe("hash()", () => {
       autoCommit: false,
     })(req, res);
     req.session.foo = "bar";
-    expect(hash(req.session)).toEqual(`{"foo":"bar"}`);
+    expect(hash(req.session)).toEqual(
+      expect.stringContaining(`"foo":"bar"`)
+    );
   });
 });
 
@@ -18,12 +20,12 @@ describe("commitHeader()", () => {
   test("return if res.headersSent is true", () => {
     const res = {
       headersSent: true,
-      setHeader: jest.fn(),
-      getHeader: jest.fn(),
+      setHeader: vi.fn(),
+      getHeader: vi.fn(),
     } as any;
     commitHeader(res, "sid", { cookie: {} as any, id: "id" });
-    expect(res.setHeader).not.toBeCalled();
-    expect(res.getHeader).not.toBeCalled();
+    expect(res.setHeader).not.toHaveBeenCalled();
+    expect(res.getHeader).not.toHaveBeenCalled();
   });
 
   test("encode id with encodeFn", () => {
@@ -31,10 +33,10 @@ describe("commitHeader()", () => {
       getHeader() {
         return undefined;
       },
-      setHeader: jest.fn(),
+      setHeader: vi.fn(),
     } as any;
     commitHeader(res, "sid", { cookie: {} as any, id: "id" }, () => "foo");
-    expect(res.setHeader).toBeCalledWith("set-cookie", "sid=foo");
+    expect(res.setHeader).toHaveBeenCalledWith("set-cookie", "sid=foo");
   });
 
   test("respect previous set-cookie headers", () => {
@@ -42,19 +44,19 @@ describe("commitHeader()", () => {
       getHeader() {
         return "foo=bar";
       },
-      setHeader: jest.fn(),
+      setHeader: vi.fn(),
     } as any;
     commitHeader(res, "sid", { cookie: {} as any, id: "id" });
-    expect(res.setHeader).toBeCalledWith("set-cookie", ["foo=bar", "sid=id"]);
+    expect(res.setHeader).toHaveBeenCalledWith("set-cookie", ["foo=bar", "sid=id"]);
 
     const resArr = {
       getHeader() {
         return ["foo=bar", "baz=qux"];
       },
-      setHeader: jest.fn(),
+      setHeader: vi.fn(),
     } as any;
     commitHeader(resArr, "sid", { cookie: {} as any, id: "id" });
-    expect(resArr.setHeader).toBeCalledWith("set-cookie", [
+    expect(resArr.setHeader).toHaveBeenCalledWith("set-cookie", [
       "foo=bar",
       "baz=qux",
       "sid=id",

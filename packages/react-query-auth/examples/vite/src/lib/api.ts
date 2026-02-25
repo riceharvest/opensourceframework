@@ -11,38 +11,56 @@ export interface User {
 	name?: string
 }
 
-export async function handleApiResponse(response: Response) {
-	const data = await response.json()
+const GENERIC_API_ERROR_MESSAGE = "Request failed. Please try again."
 
-	if (response.ok) {
-		return data
+async function parseJsonIfAvailable(response: Response): Promise<unknown> {
+	const contentType = response.headers.get("content-type") ?? ""
+	if (!contentType.toLowerCase().includes("application/json")) {
+		return null
 	}
 
-	return Promise.reject(data)
+	try {
+		return await response.json()
+	} catch {
+		return null
+	}
+}
+
+export async function handleApiResponse<T>(response: Response): Promise<T> {
+	const data = await parseJsonIfAvailable(response)
+
+	if (response.ok) {
+		return (data ?? {}) as T
+	}
+
+	throw new Error(GENERIC_API_ERROR_MESSAGE)
 }
 
 export function getUserProfile(): Promise<{ user: User | undefined }> {
+	const token = storage.getToken()
+	const headers = token ? { Authorization: token } : undefined
+
 	return fetch("/auth/me", {
-		headers: {
-			Authorization: storage.getToken(),
-		},
-	}).then(handleApiResponse)
+		headers,
+	}).then((response) => handleApiResponse<{ user: User | undefined }>(response))
 }
 
 export function loginWithEmailAndPassword(data: unknown): Promise<AuthResponse> {
 	return fetch("/auth/login", {
 		method: "POST",
 		body: JSON.stringify(data),
-	}).then(handleApiResponse)
+	}).then((response) => handleApiResponse<AuthResponse>(response))
 }
 
 export function registerWithEmailAndPassword(data: unknown): Promise<AuthResponse> {
 	return fetch("/auth/register", {
 		method: "POST",
 		body: JSON.stringify(data),
-	}).then(handleApiResponse)
+	}).then((response) => handleApiResponse<AuthResponse>(response))
 }
 
 export function logout(): Promise<{ message: string }> {
-	return fetch("/auth/logout", { method: "POST" }).then(handleApiResponse)
+	return fetch("/auth/logout", { method: "POST" }).then((response) =>
+		handleApiResponse<{ message: string }>(response)
+	)
 }

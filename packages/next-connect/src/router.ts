@@ -76,13 +76,54 @@ export class Router<H extends FunctionLike> {
     fns: Nextable<H>[],
     ...args: Parameters<H>
   ): Promise<unknown> {
-    let i = 0;
-    const next: any = () => {
-      const fn = fns[++i];
-      if (fn) return (fn as any)(...args, next);
+    let index = -1;
+    const dispatch = async (position: number): Promise<unknown> => {
+      if (position <= index) {
+        throw new Error("next() called multiple times");
+      }
+      index = position;
+
+      const fn = fns[position];
+      if (!fn) {
+        throw new Error("next() called with no middleware remaining");
+      }
+      let nextResult: Promise<unknown> | undefined;
+      const next = () => {
+        if (nextResult) {
+          throw new Error("next() called multiple times");
+        }
+        nextResult = dispatch(position + 1);
+        return nextResult;
+      };
+
+      const result = fn(...args, next);
+      const isPromiseLike =
+        result !== null &&
+        result !== undefined &&
+        typeof (result as PromiseLike<unknown>).then === "function";
+
+      if (!isPromiseLike) {
+        if (result === undefined && nextResult) {
+          return nextResult;
+        }
+        if (nextResult) {
+          await nextResult;
+        }
+        return result;
+      }
+
+      const resolved = await result;
+      if (nextResult && result !== nextResult && resolved === undefined) {
+        return nextResult;
+      }
+      return resolved;
     };
-    const first = fns[i];
-    return first ? (first as any)(...args, next) : Promise.resolve();
+
+    if (fns.length === 0) {
+      return Promise.resolve();
+    }
+
+    return dispatch(0);
   }
 
   find(method: HttpMethod, pathname: string): FindResult<H> {
