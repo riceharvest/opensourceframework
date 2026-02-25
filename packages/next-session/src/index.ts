@@ -88,7 +88,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
       // Add session methods
       decorateSession(req, res, session, sessionId as string, _now);
 
-      // Extends the expiry of the session if options.touchAfter is sastified
+      // Extends the expiry of the session if options.touchAfter is satisfied
       if (touchAfter >= 0 && (session.cookie as any).expires && (session.cookie as any).maxAge) {
         const lastTouchedTime =
           (session.cookie as any).expires.getTime() - (session.cookie as any).maxAge * 1000;

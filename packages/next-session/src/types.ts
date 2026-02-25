@@ -43,7 +43,7 @@ export interface Options {
   genid?: () => string;
   encode?: (rawSid: string) => string;
   decode?: (encryptedSid: string) => string | null;
-  touchAfter?: number;
+  touchAfter?: number | string;
   cookie?: Partial<
     Pick<
       Cookie,
