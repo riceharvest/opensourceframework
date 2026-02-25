@@ -33,6 +33,10 @@ export default tseslint.config(
         ...globals.es2021,
       },
     },
+    rules: {
+      "jest/no-try-expect": "off",
+      "jest/no-conditional-expect": "off",
+    },
   },
   {
     files: [
@@ -83,8 +87,6 @@ export default tseslint.config(
       "no-setter-return": "warn",
       "no-irregular-whitespace": "warn",
       camelcase: "warn",
-      "jest/no-try-expect": "off",
-      "jest/no-conditional-expect": "off",
       "@typescript-eslint/triple-slash-reference": "off",
       "@typescript-eslint/prefer-as-const": "off",
     },

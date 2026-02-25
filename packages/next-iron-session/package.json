@@ -43,7 +43,7 @@
     "lint": "eslint . --ignore-pattern examples",
     "prepare": "pnpm build",
     "start": "turbo start --filter=next-example",
-    "test": "vitest run && pnpm build",
+    "test": "tsx --test src/index.test.ts && pnpm build",
     "test:watch": "vitest"
   },
   "prettier": {
@@ -70,7 +70,7 @@
     "tsx": "4.19.3",
     "turbo": "^2.0.5",
     "typescript": "5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^2.1.9"
   },
   "packageManager": "pnpm@9.6.0",
   "engines": {

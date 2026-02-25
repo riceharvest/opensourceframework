@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-images",
-  "version": "0.0.0",
+  "version": "1.9.1",
   "description": "Image optimization and handling for Next.js applications",
   "keywords": [
     "next.js",
@@ -22,13 +22,22 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./global.d.ts": "./src/global.d.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "global.d.ts": [
+        "./src/global.d.ts"
+      ]
+    }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "src/global.d.ts",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
