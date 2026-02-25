@@ -37,6 +37,7 @@ export function commitHeader(
   const cookieStr = c.serialize(name, encodeFn ? encodeFn(id) : id, {
     path: cookie.path,
     httpOnly: cookie.httpOnly,
+    maxAge: cookie.maxAge,
     expires: cookie.expires,
     domain: cookie.domain,
     sameSite: cookie.sameSite,

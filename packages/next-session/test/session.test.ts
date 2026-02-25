@@ -151,7 +151,7 @@ describe("session()", () => {
     );
     expect(res.headers).toHaveProperty("set-cookie");
     expect(res.headers["set-cookie"]).toBe(
-      `sid=${id}; Path=/; Expires=${expires.toUTCString()}; HttpOnly`
+      `sid=${id}; Max-Age=10; Path=/; Expires=${expires.toUTCString()}; HttpOnly`
     );
     expect(store.set).toHaveBeenCalledWith(id, {
       foo: "bar",

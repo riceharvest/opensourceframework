@@ -1,13 +1,20 @@
-import { describe, it, expect } from 'vitest';
-import { placeholder } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import withImages, {
+  DEFAULT_FILE_EXTENSIONS,
+  DEFAULT_INLINE_IMAGE_LIMIT,
+  DEFAULT_NAME,
+  withImages as withImagesNamed,
+} from '../src/index';
 
 describe('@opensourceframework/next-images', () => {
-  it('should export placeholder', () => {
-    expect(placeholder).toBe(true);
+  it('exports the plugin as default and named export', () => {
+    expect(typeof withImages).toBe('function');
+    expect(withImagesNamed).toBe(withImages);
   });
 
-  // TODO: Add actual tests when implementing the package
-  it.todo('should handle image imports');
-  it.todo('should support various image formats');
-  it.todo('should work with Next.js Image component');
+  it('exports default constants', () => {
+    expect(DEFAULT_INLINE_IMAGE_LIMIT).toBe(8192);
+    expect(DEFAULT_NAME).toBe('[name]-[hash].[ext]');
+    expect(DEFAULT_FILE_EXTENSIONS).toContain('png');
+  });
 });

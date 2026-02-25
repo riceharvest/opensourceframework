@@ -4,7 +4,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['src/**/*.test.ts', 'test/**/*.test.ts'],
+    include: [
+      'src/**/*.test.ts',
+      'test/**/*.test.ts',
+      'src/__tests__/unit.test.js',
+      'src/__tests__/helpers.test.js',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -13,6 +18,7 @@ export default defineConfig({
         'dist/',
         '**/*.d.ts',
         '**/*.test.ts',
+        '**/*.test.js',
         '**/*.config.ts',
       ],
     },

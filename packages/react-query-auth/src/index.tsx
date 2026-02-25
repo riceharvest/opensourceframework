@@ -37,7 +37,7 @@ export function configureAuth<User, Error, LoginCredentials, RegisterCredentials
 	const useLogin = (options?: Omit<UseMutationOptions<User, Error, LoginCredentials>, 'mutationFn'>) => {
 		const queryClient = useQueryClient()
 
-		const setUser = React.useCallback((data: User) => queryClient.setQueryData(userKey, data), [queryClient])
+		const setUser = React.useCallback((userData: User) => queryClient.setQueryData(userKey, userData), [queryClient])
 
 		return useMutation({
 			mutationFn: loginFn,
@@ -52,7 +52,7 @@ export function configureAuth<User, Error, LoginCredentials, RegisterCredentials
 	const useRegister = (options?: Omit<UseMutationOptions<User, Error, RegisterCredentials>, 'mutationFn'>) => {
 		const queryClient = useQueryClient()
 
-		const setUser = React.useCallback((data: User) => queryClient.setQueryData(userKey, data), [queryClient])
+		const setUser = React.useCallback((userData: User) => queryClient.setQueryData(userKey, userData), [queryClient])
 
 		return useMutation({
 			mutationFn: registerFn,
@@ -83,7 +83,7 @@ export function configureAuth<User, Error, LoginCredentials, RegisterCredentials
 		children,
 		renderLoading,
 		renderUnauthenticated,
-		renderError = (error: Error) => <>{JSON.stringify(error)}</>,
+		renderError = () => <>Something went wrong. Please try again.</>,
 	}: {
 		children: React.ReactNode
 		renderLoading: () => JSX.Element

@@ -64,19 +64,33 @@ const createLogger = (enable) => {
  * @returns {(path: string) => boolean}
  */
 const createWebpackMatcher = (modulesToTranspile, logger = createLogger(false)) => {
-  // create an array of tuples with each passed in module to transpile and its node_modules depth
-  // example: ['/full/path/to/node_modules/button/node_modules/icon', 2]
-  const modulePathsWithDepth = modulesToTranspile.map((modulePath) => [
-    modulePath,
-    (modulePath.match(/node_modules/g) || []).length,
-  ]);
+  // Normalize paths to use forward slashes for internal matching
+  const normalize = (p) => p.replace(/\\/g, '/');
+
+  const normalizedModules = modulesToTranspile.map((modulePath) => {
+    const p = normalize(modulePath);
+    return {
+      path: p,
+      depth: (p.match(/node_modules/g) || []).length,
+    };
+  });
 
   return (filePath) => {
-    const nodeModulesDepth = (filePath.match(/node_modules/g) || []).length;
+    // Basic path traversal protection.
+    if (filePath.includes('..')) {
+      const segments = filePath.split(/[\\/]/);
+      if (segments.includes('..')) return false;
+    }
 
-    return modulePathsWithDepth.some(([modulePath, moduleDepth]) => {
-      // Ensure we aren't implicitly transpiling nested dependencies by comparing depths of modules to be transpiled and the module being checked
-      const transpiled = filePath.startsWith(modulePath) && nodeModulesDepth === moduleDepth;
+    const normalizedFilePath = normalize(filePath);
+    const nodeModulesDepth = (normalizedFilePath.match(/node_modules/g) || []).length;
+
+    return normalizedModules.some(({ path: modulePath, depth: moduleDepth }) => {
+      const isSubPath = normalizedFilePath.startsWith(modulePath);
+      const isAtBoundary =
+        normalizedFilePath.length === modulePath.length ||
+        normalizedFilePath[modulePath.length] === '/';
+      const transpiled = isSubPath && isAtBoundary && nodeModulesDepth === moduleDepth;
       if (transpiled) logger(`transpiled: ${filePath}`);
       return transpiled;
     });
@@ -170,7 +184,9 @@ const withTmInitializer = (modules = [], options = {}) => {
                   const resolve = options.getResolve();
                   const resolved = await resolve(options.context, options.request);
                   if (modulesPaths.some((mod) => resolved.startsWith(mod))) return;
-                } catch (e) {}
+                } catch {
+                  // Keep original external resolution behavior when lookup fails.
+                }
               }
               return externalResult;
             };

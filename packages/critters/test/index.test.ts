@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
-import { placeholder } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import Critters from '../src/index';
 
 describe('@opensourceframework/critters', () => {
-  it('should export placeholder', () => {
-    expect(placeholder).toBe(true);
+  it('exports a Critters constructor', () => {
+    expect(typeof Critters).toBe('function');
   });
 
-  // TODO: Add actual tests when implementing the package
-  it.todo('should extract critical CSS');
-  it.todo('should inline critical styles');
-  it.todo('should work with Next.js build process');
+  it('creates an instance with process method', () => {
+    const critters = new Critters();
+    expect(typeof critters.process).toBe('function');
+  });
 });

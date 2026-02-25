@@ -169,6 +169,13 @@ describe('createWebpackMatcher', () => {
       expect(matcher('/Users/Test/app/node_modules/@scoped/scoped-module/node_modules/nested/some-file.js')).toBe(false);
     });
 
+    test('should not match similarly-prefixed module names', () => {
+      const matcher = createWebpackMatcher(['/Users/Test/app/node_modules/foo']);
+
+      expect(matcher('/Users/Test/app/node_modules/foo/some-file.js')).toBe(true);
+      expect(matcher('/Users/Test/app/node_modules/foobar/some-file.js')).toBe(false);
+    });
+
     test('should return false for completely different paths', () => {
       const matcher = createWebpackMatcher(testPaths);
 
@@ -199,6 +206,13 @@ describe('createWebpackMatcher', () => {
 
       expect(matcher('C:\\app\\node_modules\\test\\node_modules\\nested\\some-file.js')).toBe(false);
       expect(matcher('C:\\app\\node_modules\\@scoped\\scoped-module\\node_modules\\nested\\some-file.js')).toBe(false);
+    });
+
+    test('should not match similarly-prefixed module names', () => {
+      const matcher = createWebpackMatcher(['C:\\app\\node_modules\\foo']);
+
+      expect(matcher('C:\\app\\node_modules\\foo\\some-file.js')).toBe(true);
+      expect(matcher('C:\\app\\node_modules\\foobar\\some-file.js')).toBe(false);
     });
   });
 

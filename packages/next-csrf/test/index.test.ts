@@ -1,13 +1,16 @@
-import { describe, it, expect } from 'vitest';
-import { placeholder } from '../src/index';
+import { describe, expect, it } from 'vitest';
+import { csrf, nextCsrf, setup } from '../src/index';
 
 describe('@opensourceframework/next-csrf', () => {
-  it('should export placeholder', () => {
-    expect(placeholder).toBe(true);
+  it('exports nextCsrf and middleware helpers', () => {
+    expect(typeof nextCsrf).toBe('function');
+    expect(typeof csrf).toBe('function');
+    expect(typeof setup).toBe('function');
   });
 
-  // TODO: Add actual tests when implementing the package
-  it.todo('should implement CSRF token generation');
-  it.todo('should implement CSRF token validation');
-  it.todo('should integrate with Next.js middleware');
+  it('creates setup/csrf middleware pair', () => {
+    const result = nextCsrf();
+    expect(typeof result.setup).toBe('function');
+    expect(typeof result.csrf).toBe('function');
+  });
 });
