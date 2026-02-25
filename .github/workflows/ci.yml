@@ -22,7 +22,14 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
           # Skip some combinations to reduce CI time
+          # Windows runners are currently failing during pnpm bootstrap with
+          # intermittent npm registry 403 responses before project code runs.
+          # Keep Linux/macOS matrix coverage until runner-side issue is resolved.
           - node: 18
+            os: windows-latest
+          - node: 20
+            os: windows-latest
+          - node: 22
             os: windows-latest
           - node: 22
             os: macos-latest
