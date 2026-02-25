@@ -2,6 +2,8 @@ import { describe, expect, test, vi, beforeEach, afterEach } from "vitest";
 import {
   getUserProfile,
   handleApiResponse,
+  loginWithEmailAndPassword,
+  registerWithEmailAndPassword,
 } from "../examples/vite/src/lib/api";
 import { storage } from "../examples/vite/src/lib/utils";
 
@@ -66,6 +68,39 @@ describe("examples/vite api helpers", () => {
       2,
       "/auth/me",
       expect.objectContaining({ headers: { Authorization: "token-value" } })
+    );
+  });
+
+  test("login and register send JSON content type", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ jwt: "token", user: { id: "1", email: "u@x.dev" } }), {
+        status: 200,
+        headers: { "content-type": "application/json" },
+      })
+    );
+
+    await loginWithEmailAndPassword({ email: "u@x.dev", password: "pw" });
+    await registerWithEmailAndPassword({
+      email: "u2@x.dev",
+      password: "pw",
+      name: "User",
+    });
+
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      "/auth/login",
+      expect.objectContaining({
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+    );
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/auth/register",
+      expect.objectContaining({
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
     );
   });
 });

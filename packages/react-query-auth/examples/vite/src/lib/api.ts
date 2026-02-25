@@ -48,6 +48,7 @@ export function getUserProfile(): Promise<{ user: User | undefined }> {
 export function loginWithEmailAndPassword(data: unknown): Promise<AuthResponse> {
 	return fetch("/auth/login", {
 		method: "POST",
+		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data),
 	}).then((response) => handleApiResponse<AuthResponse>(response))
 }
@@ -55,6 +56,7 @@ export function loginWithEmailAndPassword(data: unknown): Promise<AuthResponse> 
 export function registerWithEmailAndPassword(data: unknown): Promise<AuthResponse> {
 	return fetch("/auth/register", {
 		method: "POST",
+		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(data),
 	}).then((response) => handleApiResponse<AuthResponse>(response))
 }

@@ -31,6 +31,17 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
         ...globals.es2021,
+      },
+    },
+  },
+  {
+    files: [
+      "**/*.{test,spec}.{js,mjs,cjs,ts,tsx,jsx}",
+      "**/test/**/*.{js,mjs,cjs,ts,tsx,jsx}",
+      "**/__tests__/**/*.{js,mjs,cjs,ts,tsx,jsx}",
+    ],
+    languageOptions: {
+      globals: {
         vi: "readonly",
         spyOn: "readonly",
       },
