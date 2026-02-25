@@ -20,7 +20,7 @@ import type { Middleware, NextCSRF, NextCsrfOptions } from './types';
  * Default cookie options for CSRF cookies
  */
 const cookieDefaultOptions: SerializeOptions = {
-  httpOnly: true,
+  httpOnly: false,
   path: '/',
   sameSite: 'lax',
   secure: process.env.NODE_ENV === 'production',

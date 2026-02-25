@@ -34,12 +34,11 @@ export interface NextCsrfOptions {
   /** 
    * Cookie serialization options.
    * 
-   * Default: { httpOnly: true, path: "/", sameSite: "lax", secure: process.env.NODE_ENV === "production" }
+   * Default: { httpOnly: false, path: "/", sameSite: "lax", secure: process.env.NODE_ENV === "production" }
    * 
-   * Note on httpOnly: By default, the token cookie is httpOnly, which means JavaScript
-   * cannot read it. This is secure for the Double Submit Cookie pattern where cookies
-   * are automatically sent with requests. If you need JavaScript to read the token
-   * (e.g., to send in a custom header for AJAX requests), set httpOnly: false.
+   * Note on httpOnly: The token cookie is client-readable by default so frontend code
+   * can submit it in a request header/body/query for double-submit validation.
+   * The internal csrfSecret cookie is always set as httpOnly.
    * 
    * Important: The sameSite: 'lax' setting provides additional CSRF protection by
    * preventing cookies from being sent with cross-site POST requests.
@@ -90,10 +89,14 @@ export const CsrfErrorCodes = {
   MISSING_COOKIE_HEADER: 'ECSRFMissingCookie',
   /** CSRF token not found in cookie */
   MISSING_TOKEN: 'ECSRFMissingToken',
+  /** CSRF token not found in request header/body/query */
+  MISSING_REQUEST_TOKEN: 'ECSRFMissingRequestToken',
   /** CSRF secret not found in cookie */
   MISSING_SECRET: 'ECSRFMissingSecret',
   /** Token signature verification failed */
   INVALID_SIGNATURE: 'ECSRFInvalidSignature',
+  /** Request token does not match the cookie token */
+  TOKEN_MISMATCH: 'ECSRFMismatchedToken',
   /** Token verification against secret failed */
   VERIFICATION_FAILED: 'ECSRFVerificationFailed',
   /** Generic/unknown CSRF error */

@@ -129,7 +129,7 @@ export class Router<H extends FunctionLike> {
   find(method: HttpMethod, pathname: string): FindResult<H> {
     let middleOnly = true;
     const fns: Nextable<H>[] = [];
-    const params: Record<string, string> = {};
+    const params: Record<string, string | undefined> = {};
     const isHead = method === "HEAD";
     for (const route of this.routes) {
       if (
@@ -150,14 +150,14 @@ export class Router<H extends FunctionLike> {
           const matches = route.pattern.exec(pathname);
           if (matches === null) continue;
           if (matches.groups !== void 0)
-            for (const k in matches.groups) params[k] = matches.groups[k] as string;
+            for (const k in matches.groups) params[k] = matches.groups[k];
           matched = true;
         } else if (route.keys && route.keys.length > 0) {
           const matches = route.pattern.exec(pathname);
           if (matches === null) continue;
           for (let j = 0; j < route.keys.length; ) {
             const key = route.keys[j];
-            if (key) params[key] = matches[++j] as string;
+            if (key) params[key] = matches[++j];
             else j++;
           }
           matched = true;

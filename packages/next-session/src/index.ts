@@ -43,7 +43,6 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
       destroy: {
         value: function destroy() {
           (this as any)[isDestroyed] = true;
-          // @ts-expect-error - legacy compat typing
           delete req.session;
           (this as any).cookie.maxAge = -1;
           (this as any).cookie.expires = new Date(0);
@@ -66,8 +65,7 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
     req: IncomingMessage,
     res: ServerResponse
   ): Promise<TypedSession> {
-    // @ts-expect-error - legacy compat typing
-    if (req.session) return req.session;
+    if (req.session) return req.session as TypedSession;
 
     const _now = Date.now();
 
@@ -146,7 +144,6 @@ export default function nextSession<T extends SessionRecord = SessionRecord>(
       } as any;
     }
 
-    // @ts-expect-error - legacy compat typing
     req.session = session;
 
     return session;

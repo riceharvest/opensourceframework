@@ -90,10 +90,19 @@ export function setup(
       token = unsignedToken;
     }
 
-    // Set both cookies: csrfSecret and token
+    const secretCookieOptions = {
+      ...cookieOptions,
+      httpOnly: true,
+    };
+    const tokenCookieOptions = {
+      ...cookieOptions,
+      httpOnly: cookieOptions.httpOnly ?? false,
+    };
+
+    // Set both cookies: csrfSecret (always httpOnly) and token (client-readable by default)
     res.setHeader('Set-Cookie', [
-      serialize('csrfSecret', csrfSecret, cookieOptions),
-      serialize(tokenKey, token, cookieOptions),
+      serialize('csrfSecret', csrfSecret, secretCookieOptions),
+      serialize(tokenKey, token, tokenCookieOptions),
     ]);
 
     // Call the original handler with the appropriate arguments

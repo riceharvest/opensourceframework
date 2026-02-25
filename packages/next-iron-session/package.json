@@ -44,6 +44,7 @@
     "prepare": "pnpm build",
     "start": "turbo start --filter=next-example",
     "test": "tsx --test src/index.test.ts && pnpm build",
+    "test:coverage": "c8 --reporter=text --reporter=lcov tsx --test src/index.test.ts",
     "test:watch": "vitest"
   },
   "prettier": {

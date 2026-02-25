@@ -36,6 +36,7 @@
     "dev": "cd app && npm run dev",
     "watch": "tsup --config tsup.config.mjs --watch",
     "test": "vitest run --config vitest.config.js --passWithNoTests",
+    "test:coverage": "pnpm test",
     "test:e2e": "playwright test --config playwright.config.js",
     "test:ci": "npm run lint && npm run test:types && npm run test",
     "test:types": "dtslint types --onlyTestTsNext",

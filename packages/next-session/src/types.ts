@@ -52,3 +52,9 @@ export interface Options {
   >;
   autoCommit?: boolean;
 }
+
+declare module "http" {
+  interface IncomingMessage {
+    session?: Session;
+  }
+}
