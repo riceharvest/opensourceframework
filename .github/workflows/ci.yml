@@ -41,6 +41,17 @@ jobs:
         with:
           version: 9
       
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
@@ -76,6 +87,17 @@ jobs:
         with:
           version: 9
       
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -99,6 +121,17 @@ jobs:
         with:
           version: 9
       
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -123,6 +156,17 @@ jobs:
         with:
           version: 9
       
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
