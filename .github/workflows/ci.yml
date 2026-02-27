@@ -11,8 +11,51 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
+  prepare-deps:
+    name: Prepare Dependencies
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure pnpm store
+        run: pnpm config set store-dir ./.pnpm-store
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --store-dir ./.pnpm-store
+
+      - name: Upload pnpm store
+        uses: actions/upload-artifact@v4
+        with:
+          name: pnpm-store-${{ matrix.os }}
+          path: ./.pnpm-store
+
   # Matrix testing across Node versions and OS
   test-matrix:
+    needs: [prepare-deps]
     name: Test (Node ${{ matrix.node }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
@@ -58,8 +101,17 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
       
+      - name: Download pnpm store
+        uses: actions/download-artifact@v4
+        with:
+          name: pnpm-store-${{ matrix.os }}
+          path: ./pnpm-store
+
+      - name: Configure pnpm store
+        run: pnpm config set store-dir ./pnpm-store
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline --store-dir ./pnpm-store
       
       - name: Test
         run: pnpm test:coverage
@@ -77,6 +129,7 @@ jobs:
           fail_ci_if_error: false
 
   lint:
+    needs: [prepare-deps]
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -103,14 +156,24 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-      
+
+      - name: Download pnpm store
+        uses: actions/download-artifact@v4
+        with:
+          name: pnpm-store-ubuntu-latest
+          path: ./pnpm-store
+
+      - name: Configure pnpm store
+        run: pnpm config set store-dir ./pnpm-store
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline --store-dir ./pnpm-store
       
       - name: Lint
         run: pnpm lint
 
   typecheck:
+    needs: [prepare-deps]
     name: Type Check
     runs-on: ubuntu-latest
     steps:
@@ -137,9 +200,18 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-      
+
+      - name: Download pnpm store
+        uses: actions/download-artifact@v4
+        with:
+          name: pnpm-store-ubuntu-latest
+          path: ./pnpm-store
+
+      - name: Configure pnpm store
+        run: pnpm config set store-dir ./pnpm-store
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline --store-dir ./pnpm-store
       
       - name: Type Check
         run: pnpm typecheck
@@ -173,8 +245,17 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
       
+      - name: Download pnpm store
+        uses: actions/download-artifact@v4
+        with:
+          name: pnpm-store-ubuntu-latest
+          path: ./pnpm-store
+
+      - name: Configure pnpm store
+        run: pnpm config set store-dir ./pnpm-store
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline --store-dir ./pnpm-store
       
       - name: Build
         run: pnpm build
@@ -187,6 +268,7 @@ jobs:
           retention-days: 7
 
   security:
+    needs: [prepare-deps]
     name: Security Audit
     runs-on: ubuntu-latest
     steps:
