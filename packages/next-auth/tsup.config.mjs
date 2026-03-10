@@ -4,6 +4,30 @@ import path from "path"
 import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const preserveClientDirectivePlugin = {
+  name: "preserve-client-directive",
+  renderChunk(code, chunkInfo) {
+    let nextCode = code.replace(/\/\/# sourceMappingURL=[^\n]+\.map/g, "")
+    const outputPath = chunkInfo.path.replace(/\\/g, "/")
+
+    if (
+      outputPath.endsWith("/client/index.js") ||
+      outputPath.endsWith("/client/index.mjs")
+    ) {
+      return {
+        code: `"use client";\n${nextCode}`,
+        map: null,
+      }
+    }
+
+    if (nextCode !== code) {
+      return {
+        code: nextCode,
+        map: null,
+      }
+    }
+  },
+}
 
 async function _buildProvidersIndex() {
   const providersDir = path.join(__dirname, "src/providers")
@@ -69,8 +93,10 @@ export default defineConfig({
   format: ["cjs", "esm"],
   dts: false,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false,
   clean: true,
+  silent: true,
+  plugins: [preserveClientDirectivePlugin],
   loader: {
     ".js": "jsx",
   },
@@ -89,7 +115,9 @@ export default defineConfig({
     "preact",
     "preact-render-to-string",
     "querystring",
+    "typeorm",
+    "mongodb",
   ],
   ignoreAnnotations: true,
-  treeshake: true,
+  treeshake: false,
 })

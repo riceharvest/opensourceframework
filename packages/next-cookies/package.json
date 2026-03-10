@@ -48,7 +48,7 @@
     "clean": "rm -rf dist coverage node_modules"
   },
   "dependencies": {
-    "universal-cookie": "^4.0.2"
+    "universal-cookie": "^7.2.2"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

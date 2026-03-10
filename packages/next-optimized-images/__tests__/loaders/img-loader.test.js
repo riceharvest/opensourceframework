@@ -5,20 +5,23 @@ const {
   requireImageminPlugin,
 } = require('../../lib/loaders/img-loader');
 const { getConfig } = require('../../lib/config');
+const path = require('path');
 
-module.exports = () => () => ({ plugin: true });
+const imageminPluginPath = path.join(__dirname, '../fixtures/imagemin-plugin.js');
 
 describe('next-optimized-images/loaders/img-loader', () => {
   it('adds the correct plugins', () => {
-    const plugins1 = getImgLoaderOptions({}, { png: __filename }, true);
-    const plugins2 = getImgLoaderOptions({}, { png: __filename }, false);
+    const plugins1 = getImgLoaderOptions({}, { png: imageminPluginPath }, true);
+    const plugins2 = getImgLoaderOptions({}, { png: imageminPluginPath }, false);
 
     expect(plugins1.plugins).toHaveLength(1);
     expect(plugins2.plugins).toHaveLength(0);
   });
 
   it('allows overwriting the resolve path', () => {
-    const plugin = requireImageminPlugin('img-loader.test.js', { overwriteImageLoaderPaths: __dirname });
+    const plugin = requireImageminPlugin('./fixtures/imagemin-plugin', {
+      overwriteImageLoaderPaths: path.join(__dirname, '..'),
+    });
 
     expect(plugin()).toEqual({ plugin: true });
   });
@@ -64,9 +67,9 @@ describe('next-optimized-images/loaders/img-loader', () => {
   it('adds rules to the webpack config', () => {
     const webpackConfig = { module: { rules: [] } };
     applyImgLoader(webpackConfig, getConfig({}), true, false, {
-      jpeg: '../../__tests__/loaders/img-loader.test.js',
+      jpeg: imageminPluginPath,
       png: false,
-      svg: '../../__tests__/loaders/img-loader.test.js',
+      svg: imageminPluginPath,
       gif: false,
     }, {
       jpeg: true,

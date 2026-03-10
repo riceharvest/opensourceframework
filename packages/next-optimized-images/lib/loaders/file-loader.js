@@ -36,6 +36,18 @@ const getFileLoaderOptions = ({
  * @returns {string}
  */
 const getFileLoaderPath = () => {
+  let resolvedPath;
+
+  try {
+    resolvedPath = require.resolve('file-loader');
+  } catch {
+    // Fall back to the vendored path lookup used by older installs.
+  }
+
+  if (resolvedPath) {
+    return resolvedPath;
+  }
+
   const absolutePath = path.resolve(__dirname, '..', '..', 'node_modules', 'file-loader', 'dist', 'cjs.js');
 
   if (fs.existsSync(absolutePath)) {

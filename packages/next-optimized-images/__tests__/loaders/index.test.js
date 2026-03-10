@@ -6,23 +6,25 @@ const {
   appendLoaders,
 } = require('../../lib/loaders');
 const { getConfig } = require('../../lib/config');
+const path = require('path');
 
-module.exports = () => () => ({ plugin: true });
+const imageminPluginPath = path.join(__dirname, '../fixtures/imagemin-plugin.js');
+const testFixturesPath = path.join(__dirname, '../fixtures');
 
 describe('next-optimized-images/loaders', () => {
   it('detects if a module is installed', () => {
     expect(isModuleInstalled('path')).toEqual(true);
     expect(isModuleInstalled('pathalksdfjladksfj')).toEqual(false);
-    expect(isModuleInstalled('img-loader.test.js')).toEqual(false);
-    expect(isModuleInstalled('img-loader.test.js', __dirname)).toEqual(true);
+    expect(isModuleInstalled('./fixtures/imagemin-plugin', path.join(__dirname, '..'))).toEqual(true);
+    expect(isModuleInstalled('./fixtures/missing-plugin', path.join(__dirname, '..'))).toEqual(false);
   });
 
   it('detects installed loaders', () => {
-    expect(detectLoaders()).toEqual({
+    expect(detectLoaders(testFixturesPath)).toEqual({
       jpeg: false,
       gif: false,
       svg: false,
-      svgSprite: 'svg-sprite-loader', // is in the devDependencies
+      svgSprite: 'svg-sprite-loader',
       webp: false,
       png: false,
       lqip: false,
@@ -72,8 +74,8 @@ describe('next-optimized-images/loaders', () => {
     const webpackConfig = { module: { rules: [] } };
 
     appendLoaders(webpackConfig, getConfig({}), {
-      jpeg: __filename,
-      webp: __filename,
+      jpeg: imageminPluginPath,
+      webp: imageminPluginPath,
     }, false, true);
 
     expect(webpackConfig.module.rules).toHaveLength(2);

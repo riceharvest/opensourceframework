@@ -5,7 +5,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 let globbyModule,
-  CleanWebpackPlugin,
+  cleanMatchingFiles,
   WorkboxPlugin,
   defaultCache,
   buildCustomWorker,
@@ -186,9 +186,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     try {
-      const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin');
       const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
-      CleanWebpackPlugin = CWP;
       WorkboxPlugin = { GenerateSW, InjectManifest };
     } catch {
       console.warn(
@@ -198,6 +196,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     try {
+      cleanMatchingFiles = require('./cleanup-assets');
       defaultCache = require('./cache');
       buildCustomWorker = require('./build-custom-worker');
       buildFallbackWorker = require('./build-fallback-worker');
@@ -287,17 +286,13 @@ self.addEventListener('fetch', (event) => {
           console.log(`> [PWA]   url: ${_sw}`);
           console.log(`> [PWA]   scope: ${_scope}`);
 
-          config.plugins.push(
-            new CleanWebpackPlugin({
-              cleanOnceBeforeBuildPatterns: [
-                path.join(_dest, 'workbox-*.js'),
-                path.join(_dest, 'worker-*.js.LICENSE.txt'),
-                path.join(_dest, 'workbox-*.js.map'),
-                path.join(_dest, sw),
-                path.join(_dest, `${sw}.map`),
-              ],
-            })
-          );
+          cleanMatchingFiles(_dest, [
+            'workbox-*.js',
+            'worker-*.js.LICENSE.txt',
+            'workbox-*.js.map',
+            sw.replace(/^.*[\\/]/, ''),
+            `${sw.replace(/^.*[\\/]/, '')}.map`,
+          ]);
 
           let manifestEntries = additionalManifestEntries;
           if (!Array.isArray(manifestEntries)) {
