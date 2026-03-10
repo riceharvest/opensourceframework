@@ -5,6 +5,12 @@
 
 > Image optimization and handling for Next.js applications
 
+> [!IMPORTANT]
+> **DEPRECATED**: This package is maintained for legacy support only. 
+> Next.js 10+ includes a built-in [Image Component](https://nextjs.org/docs/api-reference/next/image) that provides automatic image optimization, better performance, and lazy loading.
+> We recommend migrating to the native Next.js `next/image` for all new projects.
+
+
 This is a maintained fork of the original `next-images` package, maintained by the OpenSource Framework community.
 
 ## Why This Fork?
