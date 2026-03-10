@@ -63,8 +63,12 @@ export function createDocument(html) {
   // Critters container is the viewport to evaluate critical CSS
   let crittersContainer = document.querySelector('[data-critters-container]');
 
+  if (!crittersContainer && html.includes('data-critters-container')) {
+    // If it was in the source but not found by querySelector (e.g. malformed), fallback to document
+    crittersContainer = document.documentElement;
+  }
+
   if (!crittersContainer) {
-    document.documentElement.setAttribute('data-critters-container', '');
     crittersContainer = document.documentElement;
   }
 
@@ -74,10 +78,6 @@ export function createDocument(html) {
   return document;
 }
 
-/**
- * Serialize a Document to an HTML String
- * @param {HTMLDocument} document   A Document, such as one created via `createDocument()`
- */
 export function serializeDocument(document) {
   // Remove the internal data-critters-container attribute before serializing
   const htmlElement = document.documentElement;

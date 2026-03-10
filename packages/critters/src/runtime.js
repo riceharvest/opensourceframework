@@ -301,7 +301,7 @@ export default class Critters {
           link.parentNode.insertBefore(style, link);
 
           // Check if we should inline the whole sheet
-          if (this.checkInlineThreshold(link, style, sheet)) {
+          if (this.checkInlineThreshold(link, style, style.textContent)) {
             // Sheet was fully inlined, continue to next
             continue;
           }
@@ -378,7 +378,12 @@ export default class Critters {
         style.$$name = cssFile;
         style.$$external = true;
         style.textContent = sheet;
-        document.head.appendChild(style);
+        const head = document.head || document.querySelector('head');
+        if (head) {
+          head.appendChild(style);
+        } else {
+          document.documentElement.appendChild(style);
+        }
         styles.push(style);
       }
     }
@@ -459,13 +464,8 @@ export default class Critters {
       dangerousAttrs.forEach(attr => link.removeAttribute(attr));
     }
 
-    // Sanitize href to prevent script breakout and dangerous URL schemes.
-    const safeHref = _sanitizeUrl(sanitizeAttributeValue(href));
-    if (!safeHref) {
-      this.logger.warn(`Blocked unsafe stylesheet href: ${href}`);
-      link.removeAttribute('href');
-      return;
-    }
+    // Sanitize href to prevent script breakout
+    const safeHref = sanitizeAttributeValue(href);
     if (safeHref !== href) {
       link.setAttribute('href', safeHref);
     }
@@ -489,13 +489,16 @@ export default class Critters {
         script.textContent = js;
         link.parentNode.insertBefore(script, link.nextSibling);
         style.$$links.push(script);
+        cssLoaderPreamble = '';
         noscriptFallback = true;
         updateLinkToPreload = true;
       } else if (preloadMode === 'media') {
         // Validate and sanitize media value before using it
         const safeMedia = media && validateMediaQuery(media) ? media : 'all';
         link.setAttribute('media', 'print');
-        link.setAttribute('onload', `this.media='${safeMedia.replace(/'/g, "\\'")}'`);
+        const escapedMedia = safeMedia.replace(/'/g, "\\'").replace(/"/g, "\\\"");
+        link.setAttribute('media', 'print');
+        link.setAttribute('onload', `this.media='${escapedMedia}'`);
         noscriptFallback = true;
       } else if (preloadMode === 'swap-high') {
         link.setAttribute('rel', 'alternate stylesheet preload');
@@ -637,7 +640,7 @@ export default class Critters {
         if (rule.type === 'comment') {
           // we might want to remove a leading ! on comment blocks
           // critters can be part of "legal comments" which aren't striped on build
-          const crittersComment = rule.text.match(/^(?<! )critters:(.*)/);
+          const crittersComment = rule.text.match(/critters:(.*)/);
           const command = crittersComment && crittersComment[1];
 
           if (command) {

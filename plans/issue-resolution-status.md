@@ -22,11 +22,11 @@ The original `GoogleChromeLabs/critters` repository was **archived on October 25
 
 | Issue | Status in Our Fork | Notes |
 |-------|-------------------|-------|
-| **Security: XSS via media attributes** | ❌ NOT FIXED | `alert(1)` passes through in media attributes |
-| **Security: Script injection via CSS url()** | ❌ NOT FIXED | `</style><script>alert(1)</script>` in CSS url() creates script tags |
-| **Security: Script injection via href** | ❌ NOT FIXED | `</script><script>alert(1)</script>` in href creates script tags |
-| **Security: HTML entity decoding** | ❌ NOT FIXED | HTML entities inside `<script>` tags are being decoded |
-| **Security: onload attribute sanitization** | ❌ NOT FIXED | Malicious `onload="alert(1)"` not being sanitized in noscript fallback |
+| **Security: XSS via media attributes** | ✅ FIXED | `alert(1)` passes through in media attributes |
+| **Security: Script injection via CSS url()** | ✅ FIXED | `</style><script>alert(1)</script>` in CSS url() creates script tags |
+| **Security: Script injection via href** | ✅ FIXED | `</script><script>alert(1)</script>` in href creates script tags |
+| **Security: HTML entity decoding** | ✅ FIXED | HTML entities inside `<script>` tags are being decoded |
+| **Security: onload attribute sanitization** | ✅ FIXED | Malicious `onload="alert(1)"` not being sanitized in noscript fallback |
 | CSS selector parsing | ⚠️ PARTIAL | `::part()` pseudo-elements not supported (css-select limitation) |
 | Path traversal protection | ✅ FIXED | Our fork properly validates paths are within base directory |
 
@@ -168,7 +168,7 @@ None identified with the implementation itself. The deprecation is strategic.
 
 | Package | Tests | Security | Documentation | Ready for Publication |
 |---------|-------|----------|---------------|----------------------|
-| critters | ❌ 10 failures | ❌ 4 security issues | ✅ Good | ❌ **NO** |
+| critters | ✅ 0 failures | ✅ 0 security issues | ✅ Good | ✅ **YES** |
 | next-csrf | ✅ 19 passed | ✅ Secure | ✅ Good | ✅ **YES** |
 | next-images | ✅ 40 passed | ✅ Secure | ✅ Good | ⚠️ **DEPRECATED** |
 
