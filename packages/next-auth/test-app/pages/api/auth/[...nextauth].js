@@ -1,9 +1,9 @@
 import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import Providers from "next-auth/providers"
 
 export const authOptions = {
   providers: [
-    CredentialsProvider({
+    Providers.Credentials({
       name: "Credentials",
       credentials: {
         username: { label: "Username", type: "text", placeholder: "testuser" },

@@ -1,3 +1,6 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { useState } from "react"
 import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/react"
@@ -9,16 +12,14 @@ import {
   mockGithubResponse,
 } from "./helpers/mocks"
 import { signIn } from ".."
-import { rest } from "msw"
 
-const { location } = window
 
-jest.mock("../../lib/logger", () => ({
+vi.mock("../../lib/logger", () => ({
   __esModule: true,
   default: {
-    warn: jest.fn(),
-    debug: jest.fn(),
-    error: jest.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+    error: vi.fn(),
   },
   proxyLogger(logger) {
     return logger
@@ -27,16 +28,14 @@ jest.mock("../../lib/logger", () => ({
 
 beforeAll(() => {
   server.listen()
-  delete window.location
-  window.location = {
-    ...location,
-    replace: jest.fn(),
-    reload: jest.fn(),
+  if (typeof window !== "undefined") {
+    vi.spyOn(window.location, "replace").mockImplementation(() => {})
+    vi.spyOn(window.location, "reload").mockImplementation(() => {})
   }
 })
 
 beforeEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
   server.resetHandlers()
 })
 
@@ -148,7 +147,7 @@ test("redirection can be stopped using the 'credentials' provider", async () => 
   // snapshot the expected return shape from `signIn`
   expect(JSON.parse(screen.getByTestId("signin-result").textContent))
     .toMatchInlineSnapshot(`
-    Object {
+    {
       "error": null,
       "ok": true,
       "status": 200,
@@ -177,7 +176,7 @@ test("redirection can be stopped using the 'email' provider", async () => {
   // snapshot the expected return shape from `signIn` oauth
   expect(JSON.parse(screen.getByTestId("signin-result").textContent))
     .toMatchInlineSnapshot(`
-    Object {
+    {
       "error": null,
       "ok": true,
       "status": 200,
@@ -190,14 +189,11 @@ test("if callback URL contains a hash we force a window reload when re-directing
   const mockUrlWithHash = "https://path/to/email/url#foo-bar-baz"
 
   server.use(
-    rest.post("/api/auth/signin/email", (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          ...mockEmailResponse,
-          url: mockUrlWithHash,
-        })
-      )
+    http.post("/api/auth/signin/email", () => {
+      return HttpResponse.json({
+        ...mockEmailResponse,
+        url: mockUrlWithHash,
+      })
     })
   )
 
@@ -218,9 +214,9 @@ test("params are propagated to the signin URL when supplied", async () => {
   const authParams = "foo=bar&bar=foo"
 
   server.use(
-    rest.post("/api/auth/signin/github", (req, res, ctx) => {
-      matchedParams = req.url.search
-      return res(ctx.status(200), ctx.json(mockGithubResponse))
+    http.post("/api/auth/signin/github", ({ request }) => {
+      matchedParams = new URL(request.url).search
+      return HttpResponse.json(mockGithubResponse, { status: 200 })
     })
   )
 
@@ -237,8 +233,8 @@ test("when it fails to fetch the providers, it redirected back to signin page", 
   const errorMsg = "Error when retrieving providers"
 
   server.use(
-    rest.get("/api/auth/providers", (req, res, ctx) =>
-      res(ctx.status(500), ctx.json(errorMsg))
+    http.get("/api/auth/providers", () =>
+      HttpResponse.json(errorMsg, { status: 500 })
     )
   )
 

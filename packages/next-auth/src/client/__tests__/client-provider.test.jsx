@@ -1,5 +1,7 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { useState } from "react"
-import { rest } from "msw"
 import { render, screen, waitFor } from "@testing-library/react"
 import { server, mockSession } from "./helpers/mocks"
 import { Provider, useSession } from ".."
@@ -7,10 +9,14 @@ import userEvent from "@testing-library/user-event"
 
 beforeAll(() => {
   server.listen()
+  if (typeof window !== "undefined") {
+    vi.spyOn(window.location, "replace").mockImplementation(() => {})
+    vi.spyOn(window.location, "reload").mockImplementation(() => {})
+  }
 })
 
 afterEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
   server.resetHandlers()
 })
 
@@ -19,12 +25,12 @@ afterAll(() => {
 })
 
 test("fetches the session once and re-uses it for different consumers", async () => {
-  const sessionRouteCall = jest.fn()
+  const sessionRouteCall = vi.fn()
 
   server.use(
-    rest.get("/api/auth/session", (req, res, ctx) => {
+    http.get("/api/auth/session", () => {
       sessionRouteCall()
-      res(ctx.status(200), ctx.json(mockSession))
+      HttpResponse.json(mockSession, { status: 200 })
     })
   )
 

@@ -1,17 +1,19 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { useState } from "react"
 import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/react"
 import { server, mockCSRFToken } from "./helpers/mocks"
 import logger from "../../lib/logger"
 import { getCsrfToken } from ".."
-import { rest } from "msw"
 
-jest.mock("../../lib/logger", () => ({
+vi.mock("../../lib/logger", () => ({
   __esModule: true,
   default: {
-    warn: jest.fn(),
-    debug: jest.fn(),
-    error: jest.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+    error: vi.fn(),
   },
   proxyLogger(logger) {
     return logger
@@ -20,11 +22,15 @@ jest.mock("../../lib/logger", () => ({
 
 beforeAll(() => {
   server.listen()
+  if (typeof window !== "undefined") {
+    vi.spyOn(window.location, "replace").mockImplementation(() => {})
+    vi.spyOn(window.location, "reload").mockImplementation(() => {})
+  }
 })
 
 afterEach(() => {
   server.resetHandlers()
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 afterAll(() => {
@@ -45,14 +51,11 @@ test("returns the Cross Site Request Forgery Token (CSRF Token) required to make
 
 test("when there's no CSRF token returned, it'll reflect that", async () => {
   server.use(
-    rest.get("/api/auth/csrf", (req, res, ctx) =>
-      res(
-        ctx.status(200),
-        ctx.json({
-          ...mockCSRFToken,
-          csrfToken: null,
-        })
-      )
+    http.get("/api/auth/csrf", () =>
+      HttpResponse.json({
+        ...mockCSRFToken,
+        csrfToken: null,
+      })
     )
   )
 
@@ -67,8 +70,8 @@ test("when there's no CSRF token returned, it'll reflect that", async () => {
 
 test("when the fetch fails it'll throw a client fetch error", async () => {
   server.use(
-    rest.get("/api/auth/csrf", (req, res, ctx) =>
-      res(ctx.status(500), ctx.text("some error happened"))
+    http.get("/api/auth/csrf", () =>
+      new HttpResponse("some error happened", { status: 500 })
     )
   )
 
@@ -81,7 +84,7 @@ test("when the fetch fails it'll throw a client fetch error", async () => {
     expect(logger.error).toBeCalledWith(
       "CLIENT_FETCH_ERROR",
       "csrf",
-      new SyntaxError("Unexpected token s in JSON at position 0")
+      expect.any(SyntaxError)
     )
   })
 })

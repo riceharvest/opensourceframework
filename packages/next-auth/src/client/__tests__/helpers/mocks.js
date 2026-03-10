@@ -1,5 +1,5 @@
 import { setupServer } from "msw/node"
-import { rest } from "msw"
+import { http, HttpResponse } from "msw"
 import { randomBytes } from "crypto"
 
 export const mockSession = {
@@ -64,27 +64,29 @@ export const mockSignOutResponse = {
   url: "https://path/to/signout/url",
 }
 
+const BASE_URL = "*/api/auth"
+
 export const server = setupServer(
-  rest.post("/api/auth/signout", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockSignOutResponse))
+  http.post(`${BASE_URL}/signout`, () =>
+    HttpResponse.json(mockSignOutResponse)
   ),
-  rest.get("/api/auth/session", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockSession))
+  http.get(`${BASE_URL}/session`, () =>
+    HttpResponse.json(mockSession)
   ),
-  rest.get("/api/auth/csrf", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockCSRFToken))
+  http.get(`${BASE_URL}/csrf`, () =>
+    HttpResponse.json(mockCSRFToken)
   ),
-  rest.get("/api/auth/providers", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockProviders))
+  http.get(`${BASE_URL}/providers`, () =>
+    HttpResponse.json(mockProviders)
   ),
-  rest.post("/api/auth/signin/github", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockGithubResponse))
+  http.post(`${BASE_URL}/signin/github`, () =>
+    HttpResponse.json(mockGithubResponse)
   ),
-  rest.post("/api/auth/callback/credentials", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockCredentialsResponse))
+  http.post(`${BASE_URL}/callback/credentials`, () =>
+    HttpResponse.json(mockCredentialsResponse)
   ),
-  rest.post("/api/auth/signin/email", (req, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockEmailResponse))
+  http.post(`${BASE_URL}/signin/email`, () =>
+    HttpResponse.json(mockEmailResponse)
   ),
-  rest.post("/api/auth/_log", (req, res, ctx) => res(ctx.status(200)))
+  http.post(`${BASE_URL}/_log`, () => new HttpResponse(null, { status: 200 }))
 )

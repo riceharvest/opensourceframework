@@ -1,30 +1,29 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { useState } from "react"
 import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/react"
 import { server, mockSignOutResponse } from "./helpers/mocks"
 import { signOut } from ".."
-import { rest } from "msw"
 import { getBroadcastEvents } from "./helpers/utils"
 
-const { location } = window
 
 beforeAll(() => {
   server.listen()
-  delete window.location
-  window.location = {
-    ...location,
-    replace: jest.fn(),
-    reload: jest.fn(),
+  if (typeof window !== "undefined") {
+    vi.spyOn(window.location, "replace").mockImplementation(() => {})
+    vi.spyOn(window.location, "reload").mockImplementation(() => {})
   }
 })
 
 beforeEach(() => {
    
-  jest.spyOn(window.localStorage.__proto__, "setItem")
+  vi.spyOn(window.localStorage, "setItem")
 })
 
 afterEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
   server.resetHandlers()
 })
 
@@ -37,8 +36,8 @@ const callbackUrl = "https://redirects/to"
 
 test("by default it redirects to the current URL if the server did not provide one", async () => {
   server.use(
-    rest.post("/api/auth/signout", (req, res, ctx) =>
-      res(ctx.status(200), ctx.json({ ...mockSignOutResponse, url: undefined }))
+    http.post("/api/auth/signout", () =>
+      HttpResponse.json({ ...mockSignOutResponse, url: undefined }, { status: 200 })
     )
   )
 
@@ -69,14 +68,11 @@ test("if url contains a hash during redirection a page reload happens", async ()
   const mockUrlWithHash = "https://path/to/email/url#foo-bar-baz"
 
   server.use(
-    rest.post("/api/auth/signout", (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.json({
-          ...mockSignOutResponse,
-          url: mockUrlWithHash,
-        })
-      )
+    http.post("/api/auth/signout", () => {
+      return HttpResponse.json({
+        ...mockSignOutResponse,
+        url: mockUrlWithHash,
+      })
     })
   )
 

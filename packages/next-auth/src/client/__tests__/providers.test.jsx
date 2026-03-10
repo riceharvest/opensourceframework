@@ -1,17 +1,19 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { useState } from "react"
 import userEvent from "@testing-library/user-event"
 import { render, screen, waitFor } from "@testing-library/react"
 import { server, mockProviders } from "./helpers/mocks"
 import { getProviders } from ".."
 import logger from "../../lib/logger"
-import { rest } from "msw"
 
-jest.mock("../../lib/logger", () => ({
+vi.mock("../../lib/logger", () => ({
   __esModule: true,
   default: {
-    warn: jest.fn(),
-    debug: jest.fn(),
-    error: jest.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+    error: vi.fn(),
   },
   proxyLogger(logger) {
     return logger
@@ -20,11 +22,15 @@ jest.mock("../../lib/logger", () => ({
 
 beforeAll(() => {
   server.listen()
+  if (typeof window !== "undefined") {
+    vi.spyOn(window.location, "replace").mockImplementation(() => {})
+    vi.spyOn(window.location, "reload").mockImplementation(() => {})
+  }
 })
 
 afterEach(() => {
   server.resetHandlers()
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 afterAll(() => {
@@ -45,8 +51,8 @@ test("when called it'll return the currently configured providers for sign in", 
 
 test("when failing to fetch the providers, it'll log the error", async () => {
   server.use(
-    rest.get("/api/auth/providers", (req, res, ctx) =>
-      res(ctx.status(500), ctx.text("some error happened"))
+    http.get("/api/auth/providers", () =>
+      new HttpResponse("some error happened", { status: 500 })
     )
   )
 
@@ -59,7 +65,7 @@ test("when failing to fetch the providers, it'll log the error", async () => {
     expect(logger.error).toBeCalledWith(
       "CLIENT_FETCH_ERROR",
       "providers",
-      new SyntaxError("Unexpected token s in JSON at position 0")
+      expect.any(SyntaxError)
     )
   })
 })

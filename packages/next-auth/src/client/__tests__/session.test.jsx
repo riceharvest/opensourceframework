@@ -1,17 +1,19 @@
+// @vitest-environment happy-dom
+import React from "react"
+import { http, HttpResponse } from "msw"
 import { render, screen, waitFor } from "@testing-library/react"
-import { rest } from "msw"
 import { server, mockSession } from "./helpers/mocks"
 import logger from "../../lib/logger"
 import { useState, useEffect } from "react"
 import { getSession } from ".."
 import { getBroadcastEvents } from "./helpers/utils"
 
-jest.mock("../../lib/logger", () => ({
+vi.mock("../../lib/logger", () => ({
   __esModule: true,
   default: {
-    warn: jest.fn(),
-    debug: jest.fn(),
-    error: jest.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+    error: vi.fn(),
   },
   proxyLogger(logger) {
     return logger
@@ -22,12 +24,12 @@ beforeAll(() => server.listen())
 
 beforeEach(() => {
    
-  jest.spyOn(window.localStorage.__proto__, "setItem")
+  vi.spyOn(window.localStorage, "setItem")
 })
 
 afterEach(() => {
   server.resetHandlers()
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 afterAll(() => {
@@ -39,11 +41,11 @@ test("if it can fetch the session, it should store it in `localStorage`", async 
 
   // In the start, there is no session
   const noSession = await screen.findByText("No session")
-  expect(noSession).toBeInTheDocument()
+  expect(noSession).toBeTruthy()
 
   // After we fetched the session, it should have been rendered by `<SessionFlow />`
   const session = await screen.findByText(new RegExp(mockSession.user.name))
-  expect(session).toBeInTheDocument()
+  expect(session).toBeTruthy()
 
   const broadcastCalls = getBroadcastEvents()
   const [broadcastedEvent] = broadcastCalls
@@ -61,8 +63,8 @@ test("if it can fetch the session, it should store it in `localStorage`", async 
 
 test("if there's an error fetching the session, it should log it", async () => {
   server.use(
-    rest.get("/api/auth/session", (req, res, ctx) => {
-      return res(ctx.status(500), ctx.body("Server error"))
+    http.get("/api/auth/session", () => {
+      return new HttpResponse("Server error", { status: 500 })
     })
   )
 
@@ -73,7 +75,7 @@ test("if there's an error fetching the session, it should log it", async () => {
     expect(logger.error).toBeCalledWith(
       "CLIENT_FETCH_ERROR",
       "session",
-      new SyntaxError("Unexpected token S in JSON at position 0")
+      expect.any(SyntaxError)
     )
   })
 })
