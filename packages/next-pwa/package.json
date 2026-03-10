@@ -50,7 +50,8 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage --passWithNoTests",
-    "clean": "rm -rf dist coverage"
+    "clean": "rm -rf dist coverage",
+    "test:e2e": "cd test-app && npm run test:e2e"
   },
   "dependencies": {
     "babel-loader": "^8.2.5",
