@@ -489,7 +489,6 @@ export default class Critters {
         script.textContent = js;
         link.parentNode.insertBefore(script, link.nextSibling);
         style.$$links.push(script);
-        cssLoaderPreamble = '';
         noscriptFallback = true;
         updateLinkToPreload = true;
       } else if (preloadMode === 'media') {

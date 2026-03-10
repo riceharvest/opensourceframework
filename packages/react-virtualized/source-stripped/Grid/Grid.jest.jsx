@@ -368,7 +368,7 @@ describe('Grid', () => {
     });
 
     it('should scroll back to a newly-added cell without a change in prop', () => {
-      let grid = render(
+      render(
         getMarkup({
           columnCount: NUM_COLUMNS,
           rowCount: NUM_ROWS,
@@ -376,7 +376,7 @@ describe('Grid', () => {
           scrollToRow: NUM_ROWS,
         }),
       );
-      grid = render(
+      const grid = render(
         getMarkup({
           columnCount: NUM_COLUMNS + 1,
           rowCount: NUM_ROWS + 1,
@@ -813,18 +813,18 @@ describe('Grid', () => {
     });
 
     it('should update scroll position if size shrinks smaller than the current scroll', () => {
-      let grid = findDOMNode(render(getMarkup({scrollToColumn: 250})));
-      grid = findDOMNode(render(getMarkup()));
-      grid = findDOMNode(
+      findDOMNode(render(getMarkup({scrollToColumn: 250})));
+      findDOMNode(render(getMarkup()));
+      const grid = findDOMNode(
         render(getMarkup({scrollToColumn: 250, columnCount: 10})),
       );
       expect(grid.textContent).toContain('column:9');
     });
 
     it('should update scroll position if size shrinks smaller than the current scroll', () => {
-      let grid = findDOMNode(render(getMarkup({scrollToRow: 500})));
-      grid = findDOMNode(render(getMarkup()));
-      grid = findDOMNode(render(getMarkup({scrollToRow: 500, rowCount: 10})));
+      findDOMNode(render(getMarkup({scrollToRow: 500})));
+      findDOMNode(render(getMarkup()));
+      const grid = findDOMNode(render(getMarkup({scrollToRow: 500, rowCount: 10})));
       expect(grid.textContent).toContain('row:9');
     });
   });

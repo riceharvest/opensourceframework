@@ -78,7 +78,7 @@ function _serialize(name, val, options) {
   }
 
   if (opt.expires) {
-    let expires = opt.expires
+    let expires
     if (typeof opt.expires.toUTCString === "function") {
       expires = opt.expires.toUTCString()
     } else {
