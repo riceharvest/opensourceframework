@@ -48,5 +48,6 @@
     "typescript": "^5.9.3",
     "vitest": "^4.0.18",
     "webpack": "^5.105.4"
-  }
+  },
+  "deprecated": "Use Next.js built-in next/image component instead. This package is maintained for legacy support only."
 }

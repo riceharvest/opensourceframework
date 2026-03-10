@@ -1,3 +1,8 @@
+
+> [!IMPORTANT]
+> **DEPRECATED**: This package is maintained for legacy support only. 
+> Modern Next.js (v10+) includes a built-in [Image Component](https://nextjs.org/docs/api-reference/next/image) that handles optimization automatically using `sharp`.
+> We recommend migrating to the native Next.js `next/image` for all modern applications.
 # :sunrise: next-optimized-images [![npm version](https://badgen.net/npm/v/next-optimized-images)](https://www.npmjs.com/package/next-optimized-images) [![license](https://badgen.net/github/license/cyrilwanner/next-optimized-images)](https://github.com/cyrilwanner/next-optimized-images/blob/master/LICENSE) [![downloads](https://badgen.net/npm/dt/next-optimized-images)](https://www.npmjs.com/package/next-optimized-images)
 
 **:bulb: Version 3 is coming!**
