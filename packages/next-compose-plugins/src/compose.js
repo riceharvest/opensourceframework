@@ -53,20 +53,20 @@ export const parsePluginConfig = (plugin) => {
  * @param {array} plugins - all plugins
  * @param {object} initialConfig - initial configuration
  */
-export const composePlugins = (phase, plugins, initialConfig) => {
+export const composePlugins = async (phase, plugins, initialConfig) => {
   const nextComposePluginsParam = {
     nextComposePlugins: true,
     phase,
   };
   let config = mergePhaseConfiguration(phase, { ...initialConfig });
 
-  plugins.forEach((plugin) => {
+  for (const plugin of plugins) {
     const { pluginFunction, pluginConfig, phases } = parsePluginConfig(plugin);
 
     // check if the plugin should not get executed in the current phase
     if (phases !== null) {
       if (!isInCurrentPhase(phase, phases)) {
-        return;
+        continue;
       }
     }
 
@@ -80,7 +80,7 @@ export const composePlugins = (phase, plugins, initialConfig) => {
     let updatedConfig;
 
     if (typeof resolvedPlugin === 'function') {
-      updatedConfig = resolvedPlugin({
+      updatedConfig = await resolvedPlugin({
         ...config,
         ...mergedPluginConfig,
       }, nextComposePluginsParam);
@@ -94,7 +94,7 @@ export const composePlugins = (phase, plugins, initialConfig) => {
     // and the user did not overwrite it
     if (phases === null && updatedConfig.phases) {
       if (!isInCurrentPhase(phase, updatedConfig.phases)) {
-        return;
+        continue;
       }
     }
 
@@ -105,7 +105,7 @@ export const composePlugins = (phase, plugins, initialConfig) => {
 
     // merge config back to the main one
     config = { ...config, ...updatedConfig };
-  });
+  }
 
   return config;
 };

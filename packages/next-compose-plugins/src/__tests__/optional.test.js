@@ -1,4 +1,4 @@
-import 'jest';
+import { vi } from 'vitest';
 import {
   markOptional,
   isOptional,
@@ -12,8 +12,8 @@ describe('next-compose-plugins/optional', () => {
    *
    * -------------------------------------
    */
-  it('marks a plugin as optional', () => {
-    const plugin = jest.fn(() => 'my-plugin');
+  it('marks a plugin as optional', async () => {
+    const plugin = vi.fn(() => 'my-plugin');
 
     markOptional(plugin);
 
@@ -26,8 +26,8 @@ describe('next-compose-plugins/optional', () => {
    *
    * -----------------------------------------
    */
-  it('checks if a plugin is optional', () => {
-    const plugin = jest.fn(() => 'my-plugin');
+  it('checks if a plugin is optional', async () => {
+    const plugin = vi.fn(() => 'my-plugin');
 
     expect(isOptional(plugin)).toEqual(false);
 
@@ -42,8 +42,8 @@ describe('next-compose-plugins/optional', () => {
    *
    * --------------------------------------
    */
-  it('resolves an optional plugin', () => {
-    const plugin = jest.fn(() => 'my-plugin');
+  it('resolves an optional plugin', async () => {
+    const plugin = vi.fn(() => 'my-plugin');
 
     expect(plugin).not.toHaveBeenCalled();
     expect(resolveOptionalPlugin(plugin)).toEqual('my-plugin');

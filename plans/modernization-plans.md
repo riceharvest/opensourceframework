@@ -213,13 +213,15 @@ Utility for composing multiple Next.js plugins with proper ordering and configur
 ### Required Updates
 
 1. **Next.js 16 Compatibility**
-   - Test with new plugin API changes
+   - ✅ COMPLETED: Added support for async plugin functions and async `next.config.js`
+   - ✅ COMPLETED: Migrated all internal composition logic to be asynchronous
    - Verify with app and pages directories
 
 2. **TypeScript**
    - Already well-typed, verify strict mode
 
 3. **Testing**
+   - ✅ COMPLETED: Migrated all tests to be asynchronous
    - Add tests for plugin ordering edge cases
    - Test with various plugin combinations
    - Coverage target: 90%+

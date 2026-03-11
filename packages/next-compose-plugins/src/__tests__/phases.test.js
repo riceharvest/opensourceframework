@@ -1,4 +1,4 @@
-import 'jest';
+import { vi } from 'vitest';
 import { isInCurrentPhase, mergePhaseConfiguration } from '../phases';
 
 const PHASE_DEVELOPMENT_SERVER = 'phase-development-server';
@@ -11,7 +11,7 @@ describe('next-compose-plugins/phases', () => {
    *
    * -----------------------------------------------------------------------
    */
-  it('checks when a plugin should get applied in the current phase', () => {
+  it('checks when a plugin should get applied in the current phase', async () => {
     // check array syntax
     expect(isInCurrentPhase(PHASE_DEVELOPMENT_SERVER, [PHASE_DEVELOPMENT_SERVER])).toEqual(true);
     expect(isInCurrentPhase(PHASE_DEVELOPMENT_SERVER, [
@@ -31,7 +31,7 @@ describe('next-compose-plugins/phases', () => {
       + PHASE_DEVELOPMENT_SERVER)).toEqual(true);
   });
 
-  it('checks when a plugin should not get applied in the current phase', () => {
+  it('checks when a plugin should not get applied in the current phase', async () => {
     // check array syntax
     expect(isInCurrentPhase(PHASE_PRODUCTION_BUILD, [PHASE_DEVELOPMENT_SERVER])).toEqual(false);
     expect(isInCurrentPhase(PHASE_PRODUCTION_BUILD, [
@@ -51,7 +51,7 @@ describe('next-compose-plugins/phases', () => {
       + PHASE_DEVELOPMENT_SERVER)).toEqual(false);
   });
 
-  it('checks when a plugin should get applied in the current phase with a negated config', () => {
+  it('checks when a plugin should get applied in the current phase with a negated config', async () => {
     // check array syntax
     expect(isInCurrentPhase(PHASE_DEVELOPMENT_SERVER, ['!', PHASE_PRODUCTION_SERVER])).toEqual(true);
     expect(isInCurrentPhase(PHASE_DEVELOPMENT_SERVER, [
@@ -65,7 +65,7 @@ describe('next-compose-plugins/phases', () => {
     expect(isInCurrentPhase(PHASE_DEVELOPMENT_SERVER, `!${PHASE_PRODUCTION_SERVER}${PHASE_PRODUCTION_BUILD}`)).toEqual(true);
   });
 
-  it('checks when a plugin should not get applied in the current phase with a negated config', () => {
+  it('checks when a plugin should not get applied in the current phase with a negated config', async () => {
     // check array syntax
     expect(isInCurrentPhase(PHASE_PRODUCTION_BUILD, ['!', PHASE_PRODUCTION_BUILD])).toEqual(false);
     expect(isInCurrentPhase(PHASE_PRODUCTION_BUILD, [
@@ -90,7 +90,7 @@ describe('next-compose-plugins/phases', () => {
    *
    * ----------------------------------------------
    */
-  it('merges phase specific configuration', () => {
+  it('merges phase specific configuration', async () => {
     const pluginConfig = {
       build: 'default-build',
       cssModules: true,

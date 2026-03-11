@@ -6,6 +6,7 @@
 "@opensourceframework/next-pwa": patch
 "@opensourceframework/next-images": patch
 "@opensourceframework/next-optimized-images": patch
+"@opensourceframework/next-compose-plugins": minor
 ---
 
 - **next-csrf**: Added App Router support with `verifyCsrfToken` and automated tests.
@@ -14,3 +15,4 @@
 - **next-cookies**: Fixed `useCookies` state update issues and added comprehensive unit tests.
 - **next-pwa**: Improved test discoverability and added E2E test scripts.
 - **next-images / next-optimized-images**: Formally marked as deprecated.
+- **next-compose-plugins**: Added support for async plugin functions and async `next.config.js` for Next.js 16 compatibility.
