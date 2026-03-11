@@ -8,6 +8,8 @@
 "@opensourceframework/next-optimized-images": patch
 "@opensourceframework/next-compose-plugins": minor
 "@opensourceframework/next-transpile-modules": minor
+"@opensourceframework/next-mdx": minor
+"@opensourceframework/next-mdx-toc": patch
 ---
 
 - **next-csrf**: Added App Router support with `verifyCsrfToken` and automated tests.
@@ -18,3 +20,5 @@
 - **next-images / next-optimized-images**: Formally marked as deprecated.
 - **next-compose-plugins**: Added support for async plugin functions and async `next.config.js` for Next.js 16 compatibility.
 - **next-transpile-modules**: Added support for Next.js 13+ native `transpilePackages` for better performance and Turbopack compatibility.
+- **next-mdx**: Modernized with MDX 2/3 support (upgraded to `next-mdx-remote` v4) and modernized hashing.
+- **next-mdx-toc**: Migrated to Vitest and verified compatibility with modernized `next-mdx`.

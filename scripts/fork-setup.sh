@@ -159,8 +159,11 @@ const pkg = JSON.parse(fs.readFileSync(path, 'utf8'));
 
 // Transform package
 pkg.name = '$FULL_PACKAGE_NAME';
+if (!pkg.repository) pkg.repository = {};
+if (typeof pkg.repository === 'string') pkg.repository = { type: 'git', url: pkg.repository };
 pkg.repository.url = 'git+https://github.com/riceharvest/opensourceframework.git';
 pkg.repository.directory = 'packages/$PACKAGE_NAME';
+pkg.repository.type = 'git';
 
 // Remove private field if present
 if (pkg.private) delete pkg.private;
@@ -305,7 +308,7 @@ const deps = { ...pkg.dependencies, ...pkg.peerDependencies };
 const list = Object.keys(deps || {}).filter(d => d !== 'next');
 console.log(list.join('\',\''));
 ")
-    sed "s/{external-dependencies}/$EXTERNAL_DEPS/" templates/tsup.config.template.ts > "$TARGET_DIR/tsup.config.ts"
+    sed "s#{external-dependencies}#$EXTERNAL_DEPS#" templates/tsup.config.template.ts > "$TARGET_DIR/tsup.config.ts"
     echo -e "${GREEN}✓ tsup.config.ts created${NC}"
 else
     echo -e "${YELLOW}! tsup config already exists${NC}"
