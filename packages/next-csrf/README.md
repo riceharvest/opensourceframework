@@ -48,11 +48,30 @@ const csrf = createCSRF({
 export default csrf.protect(handler);
 ```
 
+### App Router (Server Actions / Middleware)
+
+For App Router, you can use the `verifyCsrfToken` function directly in your Server Actions or Middleware.
+
+```typescript
+import { verifyCsrfToken } from '@opensourceframework/next-csrf';
+
+export async function myAction(formData: FormData) {
+  try {
+    await verifyCsrfToken({
+      secret: process.env.CSRF_SECRET,
+    });
+    // Proceed with action
+  } catch (error) {
+    // Handle CSRF error
+  }
+}
+```
+
 ## API Reference
 
 ### `createCSRF(options)`
 
-Creates a CSRF protection instance.
+Creates a CSRF protection instance for Pages Router.
 
 **Options:**
 - `secret` - Secret key for token signing (required)
@@ -61,7 +80,15 @@ Creates a CSRF protection instance.
 
 ### `csrf.protect(handler)`
 
-Middleware that protects an API route handler.
+Middleware that protects a Pages Router API route handler.
+
+### `verifyCsrfToken(options)`
+
+A function to manually verify the CSRF token, designed for App Router (Server Actions, Middleware, or Route Handlers).
+
+**Options:**
+- `secret` - Secret key for token signing (optional, defaults to environment variable)
+- `tokenKey` - Name of the token in cookies (default: '_csrf')
 
 ## Migration Guide
 

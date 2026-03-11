@@ -147,7 +147,7 @@ describe('AutoSizer', () => {
   describe('onResize and (re)render', () => {
     it('should trigger when size changes', async done => {
       const onResize = vi.fn();
-      const ChildComponent = jest
+      const ChildComponent = vi
         .fn()
         .mockImplementation(DefaultChildComponent);
       const rendered = findDOMNode(
@@ -170,7 +170,7 @@ describe('AutoSizer', () => {
 
     it('should only trigger when height changes for disableWidth == true', async done => {
       const onResize = vi.fn();
-      const ChildComponent = jest
+      const ChildComponent = vi
         .fn()
         .mockImplementation(DefaultChildComponent);
       const rendered = findDOMNode(
@@ -197,7 +197,7 @@ describe('AutoSizer', () => {
 
     it('should only trigger when width changes for disableHeight == true', async done => {
       const onResize = vi.fn();
-      const ChildComponent = jest
+      const ChildComponent = vi
         .fn()
         .mockImplementation(DefaultChildComponent);
       const rendered = findDOMNode(

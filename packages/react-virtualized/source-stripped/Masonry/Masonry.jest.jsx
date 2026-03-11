@@ -336,7 +336,7 @@ describe('Masonry', () => {
     it('should refresh all cell positions', () => {
       // Share instances between renders to avoid resetting state in ways we don't intend
       const cellMeasurerCache = createCellMeasurerCache();
-      const cellPositioner = jest
+      const cellPositioner = vi
         .fn()
         .mockImplementation(createCellPositioner(cellMeasurerCache));
 
@@ -456,7 +456,7 @@ describe('Masonry', () => {
   describe('keyMapper', () => {
     it('should pass the correct key to rendered cells', () => {
       const keyMapper = vi.fn().mockImplementation(index => `key:${index}`);
-      const cellRenderer = jest
+      const cellRenderer = vi
         .fn()
         .mockImplementation(({index, key, style}) => (
           <div key={key} style={style}>

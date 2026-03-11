@@ -390,9 +390,11 @@ Complete authentication solution for Next.js applications. **CRITICAL SECURITY P
    - Session management review
    - CSRF protection verification
 
-4. **TypeScript**
-   - Already excellent, update for strict mode
+4. **Modernization & Maintenance**
+   - ✅ COMPLETED: Migrated client tests to Vitest and MSW v2
+   - ✅ COMPLETED: Fixed CI environment regressions for tests
    - Add types for new Next.js 16 features
+   - Update remaining tests to modern patterns
 
 5. **Testing**
    - Ensure all existing tests pass
@@ -587,25 +589,25 @@ Virtual scrolling and windowing library for React with support for lists, grids,
 
 ### Required Updates
 
-1. **React 18+ Compatibility**
-   - Test with concurrent features
-   - Update for strict mode
-   - Verify with React 19 (if available)
+1. **React 18/19 Compatibility**
+   - Address `findDOMNode` deprecation (used extensively in tests and components)
+   - Verify concurrent rendering behavior
+   - Fix strict mode issues
 
-2. **TypeScript**
-   - Add comprehensive type definitions
-   - Strict mode compliance
-   - Generic types for cell renderers
+2. **Testing Infrastructure**
+   - ✅ COMPLETED: Migrated to Vitest and enabled legacy Jest tests (360+ tests now passing)
+   - ✅ COMPLETED: Resolved missing dependencies (immutable) and global mock issues
+   - Fix remaining 50+ environment-related test failures (mostly WindowScroller and Scroll events)
+   - Increase coverage beyond current baseline
 
-3. **Testing**
-   - Add tests for all components
-   - Performance regression tests
-   - Accessibility tests
-   - Coverage target: 85%+
+3. **Accessibility (WCAG)**
+   - Audit all components for aria attributes
+   - Fix known issues in Table and Grid headers
+   - Add keyboard navigation tests
 
 4. **Performance**
-   - Benchmark existing performance
-   - Optimize re-renders
+   - Implement modern benchmarking suite
+   - Optimize for React 18+ useTransition/useDeferredValue
    - Memory leak detection
    - Reduce bundle size
 

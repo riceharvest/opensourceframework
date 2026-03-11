@@ -256,7 +256,7 @@ describe('CellMeasurer', () => {
       fixedWidth: true,
     });
     const parent = createParent({cache});
-    const child = jest
+    const child = vi
       .fn()
       .mockReturnValue(<div style={{width: 100, height: 30}} />);
 
@@ -303,7 +303,7 @@ describe('CellMeasurer', () => {
       fixedHeight: true,
     });
     const parent = createParent({cache});
-    const child = jest
+    const child = vi
       .fn()
       .mockReturnValue(<div style={{width: 100, height: 30}} />);
 
