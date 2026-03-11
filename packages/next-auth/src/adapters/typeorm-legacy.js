@@ -8,7 +8,7 @@ export class TypeORMAccountModel {
     providerAccountId,
     refreshToken,
     accessToken,
-    accessTokenExpires
+    accessTokenExpires,
   ) {
     this.compoundId = createHash("sha256")
       .update(`${providerId}:${providerAccountId}`)
@@ -243,7 +243,7 @@ function cloneSchema(schema) {
   return {
     ...schema,
     columns: Object.fromEntries(
-      Object.entries(schema.columns).map(([key, value]) => [key, { ...value }])
+      Object.entries(schema.columns).map(([key, value]) => [key, { ...value }]),
     ),
     indices: schema.indices?.map((index) => ({ ...index })),
   }
@@ -257,7 +257,7 @@ function cloneModels(models) {
         model: value.model,
         schema: cloneSchema(value.schema),
       },
-    ])
+    ]),
   )
 }
 
@@ -280,7 +280,9 @@ function parseConnectionString(configOrString) {
       config.port = Number(parsedUrl.port)
       config.username = parsedUrl.username
       config.password = parsedUrl.password
-      config.database = parsedUrl.pathname.replace(/^\//, "").replace(/\?(.*)$/, "")
+      config.database = parsedUrl.pathname
+        .replace(/^\//, "")
+        .replace(/\?(.*)$/, "")
       config.options = {}
     }
 
@@ -355,7 +357,7 @@ function createNamingStrategies(DefaultNamingStrategy) {
 
     joinTableName(firstTableName, secondTableName, firstPropertyName) {
       return snakeCase(
-        `${firstTableName}_${firstPropertyName.replace(/\./gi, "_")}_${secondTableName}`
+        `${firstTableName}_${firstPropertyName.replace(/\./gi, "_")}_${secondTableName}`,
       )
     }
 
@@ -363,7 +365,10 @@ function createNamingStrategies(DefaultNamingStrategy) {
       return snakeCase(`${tableName}_${columnName || propertyName}`)
     }
 
-    classTableInheritanceParentColumnName(parentTableName, parentTableIdPropertyName) {
+    classTableInheritanceParentColumnName(
+      parentTableName,
+      parentTableIdPropertyName,
+    ) {
       return snakeCase(`${parentTableName}_${parentTableIdPropertyName}`)
     }
 
@@ -535,7 +540,7 @@ async function loadTypeORM() {
     return await import("typeorm")
   } catch {
     throw new Error(
-      'The TypeORM adapter requires the "typeorm" package. Install typeorm@^0.3.28 to use it.'
+      'The TypeORM adapter requires the "typeorm" package. Install typeorm@^0.3.28 to use it.',
     )
   }
 }
@@ -584,7 +589,7 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
 
       if (!DataSource || !EntitySchema || !DefaultNamingStrategy) {
         throw new Error(
-          'The installed "typeorm" version is not supported. Install typeorm@^0.3.28.'
+          'The installed "typeorm" version is not supported. Install typeorm@^0.3.28.',
         )
       }
 
@@ -597,7 +602,7 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
         typeOrmConfig,
         localModels,
         localOptions,
-        createNamingStrategies(DefaultNamingStrategy)
+        createNamingStrategies(DefaultNamingStrategy),
       )
 
       const config = {
@@ -617,7 +622,9 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
       try {
         if (!dataSource) {
           dataSource = new DataSource(config)
-        } else if (entitiesChanged(dataSource.options.entities, config.entities)) {
+        } else if (
+          entitiesChanged(dataSource.options.entities, config.entities)
+        ) {
           if (typeof dataSource.setOptions === "function") {
             dataSource.setOptions(config)
           } else {
@@ -707,7 +714,7 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
           providerAccountId,
           refreshToken,
           accessToken,
-          accessTokenExpires
+          accessTokenExpires,
         ) {
           return manager.save(
             new Account(
@@ -717,8 +724,8 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
               providerAccountId,
               refreshToken,
               accessToken,
-              accessTokenExpires
-            )
+              accessTokenExpires,
+            ),
           )
         },
 
@@ -753,13 +760,17 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
         },
 
         updateSession(session, force) {
-          if (sessionMaxAge && (sessionUpdateAge || sessionUpdateAge === 0) && session.expires) {
+          if (
+            sessionMaxAge &&
+            (sessionUpdateAge || sessionUpdateAge === 0) &&
+            session.expires
+          ) {
             const dateSessionIsDueToBeUpdated = new Date(session.expires)
             dateSessionIsDueToBeUpdated.setTime(
-              dateSessionIsDueToBeUpdated.getTime() - sessionMaxAge
+              dateSessionIsDueToBeUpdated.getTime() - sessionMaxAge,
             )
             dateSessionIsDueToBeUpdated.setTime(
-              dateSessionIsDueToBeUpdated.getTime() + sessionUpdateAge
+              dateSessionIsDueToBeUpdated.getTime() + sessionUpdateAge,
             )
 
             if (new Date() > dateSessionIsDueToBeUpdated) {
@@ -794,7 +805,7 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
           }
 
           await manager.save(
-            new VerificationRequest(identifier, hashedToken, expires)
+            new VerificationRequest(identifier, hashedToken, expires),
           )
 
           await sendVerificationRequest({
@@ -808,10 +819,14 @@ export function TypeORMLegacyAdapter(configOrString, options = {}) {
 
         async getVerificationRequest(identifier, token) {
           const hashedToken = hashToken(token)
-          const verificationRequest = await findOne(manager, VerificationRequest, {
-            identifier,
-            token: hashedToken,
-          })
+          const verificationRequest = await findOne(
+            manager,
+            VerificationRequest,
+            {
+              identifier,
+              token: hashedToken,
+            },
+          )
 
           if (
             verificationRequest?.expires &&

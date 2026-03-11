@@ -229,7 +229,7 @@ const withTmInitializer = (modules = [], options = {}) => {
 
         // Add a rule to include and parse all modules (js & ts)
         config.module.rules.push({
-          test: /\.+\.(js|jsx|mjs|ts|tsx)$/,
+          test: /\.(js|jsx|mjs|ts|tsx)$/,
           use: options.defaultLoaders.babel,
           include: matcher,
           type: 'javascript/auto',

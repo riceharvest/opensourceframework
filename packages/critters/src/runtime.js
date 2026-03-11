@@ -464,8 +464,14 @@ export default class Critters {
       dangerousAttrs.forEach(attr => link.removeAttribute(attr));
     }
 
-    // Sanitize href to prevent script breakout
-    const safeHref = sanitizeAttributeValue(href);
+    // Sanitize href to prevent both script breakout and dangerous URL schemes.
+    const safeHref = _sanitizeUrl(sanitizeAttributeValue(href));
+    if (!safeHref) {
+      link.removeAttribute('href');
+      this.logger.warn(`Blocked dangerous stylesheet href: ${href}`);
+      return;
+    }
+
     if (safeHref !== href) {
       link.setAttribute('href', safeHref);
     }
