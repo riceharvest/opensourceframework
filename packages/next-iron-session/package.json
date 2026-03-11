@@ -13,14 +13,20 @@
     "node.js"
   ],
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-iron-session#readme",
-  "bugs": "https://github.com/vvo/iron-session/issues",
-  "repository": "github:vvo/iron-session",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-iron-session"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-iron-session"
+  },
   "funding": [
     "https://github.com/sponsors/vvo",
     "https://github.com/sponsors/brc-dd"
   ],
   "license": "MIT",
-  "author": "OpenSource Framework Contributors (fork), Original: Unknown",
+  "author": "OpenSource Framework Contributors (fork), Original: vvo and contributors",
   "contributors": [
     {
       "name": "Unknown",
@@ -35,7 +41,8 @@
   },
   "main": "./dist/index.cjs",
   "files": [
-    "dist/*"
+    "dist/*",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",

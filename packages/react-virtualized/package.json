@@ -1,10 +1,9 @@
 {
   "name": "@opensourceframework/react-virtualized",
   "description": "React components for efficiently rendering large, scrollable lists and tabular data",
-  "author": "Brian Vaughn <brian.david.vaughn@gmail.com>",
-  "user": "bvaughn",
+  "author": "OpenSource Framework Contributors (fork), Original: Brian Vaughn",
   "version": "9.22.7",
-  "homepage": "https://github.com/bvaughn/react-virtualized",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-virtualized#readme",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "jsnext:main": "dist/es/index.js",
@@ -28,11 +27,13 @@
   },
   "files": [
     "dist",
-    "styles.css"
+    "styles.css",
+    "llms.txt"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bvaughn/react-virtualized.git"
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/react-virtualized"
   },
   "keywords": [
     "react",
@@ -52,7 +53,7 @@
     "spreadsheet"
   ],
   "bugs": {
-    "url": "https://github.com/bvaughn/react-virtualized/issues"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-virtualized"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^5.0.4",
@@ -62,6 +63,7 @@
     "jsdom": "^24.1.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-test-renderer": "^17.0.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"

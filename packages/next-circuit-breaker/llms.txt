@@ -1,0 +1,22 @@
+# @opensourceframework/next-circuit-breaker - AI Summary
+
+Circuit breaker utilities for Next.js API routes. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want safer failure handling without a larger architecture rewrite.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-circuit-breaker
+# or
+pnpm add @opensourceframework/next-circuit-breaker
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-circuit-breaker#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-circuit-breaker

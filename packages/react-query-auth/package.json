@@ -1,9 +1,13 @@
 {
   "name": "@opensourceframework/react-query-auth",
   "version": "2.4.3",
-  "author": "alan2207",
+  "author": "OpenSource Framework Contributors (fork), Original: alan2207",
   "license": "MIT",
-  "repository": "alan2207/react-query-auth",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/react-query-auth"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -23,7 +27,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "llms.txt"
   ],
   "engines": {
     "node": ">=20.0.0"
@@ -74,5 +79,9 @@
   "workspaces": [
     ".",
     "examples/*"
-  ]
+  ],
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-query-auth#readme",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-query-auth"
+  }
 }

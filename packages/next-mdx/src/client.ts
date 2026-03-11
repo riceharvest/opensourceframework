@@ -1,16 +1,54 @@
-import remoteHydrate from "next-mdx-remote/hydrate"
-import { MdxRemote } from "next-mdx-remote/types"
+import { createElement, type ComponentType, type ReactElement, type ReactNode } from "react"
+import {
+  MDXRemote,
+  type MDXRemoteProps,
+  type MDXRemoteSerializeResult,
+} from "next-mdx-remote"
 
-export interface HydrateOptions {
-  components?: MdxRemote.Components
-  provider?: MdxRemote.Provider
+interface HydrateProvider<
+  TScope = Record<string, unknown>,
+  TFrontmatter = Record<string, unknown>,
+> {
+  component: ComponentType<
+    Record<string, unknown> & {
+      children?: ReactNode
+      components?: MDXRemoteProps<TScope, TFrontmatter>["components"]
+    }
+  >
+  props?: Record<string, unknown>
 }
 
-// Wrap next-mdx-remote/hydrate for future expansion.
-// @see https://github.com/hashicorp/next-mdx-remote/pull/39
+export interface HydrateOptions<
+  TScope = Record<string, unknown>,
+  TFrontmatter = Record<string, unknown>,
+> {
+  components?: MDXRemoteProps<TScope, TFrontmatter>["components"]
+  lazy?: boolean
+  provider?: HydrateProvider<TScope, TFrontmatter>
+}
+
 export function useHydrate(
-  content: { mdx: MdxRemote.Source },
+  content: { mdx: MDXRemoteSerializeResult },
   options?: HydrateOptions
-): React.ReactNode {
-  return remoteHydrate(content.mdx, options)
+): ReactElement {
+  const hydratedContent = createElement(MDXRemote, {
+    ...content.mdx,
+    components: options?.components,
+    lazy: options?.lazy,
+  })
+
+  if (!options?.provider) {
+    return hydratedContent
+  }
+
+  const Provider = options.provider.component
+
+  return createElement(
+    Provider,
+    {
+      ...(options.provider.props ?? {}),
+      components: options.components,
+    },
+    hydratedContent
+  )
 }

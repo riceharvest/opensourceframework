@@ -4,6 +4,7 @@ const {
   applyImgLoader,
   requireImageminPlugin,
 } = require('../../lib/loaders/img-loader');
+const { getOptimizerLoaderPath } = require('../../lib/loaders/optimizer-loader-path');
 const { getConfig } = require('../../lib/config');
 const path = require('path');
 
@@ -79,8 +80,10 @@ describe('next-optimized-images/loaders/img-loader', () => {
     });
 
     const rule = webpackConfig.module.rules[0];
+    const defaultRule = rule.oneOf[rule.oneOf.length - 1];
 
     expect(rule.test).toBeInstanceOf(RegExp);
     expect(rule.oneOf).toHaveLength(13);
+    expect(defaultRule.use[1].loader).toEqual(getOptimizerLoaderPath());
   });
 });

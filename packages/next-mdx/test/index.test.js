@@ -1,6 +1,9 @@
 import path from "path"
 import mock from "mock-fs"
+import { renderToStaticMarkup } from "react-dom/server"
+import { useHydrate } from "../src/client"
 import { getNode, getAllNodes } from "../src/get-nodes"
+import { getMdxNode } from "../src/get-nodes"
 
 beforeEach(function () {
   mock({
@@ -92,7 +95,7 @@ test("node can be retrieved using both and context", async () => {
 
 test("an error is thrown for an invalid source", async () => {
   await expect(getAllNodes("foo")).rejects.toThrow(
-    "Type foo does not exist in next-mdx.json"
+    "Type foo does not exist in next-mdx configuration"
   )
 })
 
@@ -100,4 +103,12 @@ test("index.mdx should resolved to empty url for optional catch-all", async () =
   const page = await getNode("page", "")
   expect(page.frontMatter.title).toBe("Home")
   expect(page.url).toBe("/")
+})
+
+test("hydrates serialized MDX content through the public client wrapper", async () => {
+  const post = await getMdxNode("post", "post-one")
+  const html = renderToStaticMarkup(useHydrate(post))
+
+  expect(html).toContain("<p>Voluptatem doloribus fugiat ratione officiis voluptas.")
+  expect(html).toContain("<p>Blanditiis possimus quidem asperiores.")
 })

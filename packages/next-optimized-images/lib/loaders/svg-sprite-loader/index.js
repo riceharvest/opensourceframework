@@ -1,4 +1,5 @@
 const path = require('path');
+const { getOptimizerLoaderPath } = require('../optimizer-loader-path');
 
 /**
  * Returns the resource query definition for an svg sprite image
@@ -26,7 +27,7 @@ const getSvgSpriteLoaderResourceQuery = (
     },
   ].concat(detectedLoaders.svg && optimize ? [
     {
-      loader: 'img-loader',
+      loader: getOptimizerLoaderPath(),
       options: imgLoaderOptions,
     },
   ] : []),

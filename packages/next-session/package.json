@@ -22,7 +22,8 @@
   },
   "types": "lib/session.d.ts",
   "files": [
-    "lib/"
+    "lib/",
+    "llms.txt"
   ],
   "sideEffects": false,
   "scripts": {

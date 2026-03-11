@@ -2,6 +2,7 @@ const { getResourceQueries } = require('../resource-queries');
 const { getWebpResourceQuery } = require('./webp-loader');
 const { getUrlLoaderOptions } = require('./url-loader');
 const { getSvgSpriteLoaderResourceQuery } = require('./svg-sprite-loader');
+const { getOptimizerLoaderPath } = require('./optimizer-loader-path');
 
 /**
  * Requires an imagemin plugin and configures it
@@ -99,7 +100,13 @@ const applyImgLoader = (
     test: getHandledFilesRegex(handledImageTypes),
     oneOf: [
       // add all resource queries
-      ...getResourceQueries(nextConfig, isServer, optimize ? 'img-loader' : null, imgLoaderOptions, detectedLoaders),
+      ...getResourceQueries(
+        nextConfig,
+        isServer,
+        optimize ? getOptimizerLoaderPath() : null,
+        imgLoaderOptions,
+        detectedLoaders
+      ),
 
       // ?webp: convert an image to webp
       handledImageTypes.webp
@@ -119,7 +126,7 @@ const applyImgLoader = (
             options: getUrlLoaderOptions(nextConfig, isServer),
           },
           {
-            loader: 'img-loader',
+            loader: getOptimizerLoaderPath(),
             options: imgLoaderOptions,
           },
         ],

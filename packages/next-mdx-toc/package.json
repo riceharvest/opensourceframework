@@ -19,7 +19,8 @@
   "files": [
     "dist",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "llms.txt"
   ],
   "bugs": {
     "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-mdx-toc"
@@ -34,7 +35,7 @@
     "@types/node": "^14.14.37",
     "microbundle": "^0.15.1",
     "tsup": "^8.5.1",
-    "typescript": "^4.2.3"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "@opensourceframework/next-mdx": "workspace:*",

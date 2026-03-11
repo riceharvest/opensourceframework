@@ -1,17 +1,13 @@
 /**
  * next-images - Import images in Next.js
  *
+ * A compatibility-first fork that preserves the classic next-images workflow
+ * for teams that want minimal migration from the original package.
+ *
  * This package allows you to import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif)
  * in your Next.js project using webpack file-loader and url-loader.
  *
  * @packageDocumentation
- *
- * @deprecated
- * This package is deprecated. Next.js 10+ includes a built-in Image component
- * that provides automatic image optimization, lazy loading, and better performance.
- * Consider migrating to next/image instead.
- * @see https://nextjs.org/docs/api-reference/next/image
- *
  * @license MIT
  * @originalAuthor Aref Aslani (twopluszero)
  * @originalRepo https://github.com/twopluszero/next-images

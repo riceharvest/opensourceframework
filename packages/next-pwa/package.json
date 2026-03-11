@@ -39,13 +39,14 @@
     "fallback.js",
     "cache.js",
     "build-custom-worker.js",
-    "build-fallback-worker.js"
+    "build-fallback-worker.js",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint . --ignore-pattern examples",
-    "lint:fix": "eslint . --ignore-pattern examples --fix",
+    "lint": "eslint . --ignore-pattern examples --ignore-pattern \"test-app/public/*.js\"",
+    "lint:fix": "eslint . --ignore-pattern examples --ignore-pattern \"test-app/public/*.js\" --fix",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",

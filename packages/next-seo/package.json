@@ -25,7 +25,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "llms.txt"
   ],
   "scripts": {
     "// BUILD & DEVELOPMENT": "",
@@ -109,5 +110,8 @@
   "funding": {
     "type": "GitHub",
     "url": "https://github.com/sponsors/riceharvest"
+  },
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-seo"
   }
 }

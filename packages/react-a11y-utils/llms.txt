@@ -1,0 +1,22 @@
+# @opensourceframework/react-a11y-utils - AI Summary
+
+React accessibility utility functions and hooks for building accessible user interfaces. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want practical a11y helpers without a broader rewrite.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/react-a11y-utils
+# or
+pnpm add @opensourceframework/react-a11y-utils
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/react-a11y-utils#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/react-a11y-utils

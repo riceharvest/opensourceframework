@@ -1,14 +1,14 @@
 {
   "name": "@opensourceframework/next-images",
   "version": "1.9.1",
-  "description": "Image optimization and handling for Next.js applications",
+  "description": "Compatibility-first image import plugin for Next.js applications",
   "keywords": [
     "next.js",
     "images",
     "image-optimization",
     "nextjs"
   ],
-  "author": "OpenSource Framework Contributors",
+  "author": "OpenSource Framework Contributors (fork), Original: Aref Aslani",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -40,7 +40,8 @@
     "src/global.d.ts",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",
@@ -62,19 +63,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opensourceframework/opensourceframework.git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
     "directory": "packages/next-images"
   },
   "bugs": {
-    "url": "https://github.com/opensourceframework/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-images"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-images"
   },
-  "homepage": "https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images#readme",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-images#readme",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "file-loader": "^6.2.0",
     "url-loader": "^4.1.0"
-  },
-  "deprecated": "Use Next.js built-in next/image component instead. This package is maintained for legacy support only."
+  }
 }

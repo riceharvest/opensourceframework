@@ -2,39 +2,51 @@ import { promises as fs } from "fs"
 import matter from "gray-matter"
 import { sha256 } from "crypto-hash"
 import { GetStaticPropsContext } from "next"
-import { Pluggable } from "unified"
+import type { ReactNode } from "react"
 import { serialize } from "next-mdx-remote/serialize"
-import { MDXRemoteSerializeResult } from "next-mdx-remote"
+import type { MDXRemoteSerializeResult } from "next-mdx-remote"
 
 import { mdxCache } from "./get-cache"
 import { getFiles, MdxFile } from "./get-files"
 import { getConfig, getSourceConfig } from "./get-config"
 
 export type NodeFrontMatter = Record<string, unknown>
+type SerializeOptions = NonNullable<Parameters<typeof serialize>[1]>
 
-// TODO: Properly type node relationships with generics.
-export interface NodeRelationships<T = Node> {
+export type NodeRelationships<T = Node> = {
   [key: string]: T[]
 }
 
-export interface Node<T = NodeFrontMatter> extends MdxFile, MdxFileData<T> {
+export interface Node<T = NodeFrontMatter, R = any> extends MdxFile, MdxFileData<T> {
   mdx: MDXRemoteSerializeResult
-  relationships?: NodeRelationships
+  relationships?: NodeRelationships<R>
 }
 
-// type MdxNodeWithoutMdx<T extends Node> = Omit<T, "mdx">
-
-export interface MdxNode<T = NodeFrontMatter> extends Node<T> {}
+export interface MdxNode<T = NodeFrontMatter, R = any> extends Node<T, R> {}
 
 export interface MdxParams {
-  components?: Record<string, React.ReactNode>
+  components?: Record<string, ReactNode>
   scope?: Record<string, unknown>
   mdxOptions?: {
-    remarkPlugins?: Pluggable[]
-    rehypePlugins?: Pluggable[]
-    format?: 'mdx' | 'md'
+    remarkPlugins?: SerializeOptions["mdxOptions"] extends infer T
+      ? T extends { remarkPlugins?: infer U }
+        ? U
+        : never
+      : never
+    rehypePlugins?: SerializeOptions["mdxOptions"] extends infer T
+      ? T extends { rehypePlugins?: infer U }
+        ? U
+        : never
+      : never
+    format?: SerializeOptions["mdxOptions"] extends infer T
+      ? T extends { format?: infer U }
+        ? U
+        : never
+      : never
   }
   parseFrontmatter?: boolean
+  blockJS?: boolean
+  blockDangerousJS?: boolean
 }
 
 export interface getAllMdxNodesParams extends MdxParams {
@@ -44,20 +56,20 @@ export interface getAllMdxNodesParams extends MdxParams {
 
 export interface MdxFileData<T = NodeFrontMatter> {
   hash: string
-  frontMatter?: T
-  content?: string
+  frontMatter: T
+  content: string
 }
 
-export async function getMdxNode<T extends MdxNode>(
+export async function getMdxNode<T extends MdxNode = MdxNode>(
   sourceName: string,
   context: string | GetStaticPropsContext<NodeJS.Dict<string[]>>,
   params?: MdxParams
-): Promise<T> {
+): Promise<T | null> {
   if (!context || (typeof context !== "string" && !context.params?.slug)) {
     throw new Error(`slug params missing from context`)
   }
 
-  const node = await getNode(sourceName, context)
+  const node = await getNode<T>(sourceName, context)
 
   if (!node) return null
 
@@ -67,11 +79,11 @@ export async function getMdxNode<T extends MdxNode>(
   }
 }
 
-export async function getAllMdxNodes<T extends MdxNode>(
+export async function getAllMdxNodes<T extends MdxNode = MdxNode>(
   sourceName: string,
   params?: getAllMdxNodesParams
 ): Promise<T[]> {
-  const nodes = await getAllNodes(sourceName)
+  const nodes = await getAllNodes<T>(sourceName)
 
   if (!nodes.length) return []
 
@@ -87,19 +99,25 @@ export async function getAllMdxNodes<T extends MdxNode>(
 }
 
 async function renderNodeMdx(node: Node, params?: MdxParams) {
+  const { scope, mdxOptions, parseFrontmatter, blockJS, blockDangerousJS } =
+    params ?? {}
+
   return await serialize(node.content, {
-    ...params,
+    mdxOptions,
+    parseFrontmatter,
+    blockJS,
+    blockDangerousJS,
     scope: {
-      ...params?.scope,
+      ...scope,
       ...node.frontMatter,
     },
   })
 }
 
-export async function getNode<T extends Node>(
+export async function getNode<T extends Node = Node>(
   sourceName: string,
   context: string | GetStaticPropsContext<NodeJS.Dict<string[]>>
-): Promise<T> {
+): Promise<T | null> {
   const files = await getFiles(sourceName)
 
   if (!files.length) return null
@@ -115,7 +133,7 @@ export async function getNode<T extends Node>(
 
   if (!file) return null
 
-  const node = await buildNodeFromFile(file)
+  const node = await buildNodeFromFile<T>(file)
 
   return <T>{
     ...node,
@@ -123,7 +141,7 @@ export async function getNode<T extends Node>(
   }
 }
 
-export async function getAllNodes<T extends Node>(
+export async function getAllNodes<T extends Node = Node>(
   sourceName: string
 ): Promise<T[]> {
   const sourceConfig = await getSourceConfig(sourceName)
@@ -136,7 +154,7 @@ export async function getAllNodes<T extends Node>(
 
   const nodes = await Promise.all<T>(
     files.map(async (file) => {
-      const node = await buildNodeFromFile(file)
+      const node = await buildNodeFromFile<T>(file)
 
       return <T>{
         ...node,
@@ -147,8 +165,8 @@ export async function getAllNodes<T extends Node>(
 
   const adjust = sortOrder === "desc" ? -1 : 1
   return <T[]>nodes.sort((a, b) => {
-    const aValue = a.frontMatter[sortBy]
-    const bValue = b.frontMatter[sortBy]
+    const aValue = (a.frontMatter as any)[sortBy]
+    const bValue = (b.frontMatter as any)[sortBy]
     if (aValue < bValue) {
       return -1 * adjust
     }
@@ -166,6 +184,8 @@ async function buildNodeFromFile<T extends Node>(file: MdxFile): Promise<T> {
     ...fileData,
     mdx: {
       compiledSource: "",
+      frontmatter: fileData.frontMatter,
+      scope: {},
     },
   }
 }
@@ -206,9 +226,17 @@ async function getNodeRelationships(node: Node): Promise<NodeRelationships> {
 
     if (!values) continue
 
-    const valueAsArray: string[] = Array.isArray(values) ? values : [values]
-    relationships[key] = await Promise.all(
+    const valueAsArray = (Array.isArray(values) ? values : [values]).filter(
+      (value): value is string => typeof value === "string"
+    )
+
+    if (!valueAsArray.length) continue
+
+    const relatedNodes = await Promise.all(
       valueAsArray.map(async (value) => await getNode(key, value))
+    )
+    relationships[key] = relatedNodes.filter(
+      (relatedNode): relatedNode is Node => relatedNode !== null
     )
   }
 

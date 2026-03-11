@@ -4,7 +4,8 @@
   "description": "Automatically optimize images used in next.js projects (jpeg, png, gif, svg).",
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "llms.txt"
   ],
   "scripts": {
     "lint": "eslint . --ignore-pattern examples",
@@ -15,7 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riceharvest/next-optimized-images.git"
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-optimized-images"
   },
   "keywords": [
     "nextjs",
@@ -26,28 +28,25 @@
     "optimize",
     "optimized-images"
   ],
-  "author": "Cyril Wanner <info@cyr.li>",
+  "author": "OpenSource Framework Contributors (fork), Original: Cyril Wanner",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/riceharvest/next-optimized-images/issues"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-optimized-images"
   },
-  "homepage": "https://github.com/riceharvest/next-optimized-images#readme",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-optimized-images#readme",
   "dependencies": {
     "chalk": "^2.4.2",
     "figures": "^3.0.0",
     "file-loader": "^6.2.0",
-    "imagemin": "^8.0.1",
-    "img-loader": "^4.0.0",
+    "loader-utils": "^3.3.1",
     "raw-loader": "^4.0.2",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.18",
-    "loader-utils": "^3.3.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18",
     "webpack": "^5.105.4"
-  },
-  "deprecated": "Use Next.js built-in next/image component instead. This package is maintained for legacy support only."
+  }
 }

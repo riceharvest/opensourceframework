@@ -590,6 +590,9 @@ class Grid extends React.PureComponent               {
   }
 
   componentDidMount() {
+    const initialScrollTop = this._initialScrollTop;
+    const initialScrollLeft = this._initialScrollLeft;
+
     const {
       getScrollbarSize,
       height,
@@ -601,10 +604,7 @@ class Grid extends React.PureComponent               {
     } = this.props;
 
     const {instanceProps} = this.state;
-
-    // Reset initial offsets to be ignored in browser
-    this._initialScrollTop = 0;
-    this._initialScrollLeft = 0;
+    const sizeIsBiggerThanZero = height > 0 && width > 0;
 
     // If cell sizes have been invalidated (eg we are using CellMeasurer) then reset cached positions.
     // We must do this at the start of the method as we may calculate and update scroll position below.
@@ -638,19 +638,27 @@ class Grid extends React.PureComponent               {
 
     // refs don't work in `react-test-renderer`
     if (this._scrollingContainer) {
+      const targetScrollLeft =
+        initialScrollLeft > 0 && sizeIsBiggerThanZero
+          ? initialScrollLeft
+          : this.state.scrollLeft;
+      const targetScrollTop =
+        initialScrollTop > 0 && sizeIsBiggerThanZero
+          ? initialScrollTop
+          : this.state.scrollTop;
+
       // setting the ref's scrollLeft and scrollTop.
       // Somehow in MultiGrid the main grid doesn't trigger a update on mount.
-      if (this._scrollingContainer.scrollLeft !== this.state.scrollLeft) {
-        this._scrollingContainer.scrollLeft = this.state.scrollLeft;
+      if (this._scrollingContainer.scrollLeft !== targetScrollLeft) {
+        this._scrollingContainer.scrollLeft = targetScrollLeft;
       }
-      if (this._scrollingContainer.scrollTop !== this.state.scrollTop) {
-        this._scrollingContainer.scrollTop = this.state.scrollTop;
+      if (this._scrollingContainer.scrollTop !== targetScrollTop) {
+        this._scrollingContainer.scrollTop = targetScrollTop;
       }
     }
 
     // Don't update scroll offset if the size is 0; we don't render any cells in this case.
     // Setting a state may cause us to later thing we've updated the offce when we haven't.
-    const sizeIsBiggerThanZero = height > 0 && width > 0;
     if (scrollToColumn >= 0 && sizeIsBiggerThanZero) {
       this._updateScrollLeftForScrollToColumn();
     }
@@ -670,6 +678,10 @@ class Grid extends React.PureComponent               {
     });
 
     this._maybeCallOnScrollbarPresenceChange();
+
+    // Reset initial offsets after the mount-time DOM sync completes.
+    this._initialScrollTop = 0;
+    this._initialScrollLeft = 0;
   }
 
   /**

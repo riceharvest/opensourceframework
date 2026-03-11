@@ -397,7 +397,7 @@ describe('Masonry', () => {
       expect(renderCallback.mock.calls[0][1].isScrolling).toEqual(true);
     });
 
-    it('should be reset after a small debounce when scrolling stops', () => {
+    it('should be reset after a small debounce when scrolling stops', async () => {
       const cellMeasurerCache = createCellMeasurerCache();
       const renderCallback = vi.fn().mockImplementation(index => index);
       const cellRenderer = createCellRenderer(
@@ -409,9 +409,8 @@ describe('Masonry', () => {
       );
       simulateScroll(rendered, 51);
       renderCallback.mockClear();
-      setTimeout(() => {
-        expect(renderCallback.mock.calls[0][1].isScrolling).toEqual(false);
-      }, 0);
+      await new Promise(resolve => setTimeout(resolve, 200));
+      expect(renderCallback.mock.calls[0][1].isScrolling).toEqual(false);
     });
   });
 

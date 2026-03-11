@@ -1,0 +1,22 @@
+# @opensourceframework/next-json-ld - AI Summary
+
+JSON-LD structured data helpers for Next.js SEO. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want Schema.org markup helpers without changing their existing content model.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-json-ld
+# or
+pnpm add @opensourceframework/next-json-ld
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-json-ld#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-json-ld
