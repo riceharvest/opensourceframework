@@ -10,20 +10,23 @@ export type PublicUser = {
   name: string;
 };
 
+const USERS_STORAGE_KEY = 'db_users';
+const CREDENTIALS_STORAGE_KEY = 'db_credentials';
+
 function readStoredUsers(): Record<string, PublicUser> {
-  const raw = window.localStorage.getItem("db_users");
+  const raw = window.localStorage.getItem(USERS_STORAGE_KEY);
   if (!raw) return {};
 
   try {
     const parsed = JSON.parse(raw) as Record<string, Partial<PublicUser>>;
     const safeUsers: Record<string, PublicUser> = {};
     for (const [email, user] of Object.entries(parsed)) {
-      if (typeof email !== "string") continue;
-      if (!user || typeof user !== "object") continue;
+      if (typeof email !== 'string') continue;
+      if (!user || typeof user !== 'object') continue;
       if (
-        typeof user.id === "string" &&
-        typeof user.email === "string" &&
-        typeof user.name === "string"
+        typeof user.id === 'string' &&
+        typeof user.email === 'string' &&
+        typeof user.name === 'string'
       ) {
         safeUsers[email] = user as PublicUser;
       }
@@ -34,20 +37,49 @@ function readStoredUsers(): Record<string, PublicUser> {
   }
 }
 
+function readStoredCredentials(): Record<string, string> {
+  const raw = window.localStorage.getItem(CREDENTIALS_STORAGE_KEY);
+  if (!raw) return {};
+
+  try {
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const safeCredentials: Record<string, string> = {};
+    for (const [email, hash] of Object.entries(parsed)) {
+      if (typeof email !== 'string') continue;
+      if (typeof hash !== 'string' || !hash) continue;
+      safeCredentials[email] = hash;
+    }
+    return safeCredentials;
+  } catch {
+    return {};
+  }
+}
+
 const users: Record<string, PublicUser> = readStoredUsers();
-const credentials: Record<string, string> = {};
+const credentials: Record<string, string> = readStoredCredentials();
+
+function persistDb() {
+  window.localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+  window.localStorage.setItem(CREDENTIALS_STORAGE_KEY, JSON.stringify(credentials));
+}
 
 async function hashPassword(password: string): Promise<string> {
   if (globalThis.crypto?.subtle) {
     const encoded = new TextEncoder().encode(password);
-    const digest = await globalThis.crypto.subtle.digest("SHA-256", encoded);
+    const digest = await globalThis.crypto.subtle.digest('SHA-256', encoded);
     return Array.from(new Uint8Array(digest))
-      .map((byte) => byte.toString(16).padStart(2, "0"))
-      .join("");
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
   }
 
-  // Fallback for environments without SubtleCrypto (example-only code path).
-  return `plain:${password}`;
+  // Example-only fallback when SubtleCrypto is unavailable. It avoids storing raw
+  // passwords but should not be used as production-grade password hashing.
+  let hash = 2166136261;
+  for (const char of password) {
+    hash ^= char.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `fnv1a:${(hash >>> 0).toString(16).padStart(8, '0')}`;
 }
 
 export async function setUser(data: DBUser) {
@@ -61,7 +93,7 @@ export async function setUser(data: DBUser) {
   const safeUser: PublicUser = { id: email, email, name };
   users[email] = safeUser;
   credentials[email] = await hashPassword(password);
-  window.localStorage.setItem("db_users", JSON.stringify(users));
+  persistDb();
 
   return safeUser;
 }
@@ -71,10 +103,7 @@ export function getUser(email: string | null) {
   return users[email];
 }
 
-export async function validatePassword(
-  email: string | null,
-  password: string | null
-) {
+export async function validatePassword(email: string | null, password: string | null) {
   if (!email || !password) return false;
   const storedHash = credentials[email];
   if (!storedHash) return false;

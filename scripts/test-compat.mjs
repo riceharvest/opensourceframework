@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { copyFile, mkdtemp, mkdir, rm, unlink, writeFile } from 'node:fs/promises';
+import { copyFile, mkdtemp, mkdir, readFile, rm, unlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
@@ -113,8 +113,30 @@ async function buildPackage(filter) {
   });
 }
 
+async function assertNoWorkspaceRuntimeDependencies(relativeDir) {
+  const packageDir = path.join(repoRoot, relativeDir);
+  const manifest = JSON.parse(await readFile(path.join(packageDir, 'package.json'), 'utf8'));
+  const offenders = [];
+
+  for (const section of ['dependencies', 'peerDependencies', 'optionalDependencies']) {
+    const entries = Object.entries(manifest[section] ?? {});
+    for (const [name, version] of entries) {
+      if (typeof version === 'string' && version.startsWith('workspace:')) {
+        offenders.push(`${section}.${name}=${version}`);
+      }
+    }
+  }
+
+  if (offenders.length > 0) {
+    throw new Error(
+      `${relativeDir} contains publish-blocking workspace protocol entries: ${offenders.join(', ')}`
+    );
+  }
+}
+
 async function packPackage(relativeDir, tarballDir) {
   const packageDir = path.join(repoRoot, relativeDir);
+  await assertNoWorkspaceRuntimeDependencies(relativeDir);
   const { stdout } = await run('npm', ['pack', '--json'], {
     cwd: packageDir,
     env: ciEnv,
@@ -180,6 +202,35 @@ async function smokeNextImages(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'pnpm', ['build']);
 }
 
+async function smokeNextComposePlugins(tarballPath, tempRoot) {
+  const fixtureDir = path.join(tempRoot, 'next-compose-plugins');
+  await mkdir(fixtureDir, { recursive: true });
+  await writeFiles(fixtureDir, {
+    'package.json': JSON.stringify(
+      {
+        name: 'compat-next-compose-plugins',
+        private: true,
+        dependencies: {
+          '@opensourceframework/next-compose-plugins': `file:${tarballPath}`,
+        },
+      },
+      null,
+      2
+    ),
+    'smoke.cjs': [
+      "const assert = require('node:assert/strict');",
+      "const withPlugins = require('@opensourceframework/next-compose-plugins');",
+      '',
+      "assert.equal(typeof withPlugins, 'function');",
+      "assert.equal(typeof withPlugins.optional, 'function');",
+      "assert.equal(typeof withPlugins.extend, 'function');",
+      '',
+    ].join('\n'),
+  });
+
+  await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
+}
+
 async function smokeNextOptimizedImages(tarballPath, tempRoot) {
   const fixtureDir = path.join(tempRoot, 'next-optimized-images');
   await mkdir(fixtureDir, { recursive: true });
@@ -230,11 +281,6 @@ async function smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot) {
       {
         name: 'compat-next-mdx',
         private: true,
-        pnpm: {
-          overrides: {
-            '@opensourceframework/next-mdx': `file:${nextMdxTarball}`,
-          },
-        },
         dependencies: {
           '@opensourceframework/next-mdx': `file:${nextMdxTarball}`,
           '@opensourceframework/next-mdx-toc': `file:${nextMdxTocTarball}`,
@@ -340,6 +386,64 @@ async function smokeReactVirtualized(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
 }
 
+async function smokeNextSession(tarballPath, tempRoot) {
+  const fixtureDir = path.join(tempRoot, 'next-session');
+  await mkdir(fixtureDir, { recursive: true });
+  await writeFiles(fixtureDir, {
+    'package.json': JSON.stringify(
+      {
+        name: 'compat-next-session',
+        private: true,
+        dependencies: {
+          '@opensourceframework/next-session': `file:${tarballPath}`,
+        },
+      },
+      null,
+      2
+    ),
+    'smoke.cjs': [
+      "const assert = require('node:assert/strict');",
+      "const nextSession = require('@opensourceframework/next-session');",
+      "const compat = require('@opensourceframework/next-session/lib/compat');",
+      '',
+      "assert.equal(typeof nextSession, 'function');",
+      "assert.equal(typeof compat.expressSession, 'function');",
+      "assert.equal(typeof compat.promisifyStore, 'function');",
+      '',
+    ].join('\n'),
+  });
+
+  await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
+}
+
+async function smokeNextAuth(tarballPath, tempRoot) {
+  const fixtureDir = path.join(tempRoot, 'next-auth');
+  await mkdir(fixtureDir, { recursive: true });
+  await writeFiles(fixtureDir, {
+    'package.json': JSON.stringify(
+      {
+        name: 'compat-next-auth',
+        private: true,
+        dependencies: {
+          '@opensourceframework/next-auth': `file:${tarballPath}`,
+        },
+      },
+      null,
+      2
+    ),
+    'smoke.cjs': [
+      "const assert = require('node:assert/strict');",
+      "const GoogleProvider = require('@opensourceframework/next-auth/providers/google');",
+      '',
+      "assert.equal(typeof GoogleProvider, 'function');",
+      "assert.equal(GoogleProvider({ clientId: 'id', clientSecret: 'secret' }).id, 'google');",
+      '',
+    ].join('\n'),
+  });
+
+  await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
+}
+
 async function main() {
   const tempRoot = await mkdtemp(path.join(os.tmpdir(), 'osf-compat-'));
   const tarballDir = path.join(tempRoot, 'tarballs');
@@ -347,13 +451,22 @@ async function main() {
 
   try {
     await buildPackage('@opensourceframework/next-images');
+    await buildPackage('@opensourceframework/next-compose-plugins');
     await buildPackage('@opensourceframework/next-mdx');
     await buildPackage('@opensourceframework/next-mdx-toc');
+    await buildPackage('@opensourceframework/next-session');
+    await buildPackage('@opensourceframework/next-auth');
     await buildPackage('@opensourceframework/react-virtualized');
 
     const nextImagesTarball = await packPackage('packages/next-images', tarballDir);
+    const nextComposePluginsTarball = await packPackage(
+      'packages/next-compose-plugins',
+      tarballDir
+    );
     const nextMdxTarball = await packPackage('packages/next-mdx', tarballDir);
     const nextMdxTocTarball = await packPackage('packages/next-mdx-toc', tarballDir);
+    const nextSessionTarball = await packPackage('packages/next-session', tarballDir);
+    const nextAuthTarball = await packPackage('packages/next-auth', tarballDir);
     const nextOptimizedImagesTarball = await packPackage(
       'packages/next-optimized-images',
       tarballDir
@@ -361,8 +474,11 @@ async function main() {
     const reactVirtualizedTarball = await packPackage('packages/react-virtualized', tarballDir);
 
     await smokeNextImages(nextImagesTarball, tempRoot);
+    await smokeNextComposePlugins(nextComposePluginsTarball, tempRoot);
     await smokeNextOptimizedImages(nextOptimizedImagesTarball, tempRoot);
     await smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot);
+    await smokeNextSession(nextSessionTarball, tempRoot);
+    await smokeNextAuth(nextAuthTarball, tempRoot);
     await smokeReactVirtualized(reactVirtualizedTarball, tempRoot);
 
     console.log('Compatibility smoke checks passed.');

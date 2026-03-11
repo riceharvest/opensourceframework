@@ -60,6 +60,17 @@ async function _buildProvidersIndex() {
   console.log("[build] generated providers/index.js")
 }
 
+const providersDir = path.join(__dirname, "src/providers")
+const providerEntries = Object.fromEntries(
+  fs
+    .readdirSync(providersDir, "utf8")
+    .filter((file) => file !== "index.js" && file.endsWith(".js"))
+    .map((file) => [
+      `providers/${path.basename(file, ".js")}`,
+      path.join("src/providers", file),
+    ]),
+)
+
 async function _createModuleEntries() {
   const entries = {
     "index.js": 'module.exports = require("./dist/server").default\n',
@@ -88,6 +99,7 @@ export default defineConfig({
     "adapters/typeorm": "src/adapters/typeorm.js",
     "client/index": "src/client/index.js",
     "providers/index": "src/providers/index.js",
+    ...providerEntries,
   },
   outDir: "dist",
   format: ["cjs", "esm"],

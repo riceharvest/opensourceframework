@@ -12,10 +12,12 @@
   "main": "./lib/session.cjs",
   "exports": {
     ".": {
+      "types": "./lib/session.d.ts",
       "import": "./lib/session.js",
       "require": "./lib/session.cjs"
     },
     "./lib/compat": {
+      "types": "./lib/compat.d.ts",
       "import": "./lib/compat.js",
       "require": "./lib/compat.cjs"
     }
@@ -29,7 +31,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint . --ignore-pattern examples",
+    "lint": "eslint . --ignore-pattern examples --ignore-pattern lib --ignore-pattern dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",

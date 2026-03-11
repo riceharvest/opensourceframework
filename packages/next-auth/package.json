@@ -13,7 +13,7 @@
     "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-auth"
   },
   "main": "index.js",
-  "types": "./index.d.ts",
+  "types": "./types/index.d.ts",
   "keywords": [
     "react",
     "nodejs",
@@ -27,17 +27,45 @@
     "nextauth"
   ],
   "exports": {
-    ".": "./dist/server/index.js",
-    "./jwt": "./dist/lib/jwt.js",
-    "./adapters": "./dist/adapters/index.js",
-    "./client": "./dist/client/index.js",
-    "./providers": "./dist/providers/index.js",
-    "./providers/*": "./dist/providers/*.js",
-    "./errors": "./dist/lib/errors.js"
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./index.js"
+    },
+    "./jwt": {
+      "types": "./types/jwt.d.ts",
+      "import": "./dist/lib/jwt.mjs",
+      "require": "./jwt.js"
+    },
+    "./adapters": {
+      "types": "./types/adapters.d.ts",
+      "import": "./dist/adapters/index.mjs",
+      "require": "./adapters.js"
+    },
+    "./client": {
+      "types": "./types/client.d.ts",
+      "import": "./dist/client/index.mjs",
+      "require": "./client.js"
+    },
+    "./providers": {
+      "types": "./types/providers.d.ts",
+      "import": "./dist/providers/index.mjs",
+      "require": "./providers.js"
+    },
+    "./providers/*": {
+      "types": "./dist/providers/*.d.ts",
+      "import": "./dist/providers/*.mjs",
+      "require": "./dist/providers-cjs/*.cjs"
+    },
+    "./errors": {
+      "types": "./types/errors.d.ts",
+      "import": "./dist/lib/errors.mjs",
+      "require": "./errors.js"
+    }
   },
   "scripts": {
-    "build": "node scripts/prebuild.mjs && tsup --config tsup.config.mjs",
-    "build:js": "tsup --config tsup.config.mjs",
+    "build": "node scripts/prebuild.mjs && tsup --config tsup.config.mjs && node scripts/postbuild.mjs",
+    "build:js": "tsup --config tsup.config.mjs && node scripts/postbuild.mjs",
     "build:css": "postcss --config config/postcss.config.js src/**/*.css --base src --dir dist && node config/wrap-css.js",
     "dev:setup": "npm i && npm run build:css && cd app && npm i",
     "dev": "cd app && npm run dev",
@@ -55,18 +83,12 @@
   "files": [
     "dist",
     "index.js",
-    "index.d.ts",
     "providers.js",
-    "providers.d.ts",
     "adapters.js",
-    "adapters.d.ts",
     "client.js",
-    "client.d.ts",
     "errors.js",
-    "errors.d.ts",
     "jwt.js",
-    "jwt.d.ts",
-    "internals",
+    "types",
     "llms.txt"
   ],
   "license": "ISC",

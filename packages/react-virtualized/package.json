@@ -27,6 +27,7 @@
   },
   "files": [
     "dist",
+    "index.d.ts",
     "styles.css",
     "llms.txt"
   ],
@@ -85,5 +86,5 @@
       "loose-envify"
     ]
   },
-  "types": "dist/index.d.ts"
+  "types": "index.d.ts"
 }

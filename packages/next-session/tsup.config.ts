@@ -1,7 +1,11 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    session: 'src/index.ts',
+    compat: 'src/compat.ts',
+  },
+  outDir: 'lib',
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
@@ -9,7 +13,7 @@ export default defineConfig({
   clean: true,
   minify: false,
   treeshake: true,
-  external: ['next', 'cookie','nanoid'],
+  external: ['next', 'cookie', 'nanoid'],
   esbuildOptions(options) {
     options.banner = {
       js: `/**
