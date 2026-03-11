@@ -19,7 +19,7 @@
       },
       "require": {
         "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
+        "default": "./index.cjs"
       }
     },
     "./package.json": "./package.json",
@@ -32,11 +32,12 @@
       ]
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "index.cjs",
     "src/global.d.ts",
     "README.md",
     "CHANGELOG.md",

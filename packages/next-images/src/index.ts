@@ -62,13 +62,19 @@ function withImages(nextConfig: WithImagesOptions = {}): WithImagesResult {
     ...restConfig
   } = nextConfig;
 
-  return Object.assign({}, restConfig as NextConfig, {
-    serverRuntimeConfig: dynamicAssetPrefix
-      ? Object.assign({}, nextConfig.serverRuntimeConfig, {
-          nextImagesAssetPrefix: assetPrefix || basePath,
-        })
-      : nextConfig.serverRuntimeConfig,
+  const serverRuntimeConfig = dynamicAssetPrefix
+    ? Object.assign({}, nextConfig.serverRuntimeConfig, {
+        nextImagesAssetPrefix: assetPrefix || basePath,
+      })
+    : nextConfig.serverRuntimeConfig;
 
+  const config = Object.assign({}, restConfig as NextConfig) as WithImagesResult;
+
+  if (serverRuntimeConfig !== undefined) {
+    config.serverRuntimeConfig = serverRuntimeConfig;
+  }
+
+  return Object.assign(config, {
     webpack(config: WebpackConfig, options: WebpackConfigContext): WebpackConfig {
       const { isServer } = options;
 

@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 import { describe, expect, it, vi } from 'vitest';
 import withImages, {
   DEFAULT_FILE_EXTENSIONS,
@@ -15,9 +16,7 @@ function createWebpackConfig(): WebpackConfig {
   };
 }
 
-function createWebpackContext(
-  overrides: Partial<WebpackConfigContext> = {}
-): WebpackConfigContext {
+function createWebpackContext(overrides: Partial<WebpackConfigContext> = {}): WebpackConfigContext {
   return {
     isServer: false,
     defaultLoaders: {
@@ -31,6 +30,15 @@ describe('@opensourceframework/next-images', () => {
   it('exports the plugin as default and named export', () => {
     expect(typeof withImages).toBe('function');
     expect(withImagesNamed).toBe(withImages);
+  });
+
+  it('preserves CommonJS require compatibility', () => {
+    const require = createRequire(import.meta.url);
+    const cjsEntry = require('../index.cjs');
+
+    expect(typeof cjsEntry).toBe('function');
+    expect(cjsEntry).toBe(cjsEntry.default);
+    expect(cjsEntry.withImages).toBe(cjsEntry);
   });
 
   it('exports default constants', () => {
@@ -58,6 +66,12 @@ describe('@opensourceframework/next-images', () => {
     expect(options.publicPath).toBe('/_next/static/images/');
     expect(options.name).toBe(DEFAULT_NAME);
     expect(options.esModule).toBe(false);
+  });
+
+  it('does not expose server runtime config unless it is explicitly needed', () => {
+    const nextConfig = withImages();
+
+    expect('serverRuntimeConfig' in nextConfig).toBe(false);
   });
 
   it('uses server output paths for server builds', () => {
@@ -119,6 +133,18 @@ describe('@opensourceframework/next-images', () => {
     expect((options.postTransformPublicPath as (value: string) => string)('"asset.png"')).toContain(
       'nextImagesAssetPrefix'
     );
+  });
+
+  it('preserves explicit server runtime config when provided directly', () => {
+    const nextConfig = withImages({
+      serverRuntimeConfig: {
+        existing: true,
+      },
+    });
+
+    expect(nextConfig.serverRuntimeConfig).toEqual({
+      existing: true,
+    });
   });
 
   it('calls a custom webpack function if provided', () => {

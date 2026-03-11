@@ -10,13 +10,34 @@ const { showWarning } = require('./migrater');
  * @returns {object}
  */
 const withOptimizedImages = (nextConfig = {}, nextComposePlugins = {}) => {
-  const { optimizeImages, optimizeImagesInDev, overwriteImageLoaderPaths } = getConfig(nextConfig);
+  const pluginConfig = getConfig(nextConfig);
+  const { optimizeImages, optimizeImagesInDev, overwriteImageLoaderPaths } = pluginConfig;
+  const {
+    optimizeImages: _optimizeImages,
+    optimizeImagesInDev: _optimizeImagesInDev,
+    handleImages: _handleImages,
+    imagesFolder: _imagesFolder,
+    imagesName: _imagesName,
+    removeOriginalExtension: _removeOriginalExtension,
+    inlineImageLimit: _inlineImageLimit,
+    defaultImageLoader: _defaultImageLoader,
+    mozjpeg: _mozjpeg,
+    optipng: _optipng,
+    pngquant: _pngquant,
+    gifsicle: _gifsicle,
+    svgo: _svgo,
+    svgSpriteLoader: _svgSpriteLoader,
+    webp: _webp,
+    overwriteImageLoaderPaths: _overwriteImageLoaderPaths,
+    webpack: customWebpack,
+    ...cleanNextConfig
+  } = nextConfig;
 
-  return Object.assign({}, nextConfig, {
+  return Object.assign({}, cleanNextConfig, {
     webpack(config, options) {
       if (!options.defaultLoaders) {
         throw new Error(
-          'This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade',
+          'This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade'
         );
       }
 
@@ -27,13 +48,12 @@ const withOptimizedImages = (nextConfig = {}, nextComposePlugins = {}) => {
       const detectedLoaders = detectLoaders(overwriteImageLoaderPaths);
 
       // check if it should optimize images in the current step
-      const optimizeInCurrentStep = nextComposePlugins && typeof nextComposePlugins.phase === 'string'
-        ? (
-          (nextComposePlugins.phase === 'phase-production-build' && optimizeImages)
-          || (nextComposePlugins.phase === 'phase-export' && optimizeImages)
-          || (nextComposePlugins.phase === 'phase-development-server' && optimizeImagesInDev)
-        )
-        : ((!dev && optimizeImages) || (dev && optimizeImagesInDev));
+      const optimizeInCurrentStep =
+        nextComposePlugins && typeof nextComposePlugins.phase === 'string'
+          ? (nextComposePlugins.phase === 'phase-production-build' && optimizeImages) ||
+            (nextComposePlugins.phase === 'phase-export' && optimizeImages) ||
+            (nextComposePlugins.phase === 'phase-development-server' && optimizeImagesInDev)
+          : (!dev && optimizeImages) || (dev && optimizeImagesInDev);
 
       // show a warning if images should get optimized but no loader is installed
       if (optimizeImages && getNumOptimizationLoadersInstalled(detectedLoaders) === 0 && isServer) {
@@ -46,10 +66,19 @@ const withOptimizedImages = (nextConfig = {}, nextComposePlugins = {}) => {
           if (rule.oneOf) {
             rule.oneOf.forEach((subRule) => {
               if (
-                subRule.issuer && !subRule.test && !subRule.include && subRule.exclude
-                && subRule.use && subRule.use.options && subRule.use.options.name
+                subRule.issuer &&
+                !subRule.test &&
+                !subRule.include &&
+                subRule.exclude &&
+                subRule.use &&
+                subRule.use.options &&
+                subRule.use.options.name
               ) {
-                if ((String(subRule.issuer.test) === '/\\.(css|scss|sass)$/' || String(subRule.issuer) === '/\\.(css|scss|sass)$/') && subRule.use.options.name.startsWith('static/media/')) {
+                if (
+                  (String(subRule.issuer.test) === '/\\.(css|scss|sass)$/' ||
+                    String(subRule.issuer) === '/\\.(css|scss|sass)$/') &&
+                  subRule.use.options.name.startsWith('static/media/')
+                ) {
                   subRule.exclude.push(/\.(jpg|jpeg|png|svg|webp|gif|ico)$/);
                 }
               }
@@ -59,11 +88,16 @@ const withOptimizedImages = (nextConfig = {}, nextComposePlugins = {}) => {
       }
 
       // append loaders
-      enrichedConfig = appendLoaders(enrichedConfig, getConfig(nextConfig), detectedLoaders,
-        isServer, optimizeInCurrentStep);
+      enrichedConfig = appendLoaders(
+        enrichedConfig,
+        pluginConfig,
+        detectedLoaders,
+        isServer,
+        optimizeInCurrentStep
+      );
 
-      if (typeof nextConfig.webpack === 'function') {
-        return nextConfig.webpack(enrichedConfig, options);
+      if (typeof customWebpack === 'function') {
+        return customWebpack(enrichedConfig, options);
       }
 
       return enrichedConfig;

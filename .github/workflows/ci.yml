@@ -124,10 +124,34 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
+  compat:
+    needs: [prepare-deps]
+    name: Compatibility Smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Compatibility Smoke Checks
+        run: pnpm test:compat
+
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, typecheck, test-matrix]
+    needs: [lint, typecheck, test-matrix, compat]
     steps:
       - uses: actions/checkout@v4
 
@@ -178,7 +202,6 @@ jobs:
 
       - name: Run Security Audit
         run: pnpm audit --audit-level=moderate
-        continue-on-error: true
 
       - name: Run Snyk Security Scan
         uses: snyk/actions/node@master

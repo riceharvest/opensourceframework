@@ -7,10 +7,16 @@ const getNextConfig = (options, webpackOptions = {}) => {
     },
   };
 
-  return withOptimizedImages(options).webpack(Object.assign({}, webpackConfig), Object.assign({
-    defaultLoaders: [],
-    dev: false,
-  }, webpackOptions));
+  return withOptimizedImages(options).webpack(
+    Object.assign({}, webpackConfig),
+    Object.assign(
+      {
+        defaultLoaders: [],
+        dev: false,
+      },
+      webpackOptions
+    )
+  );
 };
 
 describe('next-optimized-images', () => {
@@ -66,20 +72,40 @@ describe('next-optimized-images', () => {
   });
 
   it('propagates and merges configuration', () => {
-    const config = getNextConfig({
-      webpack: (webpackConfig, webpackOptions) => {
-        expect(webpackConfig.module.rules).toHaveLength(2);
-        expect(webpackOptions.dev).toEqual(false);
-        expect(webpackOptions.foo).toEqual('bar');
+    const config = getNextConfig(
+      {
+        webpack: (webpackConfig, webpackOptions) => {
+          expect(webpackConfig.module.rules).toHaveLength(2);
+          expect(webpackOptions.dev).toEqual(false);
+          expect(webpackOptions.foo).toEqual('bar');
 
-        return Object.assign({
-          changed: true,
-        }, webpackConfig);
+          return Object.assign(
+            {
+              changed: true,
+            },
+            webpackConfig
+          );
+        },
       },
-    }, { foo: 'bar' });
+      { foo: 'bar' }
+    );
 
     expect(config.module.rules).toHaveLength(2);
     expect(config.changed).toEqual(true);
+  });
+
+  it('does not leak plugin-only options into the next.js config object', () => {
+    const config = withOptimizedImages({
+      handleImages: ['svg'],
+      inlineImageLimit: false,
+      optimizeImages: false,
+      assetPrefix: 'https://cdn.example.com',
+    });
+
+    expect(config.handleImages).toBeUndefined();
+    expect(config.inlineImageLimit).toBeUndefined();
+    expect(config.optimizeImages).toBeUndefined();
+    expect(config.assetPrefix).toEqual('https://cdn.example.com');
   });
 
   it('only supports next.js >= 5', () => {
