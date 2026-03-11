@@ -439,9 +439,18 @@ async function smokeNextAuth(tarballPath, tempRoot) {
       "assert.equal(GoogleProvider({ clientId: 'id', clientSecret: 'secret' }).id, 'google');",
       '',
     ].join('\n'),
+    'smoke.mjs': [
+      "import assert from 'node:assert/strict';",
+      "import GoogleProvider from '@opensourceframework/next-auth/providers/google';",
+      '',
+      "assert.equal(typeof GoogleProvider, 'function');",
+      "assert.equal(GoogleProvider({ clientId: 'id', clientSecret: 'secret' }).id, 'google');",
+      '',
+    ].join('\n'),
   });
 
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
+  await installAndRun(fixtureDir, 'node', ['smoke.mjs']);
 }
 
 async function main() {
