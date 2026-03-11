@@ -2,7 +2,6 @@
 import { headers, cookies } from 'next/headers';
 import { unsign } from 'cookie-signature';
 import { createToken } from './utils/create-token';
-import { CsrfErrorCodes } from './types';
 
 export interface VerifyCsrfTokenOptions {
   tokenKey?: string;

@@ -38,7 +38,7 @@ describe('next-cookies', () => {
   });
 
   it('should handle undefined context', () => {
-    // @ts-ignore
+    // @ts-expect-error intentionally exercises the undefined input fallback
     const cookies = nextCookies(undefined);
     expect(cookies).toEqual({});
   });
