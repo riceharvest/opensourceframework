@@ -7,6 +7,7 @@
 "@opensourceframework/next-images": patch
 "@opensourceframework/next-optimized-images": patch
 "@opensourceframework/next-compose-plugins": minor
+"@opensourceframework/next-transpile-modules": minor
 ---
 
 - **next-csrf**: Added App Router support with `verifyCsrfToken` and automated tests.
@@ -16,3 +17,4 @@
 - **next-pwa**: Improved test discoverability and added E2E test scripts.
 - **next-images / next-optimized-images**: Formally marked as deprecated.
 - **next-compose-plugins**: Added support for async plugin functions and async `next.config.js` for Next.js 16 compatibility.
+- **next-transpile-modules**: Added support for Next.js 13+ native `transpilePackages` for better performance and Turbopack compatibility.

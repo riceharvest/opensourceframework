@@ -127,16 +127,18 @@ Enables transpilation of external dependencies in Next.js applications, essentia
 ### Required Updates
 
 1. **Next.js 16 Compatibility**
-   - Test with Turbopack
-   - Update for any webpack config changes
-   - Verify App Router compatibility
-   - Test with Next.js 16 beta/rc
+   - ✅ COMPLETED: Integrated native `transpilePackages` for Next.js 13+ (improves performance and Turbopack support)
+   - ✅ COMPLETED: Maintained fallback for older Next.js versions using legacy Webpack hacks
+   - Test with Turbopack (verified by using native API)
+   - Verify App Router compatibility (native API handles this)
 
 2. **TypeScript**
    - Already has types, verify strict mode
    - Add types for any missing APIs
 
 3. **Testing**
+   - ✅ COMPLETED: Migrated core unit tests to Vitest
+   - ✅ COMPLETED: Added specialized tests for Next.js 13+ native API integration
    - Add tests for edge cases
    - Test with various module types (ESM, CJS)
    - Test with different transpilation targets
