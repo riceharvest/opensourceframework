@@ -124,7 +124,6 @@ export default tseslint.config(
       "**/package-lock.json",
       "**/pnpm-lock.yaml",
       "**/.next/",
-      "**/examples/",
       "packages/next-pwa/test-app/public/service-worker.js",
     ],
   },
