@@ -1,4 +1,4 @@
-import { SoftwareApplicationJsonLd } from "next-seo";
+import { SoftwareApplicationJsonLd } from '@opensourceframework/next-seo';
 
 export default function WebAppPage() {
   return (
@@ -9,7 +9,7 @@ export default function WebAppPage() {
         description="Real-time collaboration platform for modern teams with document sharing, video conferencing, and project management"
         url="https://app.cloudsyncpro.com"
         image={{
-          url: "https://example.com/cloudsync-logo.svg",
+          url: 'https://example.com/cloudsync-logo.svg',
           width: 512,
           height: 512,
         }}
@@ -19,21 +19,21 @@ export default function WebAppPage() {
         offers={[
           {
             price: 0,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            url: "https://app.cloudsyncpro.com/signup/free",
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            url: 'https://app.cloudsyncpro.com/signup/free',
           },
           {
             price: 12,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            url: "https://app.cloudsyncpro.com/signup/pro",
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            url: 'https://app.cloudsyncpro.com/signup/pro',
           },
           {
             price: 25,
-            priceCurrency: "USD",
-            availability: "https://schema.org/InStock",
-            url: "https://app.cloudsyncpro.com/signup/enterprise",
+            priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
+            url: 'https://app.cloudsyncpro.com/signup/enterprise',
           },
         ]}
         aggregateRating={{
@@ -44,96 +44,96 @@ export default function WebAppPage() {
         review={[
           {
             author: {
-              name: "TechStartup Inc.",
-              "@type": "Organization",
+              name: 'TechStartup Inc.',
+              '@type': 'Organization',
             },
             reviewRating: { ratingValue: 5 },
             reviewBody:
-              "CloudSync Pro transformed how our remote team collaborates. The real-time features are incredible!",
-            datePublished: "2024-11-05",
+              'CloudSync Pro transformed how our remote team collaborates. The real-time features are incredible!',
+            datePublished: '2024-11-05',
           },
           {
-            author: "David Kim",
+            author: 'David Kim',
             reviewRating: { ratingValue: 4 },
             reviewBody:
-              "Excellent features and reliability. Would benefit from more integrations with design tools.",
-            datePublished: "2024-10-20",
+              'Excellent features and reliability. Would benefit from more integrations with design tools.',
+            datePublished: '2024-10-20',
           },
         ]}
         screenshot={[
           {
-            url: "https://example.com/screenshots/cloudsync-dashboard.png",
-            caption: "Team dashboard with project overview",
+            url: 'https://example.com/screenshots/cloudsync-dashboard.png',
+            caption: 'Team dashboard with project overview',
           },
           {
-            url: "https://example.com/screenshots/cloudsync-editor.png",
-            caption: "Real-time collaborative document editor",
+            url: 'https://example.com/screenshots/cloudsync-editor.png',
+            caption: 'Real-time collaborative document editor',
           },
           {
-            url: "https://example.com/screenshots/cloudsync-video.png",
-            caption: "Built-in video conferencing",
+            url: 'https://example.com/screenshots/cloudsync-video.png',
+            caption: 'Built-in video conferencing',
           },
           {
-            url: "https://example.com/screenshots/cloudsync-kanban.png",
-            caption: "Kanban board for project management",
+            url: 'https://example.com/screenshots/cloudsync-kanban.png',
+            caption: 'Kanban board for project management',
           },
         ]}
         featureList={[
-          "Real-time collaborative editing",
-          "HD video conferencing (up to 100 participants)",
-          "Unlimited cloud storage",
-          "Advanced project management tools",
-          "End-to-end encryption",
-          "API access for integrations",
-          "Mobile responsive design",
-          "Offline mode with sync",
-          "Two-factor authentication",
-          "Custom branding options",
+          'Real-time collaborative editing',
+          'HD video conferencing (up to 100 participants)',
+          'Unlimited cloud storage',
+          'Advanced project management tools',
+          'End-to-end encryption',
+          'API access for integrations',
+          'Mobile responsive design',
+          'Offline mode with sync',
+          'Two-factor authentication',
+          'Custom branding options',
         ]}
         softwareVersion="8.5.3"
         datePublished="2018-09-01"
         dateModified="2024-11-25"
         author={{
-          name: "CloudSync Technologies",
-          url: "https://cloudsynctech.com",
+          name: 'CloudSync Technologies',
+          url: 'https://cloudsynctech.com',
         }}
         publisher={{
-          name: "CloudSync Technologies Inc.",
-          url: "https://cloudsynctech.com",
+          name: 'CloudSync Technologies Inc.',
+          url: 'https://cloudsynctech.com',
           logo: {
-            url: "https://cloudsynctech.com/press/logo.png",
+            url: 'https://cloudsynctech.com/press/logo.png',
             width: 600,
             height: 60,
           },
           address: {
-            streetAddress: "123 Tech Boulevard",
-            addressLocality: "San Francisco",
-            addressRegion: "CA",
-            postalCode: "94105",
-            addressCountry: "US",
+            streetAddress: '123 Tech Boulevard',
+            addressLocality: 'San Francisco',
+            addressRegion: 'CA',
+            postalCode: '94105',
+            addressCountry: 'US',
           },
         }}
         countriesSupported={[
-          "US",
-          "CA",
-          "GB",
-          "DE",
-          "FR",
-          "ES",
-          "IT",
-          "NL",
-          "SE",
-          "NO",
-          "DK",
-          "FI",
-          "AU",
-          "NZ",
-          "JP",
-          "SG",
-          "HK",
-          "IN",
-          "BR",
-          "MX",
+          'US',
+          'CA',
+          'GB',
+          'DE',
+          'FR',
+          'ES',
+          'IT',
+          'NL',
+          'SE',
+          'NO',
+          'DK',
+          'FI',
+          'AU',
+          'NZ',
+          'JP',
+          'SG',
+          'HK',
+          'IN',
+          'BR',
+          'MX',
         ]}
       />
 
@@ -143,9 +143,7 @@ export default function WebAppPage() {
             <span className="text-white text-3xl font-bold">CS</span>
           </div>
           <h1 className="text-5xl font-bold mb-4">CloudSync Pro</h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Where teams achieve more together
-          </p>
+          <p className="text-xl text-gray-600 mb-8">Where teams achieve more together</p>
           <div className="flex justify-center space-x-4">
             <a
               href="#"
@@ -165,9 +163,7 @@ export default function WebAppPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 text-center">
             <h3 className="text-4xl font-bold text-blue-600 mb-2">Free</h3>
-            <p className="text-gray-600 mb-4">
-              For individuals and small teams
-            </p>
+            <p className="text-gray-600 mb-4">For individuals and small teams</p>
             <ul className="text-left space-y-2 text-sm">
               <li>✓ Up to 5 team members</li>
               <li>✓ 10GB storage</li>
@@ -208,46 +204,37 @@ export default function WebAppPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="text-4xl mb-4">📝</div>
-              <h3 className="text-xl font-semibold mb-2">
-                Real-time Collaboration
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Real-time Collaboration</h3>
               <p className="text-gray-600">
-                Work together on documents, spreadsheets, and presentations in
-                real-time
+                Work together on documents, spreadsheets, and presentations in real-time
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="text-4xl mb-4">📹</div>
               <h3 className="text-xl font-semibold mb-2">Video Conferencing</h3>
               <p className="text-gray-600">
-                HD video calls with screen sharing, recording, and up to 100
-                participants
+                HD video calls with screen sharing, recording, and up to 100 participants
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="text-4xl mb-4">📊</div>
               <h3 className="text-xl font-semibold mb-2">Project Management</h3>
               <p className="text-gray-600">
-                Kanban boards, Gantt charts, and agile tools to keep projects on
-                track
+                Kanban boards, Gantt charts, and agile tools to keep projects on track
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-xl font-semibold mb-2">
-                Enterprise Security
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">Enterprise Security</h3>
               <p className="text-gray-600">
-                End-to-end encryption, SSO, 2FA, and compliance with SOC 2 and
-                GDPR
+                End-to-end encryption, SSO, 2FA, and compliance with SOC 2 and GDPR
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="text-4xl mb-4">🔌</div>
               <h3 className="text-xl font-semibold mb-2">1000+ Integrations</h3>
               <p className="text-gray-600">
-                Connect with Slack, GitHub, Jira, Salesforce, and all your
-                favorite tools
+                Connect with Slack, GitHub, Jira, Salesforce, and all your favorite tools
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-6">
@@ -261,9 +248,7 @@ export default function WebAppPage() {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Trusted by teams worldwide
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Trusted by teams worldwide</h2>
           <div className="bg-gray-50 rounded-lg p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
               <div className="text-center">
@@ -291,8 +276,7 @@ export default function WebAppPage() {
           <h2 className="text-2xl font-semibold mb-4">Browser Requirements</h2>
           <div className="bg-white rounded-lg shadow p-6">
             <p className="text-gray-700 mb-4">
-              CloudSync Pro works best with modern browsers. For optimal
-              performance, please use:
+              CloudSync Pro works best with modern browsers. For optimal performance, please use:
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">

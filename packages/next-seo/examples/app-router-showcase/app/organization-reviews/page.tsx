@@ -1,4 +1,4 @@
-import { OrganizationJsonLd } from "next-seo";
+import { OrganizationJsonLd } from '@opensourceframework/next-seo';
 
 export default function OrganizationReviewsPage() {
   return (
@@ -8,35 +8,32 @@ export default function OrganizationReviewsPage() {
         url="https://www.acmesoftware.com"
         logo="https://www.acmesoftware.com/logo.png"
         description="Acme Software delivers enterprise-grade solutions for businesses worldwide"
-        sameAs={[
-          "https://twitter.com/acmesoftware",
-          "https://linkedin.com/company/acme-software",
-        ]}
+        sameAs={['https://twitter.com/acmesoftware', 'https://linkedin.com/company/acme-software']}
         telephone="+1-800-555-0199"
         email="info@acmesoftware.com"
         review={[
           {
-            author: "Sarah Johnson",
+            author: 'Sarah Johnson',
             reviewBody:
-              "Acme Software transformed our business operations. Their enterprise platform is reliable and their support team is outstanding.",
+              'Acme Software transformed our business operations. Their enterprise platform is reliable and their support team is outstanding.',
             reviewRating: {
               ratingValue: 5,
               bestRating: 5,
             },
-            datePublished: "2025-06-15",
+            datePublished: '2025-06-15',
           },
           {
             author: {
-              name: "Michael Chen",
-              url: "https://example.com/michael-chen",
+              name: 'Michael Chen',
+              url: 'https://example.com/michael-chen',
             },
             reviewBody:
-              "Great software solutions with excellent customer service. Highly recommend for mid-size businesses.",
+              'Great software solutions with excellent customer service. Highly recommend for mid-size businesses.',
             reviewRating: {
               ratingValue: 4,
               bestRating: 5,
             },
-            datePublished: "2025-08-22",
+            datePublished: '2025-08-22',
           },
         ]}
         aggregateRating={{
@@ -54,9 +51,9 @@ export default function OrganizationReviewsPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">About Us</h2>
           <p className="text-gray-700 mb-4">
-            Acme Software delivers enterprise-grade solutions for businesses
-            worldwide. With over 300 verified reviews and an average rating of
-            4.6 out of 5, we are trusted by thousands of organizations.
+            Acme Software delivers enterprise-grade solutions for businesses worldwide. With over
+            300 verified reviews and an average rating of 4.6 out of 5, we are trusted by thousands
+            of organizations.
           </p>
         </section>
 
@@ -69,9 +66,8 @@ export default function OrganizationReviewsPage() {
                 <span className="ml-2 text-yellow-500">5/5</span>
               </div>
               <p className="text-gray-700">
-                Acme Software transformed our business operations. Their
-                enterprise platform is reliable and their support team is
-                outstanding.
+                Acme Software transformed our business operations. Their enterprise platform is
+                reliable and their support team is outstanding.
               </p>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -80,8 +76,8 @@ export default function OrganizationReviewsPage() {
                 <span className="ml-2 text-yellow-500">4/5</span>
               </div>
               <p className="text-gray-700">
-                Great software solutions with excellent customer service. Highly
-                recommend for mid-size businesses.
+                Great software solutions with excellent customer service. Highly recommend for
+                mid-size businesses.
               </p>
             </div>
           </div>

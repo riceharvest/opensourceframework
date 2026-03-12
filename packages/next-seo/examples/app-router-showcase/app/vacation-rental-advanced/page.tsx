@@ -1,19 +1,19 @@
-import { VacationRentalJsonLd } from "next-seo";
+import { VacationRentalJsonLd } from '@opensourceframework/next-seo';
 
 export default function VacationRentalAdvancedPage() {
   return (
     <div className="container mx-auto p-8">
       <VacationRentalJsonLd
         containsPlace={{
-          additionalType: "EntirePlace",
+          additionalType: 'EntirePlace',
           bed: [
             {
               numberOfBeds: 1,
-              typeOfBed: "Queen",
+              typeOfBed: 'Queen',
             },
             {
               numberOfBeds: 2,
-              typeOfBed: "Single",
+              typeOfBed: 'Single',
             },
           ],
           occupancy: {
@@ -21,53 +21,53 @@ export default function VacationRentalAdvancedPage() {
           },
           amenityFeature: [
             {
-              name: "ac",
+              name: 'ac',
               value: true,
             },
             {
-              name: "wifi",
+              name: 'wifi',
               value: true,
             },
             {
-              name: "beachAccess",
+              name: 'beachAccess',
               value: true,
             },
             {
-              name: "pool",
+              name: 'pool',
               value: true,
             },
             {
-              name: "balcony",
+              name: 'balcony',
               value: true,
             },
             {
-              name: "kitchen",
+              name: 'kitchen',
               value: true,
             },
             {
-              name: "washerDryer",
+              name: 'washerDryer',
               value: true,
             },
             {
-              name: "poolType",
-              value: "Outdoor",
+              name: 'poolType',
+              value: 'Outdoor',
             },
             {
-              name: "parkingType",
-              value: "Free",
+              name: 'parkingType',
+              value: 'Free',
             },
             {
-              name: "internetType",
-              value: "Free",
+              name: 'internetType',
+              value: 'Free',
             },
             {
-              name: "licenseNum",
-              value: "California: VR-12345-2024",
+              name: 'licenseNum',
+              value: 'California: VR-12345-2024',
             },
           ],
           floorSize: {
             value: 150,
-            unitCode: "MTK",
+            unitCode: 'MTK',
           },
           numberOfBathroomsTotal: 2.5,
           numberOfBedrooms: 3,
@@ -77,25 +77,25 @@ export default function VacationRentalAdvancedPage() {
         }}
         identifier="lux-villa-malibu-456"
         image={[
-          "https://example.com/images/villa-exterior.jpg",
-          "https://example.com/images/villa-living-room.jpg",
-          "https://example.com/images/villa-master-bedroom.jpg",
-          "https://example.com/images/villa-guest-bedroom.jpg",
-          "https://example.com/images/villa-kitchen.jpg",
-          "https://example.com/images/villa-bathroom.jpg",
-          "https://example.com/images/villa-pool.jpg",
-          "https://example.com/images/villa-ocean-view.jpg",
+          'https://example.com/images/villa-exterior.jpg',
+          'https://example.com/images/villa-living-room.jpg',
+          'https://example.com/images/villa-master-bedroom.jpg',
+          'https://example.com/images/villa-guest-bedroom.jpg',
+          'https://example.com/images/villa-kitchen.jpg',
+          'https://example.com/images/villa-bathroom.jpg',
+          'https://example.com/images/villa-pool.jpg',
+          'https://example.com/images/villa-ocean-view.jpg',
         ]}
         latitude={34.03654}
         longitude={-118.68512}
         name="Luxury Ocean View Villa"
         additionalType="Villa"
         address={{
-          addressCountry: "US",
-          addressLocality: "Malibu",
-          addressRegion: "California",
-          postalCode: "90265",
-          streetAddress: "123 Ocean Drive, Unit 6E",
+          addressCountry: 'US',
+          addressLocality: 'Malibu',
+          addressRegion: 'California',
+          postalCode: '90265',
+          streetAddress: '123 Ocean Drive, Unit 6E',
         }}
         aggregateRating={{
           ratingValue: 4.8,
@@ -104,22 +104,22 @@ export default function VacationRentalAdvancedPage() {
           bestRating: 5,
         }}
         brand={{
-          name: "Luxury Beach Rentals Inc",
+          name: 'Luxury Beach Rentals Inc',
         }}
         checkinTime="15:00:00-08:00"
         checkoutTime="11:00:00-08:00"
         description="Stunning beachfront villa with panoramic ocean views, modern amenities, and direct beach access. This luxury property features 3 bedrooms, 2.5 bathrooms, a private pool, and spacious outdoor entertainment areas."
-        knowsLanguage={["en-US", "es-ES", "fr-FR"]}
+        knowsLanguage={['en-US', 'es-ES', 'fr-FR']}
         review={[
           {
             reviewRating: {
               ratingValue: 5,
               bestRating: 5,
             },
-            author: "Sarah Johnson",
-            datePublished: "2024-01-15",
+            author: 'Sarah Johnson',
+            datePublished: '2024-01-15',
             reviewBody:
-              "Absolutely stunning property! The ocean views were breathtaking and the villa was even better than the photos. Perfect for our family vacation.",
+              'Absolutely stunning property! The ocean views were breathtaking and the villa was even better than the photos. Perfect for our family vacation.',
           },
           {
             reviewRating: {
@@ -127,9 +127,9 @@ export default function VacationRentalAdvancedPage() {
               bestRating: 5,
             },
             author: {
-              name: "Michael Chen",
+              name: 'Michael Chen',
             },
-            datePublished: "2024-01-20",
+            datePublished: '2024-01-20',
             reviewBody:
               "Great location and beautiful villa. Only minor issue was the hot tub wasn't working for the first day, but the host fixed it quickly.",
           },
@@ -138,10 +138,10 @@ export default function VacationRentalAdvancedPage() {
               ratingValue: 5,
               bestRating: 5,
             },
-            author: "Emma Thompson",
-            datePublished: "2024-02-01",
+            author: 'Emma Thompson',
+            datePublished: '2024-02-01',
             reviewBody:
-              "We had an amazing stay! The villa is luxurious and well-maintained. The private beach access was a huge plus. Will definitely book again!",
+              'We had an amazing stay! The villa is luxurious and well-maintained. The private beach access was a huge plus. Will definitely book again!',
           },
         ]}
       />
@@ -234,9 +234,7 @@ export default function VacationRentalAdvancedPage() {
         <h3>Guest Reviews</h3>
         <div className="bg-gray-100 p-4 rounded-lg mb-4">
           <p className="font-bold">Overall Rating: 4.8/5</p>
-          <p className="text-sm text-gray-600">
-            Based on 125 ratings from 98 reviews
-          </p>
+          <p className="text-sm text-gray-600">Based on 125 ratings from 98 reviews</p>
         </div>
 
         <div className="space-y-4">
@@ -244,9 +242,8 @@ export default function VacationRentalAdvancedPage() {
             <p className="font-semibold">Sarah Johnson - ⭐⭐⭐⭐⭐</p>
             <p className="text-sm text-gray-600">January 15, 2024</p>
             <p className="mt-2">
-              Absolutely stunning property! The ocean views were breathtaking
-              and the villa was even better than the photos. Perfect for our
-              family vacation.
+              Absolutely stunning property! The ocean views were breathtaking and the villa was even
+              better than the photos. Perfect for our family vacation.
             </p>
           </div>
 
@@ -254,9 +251,8 @@ export default function VacationRentalAdvancedPage() {
             <p className="font-semibold">Michael Chen - ⭐⭐⭐⭐</p>
             <p className="text-sm text-gray-600">January 20, 2024</p>
             <p className="mt-2">
-              Great location and beautiful villa. Only minor issue was the hot
-              tub wasn't working for the first day, but the host fixed it
-              quickly.
+              Great location and beautiful villa. Only minor issue was the hot tub wasn't working
+              for the first day, but the host fixed it quickly.
             </p>
           </div>
 
@@ -264,9 +260,8 @@ export default function VacationRentalAdvancedPage() {
             <p className="font-semibold">Emma Thompson - ⭐⭐⭐⭐⭐</p>
             <p className="text-sm text-gray-600">February 1, 2024</p>
             <p className="mt-2">
-              We had an amazing stay! The villa is luxurious and
-              well-maintained. The private beach access was a huge plus. Will
-              definitely book again!
+              We had an amazing stay! The villa is luxurious and well-maintained. The private beach
+              access was a huge plus. Will definitely book again!
             </p>
           </div>
         </div>

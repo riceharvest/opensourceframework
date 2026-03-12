@@ -1,4 +1,4 @@
-import { FAQJsonLd } from "next-seo";
+import { FAQJsonLd } from '@opensourceframework/next-seo';
 
 export default function HealthFAQPage() {
   return (
@@ -6,7 +6,7 @@ export default function HealthFAQPage() {
       <FAQJsonLd
         questions={[
           {
-            question: "What are the symptoms of COVID-19?",
+            question: 'What are the symptoms of COVID-19?',
             answer: `<p>The most common symptoms of COVID-19 include:</p>
 <ul>
   <li>Fever or chills</li>
@@ -19,7 +19,7 @@ export default function HealthFAQPage() {
 <p>If you experience any of these symptoms, <strong>contact your healthcare provider immediately</strong>.</p>`,
           },
           {
-            question: "How do I schedule a vaccination appointment?",
+            question: 'How do I schedule a vaccination appointment?',
             answer: `<p>To schedule your vaccination appointment:</p>
 <ol>
   <li>Visit our <a href="/vaccine-scheduler">online scheduling portal</a></li>
@@ -29,7 +29,7 @@ export default function HealthFAQPage() {
 <p>Appointments are available <em>Monday through Saturday, 8 AM to 6 PM</em>.</p>`,
           },
           {
-            question: "What health insurance plans are accepted?",
+            question: 'What health insurance plans are accepted?',
             answer: `<p>We accept most major health insurance plans including:</p>
 <ul>
   <li>Medicare (Parts A, B, C, and D)</li>
@@ -42,7 +42,7 @@ export default function HealthFAQPage() {
 <p>For uninsured patients, we offer <strong>sliding scale fees</strong> based on income. Contact our <a href="/financial-assistance">financial assistance office</a> for more information.</p>`,
           },
           {
-            question: "What preventive health screenings are recommended?",
+            question: 'What preventive health screenings are recommended?',
             answer: `<p>Recommended preventive health screenings vary by age and risk factors:</p>
 <div>
   <h4>Ages 18-39:</h4>
@@ -69,7 +69,7 @@ export default function HealthFAQPage() {
 <p>Consult with your healthcare provider for personalized recommendations.</p>`,
           },
           {
-            question: "How can I access my medical records online?",
+            question: 'How can I access my medical records online?',
             answer: `<p>Access your medical records through our secure patient portal:</p>
 <ol>
   <li>Go to <a href="/patient-portal">our patient portal</a></li>
@@ -85,24 +85,21 @@ export default function HealthFAQPage() {
       <div className="prose lg:prose-xl max-w-none">
         <div className="bg-blue-50 p-4 rounded-lg mb-8">
           <p className="text-sm text-blue-800">
-            <strong>Note:</strong> This is an example of a health-focused FAQ
-            page. In production, FAQ rich results are only available for
-            well-known, authoritative government or health websites as
-            determined by Google.
+            <strong>Note:</strong> This is an example of a health-focused FAQ page. In production,
+            FAQ rich results are only available for well-known, authoritative government or health
+            websites as determined by Google.
           </p>
         </div>
 
         <h1>Health Services FAQ</h1>
         <p className="lead">
-          Find answers to common questions about our health services, insurance,
-          and patient resources.
+          Find answers to common questions about our health services, insurance, and patient
+          resources.
         </p>
 
         <div className="mt-8 space-y-6">
           <div className="bg-white shadow rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-3">
-              What are the symptoms of COVID-19?
-            </h2>
+            <h2 className="text-xl font-semibold mb-3">What are the symptoms of COVID-19?</h2>
             <div className="text-gray-700">
               <p>The most common symptoms of COVID-19 include:</p>
               <ul className="list-disc ml-6 mt-2">
@@ -114,7 +111,7 @@ export default function HealthFAQPage() {
                 <li>Loss of taste or smell</li>
               </ul>
               <p className="mt-3">
-                If you experience any of these symptoms,{" "}
+                If you experience any of these symptoms,{' '}
                 <strong>contact your healthcare provider immediately</strong>.
               </p>
             </div>
@@ -128,11 +125,8 @@ export default function HealthFAQPage() {
               <p>To schedule your vaccination appointment:</p>
               <ol className="list-decimal ml-6 mt-2">
                 <li>
-                  Visit our{" "}
-                  <a
-                    href="/vaccine-scheduler"
-                    className="text-blue-600 underline"
-                  >
+                  Visit our{' '}
+                  <a href="/vaccine-scheduler" className="text-blue-600 underline">
                     online scheduling portal
                   </a>
                 </li>
@@ -142,8 +136,7 @@ export default function HealthFAQPage() {
                 <li>Visit any participating pharmacy or health center</li>
               </ol>
               <p className="mt-3 italic">
-                Appointments are available Monday through Saturday, 8 AM to 6
-                PM.
+                Appointments are available Monday through Saturday, 8 AM to 6 PM.
               </p>
             </div>
           </div>
@@ -163,14 +156,11 @@ export default function HealthFAQPage() {
                 <li>Cigna</li>
               </ul>
               <p className="mt-3">
-                For uninsured patients, we offer{" "}
-                <strong>sliding scale fees</strong> based on income. Contact our{" "}
-                <a
-                  href="/financial-assistance"
-                  className="text-blue-600 underline"
-                >
+                For uninsured patients, we offer <strong>sliding scale fees</strong> based on
+                income. Contact our{' '}
+                <a href="/financial-assistance" className="text-blue-600 underline">
                   financial assistance office
-                </a>{" "}
+                </a>{' '}
                 for more information.
               </p>
             </div>
@@ -181,10 +171,7 @@ export default function HealthFAQPage() {
               What preventive health screenings are recommended?
             </h2>
             <div className="text-gray-700">
-              <p>
-                Recommended preventive health screenings vary by age and risk
-                factors:
-              </p>
+              <p>Recommended preventive health screenings vary by age and risk factors:</p>
               <div className="mt-3">
                 <h4 className="font-semibold">Ages 18-39:</h4>
                 <ul className="list-disc ml-6 mb-3">
@@ -208,8 +195,7 @@ export default function HealthFAQPage() {
                 </ul>
               </div>
               <p className="mt-3">
-                Consult with your healthcare provider for personalized
-                recommendations.
+                Consult with your healthcare provider for personalized recommendations.
               </p>
             </div>
           </div>
@@ -219,12 +205,10 @@ export default function HealthFAQPage() {
               How can I access my medical records online?
             </h2>
             <div className="text-gray-700">
-              <p>
-                Access your medical records through our secure patient portal:
-              </p>
+              <p>Access your medical records through our secure patient portal:</p>
               <ol className="list-decimal ml-6 mt-2">
                 <li>
-                  Go to{" "}
+                  Go to{' '}
                   <a href="/patient-portal" className="text-blue-600 underline">
                     our patient portal
                   </a>
@@ -234,9 +218,8 @@ export default function HealthFAQPage() {
                 <li>View, download, or print your records</li>
               </ol>
               <p className="mt-3">
-                <strong>First-time users:</strong> You'll need your patient ID
-                and date of birth to register. For assistance, call{" "}
-                <strong>1-800-RECORDS</strong>.
+                <strong>First-time users:</strong> You'll need your patient ID and date of birth to
+                register. For assistance, call <strong>1-800-RECORDS</strong>.
               </p>
             </div>
           </div>

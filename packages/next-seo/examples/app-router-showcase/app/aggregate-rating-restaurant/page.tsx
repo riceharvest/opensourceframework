@@ -1,4 +1,4 @@
-import { AggregateRatingJsonLd } from "next-seo";
+import { AggregateRatingJsonLd } from '@opensourceframework/next-seo';
 
 export default function Page() {
   return (
@@ -6,19 +6,19 @@ export default function Page() {
       <h1 className="text-2xl font-semibold">Restaurant Aggregate Rating</h1>
       <AggregateRatingJsonLd
         itemReviewed={{
-          "@type": "LocalBusiness",
-          name: "Legal Seafood",
-          image: "https://example.com/seafood-restaurant.jpg",
-          servesCuisine: "Seafood",
-          telephone: "1234567",
-          priceRange: "$$$",
+          '@type': 'LocalBusiness',
+          name: 'Legal Seafood',
+          image: 'https://example.com/seafood-restaurant.jpg',
+          servesCuisine: 'Seafood',
+          telephone: '1234567',
+          priceRange: '$$$',
           address: {
-            "@type": "PostalAddress",
-            streetAddress: "123 William St",
-            addressLocality: "New York",
-            addressRegion: "NY",
-            postalCode: "10038",
-            addressCountry: "US",
+            '@type': 'PostalAddress',
+            streetAddress: '123 William St',
+            addressLocality: 'New York',
+            addressRegion: 'NY',
+            postalCode: '10038',
+            addressCountry: 'US',
           },
         }}
         ratingValue={88}
@@ -28,8 +28,8 @@ export default function Page() {
       <div className="prose max-w-none">
         <h2>Restaurant Rating Summary</h2>
         <p>
-          This example demonstrates an aggregate rating for a restaurant using a
-          percentage-based rating system (0-100).
+          This example demonstrates an aggregate rating for a restaurant using a percentage-based
+          rating system (0-100).
         </p>
         <h3>Rating Details:</h3>
         <ul>

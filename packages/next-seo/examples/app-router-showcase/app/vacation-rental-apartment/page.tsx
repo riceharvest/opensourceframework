@@ -1,47 +1,47 @@
-import { VacationRentalJsonLd } from "next-seo";
+import { VacationRentalJsonLd } from '@opensourceframework/next-seo';
 
 export default function VacationRentalApartmentPage() {
   return (
     <div className="container mx-auto p-8">
       <VacationRentalJsonLd
         containsPlace={{
-          additionalType: "PrivateRoom",
+          additionalType: 'PrivateRoom',
           bed: {
             numberOfBeds: 1,
-            typeOfBed: "Double",
+            typeOfBed: 'Double',
           },
           occupancy: {
             value: 2,
           },
           amenityFeature: [
             {
-              name: "ac",
+              name: 'ac',
               value: true,
             },
             {
-              name: "wifi",
+              name: 'wifi',
               value: true,
             },
             {
-              name: "elevator",
+              name: 'elevator',
               value: true,
             },
             {
-              name: "kitchen",
+              name: 'kitchen',
               value: false,
             },
             {
-              name: "selfCheckinCheckout",
+              name: 'selfCheckinCheckout',
               value: true,
             },
             {
-              name: "parkingType",
-              value: "None",
+              name: 'parkingType',
+              value: 'None',
             },
           ],
           floorSize: {
             value: 450,
-            unitCode: "FTK",
+            unitCode: 'FTK',
           },
           numberOfBathroomsTotal: 1,
           numberOfBedrooms: 1,
@@ -51,25 +51,25 @@ export default function VacationRentalApartmentPage() {
         }}
         identifier="city-apt-789"
         image={[
-          "https://example.com/apt/bedroom.jpg",
-          "https://example.com/apt/bathroom.jpg",
-          "https://example.com/apt/entrance.jpg",
-          "https://example.com/apt/window-view.jpg",
-          "https://example.com/apt/building-exterior.jpg",
-          "https://example.com/apt/neighborhood.jpg",
-          "https://example.com/apt/amenities.jpg",
-          "https://example.com/apt/detail.jpg",
+          'https://example.com/apt/bedroom.jpg',
+          'https://example.com/apt/bathroom.jpg',
+          'https://example.com/apt/entrance.jpg',
+          'https://example.com/apt/window-view.jpg',
+          'https://example.com/apt/building-exterior.jpg',
+          'https://example.com/apt/neighborhood.jpg',
+          'https://example.com/apt/amenities.jpg',
+          'https://example.com/apt/detail.jpg',
         ]}
         latitude="40.74844"
         longitude="-73.98566"
         name="Cozy Manhattan Studio Apartment"
         additionalType="Apartment"
         address={{
-          addressCountry: "US",
-          addressLocality: "New York",
-          addressRegion: "New York",
-          postalCode: "10001",
-          streetAddress: "456 Broadway, Apt 12B",
+          addressCountry: 'US',
+          addressLocality: 'New York',
+          addressRegion: 'New York',
+          postalCode: '10001',
+          streetAddress: '456 Broadway, Apt 12B',
         }}
         aggregateRating={{
           ratingValue: 4.3,
@@ -85,24 +85,21 @@ export default function VacationRentalApartmentPage() {
             ratingValue: 4,
           },
           author: {
-            name: "David Lee",
+            name: 'David Lee',
           },
-          datePublished: "2024-02-10",
-          reviewBody:
-            "Great location and clean apartment. Easy self check-in process.",
+          datePublished: '2024-02-10',
+          reviewBody: 'Great location and clean apartment. Easy self check-in process.',
         }}
       />
 
-      <h1 className="text-4xl font-bold mb-4">
-        Cozy Manhattan Studio Apartment
-      </h1>
+      <h1 className="text-4xl font-bold mb-4">Cozy Manhattan Studio Apartment</h1>
 
       <div className="prose lg:prose-xl">
         <h2>About this apartment</h2>
         <p>
-          Modern studio apartment in the heart of Manhattan. Perfect for
-          business travelers or couples exploring NYC. This cozy space offers
-          all the essentials for a comfortable stay in the city.
+          Modern studio apartment in the heart of Manhattan. Perfect for business travelers or
+          couples exploring NYC. This cozy space offers all the essentials for a comfortable stay in
+          the city.
         </p>
 
         <h3>Accommodation Details</h3>
@@ -146,9 +143,7 @@ export default function VacationRentalApartmentPage() {
         <h3>Guest Reviews</h3>
         <div className="bg-gray-100 p-4 rounded-lg">
           <p className="font-bold">Rating: 4.3/5</p>
-          <p className="text-sm text-gray-600">
-            Based on 45 ratings from 38 reviews
-          </p>
+          <p className="text-sm text-gray-600">Based on 45 ratings from 38 reviews</p>
           <blockquote className="mt-4 italic">
             "Great location and clean apartment. Easy self check-in process."
             <footer className="text-sm mt-2">— David Lee, February 2024</footer>

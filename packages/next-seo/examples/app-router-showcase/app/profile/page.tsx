@@ -1,4 +1,4 @@
-import { ProfilePageJsonLd } from "next-seo";
+import { ProfilePageJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProfilePage() {
   return (
@@ -21,8 +21,7 @@ export default function ProfilePage() {
 
           <div className="mb-6">
             <p className="text-gray-700">
-              Welcome to my profile! I'm passionate about technology and sharing
-              knowledge.
+              Welcome to my profile! I'm passionate about technology and sharing knowledge.
             </p>
           </div>
 

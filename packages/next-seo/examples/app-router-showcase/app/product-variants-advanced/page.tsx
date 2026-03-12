@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductVariantsAdvancedPage() {
   return (
@@ -10,21 +10,21 @@ export default function ProductVariantsAdvancedPage() {
         url="https://example.com/products/athletic-performance-shoes"
         productGroupID="APS2024"
         brand={{
-          "@type": "Organization",
-          name: "SpeedRunner Pro",
-          logo: "https://example.com/logos/speedrunner.png",
+          '@type': 'Organization',
+          name: 'SpeedRunner Pro',
+          logo: 'https://example.com/logos/speedrunner.png',
         }}
         material="Mesh/Synthetic"
         pattern="solid"
         category="Sports/Running/Footwear"
-        variesBy={["size", "color", "suggestedGender"]}
+        variesBy={['size', 'color', 'suggestedGender']}
         audience={{
-          "@type": "PeopleAudience",
-          suggestedGender: "unisex",
+          '@type': 'PeopleAudience',
+          suggestedGender: 'unisex',
           suggestedAge: {
-            "@type": "QuantitativeValue",
+            '@type': 'QuantitativeValue',
             minValue: 13,
-            unitCode: "ANN",
+            unitCode: 'ANN',
           },
         }}
         aggregateRating={{
@@ -34,138 +34,137 @@ export default function ProductVariantsAdvancedPage() {
         }}
         review={[
           {
-            name: "Best Running Shoes Ever!",
+            name: 'Best Running Shoes Ever!',
             reviewRating: {
               ratingValue: 5,
               bestRating: 5,
             },
-            author: "Sarah Johnson",
+            author: 'Sarah Johnson',
             reviewBody:
-              "These shoes are incredibly comfortable and provide excellent support during long runs.",
-            datePublished: "2024-01-15",
+              'These shoes are incredibly comfortable and provide excellent support during long runs.',
+            datePublished: '2024-01-15',
           },
           {
-            name: "Great for Marathon Training",
+            name: 'Great for Marathon Training',
             reviewRating: {
               ratingValue: 4,
               bestRating: 5,
             },
             author: {
-              name: "Mike Chen",
-              url: "https://example.com/users/mikechen",
+              name: 'Mike Chen',
+              url: 'https://example.com/users/mikechen',
             },
             reviewBody:
-              "Excellent cushioning and durability. The only downside is they run slightly narrow.",
-            datePublished: "2024-01-20",
+              'Excellent cushioning and durability. The only downside is they run slightly narrow.',
+            datePublished: '2024-01-20',
           },
         ]}
         hasVariant={[
           {
             name: "Athletic Performance Shoes - Men's 10 Black",
-            sku: "APS2024-M10-BLK",
-            gtin14: "98766051104444",
-            size: "10",
-            color: "Black",
-            pattern: "solid",
+            sku: 'APS2024-M10-BLK',
+            gtin14: '98766051104444',
+            size: '10',
+            color: 'Black',
+            pattern: 'solid',
             image: [
-              "https://example.com/images/shoes-m10-black-1.jpg",
-              "https://example.com/images/shoes-m10-black-2.jpg",
-              "https://example.com/images/shoes-m10-black-3.jpg",
+              'https://example.com/images/shoes-m10-black-1.jpg',
+              'https://example.com/images/shoes-m10-black-2.jpg',
+              'https://example.com/images/shoes-m10-black-3.jpg',
             ],
             weight: {
               value: 310,
-              unitCode: "GRM",
+              unitCode: 'GRM',
             },
             offers: {
               price: 149.99,
-              priceCurrency: "USD",
-              availability: "InStock",
-              url: "https://example.com/products/athletic-performance-shoes?size=10&color=black&gender=mens",
-              priceValidUntil: "2024-12-31",
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              url: 'https://example.com/products/athletic-performance-shoes?size=10&color=black&gender=mens',
+              priceValidUntil: '2024-12-31',
               seller: {
-                name: "Official SpeedRunner Store",
-                url: "https://example.com",
+                name: 'Official SpeedRunner Store',
+                url: 'https://example.com',
               },
               shippingDetails: {
-                "@type": "OfferShippingDetails",
+                '@type': 'OfferShippingDetails',
                 shippingRate: {
-                  "@type": "MonetaryAmount",
+                  '@type': 'MonetaryAmount',
                   value: 0,
-                  currency: "USD",
+                  currency: 'USD',
                 },
                 shippingDestination: {
-                  "@type": "DefinedRegion",
-                  addressCountry: "US",
+                  '@type': 'DefinedRegion',
+                  addressCountry: 'US',
                 },
                 deliveryTime: {
-                  "@type": "ShippingDeliveryTime",
+                  '@type': 'ShippingDeliveryTime',
                   handlingTime: {
-                    "@type": "QuantitativeValue",
+                    '@type': 'QuantitativeValue',
                     minValue: 0,
                     maxValue: 1,
-                    unitCode: "DAY",
+                    unitCode: 'DAY',
                   },
                   transitTime: {
-                    "@type": "QuantitativeValue",
+                    '@type': 'QuantitativeValue',
                     minValue: 2,
                     maxValue: 5,
-                    unitCode: "DAY",
+                    unitCode: 'DAY',
                   },
                 },
               },
               hasMerchantReturnPolicy: {
-                applicableCountry: "US",
-                returnPolicyCategory:
-                  "https://schema.org/MerchantReturnFiniteReturnWindow",
+                applicableCountry: 'US',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
                 merchantReturnDays: 60,
-                returnMethod: "https://schema.org/ReturnByMail",
-                returnFees: "https://schema.org/FreeReturn",
+                returnMethod: 'https://schema.org/ReturnByMail',
+                returnFees: 'https://schema.org/FreeReturn',
               },
             },
           },
           {
             name: "Athletic Performance Shoes - Women's 8 White/Pink",
-            sku: "APS2024-W8-WPK",
-            gtin14: "98766051104451",
-            size: "8",
-            color: "White/Pink",
-            pattern: "two-tone",
-            image: "https://example.com/images/shoes-w8-white-pink.jpg",
+            sku: 'APS2024-W8-WPK',
+            gtin14: '98766051104451',
+            size: '8',
+            color: 'White/Pink',
+            pattern: 'two-tone',
+            image: 'https://example.com/images/shoes-w8-white-pink.jpg',
             weight: {
               value: 280,
-              unitCode: "GRM",
+              unitCode: 'GRM',
             },
             offers: {
               price: 149.99,
-              priceCurrency: "USD",
-              availability: "InStock",
-              url: "https://example.com/products/athletic-performance-shoes?size=8&color=white-pink&gender=womens",
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              url: 'https://example.com/products/athletic-performance-shoes?size=8&color=white-pink&gender=womens',
             },
           },
           {
             name: "Athletic Performance Shoes - Men's 11 Navy",
-            sku: "APS2024-M11-NVY",
-            gtin14: "98766051104468",
-            size: "11",
-            color: "Navy",
-            pattern: "solid",
+            sku: 'APS2024-M11-NVY',
+            gtin14: '98766051104468',
+            size: '11',
+            color: 'Navy',
+            pattern: 'solid',
             offers: {
               price: 139.99,
-              priceCurrency: "USD",
-              availability: "PreOrder",
-              availabilityStarts: "2024-02-15",
-              url: "https://example.com/products/athletic-performance-shoes?size=11&color=navy&gender=mens",
+              priceCurrency: 'USD',
+              availability: 'PreOrder',
+              availabilityStarts: '2024-02-15',
+              url: 'https://example.com/products/athletic-performance-shoes?size=11&color=navy&gender=mens',
             },
           },
           // URL-only variants for other sizes/colors available on separate pages
           {
-            url: "https://example.com/products/athletic-performance-shoes/mens-9-gray",
+            url: 'https://example.com/products/athletic-performance-shoes/mens-9-gray',
           },
           {
-            url: "https://example.com/products/athletic-performance-shoes/womens-7-purple",
+            url: 'https://example.com/products/athletic-performance-shoes/womens-7-purple',
           },
           {
-            url: "https://example.com/products/athletic-performance-shoes/mens-12-red",
+            url: 'https://example.com/products/athletic-performance-shoes/mens-12-red',
           },
         ]}
       />
@@ -179,9 +178,7 @@ export default function ProductVariantsAdvancedPage() {
             <li>/</li>
             <li>Running</li>
             <li>/</li>
-            <li className="font-semibold text-gray-900">
-              Athletic Performance Shoes
-            </li>
+            <li className="font-semibold text-gray-900">Athletic Performance Shoes</li>
           </ol>
         </nav>
 
@@ -201,14 +198,10 @@ export default function ProductVariantsAdvancedPage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Athletic Performance Shoes
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Athletic Performance Shoes</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
-                <span className="text-gray-600">
-                  4.8 out of 5 (342 ratings, 289 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
+                <span className="text-gray-600">4.8 out of 5 (342 ratings, 289 reviews)</span>
               </div>
               <div className="flex items-center gap-4">
                 <p className="text-gray-600">by SpeedRunner Pro</p>
@@ -220,10 +213,9 @@ export default function ProductVariantsAdvancedPage() {
 
             <div>
               <p className="text-gray-700">
-                High-performance running shoes with advanced cushioning
-                technology. Engineered for serious runners who demand comfort,
-                support, and durability. Features our proprietary CloudFoam™
-                midsole and breathable mesh upper.
+                High-performance running shoes with advanced cushioning technology. Engineered for
+                serious runners who demand comfort, support, and durability. Features our
+                proprietary CloudFoam™ midsole and breathable mesh upper.
               </p>
             </div>
 
@@ -231,9 +223,7 @@ export default function ProductVariantsAdvancedPage() {
               <div>
                 <label className="block text-sm font-medium mb-2">Gender</label>
                 <div className="flex gap-2">
-                  <button className="px-4 py-2 border-2 border-blue-500 rounded">
-                    Men's
-                  </button>
+                  <button className="px-4 py-2 border-2 border-blue-500 rounded">Men's</button>
                   <button className="px-4 py-2 border rounded hover:border-gray-400">
                     Women's
                   </button>
@@ -243,11 +233,11 @@ export default function ProductVariantsAdvancedPage() {
               <div>
                 <label className="block text-sm font-medium mb-2">Size</label>
                 <div className="grid grid-cols-5 gap-2">
-                  {["7", "8", "9", "10", "11", "12", "13"].map((size) => (
+                  {['7', '8', '9', '10', '11', '12', '13'].map((size) => (
                     <button
                       key={size}
                       className={`px-3 py-2 border rounded hover:border-gray-400 ${
-                        size === "10" ? "border-2 border-blue-500" : ""
+                        size === '10' ? 'border-2 border-blue-500' : ''
                       }`}
                     >
                       {size}
@@ -271,19 +261,11 @@ export default function ProductVariantsAdvancedPage() {
             <div className="space-y-2">
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold">$149.99</span>
-                <span className="text-sm text-gray-500 line-through">
-                  $179.99
-                </span>
-                <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">
-                  SALE
-                </span>
+                <span className="text-sm text-gray-500 line-through">$179.99</span>
+                <span className="text-sm bg-red-100 text-red-800 px-2 py-1 rounded">SALE</span>
               </div>
-              <p className="text-green-600 font-medium">
-                ✓ In Stock - Ships today!
-              </p>
-              <p className="text-sm text-gray-500">
-                FREE shipping on orders over $50
-              </p>
+              <p className="text-green-600 font-medium">✓ In Stock - Ships today!</p>
+              <p className="text-sm text-gray-500">FREE shipping on orders over $50</p>
               <p className="text-sm text-gray-500">
                 Product ID: APS2024 | SKU: APS2024-M10-BLK | Weight: 310g
               </p>
@@ -292,8 +274,7 @@ export default function ProductVariantsAdvancedPage() {
             <div className="bg-blue-50 p-4 rounded-lg">
               <h3 className="font-semibold mb-2">60-Day Return Policy</h3>
               <p className="text-sm text-gray-700">
-                Not satisfied? Return for free within 60 days. No questions
-                asked.
+                Not satisfied? Return for free within 60 days. No questions asked.
               </p>
             </div>
 
@@ -316,17 +297,15 @@ export default function ProductVariantsAdvancedPage() {
                 <div>
                   <h3 className="font-semibold">Best Running Shoes Ever!</h3>
                   <div className="flex items-center gap-2 mt-1">
-                    <div className="flex text-yellow-400 text-sm">
-                      {"★★★★★"}
-                    </div>
+                    <div className="flex text-yellow-400 text-sm">{'★★★★★'}</div>
                     <span className="text-sm text-gray-600">5 out of 5</span>
                   </div>
                 </div>
                 <span className="text-sm text-gray-500">Jan 15, 2024</span>
               </div>
               <p className="text-gray-700 mb-2">
-                These shoes are incredibly comfortable and provide excellent
-                support during long runs.
+                These shoes are incredibly comfortable and provide excellent support during long
+                runs.
               </p>
               <p className="text-sm text-gray-600">— Sarah Johnson</p>
             </div>
@@ -336,20 +315,17 @@ export default function ProductVariantsAdvancedPage() {
                 <div>
                   <h3 className="font-semibold">Great for Marathon Training</h3>
                   <div className="flex items-center gap-2 mt-1">
-                    <div className="flex text-yellow-400 text-sm">
-                      {"★★★★☆"}
-                    </div>
+                    <div className="flex text-yellow-400 text-sm">{'★★★★☆'}</div>
                     <span className="text-sm text-gray-600">4 out of 5</span>
                   </div>
                 </div>
                 <span className="text-sm text-gray-500">Jan 20, 2024</span>
               </div>
               <p className="text-gray-700 mb-2">
-                Excellent cushioning and durability. The only downside is they
-                run slightly narrow.
+                Excellent cushioning and durability. The only downside is they run slightly narrow.
               </p>
               <p className="text-sm text-gray-600">
-                —{" "}
+                —{' '}
                 <a
                   href="https://example.com/users/mikechen"
                   className="text-blue-600 hover:underline"

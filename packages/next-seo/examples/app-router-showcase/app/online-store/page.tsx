@@ -1,4 +1,4 @@
-import { OrganizationJsonLd } from "next-seo";
+import { OrganizationJsonLd } from '@opensourceframework/next-seo';
 
 export default function OnlineStorePage() {
   return (
@@ -8,29 +8,26 @@ export default function OnlineStorePage() {
         name="Example Online Store"
         url="https://www.example.com"
         logo={{
-          "@type": "ImageObject",
-          url: "https://www.example.com/assets/logo.png",
+          '@type': 'ImageObject',
+          url: 'https://www.example.com/assets/logo.png',
           width: 600,
           height: 400,
         }}
         description="Your trusted online retailer for premium widgets and accessories"
-        sameAs={[
-          "https://example.net/profile/example12",
-          "https://example.org/@example34",
-        ]}
+        sameAs={['https://example.net/profile/example12', 'https://example.org/@example34']}
         address={{
-          "@type": "PostalAddress",
-          streetAddress: "999 W Example St Suite 99",
-          addressLocality: "New York",
-          addressRegion: "NY",
-          postalCode: "10019",
-          addressCountry: "US",
+          '@type': 'PostalAddress',
+          streetAddress: '999 W Example St Suite 99',
+          addressLocality: 'New York',
+          addressRegion: 'NY',
+          postalCode: '10019',
+          addressCountry: 'US',
         }}
         contactPoint={{
-          "@type": "ContactPoint",
-          contactType: "Customer Service",
-          telephone: "+1-999-999-9900",
-          email: "support@example.com",
+          '@type': 'ContactPoint',
+          contactType: 'Customer Service',
+          telephone: '+1-999-999-9900',
+          email: 'support@example.com',
         }}
         vatID="FR12345678901"
         iso6523Code="0199:724500PMK2A2M1SQQ228"
@@ -39,63 +36,54 @@ export default function OnlineStorePage() {
           maxValue: 999,
         }}
         hasMerchantReturnPolicy={{
-          "@type": "MerchantReturnPolicy",
-          applicableCountry: ["US", "CA"],
-          returnPolicyCountry: "US",
-          returnPolicyCategory:
-            "https://schema.org/MerchantReturnFiniteReturnWindow",
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: ['US', 'CA'],
+          returnPolicyCountry: 'US',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
           merchantReturnDays: 60,
-          itemCondition: ["https://schema.org/NewCondition"],
-          returnMethod: [
-            "https://schema.org/ReturnByMail",
-            "https://schema.org/ReturnInStore",
-          ],
-          returnFees: "https://schema.org/FreeReturn",
-          refundType: "https://schema.org/FullRefund",
-          returnLabelSource: "https://schema.org/ReturnLabelDownloadAndPrint",
-          customerRemorseReturnFees: "https://schema.org/FreeReturn",
-          itemDefectReturnFees: "https://schema.org/FreeReturn",
+          itemCondition: ['https://schema.org/NewCondition'],
+          returnMethod: ['https://schema.org/ReturnByMail', 'https://schema.org/ReturnInStore'],
+          returnFees: 'https://schema.org/FreeReturn',
+          refundType: 'https://schema.org/FullRefund',
+          returnLabelSource: 'https://schema.org/ReturnLabelDownloadAndPrint',
+          customerRemorseReturnFees: 'https://schema.org/FreeReturn',
+          itemDefectReturnFees: 'https://schema.org/FreeReturn',
           returnPolicySeasonalOverride: [
             {
-              startDate: "2025-11-29",
-              endDate: "2025-12-31",
-              returnPolicyCategory:
-                "https://schema.org/MerchantReturnFiniteReturnWindow",
+              startDate: '2025-11-29',
+              endDate: '2025-12-31',
+              returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
               merchantReturnDays: 90,
             },
           ],
         }}
         hasMemberProgram={{
-          name: "Rewards Plus",
-          description:
-            "Earn points and unlock exclusive benefits with our loyalty program",
-          url: "https://www.example.com/rewards",
+          name: 'Rewards Plus',
+          description: 'Earn points and unlock exclusive benefits with our loyalty program',
+          url: 'https://www.example.com/rewards',
           hasTiers: [
             {
-              name: "Bronze",
-              hasTierBenefit: "TierBenefitLoyaltyPoints",
+              name: 'Bronze',
+              hasTierBenefit: 'TierBenefitLoyaltyPoints',
               membershipPointsEarned: 1,
             },
             {
-              name: "Silver",
-              hasTierBenefit: ["TierBenefitLoyaltyPoints"],
+              name: 'Silver',
+              hasTierBenefit: ['TierBenefitLoyaltyPoints'],
               hasTierRequirement: {
                 value: 500,
-                currency: "USD",
+                currency: 'USD',
               },
               membershipPointsEarned: 2,
             },
             {
-              name: "Gold",
-              hasTierBenefit: [
-                "TierBenefitLoyaltyPoints",
-                "TierBenefitLoyaltyPrice",
-              ],
+              name: 'Gold',
+              hasTierBenefit: ['TierBenefitLoyaltyPoints', 'TierBenefitLoyaltyPrice'],
               hasTierRequirement: {
-                name: "Example Gold Credit Card",
+                name: 'Example Gold Credit Card',
               },
               membershipPointsEarned: 5,
-              url: "https://www.example.com/rewards/gold",
+              url: 'https://www.example.com/rewards/gold',
             },
           ],
         }}
@@ -107,9 +95,9 @@ export default function OnlineStorePage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">About Us</h2>
           <p className="text-gray-700 mb-4">
-            Example Online Store is your trusted online retailer for premium
-            widgets and accessories. We serve customers across the United States
-            and Canada with fast shipping and excellent customer service.
+            Example Online Store is your trusted online retailer for premium widgets and
+            accessories. We serve customers across the United States and Canada with fast shipping
+            and excellent customer service.
           </p>
         </section>
 
@@ -131,30 +119,23 @@ export default function OnlineStorePage() {
         </section>
 
         <section className="mb-8 bg-blue-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">
-            Rewards Plus Loyalty Program
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Rewards Plus Loyalty Program</h2>
           <p className="text-gray-700 mb-4">
             Earn points and unlock exclusive benefits with our loyalty program!
           </p>
           <div className="space-y-4">
             <div className="border-l-4 border-orange-400 pl-4">
               <h3 className="font-semibold text-orange-800">🥉 Bronze Tier</h3>
-              <p className="text-sm text-gray-600">
-                Join free and earn 1 point per dollar spent
-              </p>
+              <p className="text-sm text-gray-600">Join free and earn 1 point per dollar spent</p>
             </div>
             <div className="border-l-4 border-gray-400 pl-4">
               <h3 className="font-semibold text-gray-700">🥈 Silver Tier</h3>
-              <p className="text-sm text-gray-600">
-                Spend $500+ to earn 2 points per dollar
-              </p>
+              <p className="text-sm text-gray-600">Spend $500+ to earn 2 points per dollar</p>
             </div>
             <div className="border-l-4 border-yellow-400 pl-4">
               <h3 className="font-semibold text-yellow-700">🥇 Gold Tier</h3>
               <p className="text-sm text-gray-600">
-                Sign up for our Gold Credit Card to earn 5 points per dollar +
-                member pricing
+                Sign up for our Gold Credit Card to earn 5 points per dollar + member pricing
               </p>
             </div>
           </div>

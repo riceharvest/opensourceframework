@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductUnitPricingPage() {
   return (
@@ -8,30 +8,30 @@ export default function ProductUnitPricingPage() {
         description="Cold-pressed extra virgin olive oil from organic Italian olives, perfect for cooking and dressing"
         url="https://example.com/products/olive-oil"
         image={[
-          "https://example.com/olive-oil-1x1.jpg",
-          "https://example.com/olive-oil-4x3.jpg",
-          "https://example.com/olive-oil-16x9.jpg",
+          'https://example.com/olive-oil-1x1.jpg',
+          'https://example.com/olive-oil-4x3.jpg',
+          'https://example.com/olive-oil-16x9.jpg',
         ]}
         sku="OIL-EVOO-750"
         mpn="EVOO750ML"
         brand="Mediterranean Gold"
         offers={{
-          url: "https://example.com/buy/olive-oil",
+          url: 'https://example.com/buy/olive-oil',
           priceSpecification: {
             price: 18.0,
-            priceCurrency: "EUR",
+            priceCurrency: 'EUR',
             // Unit pricing for products sold by volume
             referenceQuantity: {
-              value: "750",
-              unitCode: "MLT",
+              value: '750',
+              unitCode: 'MLT',
               valueReference: {
-                value: "100",
-                unitCode: "MLT",
+                value: '100',
+                unitCode: 'MLT',
               },
             },
           },
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
         }}
         aggregateRating={{
           ratingValue: 4.9,
@@ -48,9 +48,7 @@ export default function ProductUnitPricingPage() {
             <li>/</li>
             <li>Oils & Vinegars</li>
             <li>/</li>
-            <li className="font-semibold text-gray-900">
-              Premium Olive Oil - Extra Virgin
-            </li>
+            <li className="font-semibold text-gray-900">Premium Olive Oil - Extra Virgin</li>
           </ol>
         </nav>
 
@@ -68,11 +66,9 @@ export default function ProductUnitPricingPage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Premium Olive Oil - Extra Virgin
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Premium Olive Oil - Extra Virgin</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
                 <span className="text-gray-600">4.9 out of 5 (89 reviews)</span>
               </div>
               <p className="text-gray-600">by Mediterranean Gold</p>
@@ -90,15 +86,13 @@ export default function ProductUnitPricingPage() {
                 </div>
               </div>
               <p className="text-green-600 font-medium">✓ In Stock</p>
-              <p className="text-sm text-gray-500">
-                Price valid until Dec 31, 2024
-              </p>
+              <p className="text-sm text-gray-500">Price valid until Dec 31, 2024</p>
             </div>
 
             <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
               <p className="text-sm text-blue-800">
-                <strong>EU Regulation:</strong> Unit pricing displayed as
-                required for products sold by weight or volume
+                <strong>EU Regulation:</strong> Unit pricing displayed as required for products sold
+                by weight or volume
               </p>
             </div>
 
@@ -119,11 +113,10 @@ export default function ProductUnitPricingPage() {
 
             <div className="space-y-4">
               <p className="text-gray-700">
-                Our premium extra virgin olive oil is cold-pressed from
-                hand-picked organic olives grown in the sun-drenched groves of
-                Tuscany. With its rich, fruity flavor and low acidity (0.3%),
-                it's perfect for drizzling over salads, dipping bread, or
-                finishing your favorite dishes.
+                Our premium extra virgin olive oil is cold-pressed from hand-picked organic olives
+                grown in the sun-drenched groves of Tuscany. With its rich, fruity flavor and low
+                acidity (0.3%), it's perfect for drizzling over salads, dipping bread, or finishing
+                your favorite dishes.
               </p>
             </div>
 
@@ -170,9 +163,7 @@ export default function ProductUnitPricingPage() {
               </dl>
             </div>
             <div>
-              <h3 className="font-semibold mb-3">
-                Nutritional Info (per 100ml)
-              </h3>
+              <h3 className="font-semibold mb-3">Nutritional Info (per 100ml)</h3>
               <dl className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-gray-600">Energy:</dt>

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@opensourceframework/next-seo": "workspace:^",
-    "next": "15.5.10",
+    "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

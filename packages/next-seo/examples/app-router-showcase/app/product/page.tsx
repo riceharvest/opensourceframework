@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductPage() {
   return (
@@ -8,19 +8,19 @@ export default function ProductPage() {
         description="Sleeker than ACME's Classic Anvil, the Executive Anvil is perfect for the business traveler looking for something to drop from a height."
         url="https://example.com/products/anvil"
         image={[
-          "https://example.com/photos/1x1/photo.jpg",
-          "https://example.com/photos/4x3/photo.jpg",
-          "https://example.com/photos/16x9/photo.jpg",
+          'https://example.com/photos/1x1/photo.jpg',
+          'https://example.com/photos/4x3/photo.jpg',
+          'https://example.com/photos/16x9/photo.jpg',
         ]}
         sku="0446310786"
         mpn="925872"
         brand="ACME"
         offers={{
           price: 119.99,
-          priceCurrency: "USD",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
-          url: "https://example.com/buy/anvil",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
+          url: 'https://example.com/buy/anvil',
         }}
         aggregateRating={{
           ratingValue: 4.4,
@@ -55,7 +55,7 @@ export default function ProductPage() {
             <div>
               <h1 className="text-3xl font-bold mb-2">Executive Anvil</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★☆"}</div>
+                <div className="flex text-yellow-400">{'★★★★☆'}</div>
                 <span className="text-gray-600">4.4 out of 5 (89 reviews)</span>
               </div>
               <p className="text-gray-600">by ACME</p>
@@ -67,9 +67,7 @@ export default function ProductPage() {
                 <span className="text-sm text-gray-500">USD</span>
               </div>
               <p className="text-green-600 font-medium">✓ In Stock</p>
-              <p className="text-sm text-gray-500">
-                Price valid until Dec 31, 2024
-              </p>
+              <p className="text-sm text-gray-500">Price valid until Dec 31, 2024</p>
             </div>
 
             <div className="space-y-2">
@@ -83,10 +81,9 @@ export default function ProductPage() {
 
             <div className="space-y-4">
               <p className="text-gray-700">
-                Sleeker than ACME's Classic Anvil, the Executive Anvil is
-                perfect for the business traveler looking for something to drop
-                from a height. Crafted from the finest steel and polished to a
-                mirror finish, this anvil combines functionality with executive
+                Sleeker than ACME's Classic Anvil, the Executive Anvil is perfect for the business
+                traveler looking for something to drop from a height. Crafted from the finest steel
+                and polished to a mirror finish, this anvil combines functionality with executive
                 style.
               </p>
             </div>

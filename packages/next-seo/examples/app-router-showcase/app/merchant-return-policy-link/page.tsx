@@ -1,4 +1,4 @@
-import { MerchantReturnPolicyJsonLd } from "next-seo";
+import { MerchantReturnPolicyJsonLd } from '@opensourceframework/next-seo';
 
 export default function MerchantReturnPolicyLinkPage() {
   return (
@@ -11,9 +11,9 @@ export default function MerchantReturnPolicyLinkPage() {
         <section className="mb-8 bg-blue-50 p-6 rounded-lg">
           <h2 className="text-2xl font-semibold mb-4">Our Return Policy</h2>
           <p className="text-gray-700 mb-4">
-            We maintain a comprehensive return policy to ensure customer
-            satisfaction. For complete details about our return process,
-            conditions, and procedures, please visit our dedicated returns page.
+            We maintain a comprehensive return policy to ensure customer satisfaction. For complete
+            details about our return process, conditions, and procedures, please visit our dedicated
+            returns page.
           </p>
           <a
             href="https://www.example.com/returns"
@@ -36,24 +36,20 @@ export default function MerchantReturnPolicyLinkPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Need Help?</h2>
           <p className="text-gray-700">
-            If you have questions about returns or need assistance with a
-            return, our customer service team is here to help. Contact us at{" "}
-            <a
-              href="mailto:returns@example.com"
-              className="text-blue-600 hover:underline"
-            >
+            If you have questions about returns or need assistance with a return, our customer
+            service team is here to help. Contact us at{' '}
+            <a href="mailto:returns@example.com" className="text-blue-600 hover:underline">
               returns@example.com
-            </a>{" "}
+            </a>{' '}
             or call 1-800-RETURNS.
           </p>
         </section>
 
         <section className="text-sm text-gray-600">
           <p>
-            This example demonstrates the simple "Option B" approach where you
-            only provide a link to your return policy page instead of detailed
-            structured data. This is useful when your return policy is complex
-            or frequently updated.
+            This example demonstrates the simple "Option B" approach where you only provide a link
+            to your return policy page instead of detailed structured data. This is useful when your
+            return policy is complex or frequently updated.
           </p>
         </section>
       </div>

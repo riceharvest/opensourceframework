@@ -1,4 +1,4 @@
-import { ImageJsonLd } from "next-seo";
+import { ImageJsonLd } from '@opensourceframework/next-seo';
 
 export default function ImagePage() {
   return (
@@ -33,10 +33,7 @@ export default function ImagePage() {
             <div>
               <dt className="font-medium text-gray-700">License</dt>
               <dd>
-                <a
-                  href="https://example.com/license"
-                  className="text-blue-600 hover:underline"
-                >
+                <a href="https://example.com/license" className="text-blue-600 hover:underline">
                   View License
                 </a>
               </dd>

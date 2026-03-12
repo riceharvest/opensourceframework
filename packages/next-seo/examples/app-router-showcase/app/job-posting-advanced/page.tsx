@@ -1,4 +1,4 @@
-import { JobPostingJsonLd } from "next-seo";
+import { JobPostingJsonLd } from '@opensourceframework/next-seo';
 
 export default function AdvancedJobPostingPage() {
   return (
@@ -9,10 +9,10 @@ export default function AdvancedJobPostingPage() {
         datePosted="2024-01-18"
         validThrough="2024-04-18T23:59:59"
         hiringOrganization={{
-          name: "Google",
-          sameAs: "https://www.google.com",
+          name: 'Google',
+          sameAs: 'https://www.google.com',
           logo: {
-            url: "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+            url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
             width: 272,
             height: 92,
           },
@@ -20,51 +20,51 @@ export default function AdvancedJobPostingPage() {
         jobLocation={[
           {
             address: {
-              streetAddress: "1600 Amphitheatre Parkway",
-              addressLocality: "Mountain View",
-              addressRegion: "CA",
-              postalCode: "94043",
-              addressCountry: "US",
+              streetAddress: '1600 Amphitheatre Parkway',
+              addressLocality: 'Mountain View',
+              addressRegion: 'CA',
+              postalCode: '94043',
+              addressCountry: 'US',
             },
           },
           {
             address: {
-              streetAddress: "111 8th Avenue",
-              addressLocality: "New York",
-              addressRegion: "NY",
-              postalCode: "10011",
-              addressCountry: "US",
+              streetAddress: '111 8th Avenue',
+              addressLocality: 'New York',
+              addressRegion: 'NY',
+              postalCode: '10011',
+              addressCountry: 'US',
             },
           },
         ]}
         jobLocationType="TELECOMMUTE"
         applicantLocationRequirements={[
-          { name: "California, USA" },
-          { name: "New York, USA" },
-          { name: "Washington, USA" },
-          { name: "Texas, USA" },
+          { name: 'California, USA' },
+          { name: 'New York, USA' },
+          { name: 'Washington, USA' },
+          { name: 'Texas, USA' },
         ]}
         url="https://careers.google.com/jobs/senior-product-manager-cloud"
-        employmentType={["FULL_TIME", "CONTRACTOR"]}
+        employmentType={['FULL_TIME', 'CONTRACTOR']}
         identifier={{
-          name: "Google",
-          value: "GCP-PM-2024-001",
+          name: 'Google',
+          value: 'GCP-PM-2024-001',
         }}
         baseSalary={{
-          currency: "USD",
+          currency: 'USD',
           value: {
             minValue: 180000,
             maxValue: 280000,
-            unitText: "YEAR",
+            unitText: 'YEAR',
           },
         }}
         directApply={true}
         educationRequirements={[
           {
-            credentialCategory: "bachelor degree",
+            credentialCategory: 'bachelor degree',
           },
           {
-            credentialCategory: "postgraduate degree",
+            credentialCategory: 'postgraduate degree',
           },
         ]}
         experienceRequirements={{
@@ -80,9 +80,7 @@ export default function AdvancedJobPostingPage() {
           <p>Posted: January 18, 2024 • Expires: April 18, 2024</p>
           <p>$180,000 - $280,000 per year</p>
           <div className="flex gap-2 mt-2">
-            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
-              Full-time
-            </span>
+            <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Full-time</span>
             <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">
               Contract Available
             </span>
@@ -94,9 +92,8 @@ export default function AdvancedJobPostingPage() {
 
         <h2>About the Role</h2>
         <p>
-          Google is seeking an experienced Product Manager to lead our Cloud
-          Platform initiatives. This is a unique opportunity to shape the future
-          of cloud computing at scale.
+          Google is seeking an experienced Product Manager to lead our Cloud Platform initiatives.
+          This is a unique opportunity to shape the future of cloud computing at scale.
         </p>
 
         <h2>Responsibilities</h2>
@@ -111,9 +108,7 @@ export default function AdvancedJobPostingPage() {
 
         <h2>Minimum Qualifications</h2>
         <ul>
-          <li>
-            Bachelor's degree in Computer Science, Engineering, or related field
-          </li>
+          <li>Bachelor's degree in Computer Science, Engineering, or related field</li>
           <li>7+ years of product management experience</li>
           <li>Experience with cloud technologies and enterprise software</li>
           <li>Track record of launching successful products</li>
@@ -124,17 +119,14 @@ export default function AdvancedJobPostingPage() {
           <li>MBA or Master's degree in a technical field</li>
           <li>Experience with AI/ML products</li>
           <li>Previous experience at a major cloud provider</li>
-          <li>
-            Strong technical background with ability to engage with engineers
-          </li>
+          <li>Strong technical background with ability to engage with engineers</li>
         </ul>
 
         <h2>Location & Work Arrangement</h2>
         <p>
-          This role offers flexibility with options to work from our offices in
-          Mountain View or New York, or remotely from select states (CA, NY, WA,
-          TX). We support a hybrid work model with 3 days in office for those
-          near our locations.
+          This role offers flexibility with options to work from our offices in Mountain View or New
+          York, or remotely from select states (CA, NY, WA, TX). We support a hybrid work model with
+          3 days in office for those near our locations.
         </p>
 
         <h2>Compensation & Benefits</h2>

@@ -1,4 +1,4 @@
-import { ClaimReviewJsonLd } from "next-seo";
+import { ClaimReviewJsonLd } from '@opensourceframework/next-seo';
 
 export default function ClaimReviewAdvancedPage() {
   return (
@@ -9,36 +9,35 @@ export default function ClaimReviewAdvancedPage() {
           ratingValue: 1,
           bestRating: 5,
           worstRating: 1,
-          alternateName: "False",
-          name: "False",
+          alternateName: 'False',
+          name: 'False',
         }}
         url="https://example.com/news/science/worldisflat.html"
         author={{
-          name: "Example.com Science Watch",
-          url: "https://example.com/science",
-          logo: "https://example.com/logo.jpg",
+          name: 'Example.com Science Watch',
+          url: 'https://example.com/science',
+          logo: 'https://example.com/logo.jpg',
         }}
         itemReviewed={{
           author: {
-            "@type": "Organization",
-            name: "Square World Society",
-            sameAs:
-              "https://example.flatworlders.com/we-know-that-the-world-is-flat",
+            '@type': 'Organization',
+            name: 'Square World Society',
+            sameAs: 'https://example.flatworlders.com/we-know-that-the-world-is-flat',
           },
-          datePublished: "2024-06-20",
+          datePublished: '2024-06-20',
           appearance: {
-            "@type": "OpinionNewsArticle",
-            url: "https://example.com/news/a122121",
-            headline: "Square Earth - Flat earthers for the Internet age",
-            datePublished: "2024-06-22",
+            '@type': 'OpinionNewsArticle',
+            url: 'https://example.com/news/a122121',
+            headline: 'Square Earth - Flat earthers for the Internet age',
+            datePublished: '2024-06-22',
             author: {
-              name: "T. Tellar",
+              name: 'T. Tellar',
             },
-            image: "https://example.com/photos/1x1/photo.jpg",
+            image: 'https://example.com/photos/1x1/photo.jpg',
             publisher: {
-              name: "Skeptical News",
+              name: 'Skeptical News',
               logo: {
-                url: "https://example.com/logo.jpg",
+                url: 'https://example.com/logo.jpg',
               },
             },
           },
@@ -59,33 +58,30 @@ export default function ClaimReviewAdvancedPage() {
             <strong>First published:</strong> June 20, 2024
           </p>
           <p>
-            <strong>Appeared in:</strong> "Square Earth - Flat earthers for the
-            Internet age" by T. Tellar
+            <strong>Appeared in:</strong> "Square Earth - Flat earthers for the Internet age" by T.
+            Tellar
           </p>
         </div>
         <p>
-          This advanced example demonstrates a fact check with complete claim
-          tracking, including the original source, publication details, and
-          appearance information.
+          This advanced example demonstrates a fact check with complete claim tracking, including
+          the original source, publication details, and appearance information.
         </p>
         <h2>About This Fact Check</h2>
         <p>
-          This fact check was conducted by Example.com Science Watch, an
-          independent fact-checking organization dedicated to verifying
-          scientific claims.
+          This fact check was conducted by Example.com Science Watch, an independent fact-checking
+          organization dedicated to verifying scientific claims.
         </p>
         <h2>The Claim Origin</h2>
         <p>
-          The claim was originally made by the Square World Society on June 20,
-          2024, and subsequently appeared in an opinion piece titled "Square
-          Earth - Flat earthers for the Internet age" published by Skeptical
-          News on June 22, 2024.
+          The claim was originally made by the Square World Society on June 20, 2024, and
+          subsequently appeared in an opinion piece titled "Square Earth - Flat earthers for the
+          Internet age" published by Skeptical News on June 22, 2024.
         </p>
         <h2>Our Analysis</h2>
         <p>
-          After thorough investigation and consultation with multiple scientific
-          experts, we rate this claim as FALSE. The evidence overwhelmingly
-          supports that Earth is spherical, not flat.
+          After thorough investigation and consultation with multiple scientific experts, we rate
+          this claim as FALSE. The evidence overwhelmingly supports that Earth is spherical, not
+          flat.
         </p>
       </article>
     </div>

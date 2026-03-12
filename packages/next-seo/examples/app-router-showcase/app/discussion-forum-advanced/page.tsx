@@ -1,4 +1,4 @@
-import { DiscussionForumPostingJsonLd } from "next-seo";
+import { DiscussionForumPostingJsonLd } from '@opensourceframework/next-seo';
 
 export default function DiscussionForumAdvancedPage() {
   return (
@@ -7,70 +7,70 @@ export default function DiscussionForumAdvancedPage() {
         headline="Very Popular Thread About Concerts"
         text="I went to an amazing concert last night! The atmosphere was electric and the band played all their hits."
         image={[
-          "https://example.com/concert-photo1.jpg",
+          'https://example.com/concert-photo1.jpg',
           {
-            url: "https://example.com/concert-photo2.jpg",
+            url: 'https://example.com/concert-photo2.jpg',
             width: 1200,
             height: 800,
-            caption: "The main stage",
+            caption: 'The main stage',
           },
         ]}
         video={{
-          name: "Concert Highlights",
-          contentUrl: "https://example.com/concert-video.mp4",
-          uploadDate: "2024-01-02T10:00:00+00:00",
-          thumbnailUrl: "https://example.com/concert-thumbnail.jpg",
-          description: "Best moments from the concert",
+          name: 'Concert Highlights',
+          contentUrl: 'https://example.com/concert-video.mp4',
+          uploadDate: '2024-01-02T10:00:00+00:00',
+          thumbnailUrl: 'https://example.com/concert-thumbnail.jpg',
+          description: 'Best moments from the concert',
         }}
         url="https://example.com/forum/concerts/very-popular-thread"
         author={{
-          name: "Katie Pope",
-          url: "https://example.com/user/katie-pope",
+          name: 'Katie Pope',
+          url: 'https://example.com/user/katie-pope',
         }}
         datePublished="2024-01-01T08:34:34+00:00"
         dateModified="2024-01-01T09:00:00+00:00"
         interactionStatistic={[
           {
-            interactionType: "https://schema.org/LikeAction",
+            interactionType: 'https://schema.org/LikeAction',
             userInteractionCount: 127,
           },
           {
-            interactionType: "https://schema.org/ViewAction",
+            interactionType: 'https://schema.org/ViewAction',
             userInteractionCount: 3420,
           },
           {
-            interactionType: "https://schema.org/CommentAction",
+            interactionType: 'https://schema.org/CommentAction',
             userInteractionCount: 23,
           },
         ]}
         isPartOf={{
-          name: "Concert Discussions",
-          url: "https://example.com/forum/concerts",
+          name: 'Concert Discussions',
+          url: 'https://example.com/forum/concerts',
         }}
         sharedContent={{
-          url: "https://example.com/concert-tickets",
-          name: "Concert Venue Information",
-          description: "Details about the venue and upcoming shows",
+          url: 'https://example.com/concert-tickets',
+          name: 'Concert Venue Information',
+          description: 'Details about the venue and upcoming shows',
         }}
         comment={[
           {
-            text: "This should not be this popular",
+            text: 'This should not be this popular',
             author: {
-              name: "Forum Critic",
-              url: "https://example.com/user/forum-critic",
+              name: 'Forum Critic',
+              url: 'https://example.com/user/forum-critic',
             },
-            datePublished: "2024-01-01T09:00:00+00:00",
+            datePublished: '2024-01-01T09:00:00+00:00',
             interactionStatistic: {
-              interactionType: "https://schema.org/DislikeAction",
+              interactionType: 'https://schema.org/DislikeAction',
               userInteractionCount: 5,
             },
             comment: [
               {
                 text: "Yes it should, it's a great post!",
-                author: "Happy Fan",
-                datePublished: "2024-01-01T09:30:00+00:00",
+                author: 'Happy Fan',
+                datePublished: '2024-01-01T09:30:00+00:00',
                 interactionStatistic: {
-                  interactionType: "https://schema.org/LikeAction",
+                  interactionType: 'https://schema.org/LikeAction',
                   userInteractionCount: 15,
                 },
               },
@@ -79,16 +79,16 @@ export default function DiscussionForumAdvancedPage() {
           {
             text: "I was at the same concert! Here's my video:",
             author: {
-              name: "Concert Goer",
-              url: "https://example.com/user/concert-goer",
+              name: 'Concert Goer',
+              url: 'https://example.com/user/concert-goer',
             },
-            datePublished: "2024-01-01T10:00:00+00:00",
+            datePublished: '2024-01-01T10:00:00+00:00',
             video: {
-              name: "My Concert Video",
-              contentUrl: "https://example.com/user-concert-video.mp4",
-              uploadDate: "2024-01-01T11:00:00+00:00",
-              thumbnailUrl: "https://example.com/user-video-thumb.jpg",
-              description: "My perspective from the crowd",
+              name: 'My Concert Video',
+              contentUrl: 'https://example.com/user-concert-video.mp4',
+              uploadDate: '2024-01-01T11:00:00+00:00',
+              thumbnailUrl: 'https://example.com/user-video-thumb.jpg',
+              description: 'My perspective from the crowd',
             },
           },
         ]}
@@ -97,22 +97,19 @@ export default function DiscussionForumAdvancedPage() {
       <article className="prose lg:prose-xl">
         <h1>Very Popular Thread About Concerts</h1>
         <div className="text-sm text-gray-600 mb-4">
-          Posted by <a href="https://example.com/user/katie-pope">Katie Pope</a>{" "}
-          on January 1, 2024
+          Posted by <a href="https://example.com/user/katie-pope">Katie Pope</a> on January 1, 2024
           <br />
           127 likes · 3,420 views · 23 comments
         </div>
 
         <p>
-          I went to an amazing concert last night! The atmosphere was electric
-          and the band played all their hits.
+          I went to an amazing concert last night! The atmosphere was electric and the band played
+          all their hits.
         </p>
 
         <div className="my-4 bg-gray-100 p-4 rounded">
           <h3>Shared Link:</h3>
-          <a href="https://example.com/concert-tickets">
-            Concert Venue Information
-          </a>
+          <a href="https://example.com/concert-tickets">Concert Venue Information</a>
           <p className="text-sm">Details about the venue and upcoming shows</p>
         </div>
 
@@ -142,10 +139,7 @@ export default function DiscussionForumAdvancedPage() {
             <p>I was at the same concert! Here's my video:</p>
             <div className="mt-2">
               <video controls className="w-full max-w-md">
-                <source
-                  src="https://example.com/user-concert-video.mp4"
-                  type="video/mp4"
-                />
+                <source src="https://example.com/user-concert-video.mp4" type="video/mp4" />
               </video>
             </div>
           </div>

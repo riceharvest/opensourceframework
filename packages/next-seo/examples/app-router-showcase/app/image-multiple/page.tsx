@@ -1,4 +1,4 @@
-import { ImageJsonLd } from "next-seo";
+import { ImageJsonLd } from '@opensourceframework/next-seo';
 
 export default function ImageMultiplePage() {
   return (
@@ -6,47 +6,43 @@ export default function ImageMultiplePage() {
       <ImageJsonLd
         images={[
           {
-            contentUrl: "https://example.com/photos/mountain-sunrise.jpg",
-            creator: "Alex Mountain",
-            license: "https://example.com/license/standard",
-            creditText: "Nature Photography Collection",
-            copyrightNotice: "© 2024 Alex Mountain",
+            contentUrl: 'https://example.com/photos/mountain-sunrise.jpg',
+            creator: 'Alex Mountain',
+            license: 'https://example.com/license/standard',
+            creditText: 'Nature Photography Collection',
+            copyrightNotice: '© 2024 Alex Mountain',
           },
           {
-            contentUrl: "https://example.com/photos/ocean-waves.jpg",
+            contentUrl: 'https://example.com/photos/ocean-waves.jpg',
             creator: [
-              "Sarah Ocean",
+              'Sarah Ocean',
               {
-                name: "Coastal Studios",
-                url: "https://coastalstudios.com",
+                name: 'Coastal Studios',
+                url: 'https://coastalstudios.com',
               },
             ],
-            license: "https://creativecommons.org/licenses/by-sa/4.0/",
-            acquireLicensePage:
-              "https://example.com/licensing/ocean-collection",
-            creditText: "Coastal Studios & Sarah Ocean",
-            copyrightNotice: "© 2024 Coastal Studios",
+            license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+            acquireLicensePage: 'https://example.com/licensing/ocean-collection',
+            creditText: 'Coastal Studios & Sarah Ocean',
+            copyrightNotice: '© 2024 Coastal Studios',
           },
           {
-            contentUrl: "https://example.com/photos/city-lights.jpg",
+            contentUrl: 'https://example.com/photos/city-lights.jpg',
             creator: {
-              name: "Urban Photography Inc.",
-              logo: "https://example.com/urban-photo-logo.jpg",
-              sameAs: ["https://instagram.com/urbanphoto"],
+              name: 'Urban Photography Inc.',
+              logo: 'https://example.com/urban-photo-logo.jpg',
+              sameAs: ['https://instagram.com/urbanphoto'],
             },
-            license: "https://example.com/license/commercial",
-            acquireLicensePage: "https://example.com/licensing/urban",
-            creditText: "Urban Photography Inc.",
-            copyrightNotice:
-              "© 2024 Urban Photography Inc. All rights reserved.",
+            license: 'https://example.com/license/commercial',
+            acquireLicensePage: 'https://example.com/licensing/urban',
+            creditText: 'Urban Photography Inc.',
+            copyrightNotice: '© 2024 Urban Photography Inc. All rights reserved.',
           },
         ]}
       />
 
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">
-          Photography Collection Gallery
-        </h1>
+        <h1 className="text-3xl font-bold mb-8">Photography Collection Gallery</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Mountain Sunrise */}
@@ -128,9 +124,7 @@ export default function ImageMultiplePage() {
                 <div className="w-8 h-8 rounded bg-gray-300 flex items-center justify-center">
                   <span className="text-gray-600 text-xs">U</span>
                 </div>
-                <span className="font-medium text-sm">
-                  Urban Photography Inc.
-                </span>
+                <span className="font-medium text-sm">Urban Photography Inc.</span>
               </div>
               <dl className="text-sm space-y-1">
                 <div className="flex justify-between">
@@ -163,15 +157,13 @@ export default function ImageMultiplePage() {
         <div className="mt-8 p-6 bg-gray-100 rounded-lg">
           <h2 className="text-xl font-semibold mb-3">About This Collection</h2>
           <p className="text-gray-700 mb-4">
-            This gallery showcases various photography styles from different
-            creators and studios. Each image has its own licensing terms and
-            creators. Some images are available under Creative Commons licenses,
-            while others require commercial licensing.
+            This gallery showcases various photography styles from different creators and studios.
+            Each image has its own licensing terms and creators. Some images are available under
+            Creative Commons licenses, while others require commercial licensing.
           </p>
           <p className="text-sm text-gray-600">
-            To use any of these images, please review the individual license
-            terms and contact the respective creators or studios for permissions
-            beyond the stated licenses.
+            To use any of these images, please review the individual license terms and contact the
+            respective creators or studios for permissions beyond the stated licenses.
           </p>
         </div>
       </div>

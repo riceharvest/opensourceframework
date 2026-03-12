@@ -1,4 +1,4 @@
-import { VideoJsonLd } from "next-seo";
+import { VideoJsonLd } from '@opensourceframework/next-seo';
 
 export default function VideoLivePage() {
   return (
@@ -10,27 +10,27 @@ export default function VideoLivePage() {
         uploadDate="2024-12-20T10:00:00+00:00"
         embedUrl="https://example.com/live/nye-special"
         interactionStatistic={{
-          interactionType: "WatchAction",
+          interactionType: 'WatchAction',
           userInteractionCount: 15000,
         }}
         publication={[
           {
-            name: "First Broadcast",
+            name: 'First Broadcast',
             isLiveBroadcast: true,
-            startDate: "2024-12-31T20:00:00+00:00",
-            endDate: "2024-12-31T22:00:00+00:00",
+            startDate: '2024-12-31T20:00:00+00:00',
+            endDate: '2024-12-31T22:00:00+00:00',
           },
           {
-            name: "Encore Presentation",
+            name: 'Encore Presentation',
             isLiveBroadcast: true,
-            startDate: "2025-01-01T14:00:00+00:00",
-            endDate: "2025-01-01T16:00:00+00:00",
+            startDate: '2025-01-01T14:00:00+00:00',
+            endDate: '2025-01-01T16:00:00+00:00',
           },
         ]}
         author="Chef Maria Rodriguez"
         publisher={{
-          name: "Live Cooking Network",
-          logo: "https://example.com/live-cooking-network-logo.png",
+          name: 'Live Cooking Network',
+          logo: 'https://example.com/live-cooking-network-logo.png',
         }}
       />
 
@@ -40,9 +40,7 @@ export default function VideoLivePage() {
         <div className="bg-red-50 border-2 border-red-200 p-6 rounded-lg mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-4 h-4 bg-red-600 rounded-full animate-pulse"></div>
-            <span className="text-xl font-bold text-red-600">
-              LIVE BROADCAST
-            </span>
+            <span className="text-xl font-bold text-red-600">LIVE BROADCAST</span>
           </div>
           <p className="text-lg mb-4">
             Join us for a special New Year's Eve cooking demonstration!
@@ -59,19 +57,16 @@ export default function VideoLivePage() {
 
         <div className="aspect-w-16 aspect-h-9 mb-8">
           <div className="bg-gray-200 rounded-lg flex items-center justify-center">
-            <p className="text-xl text-gray-600">
-              Live stream player will appear here
-            </p>
+            <p className="text-xl text-gray-600">Live stream player will appear here</p>
           </div>
         </div>
 
         <section>
           <h2>About This Live Show</h2>
           <p>
-            Join Chef Maria Rodriguez for an exciting live cooking demonstration
-            where she'll prepare a complete New Year's Eve feast. From
-            appetizers to desserts, learn how to create the perfect celebration
-            menu.
+            Join Chef Maria Rodriguez for an exciting live cooking demonstration where she'll
+            prepare a complete New Year's Eve feast. From appetizers to desserts, learn how to
+            create the perfect celebration menu.
           </p>
         </section>
 
@@ -89,9 +84,8 @@ export default function VideoLivePage() {
         <section>
           <h2>Live Interaction</h2>
           <p>
-            During the live broadcast, Chef Maria will answer your questions in
-            real-time. Submit your questions through the chat and she'll address
-            them throughout the show.
+            During the live broadcast, Chef Maria will answer your questions in real-time. Submit
+            your questions through the chat and she'll address them throughout the show.
           </p>
         </section>
 

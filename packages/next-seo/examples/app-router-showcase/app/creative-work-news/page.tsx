@@ -1,4 +1,4 @@
-import { CreativeWorkJsonLd } from "next-seo";
+import { CreativeWorkJsonLd } from '@opensourceframework/next-seo';
 
 export default function CreativeWorkNewsPage() {
   return (
@@ -10,19 +10,19 @@ export default function CreativeWorkNewsPage() {
         datePublished="2024-01-15T09:00:00+00:00"
         dateModified="2024-01-15T11:30:00+00:00"
         author={{
-          name: "Jane Martinez",
-          url: "https://example.com/journalists/jane-martinez",
+          name: 'Jane Martinez',
+          url: 'https://example.com/journalists/jane-martinez',
         }}
         image={{
-          url: "https://example.com/images/discovery-hero.jpg",
+          url: 'https://example.com/images/discovery-hero.jpg',
           width: 1200,
           height: 630,
-          caption: "Scientific breakthrough illustration",
+          caption: 'Scientific breakthrough illustration',
         }}
         publisher={{
-          name: "Global News Network",
+          name: 'Global News Network',
           logo: {
-            url: "https://example.com/gnn-logo.png",
+            url: 'https://example.com/gnn-logo.png',
             width: 600,
             height: 60,
           },
@@ -31,10 +31,10 @@ export default function CreativeWorkNewsPage() {
         isAccessibleForFree={false}
         hasPart={{
           isAccessibleForFree: false,
-          cssSelector: ".premium-news",
+          cssSelector: '.premium-news',
         }}
         mainEntityOfPage={{
-          "@id": "https://example.com/news/scientific-discovery",
+          '@id': 'https://example.com/news/scientific-discovery',
         }}
       />
 
@@ -43,13 +43,12 @@ export default function CreativeWorkNewsPage() {
 
         <div className="lead bg-white p-6 rounded-lg shadow-md">
           <p className="text-lg font-semibold">
-            Scientists at the International Research Center have announced a
-            groundbreaking discovery that could revolutionize our understanding
-            of quantum physics.
+            Scientists at the International Research Center have announced a groundbreaking
+            discovery that could revolutionize our understanding of quantum physics.
           </p>
           <p>
-            The discovery, made during a series of experiments over the past six
-            months, has implications for future technology development.
+            The discovery, made during a series of experiments over the past six months, has
+            implications for future technology development.
           </p>
           <p className="text-sm text-gray-600 mt-4">
             Published: January 15, 2024, 9:00 AM | Updated: 11:30 AM
@@ -71,9 +70,7 @@ export default function CreativeWorkNewsPage() {
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
               />
             </svg>
-            <span className="text-red-700 font-semibold">
-              Subscriber Exclusive Content
-            </span>
+            <span className="text-red-700 font-semibold">Subscriber Exclusive Content</span>
           </div>
 
           <h2>Full Discovery Details</h2>
@@ -83,30 +80,29 @@ export default function CreativeWorkNewsPage() {
 
           <h3>The Breakthrough</h3>
           <p>
-            Dr. Sarah Chen and her team have successfully demonstrated quantum
-            entanglement at room temperature, a feat previously thought
-            impossible. The implications for quantum computing are enormous.
+            Dr. Sarah Chen and her team have successfully demonstrated quantum entanglement at room
+            temperature, a feat previously thought impossible. The implications for quantum
+            computing are enormous.
           </p>
 
           <h3>Technical Details</h3>
           <p>
-            The experiment utilized a novel approach combining laser cooling
-            techniques with magnetic field manipulation. The team was able to
-            maintain entanglement for over 100 milliseconds at 25°C.
+            The experiment utilized a novel approach combining laser cooling techniques with
+            magnetic field manipulation. The team was able to maintain entanglement for over 100
+            milliseconds at 25°C.
           </p>
 
           <h3>Future Applications</h3>
           <p>
-            This discovery opens doors for practical quantum computers that
-            don't require extreme cooling, potentially making the technology
-            accessible for everyday use within the next decade.
+            This discovery opens doors for practical quantum computers that don't require extreme
+            cooling, potentially making the technology accessible for everyday use within the next
+            decade.
           </p>
 
           <h3>Industry Response</h3>
           <p>
-            Major tech companies have already expressed interest in licensing
-            the technology. "This changes everything," said a spokesperson from
-            a leading quantum computing firm.
+            Major tech companies have already expressed interest in licensing the technology. "This
+            changes everything," said a spokesperson from a leading quantum computing firm.
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { DiscussionForumPostingJsonLd } from "next-seo";
+import { DiscussionForumPostingJsonLd } from '@opensourceframework/next-seo';
 
 export default function DiscussionForumPage() {
   return (
@@ -12,22 +12,20 @@ export default function DiscussionForumPage() {
         comment={[
           {
             text: "Who's the person you're with?",
-            author: "Saul Douglas",
-            datePublished: "2024-01-01T09:46:02+00:00",
+            author: 'Saul Douglas',
+            datePublished: '2024-01-01T09:46:02+00:00',
           },
           {
             text: "That's my mom, isn't she cool?",
-            author: "Katie Pope",
-            datePublished: "2024-01-01T09:50:25+00:00",
+            author: 'Katie Pope',
+            datePublished: '2024-01-01T09:50:25+00:00',
           },
         ]}
       />
 
       <article className="prose lg:prose-xl">
         <h1>I went to the concert!</h1>
-        <div className="text-sm text-gray-600 mb-4">
-          Posted by Katie Pope on January 1, 2024
-        </div>
+        <div className="text-sm text-gray-600 mb-4">Posted by Katie Pope on January 1, 2024</div>
         <p>Look at how cool this concert was!</p>
 
         <div className="mt-8 space-y-4">

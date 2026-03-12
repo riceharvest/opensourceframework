@@ -1,4 +1,4 @@
-import { EventJsonLd } from "next-seo";
+import { EventJsonLd } from '@opensourceframework/next-seo';
 
 export default function EventFreePage() {
   return (
@@ -8,32 +8,32 @@ export default function EventFreePage() {
         startDate="2025-07-15T18:00:00-05:00"
         endDate="2025-07-15T20:00:00-05:00"
         location={{
-          "@type": "Place",
-          name: "Downtown Public Library",
+          '@type': 'Place',
+          name: 'Downtown Public Library',
           address: {
-            "@type": "PostalAddress",
-            streetAddress: "123 Main Street",
-            addressLocality: "Springfield",
-            addressRegion: "IL",
-            postalCode: "62701",
-            addressCountry: "US",
+            '@type': 'PostalAddress',
+            streetAddress: '123 Main Street',
+            addressLocality: 'Springfield',
+            addressRegion: 'IL',
+            postalCode: '62701',
+            addressCountry: 'US',
           },
         }}
         description="Free workshop for beginners interested in learning web development. No prior experience required!"
         eventStatus="https://schema.org/EventScheduled"
         image="https://example.com/coding-workshop.jpg"
         offers={{
-          "@type": "Offer",
-          url: "https://example.com/register/coding-workshop",
+          '@type': 'Offer',
+          url: 'https://example.com/register/coding-workshop',
           price: 0,
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
         }}
         performer="Sarah Johnson"
         organizer={{
-          "@type": "Organization",
-          name: "Code for Community",
-          url: "https://codeforcommunity.org",
+          '@type': 'Organization',
+          name: 'Code for Community',
+          url: 'https://codeforcommunity.org',
         }}
         url="https://codeforcommunity.org/events/intro-web-dev"
       />
@@ -41,9 +41,7 @@ export default function EventFreePage() {
       <article className="prose lg:prose-xl">
         <div className="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded mb-6">
           <h1 className="text-3xl font-bold mb-2">FREE EVENT</h1>
-          <p className="text-lg">
-            No registration fee required! Open to all community members.
-          </p>
+          <p className="text-lg">No registration fee required! Open to all community members.</p>
         </div>
 
         <h2 className="text-2xl font-semibold mb-4">
@@ -76,9 +74,7 @@ export default function EventFreePage() {
             <p>
               <strong>Seats Available:</strong> Limited to 30
             </p>
-            <p className="mt-2 text-sm">
-              Registration required to reserve your spot.
-            </p>
+            <p className="mt-2 text-sm">Registration required to reserve your spot.</p>
             <a
               href="https://example.com/register/coding-workshop"
               className="inline-block mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
@@ -91,14 +87,14 @@ export default function EventFreePage() {
         <section className="mb-8">
           <h3 className="text-xl font-semibold mb-4">About the Workshop</h3>
           <p>
-            Join us for a free, beginner-friendly workshop on web development!
-            This two-hour session will introduce you to the basics of HTML, CSS,
-            and JavaScript. No prior programming experience is required.
+            Join us for a free, beginner-friendly workshop on web development! This two-hour session
+            will introduce you to the basics of HTML, CSS, and JavaScript. No prior programming
+            experience is required.
           </p>
           <p className="mt-4">
-            Perfect for anyone interested in learning to code, whether
-            you&apos;re exploring a career change, looking to build your own
-            website, or just curious about how the web works.
+            Perfect for anyone interested in learning to code, whether you&apos;re exploring a
+            career change, looking to build your own website, or just curious about how the web
+            works.
           </p>
         </section>
 
@@ -120,33 +116,24 @@ export default function EventFreePage() {
             <li>Enthusiasm to learn!</li>
             <li>Questions about web development</li>
           </ul>
-          <p className="mt-4 text-sm italic">
-            Light refreshments will be provided.
-          </p>
+          <p className="mt-4 text-sm italic">Light refreshments will be provided.</p>
         </section>
 
         <section className="mb-8">
           <h3 className="text-xl font-semibold mb-4">Instructor</h3>
           <p>
-            <strong>Sarah Johnson</strong> is a senior web developer with over
-            10 years of experience and a passion for teaching. She volunteers
-            regularly with Code for Community to help make tech education
-            accessible to everyone.
+            <strong>Sarah Johnson</strong> is a senior web developer with over 10 years of
+            experience and a passion for teaching. She volunteers regularly with Code for Community
+            to help make tech education accessible to everyone.
           </p>
         </section>
 
         <section>
-          <h3 className="text-xl font-semibold mb-4">
-            About Code for Community
-          </h3>
+          <h3 className="text-xl font-semibold mb-4">About Code for Community</h3>
           <p>
-            Code for Community is a non-profit organization dedicated to
-            providing free coding education and resources to underserved
-            communities. Learn more at{" "}
-            <a
-              href="https://codeforcommunity.org"
-              className="text-blue-600 hover:underline"
-            >
+            Code for Community is a non-profit organization dedicated to providing free coding
+            education and resources to underserved communities. Learn more at{' '}
+            <a href="https://codeforcommunity.org" className="text-blue-600 hover:underline">
               codeforcommunity.org
             </a>
           </p>

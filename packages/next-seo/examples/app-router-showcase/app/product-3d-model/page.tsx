@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function Product3DModelPage() {
   return (
@@ -8,9 +8,9 @@ export default function Product3DModelPage() {
         description="Ergonomic lounge chair with premium leather upholstery and swivel base"
         url="https://example.com/products/modern-lounge-chair"
         image={[
-          "https://example.com/chair-1x1.jpg",
-          "https://example.com/chair-4x3.jpg",
-          "https://example.com/chair-16x9.jpg",
+          'https://example.com/chair-1x1.jpg',
+          'https://example.com/chair-4x3.jpg',
+          'https://example.com/chair-16x9.jpg',
         ]}
         sku="CHAIR-ML-001"
         mpn="MLC2024"
@@ -19,21 +19,21 @@ export default function Product3DModelPage() {
         // 3D model reference
         subjectOf={{
           encoding: {
-            contentUrl: "https://example.com/models/lounge-chair.gltf",
+            contentUrl: 'https://example.com/models/lounge-chair.gltf',
           },
         }}
         // Target audience
         audience={{
-          suggestedGender: "unisex",
+          suggestedGender: 'unisex',
           suggestedMinAge: 18,
           suggestedMaxAge: 65,
         }}
         offers={{
           price: 1299.0,
-          priceCurrency: "USD",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
-          itemCondition: "https://schema.org/NewCondition",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
+          itemCondition: 'https://schema.org/NewCondition',
         }}
         aggregateRating={{
           ratingValue: 4.8,
@@ -41,8 +41,8 @@ export default function Product3DModelPage() {
         }}
         // Enhanced size specifications
         size={{
-          name: "Standard",
-          sizeSystem: "https://schema.org/WearableSizeSystemUS",
+          name: 'Standard',
+          sizeSystem: 'https://schema.org/WearableSizeSystemUS',
         }}
         color="Cognac Leather"
         material="Italian Leather, Steel Frame"
@@ -68,12 +68,7 @@ export default function Product3DModelPage() {
               <div className="text-center">
                 <span className="text-gray-500 block mb-4">Chair 3D Model</span>
                 <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2 mx-auto">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -99,10 +94,8 @@ export default function Product3DModelPage() {
             <div>
               <h1 className="text-3xl font-bold mb-2">Modern Lounge Chair</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
-                <span className="text-gray-600">
-                  4.8 out of 5 (127 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
+                <span className="text-gray-600">4.8 out of 5 (127 reviews)</span>
               </div>
               <p className="text-gray-600">by Designer Furniture Studio</p>
             </div>
@@ -114,9 +107,7 @@ export default function Product3DModelPage() {
               </div>
               <p className="text-green-600 font-medium">✓ In Stock</p>
               <div className="flex gap-2 text-sm">
-                <span className="bg-gray-100 px-2 py-1 rounded">
-                  New Condition
-                </span>
+                <span className="bg-gray-100 px-2 py-1 rounded">New Condition</span>
                 <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded">
                   3D View Available
                 </span>
@@ -141,8 +132,7 @@ export default function Product3DModelPage() {
                 Interactive 3D Model
               </h3>
               <p className="text-sm text-gray-700 mb-3">
-                View this product in 3D! Rotate, zoom, and explore every detail
-                before you buy.
+                View this product in 3D! Rotate, zoom, and explore every detail before you buy.
               </p>
               <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700">
                 Launch 3D Viewer
@@ -256,14 +246,13 @@ export default function Product3DModelPage() {
             About Our 3D Models
           </h3>
           <p className="text-sm text-gray-700 mb-3">
-            Our interactive 3D models are created using photogrammetry and
-            professional 3D scanning to provide the most accurate representation
-            of our products. View products from every angle, zoom in on details,
-            and see how they'll look in your space using AR technology.
+            Our interactive 3D models are created using photogrammetry and professional 3D scanning
+            to provide the most accurate representation of our products. View products from every
+            angle, zoom in on details, and see how they'll look in your space using AR technology.
           </p>
           <p className="text-sm text-gray-600">
-            3D models are available in GLTF format and compatible with most
-            modern browsers and AR applications.
+            3D models are available in GLTF format and compatible with most modern browsers and AR
+            applications.
           </p>
         </div>
       </div>
