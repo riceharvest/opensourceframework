@@ -1,4 +1,4 @@
-const withPWA = require('next-pwa')({
+const withPWA = require('@opensourceframework/next-pwa')({
   // pwa output folder
   // dest: '.next/pwa'
   //

@@ -34,7 +34,7 @@ const toc = await getTableOfContents(doc)
 ```jsx
 import * as React from "react"
 import { getMdxNode } from "next-mdx/server"
-import { getTableOfContents } from "next-mdx-toc"
+import { getTableOfContents } from "@opensourceframework/next-mdx-toc"
 
 export default function Page({ doc, tableOfContents }) {}
 
@@ -62,7 +62,7 @@ export async function getStaticProps(context) {
 To render the table of contents, use a recursive component type:
 
 ```tsx
-import { TableOfContents } from "next-mdx-toc"
+import { TableOfContents } from "@opensourceframework/next-mdx-toc"
 
 function Toc({ tree }: { tree: TableOfContents }) {
   return tree?.items.length ? (
@@ -89,7 +89,7 @@ function Toc({ tree }: { tree: TableOfContents }) {
 If you want to add the table of contents to your `MdxNode`, you can do so as follows:
 
 ```ts
-import { TableOfContents } from "next-mdx-toc"
+import { TableOfContents } from "@opensourceframework/next-mdx-toc"
 import { MdxNode } from "next-mdx/server"
 
 interface Doc extends MdxNode {

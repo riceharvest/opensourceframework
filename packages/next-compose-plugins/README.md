@@ -38,7 +38,7 @@ Building a **Dashboard** or **Admin UI**? Or do you want to see a **usage exampl
 
 ```javascript
 // next.config.js
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 
 module.exports = withPlugins([...plugins], nextConfiguration);
 ```
@@ -59,7 +59,7 @@ Imported plugin.
 See the [optional plugins](#optional-plugins) section if you only want to require a plugin when it is really used.
 
 ```javascript
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const sass = require('@zeit/next-sass');
 
 module.exports = withPlugins([
@@ -74,7 +74,7 @@ Configuration for the plugin.
 You can also overwrite specific configuration keys for a phase:
 
 ```javascript
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 const sass = require('@zeit/next-sass');
 
@@ -103,7 +103,7 @@ If the plugin should only be applied in specific phases, you can specify them he
 You can use all phases [next.js provides](https://github.com/zeit/next.js/blob/canary/packages/next/next-server/lib/constants.ts#L1-L4).
 
 ```javascript
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 const sass = require('@zeit/next-sass');
 
@@ -120,7 +120,7 @@ module.exports = withPlugins([
 You can also negate the phases with a leading `!`:
 
 ```javascript
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } = require('next/constants');
 const sass = require('@zeit/next-sass');
 
@@ -143,7 +143,7 @@ Any direct [next.js configuration](https://github.com/zeit/next.js#custom-config
 You can also customize the webpack configuration of next.js within this object.
 
 ```javascript
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 
 const nextConfig = {
   distDir: 'build',
@@ -178,7 +178,7 @@ This can especially be useful if the plugin is only in the `devDependencies` and
 If you don't use the `optional` helper in this case, you would get an error.
 
 ```javascript
-const { withPlugins, optional } = require('next-compose-plugins');
+const { withPlugins, optional } = require('@opensourceframework/next-compose-plugins');
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
 module.exports = withPlugins([
@@ -195,7 +195,7 @@ To easily archive this, you can use the `extend` helper in the `next.config.js` 
 
 ```javascript
 // next.config.js
-const { withPlugins, extend } = require('next-compose-plugins');
+const { withPlugins, extend } = require('@opensourceframework/next-compose-plugins');
 const baseConfig = require('./base.next.config.js');
 
 const nextConfig = { /* ... */ };
@@ -209,7 +209,7 @@ module.exports = extend(baseConfig).withPlugins([
 
 ```javascript
 // base.next.config.js
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 
 module.exports = withPlugins([
   [typescript, {
@@ -289,8 +289,8 @@ Check out the [NextJS Material Dashboard](https://www.creative-tim.com/product/n
 
 ```javascript
 // next.config.js
-const withPlugins = require('next-compose-plugins');
-const images = require('next-images');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
+const images = require('@opensourceframework/next-images');
 const sass = require('@zeit/next-sass');
 const typescript = require('@zeit/next-typescript');
 
@@ -327,8 +327,8 @@ module.exports = withPlugins([
 
 ```javascript
 // next.config.js
-const { withPlugins, optional } = require('next-compose-plugins');
-const images = require('next-images');
+const { withPlugins, optional } = require('@opensourceframework/next-compose-plugins');
+const images = require('@opensourceframework/next-images');
 const sass = require('@zeit/next-sass');
 const typescript = require('@zeit/next-typescript');
 
@@ -384,7 +384,7 @@ As a comparison, it would look like this without this plugin where it is not rea
 // next.config.js
 const withSass = require('@zeit/next-sass');
 const withTypescript = require('@zeit/next-typescript');
-const withImages = require('next-images');
+const withImages = require('@opensourceframework/next-images');
 const withOffline = require('next-offline');
 
 module.exports = withSass(withOffline(withTypescript(withImages({

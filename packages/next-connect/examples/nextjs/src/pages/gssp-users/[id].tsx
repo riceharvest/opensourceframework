@@ -5,7 +5,7 @@ import type {
   GetServerSidePropsContext,
   NextPage,
 } from "next";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 import Head from "next/head";
 import styles from "../../styles/styles.module.css";
 import { getUsers } from "../../utils/api";

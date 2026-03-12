@@ -125,7 +125,7 @@ For this reason it is recommended that your rows use a style like `overflow-y: h
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {List} from 'react-virtualized';
+import {List} from '@opensourceframework/react-virtualized';
 
 // List data as an array of strings
 const list = [

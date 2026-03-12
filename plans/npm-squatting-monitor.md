@@ -210,16 +210,16 @@ Create a script to reserve all package names:
 # Reserve all @opensourceframework package names
 
 PACKAGES=(
-  "next-seo"
+  "@opensourceframework/next-seo"
   "next-transpile-modules"
-  "next-compose-plugins"
+  "@opensourceframework/next-compose-plugins"
   "next-cookies"
-  "next-auth"
-  "next-pwa"
-  "react-virtualized"
-  "next-session"
-  "next-iron-session"
-  "next-mdx"
+  "@opensourceframework/next-auth"
+  "@opensourceframework/next-pwa"
+  "@opensourceframework/react-virtualized"
+  "@opensourceframework/next-session"
+  "@opensourceframework/next-iron-session"
+  "@opensourceframework/next-mdx"
 )
 
 for pkg in "${PACKAGES[@]}"; do

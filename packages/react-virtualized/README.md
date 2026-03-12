@@ -26,8 +26,8 @@ For example:
 // This only needs to be done once; probably during your application's bootstrapping process.
 import 'react-virtualized/styles.css';
 
-// You can import any component you want as a named export from 'react-virtualized', eg
-import {Column, Table} from 'react-virtualized';
+// You can import any component you want as a named export from '@opensourceframework/react-virtualized', eg
+import {Column, Table} from '@opensourceframework/react-virtualized';
 
 // But if you only use a few react-virtualized components,
 // And you're concerned about increasing your application's bundle size,

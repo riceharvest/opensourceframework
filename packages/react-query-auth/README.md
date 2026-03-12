@@ -25,7 +25,7 @@ $ yarn add @tanstack/react-query react-query-auth
 To use this library, you will need to provide it with functions for fetching the current user, logging in, registering, and logging out. You can do this using the `configureAuth` function:
 
 ```ts
-import { configureAuth } from 'react-query-auth';
+import { configureAuth } from '@opensourceframework/react-query-auth';
 
 const { useUser, useLogin, useRegister, useLogout } = configureAuth({
   userFn: () => api.get('/me'),

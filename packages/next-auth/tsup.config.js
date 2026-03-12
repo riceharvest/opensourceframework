@@ -83,7 +83,7 @@ export default defineConfig({
     "react",
     "react-dom",
     "next",
-    "next-auth",
+    "@opensourceframework/next-auth",
     "jose",
     "futoin-hkdf",
     "jsonwebtoken",

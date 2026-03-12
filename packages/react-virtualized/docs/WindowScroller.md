@@ -41,7 +41,7 @@ This method is automatically triggered when the component mounts as well as when
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { List, WindowScroller } from 'react-virtualized';
+import { List, WindowScroller } from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 ReactDOM.render(
@@ -69,7 +69,7 @@ using `registerChild`
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { List, WindowScroller } from 'react-virtualized';
+import { List, WindowScroller } from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 ReactDOM.render(

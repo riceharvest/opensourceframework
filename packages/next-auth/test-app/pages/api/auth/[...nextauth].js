@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 
 export const authOptions = {

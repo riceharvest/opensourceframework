@@ -33,8 +33,8 @@ No changes required - the package exports are identical:
 
 ```javascript
 // Before
-import { NextSeo } from 'next-seo';
-import { ArticleJsonLd } from 'next-seo';
+import { NextSeo } from '@opensourceframework/next-seo';
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 
 // After - works exactly the same
 import { NextSeo } from '@opensourceframework/next-seo';
@@ -47,7 +47,7 @@ For Next.js App Router, the import path is unchanged:
 
 ```tsx
 // Before
-import { NextSeo } from 'next-seo';
+import { NextSeo } from '@opensourceframework/next-seo';
 
 // After - identical usage
 import { NextSeo } from '@opensourceframework/next-seo';
@@ -67,7 +67,7 @@ export default function Page() {
 ```jsx
 // Before
 import Head from 'next/head';
-import { NextSeo } from 'next-seo';
+import { NextSeo } from '@opensourceframework/next-seo';
 
 // After - same pattern
 import Head from 'next/head';

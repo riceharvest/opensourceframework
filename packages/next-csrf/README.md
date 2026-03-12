@@ -95,7 +95,7 @@ A function to manually verify the CSRF token, designed for App Router (Server Ac
 If migrating from the original package:
 
 ```diff
-- import { createCSRF } from 'next-csrf';
+- import { createCSRF } from '@opensourceframework/next-csrf';
 + import { createCSRF } from '@opensourceframework/next-csrf';
 ```
 

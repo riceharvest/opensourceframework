@@ -56,7 +56,7 @@ export default {
 You can use custom models by specifying the TypeORM adapter explicitly and passing them as an option.
 
 ```js title="pages/api/auth/[...nextauth].js"
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 import Adapters from "next-auth/adapters"
 

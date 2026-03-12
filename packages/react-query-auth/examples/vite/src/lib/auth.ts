@@ -1,4 +1,4 @@
-import { configureAuth } from "react-query-auth"
+import { configureAuth } from "@opensourceframework/react-query-auth"
 import {
 	type AuthResponse,
 	getUserProfile,

@@ -17,7 +17,7 @@ import {
  
 type TestSchema = JSONLDSchema;
 
-describe('next-json-ld', () => {
+describe('@opensourceframework/next-json-ld', () => {
   describe('createJsonLdScript', () => {
     it('should stringify a single schema', () => {
       const schema = {

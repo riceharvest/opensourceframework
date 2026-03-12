@@ -33,7 +33,7 @@ No configuration changes required - the API is identical:
 
 ```javascript
 // Before
-const withPWA = require('next-pwa')({
+const withPWA = require('@opensourceframework/next-pwa')({
   dest: 'public'
 })
 

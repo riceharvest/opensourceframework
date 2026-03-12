@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import EmailProvider from "next-auth/providers/email"
 import GitHubProvider from "next-auth/providers/github"
 import Auth0Provider from "next-auth/providers/auth0"

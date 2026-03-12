@@ -314,7 +314,7 @@ The `ArticleJsonLd` component helps you add structured data for articles, blog p
 #### Basic Usage
 
 ```tsx
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from "@opensourceframework/next-seo";
 
 <ArticleJsonLd
   headline="My Amazing Article"
@@ -347,7 +347,7 @@ import { ArticleJsonLd } from "next-seo";
 Create example pages in `examples/app-router-showcase/app/[component]/page.tsx`:
 
 ```tsx
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from "@opensourceframework/next-seo";
 
 export default function ArticlePage() {
   return (

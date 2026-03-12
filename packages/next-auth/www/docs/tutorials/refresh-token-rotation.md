@@ -18,7 +18,7 @@ Using a [JWT callback](https://next-auth.js.org/configuration/callbacks#jwt-call
 Below is a sample implementation using Google's Identity Provider. Please note that the OAuth 2.0 request in the `refreshAccessToken()` function will vary between different providers, but the core logic should remain similar.
 
 ```js title="pages/auth/[...nextauth.js]"
-import NextAuth from "next-auth";
+import NextAuth from "@opensourceframework/next-auth";
 import Providers from "next-auth/providers";
 
 const GOOGLE_AUTHORIZATION_URL =

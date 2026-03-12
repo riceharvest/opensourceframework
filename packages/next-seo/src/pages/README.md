@@ -180,7 +180,7 @@ If you're using the old import path or component-based approach, update your cod
 
 ```tsx
 // Old (deprecated components)
-import { NextSeo, DefaultSeo } from "next-seo";
+import { NextSeo, DefaultSeo } from "@opensourceframework/next-seo";
 // Usage: <NextSeo title="..." />
 
 // New (Pages Router functions)

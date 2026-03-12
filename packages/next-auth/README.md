@@ -90,7 +90,7 @@ The package at `@types/next-auth` is now deprecated.
 ### Add API Route
 
 ```javascript
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 
 export default NextAuth({
