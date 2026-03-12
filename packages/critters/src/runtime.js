@@ -748,10 +748,13 @@ export default class Critters {
 
               // detect used keyframes
               if (decl.prop === 'animation' || decl.prop === 'animation-name') {
+                // Filter out common animation keywords and durations
+                const keywords = ['none', 'inherit', 'initial', 'unset', 'infinite', 'alternate', 'alternate-reverse', 'forwards', 'backwards', 'both', 'running', 'paused', 'normal', 'reverse', 'ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear', 'step-start', 'step-end'];
                 for (const name of decl.value.split(/\s+/)) {
-                  // @todo: parse animation declarations and extract only the name. for now we'll do a lazy match.
                   const nameTrimmed = name.trim();
-                  if (nameTrimmed) criticalKeyframeNames.add(nameTrimmed);
+                  if (nameTrimmed && !keywords.includes(nameTrimmed) && !/^\d/.test(nameTrimmed)) {
+                    criticalKeyframeNames.add(nameTrimmed);
+                  }
                 }
               }
             }
@@ -797,21 +800,31 @@ export default class Critters {
         let family, src;
         for (const decl of rule.nodes) {
           if (decl.prop === 'src') {
-            // @todo parse this properly and generate multiple preloads with type="font/woff2" etc
-            src = (decl.value.match(/url\s*\(\s*(['"]?)(.+?)\1\s*\)/) || [])[2];
+            src = decl.value;
           } else if (decl.prop === 'font-family') {
             family = decl.value;
           }
         }
 
-        if (src && shouldPreloadFonts && !preloadedFonts.has(src)) {
-          preloadedFonts.add(src);
-          const preload = document.createElement('link');
-          preload.setAttribute('rel', 'preload');
-          preload.setAttribute('as', 'font');
-          preload.setAttribute('crossorigin', 'anonymous');
-          preload.setAttribute('href', src.trim());
-          document.head.appendChild(preload);
+        if (src && shouldPreloadFonts) {
+          const urlRegex = /url\s*\(\s*(['"]?)(.+?)\1\s*\)(\s*format\s*\(\s*(['"]?)(.+?)\4\s*\))?/g;
+          let match;
+          while ((match = urlRegex.exec(src)) !== null) {
+            const fontUrl = match[2].trim();
+            const format = match[5];
+            if (!preloadedFonts.has(fontUrl)) {
+              preloadedFonts.add(fontUrl);
+              const preload = document.createElement('link');
+              preload.setAttribute('rel', 'preload');
+              preload.setAttribute('as', 'font');
+              if (format) {
+                preload.setAttribute('type', `font/${format}`);
+              }
+              preload.setAttribute('crossorigin', 'anonymous');
+              preload.setAttribute('href', fontUrl);
+              document.head.appendChild(preload);
+            }
+          }
         }
 
         // if we're missing info, if the font is unused, or if critical font inlining is disabled, remove the rule:
