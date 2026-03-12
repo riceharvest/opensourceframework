@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "files": [
+    "../webpack-runtime.js",
+    "../chunks/814.js",
+    "../chunks/425.js",
+    "../chunks/66.js",
+    "page_client-reference-manifest.js",
+    "../../../package.json",
+    "../../../../package.json"
+  ]
+}
