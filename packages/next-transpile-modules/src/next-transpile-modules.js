@@ -75,7 +75,6 @@ const createLogger = (enable) => {
 
 /**
  * Matcher function for webpack to decide which modules to transpile
- * TODO: could be simplified
  *
  * @param {string[]} modulesToTranspile
  * @param {function} logger
@@ -243,7 +242,6 @@ const withTmInitializer = (modules = [], options = {}) => {
         }
 
         // Support CSS modules + global in node_modules
-        // TODO ask Next.js maintainer to expose the css-loader via defaultLoaders
         const nextCssLoaders = config.module.rules.find((rule) => typeof rule.oneOf === 'object');
 
         // .module.css
@@ -308,8 +306,6 @@ const withTmInitializer = (modules = [], options = {}) => {
         }
 
         // Make hot reloading work!
-        // FIXME: not working on Wepback 5
-        // https://github.com/vercel/next.js/issues/13039
         const watchOptionsIgnored = Array.isArray(config.watchOptions.ignored)
           ? config.watchOptions.ignored
           : [config.watchOptions.ignored];
