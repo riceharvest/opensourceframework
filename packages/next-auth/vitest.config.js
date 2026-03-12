@@ -8,7 +8,7 @@ export default defineConfig({
     include: [
       "src/lib/__tests__/**/*.js", 
       "src/server/lib/__tests__/**/*.js",
-      "src/client/__tests__/**/*.jsx"
+      "src/client/__tests__/**/*.{js,jsx}"
     ],
     env: {
       NEXTAUTH_URL: "http://localhost:3000/api/auth",
