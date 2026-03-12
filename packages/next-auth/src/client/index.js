@@ -1,3 +1,5 @@
+"use client";
+
 // Note about signIn() and signOut() methods:
 //
 // On signIn() and signOut() we pass 'json: true' to request a response in JSON
@@ -397,11 +399,7 @@ function BroadcastChannel(name = "nextauth.message") {
   }
 }
 
-// Some methods are exported with more than one name. This provides some
-// flexibility over how they can be invoked and backwards compatibility
-// with earlier releases. These should be removed in a newer release, as it only
-// creates problems for bundlers and adds confusion to users. TypeScript declarations
-// will provide sufficient help when importing
+// Named exports
 export {
   setOptions as options,
   getSession as session,
@@ -411,6 +409,7 @@ export {
   signOut as signout,
 }
 
+// Default export
 export default {
   getSession,
   getCsrfToken,
@@ -419,12 +418,7 @@ export default {
   signIn,
   signOut,
   Provider,
-  /* Deprecated / unsupported features below this line */
-  // Use setOptions() set options globally in the app.
   setOptions,
-  // Some methods are exported with more than one name. This provides some
-  // flexibility over how they can be invoked and backwards compatibility
-  // with earlier releases.
   options: setOptions,
   session: getSession,
   providers: getProviders,

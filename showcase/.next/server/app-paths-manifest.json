@@ -1,6 +1,8 @@
 {
-  "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/session-info/route": "app/api/session-info/route.js",
+  "/auth-demo/page": "app/auth-demo/page.js",
   "/page": "app/page.js"
 }

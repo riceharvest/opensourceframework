@@ -20,7 +20,16 @@
     "afterFiles": [],
     "fallback": []
   },
-  "dynamicRoutes": [],
+  "dynamicRoutes": [
+    {
+      "page": "/api/auth/[...nextauth]",
+      "regex": "^/api/auth/(.+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPnextauth": "nxtPnextauth"
+      },
+      "namedRegex": "^/api/auth/(?<nxtPnextauth>.+?)(?:/)?$"
+    }
+  ],
   "staticRoutes": [
     {
       "page": "/",
@@ -45,6 +54,12 @@
       "regex": "^/api/session\\-info(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/session\\-info(?:/)?$"
+    },
+    {
+      "page": "/auth-demo",
+      "regex": "^/auth\\-demo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth\\-demo(?:/)?$"
     }
   ],
   "dataRoutes": [],

@@ -2,7 +2,6 @@
   "version": 1,
   "config": {
     "env": {},
-    "webpack": null,
     "typescript": {
       "ignoreBuildErrors": false
     },
@@ -11,22 +10,46 @@
     "cleanDistDir": true,
     "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
-    "configOrigin": "default",
+    "configOrigin": "next.config.mjs",
     "useFileSystemPublicRoutes": true,
     "generateEtags": true,
-    "pageExtensions": ["tsx", "ts", "jsx", "js"],
+    "pageExtensions": [
+      "tsx",
+      "ts",
+      "jsx",
+      "js"
+    ],
     "poweredByHeader": true,
     "compress": true,
     "images": {
-      "deviceSizes": [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-      "imageSizes": [32, 48, 64, 96, 128, 256, 384],
+      "deviceSizes": [
+        640,
+        750,
+        828,
+        1080,
+        1200,
+        1920,
+        2048,
+        3840
+      ],
+      "imageSizes": [
+        32,
+        48,
+        64,
+        96,
+        128,
+        256,
+        384
+      ],
       "path": "/_next/image",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
       "disableStaticImages": false,
       "minimumCacheTTL": 14400,
-      "formats": ["image/webp"],
+      "formats": [
+        "image/webp"
+      ],
       "maximumRedirects": 3,
       "maximumResponseBody": 50000000,
       "dangerouslyAllowLocalIP": false,
@@ -40,7 +63,9 @@
         }
       ],
       "remotePatterns": [],
-      "qualities": [75],
+      "qualities": [
+        75
+      ],
       "unoptimized": false
     },
     "devIndicators": {
@@ -183,7 +208,6 @@
       "turbopackFileSystemCacheForDev": true,
       "turbopackFileSystemCacheForBuild": false,
       "turbopackInferModuleSideEffects": false,
-      "middlewarePrefetch": "flexible",
       "optimizePackageImports": [
         "lucide-react",
         "date-fns",
@@ -266,7 +290,17 @@
     },
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
-    "configFileName": "next.config.js",
+    "configFileName": "next.config.mjs",
+    "serverExternalPackages": [
+      "mongodb",
+      "mysql",
+      "mysql2",
+      "pg",
+      "mssql",
+      "sqlite3",
+      "redis",
+      "typeorm"
+    ],
     "turbopack": {
       "root": "/home/dario/Documents/dev workspace/opensourceframework"
     },
@@ -282,6 +316,8 @@
     ".next/server/functions-config-manifest.json",
     ".next/server/middleware-manifest.json",
     ".next/server/middleware-build-manifest.js",
+    ".next/server/middleware-react-loadable-manifest.js",
+    ".next/react-loadable-manifest.json",
     ".next/server/app-paths-manifest.json",
     ".next/app-path-routes-manifest.json",
     ".next/server/server-reference-manifest.js",
