@@ -309,6 +309,9 @@ importers:
       eslint-plugin-jest:
         specifier: ^29.15.0
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(jest@30.3.0(@types/node@22.19.11))(typescript@5.9.3)
+      next:
+        specifier: ^16.0.0
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.13)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
@@ -468,7 +471,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(jest@30.3.0(@types/node@20.17.24))(typescript@5.9.3)
       next:
         specifier: ^16.0.0
-        version: 16.1.6(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -786,7 +789,7 @@ importers:
         version: 6.6.0
       next:
         specifier: ^16.0.0
-        version: 16.1.6(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.13)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
