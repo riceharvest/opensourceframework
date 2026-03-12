@@ -32,7 +32,10 @@
     "directory": "packages/next-mdx-toc"
   },
   "devDependencies": {
-    "@types/node": "^14.14.37",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/node": "^22.0.0",
     "microbundle": "^0.15.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
@@ -44,8 +47,8 @@
     "unist-util-visit": "^2.0.3"
   },
   "peerDependencies": {
-    "next": ">= 10.0.0",
-    "react": ">= 16.8.0"
+    "next": ">=12.0.0 <22.0.0 || ^16.0.0",
+    "react": ">=18.2.0 <22.0.0 || ^19.0.0"
   },
   "author": "OpenSource Framework Contributors (fork), Original: shadcn",
   "engines": {
