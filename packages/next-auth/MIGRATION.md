@@ -33,7 +33,7 @@ No changes required - the package exports are identical:
 
 ```javascript
 // Before
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 
 // After - works exactly the same
@@ -102,10 +102,13 @@ npm install next-auth@3.29.10
 
 ## Changelog Highlights
 
+### v3.29.11
+- **Monorepo Integration**: All documentation and examples updated to use the `@opensourceframework/` scope.
+- **Native OAuth Client**: Replaced legacy \`oauth\` package with a native \`fetch\`-based client for OAuth 2.x providers.
+- **Structured URLs**: Modernized internal URL handling using a structured \`url\` object (\`origin\`, \`pathname\`, \`href\`).
+- **OAuth Checks**: Renamed \`provider.protection\` to \`provider.checks\` (v4 style) while keeping backward compatibility.
+- **React 19 & Next.js 16**: Verified full compatibility with latest framework versions.
+
 ### v3.29.10
 - React 19 hydration fixes
 - Next.js 16/17 support added
-
-### v3.29.x
-- Security patches backported
-- TypeScript type definitions maintained
