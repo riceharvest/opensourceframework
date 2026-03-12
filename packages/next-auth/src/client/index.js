@@ -193,16 +193,16 @@ export async function getProviders() {
 export async function signIn(provider, options = {}, authorizationParams = {}) {
   const { callbackUrl = window.location.href, redirect = true } = options
 
-  const baseUrl = _apiBaseUrl()
+  const apiBaseUrl = _apiBaseUrl()
   const providers = await getProviders()
 
   if (!providers) {
-    return window.location.replace(`${baseUrl}/error`)
+    return window.location.replace(`${apiBaseUrl}/error`)
   }
 
   if (!(provider in providers)) {
     return window.location.replace(
-      `${baseUrl}/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
+      `${apiBaseUrl}/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
     )
   }
 
@@ -211,8 +211,8 @@ export async function signIn(provider, options = {}, authorizationParams = {}) {
   const isSupportingReturn = isCredentials || isEmail
 
   const signInUrl = isCredentials
-    ? `${baseUrl}/callback/${provider}`
-    : `${baseUrl}/signin/${provider}`
+    ? `${apiBaseUrl}/callback/${provider}`
+    : `${apiBaseUrl}/signin/${provider}`
 
   const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`
 
@@ -255,7 +255,7 @@ export async function signIn(provider, options = {}, authorizationParams = {}) {
 
 export async function signOut(options = {}) {
   const { callbackUrl = window.location.href, redirect = true } = options
-  const baseUrl = _apiBaseUrl()
+  const apiBaseUrl = _apiBaseUrl()
   const fetchOptions = {
     method: "post",
     headers: {
@@ -267,7 +267,7 @@ export async function signOut(options = {}) {
       json: true,
     }),
   }
-  const res = await fetch(`${baseUrl}/signout`, fetchOptions)
+  const res = await fetch(`${apiBaseUrl}/signout`, fetchOptions)
   const data = await res.json()
   _getBroadcast().post({ event: "session", data: { trigger: "signout" } })
 
