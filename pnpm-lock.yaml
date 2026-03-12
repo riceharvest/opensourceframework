@@ -554,7 +554,7 @@ importers:
     dependencies:
       '@mdx-js/react':
         specifier: ^3.1.1
-        version: 3.1.1(@types/react@19.2.14)(react@17.0.2)
+        version: 3.1.1(@types/react@19.2.14)(react@19.2.4)
       crypto-hash:
         specifier: ^4.0.1
         version: 4.0.1
@@ -564,19 +564,16 @@ importers:
       gray-matter:
         specifier: ^4.0.2
         version: 4.0.3
-      next:
-        specifier: '>= 10.0.0'
-        version: 15.5.10(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@17.0.2(react@17.0.2))(react@17.0.2)
       next-mdx-remote:
         specifier: ^6.0.0
-        version: 6.0.0(@types/react@19.2.14)(react@17.0.2)
+        version: 6.0.0(@types/react@19.2.14)(react@19.2.4)
       node-cache:
         specifier: ^5.1.2
         version: 5.1.2
     devDependencies:
       '@types/node':
-        specifier: ^14.14.37
-        version: 14.18.63
+        specifier: ^22.0.0
+        version: 22.19.11
       concurrently:
         specifier: ^6.0.0
         version: 6.5.1
@@ -586,12 +583,15 @@ importers:
       mock-fs:
         specifier: ^5.5.0
         version: 5.5.0
+      next:
+        specifier: ^16.0.0
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
-        specifier: ^17.0.2
-        version: 17.0.2
+        specifier: ^19.0.0
+        version: 19.2.4
       react-dom:
-        specifier: ^17.0.2
-        version: 17.0.2(react@17.0.2)
+        specifier: ^19.0.0
+        version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.13)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
@@ -12303,6 +12303,12 @@ snapshots:
       '@types/react': 19.2.14
       react: 17.0.2
 
+  '@mdx-js/react@3.1.1(@types/react@19.2.14)(react@19.2.4)':
+    dependencies:
+      '@types/mdx': 2.0.13
+      '@types/react': 19.2.14
+      react: 19.2.4
+
   '@mswjs/interceptors@0.41.3':
     dependencies:
       '@open-draft/deferred-promise': 2.2.0
@@ -18208,6 +18214,20 @@ snapshots:
       '@mdx-js/mdx': 3.1.1
       '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@17.0.2)
       react: 17.0.2
+      unist-util-remove: 4.0.0
+      unist-util-visit: 5.1.0
+      vfile: 6.0.3
+      vfile-matter: 5.0.1
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
+
+  next-mdx-remote@6.0.0(@types/react@19.2.14)(react@19.2.4):
+    dependencies:
+      '@babel/code-frame': 7.29.0
+      '@mdx-js/mdx': 3.1.1
+      '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@19.2.4)
+      react: 19.2.4
       unist-util-remove: 4.0.0
       unist-util-visit: 5.1.0
       vfile: 6.0.3
