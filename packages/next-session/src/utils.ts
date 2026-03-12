@@ -31,12 +31,11 @@ export function parseTime(time: number | string): number {
 }
 
 export function commitHeader(
-  res: ServerResponse,
+  res: ServerResponse | Headers,
   name: string,
   session: Pick<Session, "cookie" | "id">,
   encodeFn?: Options["encode"]
 ) {
-  if (res.headersSent) return;
   const { cookie, id } = session;
   const cookieStr = c.serialize(name, encodeFn ? encodeFn(id) : id, {
     path: cookie.path,
@@ -48,6 +47,12 @@ export function commitHeader(
     secure: cookie.secure,
   });
 
+  if (res instanceof Headers) {
+    res.append("set-cookie", cookieStr);
+    return;
+  }
+
+  if (res.headersSent) return;
   const prevSetCookie = res.getHeader("set-cookie");
 
   if (prevSetCookie) {
