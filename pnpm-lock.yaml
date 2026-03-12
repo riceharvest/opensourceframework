@@ -677,9 +677,6 @@ importers:
       globby:
         specifier: ^11.0.4
         version: 11.1.0
-      next:
-        specifier: ^12 || ^13 || ^14 || ^15 || ^16 || ^17
-        version: 15.5.10(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@17.0.2))(react@17.0.2)
       react:
         specifier: ^17 || ^18 || ^19
         version: 17.0.2
@@ -705,6 +702,9 @@ importers:
       eslint-plugin-jest:
         specifier: ^29.15.0
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(jest@30.3.0(@types/node@20.17.24))(typescript@5.9.3)
+      next:
+        specifier: ^16.0.0
+        version: 16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@17.0.2))(react@17.0.2)
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.13)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
@@ -18291,6 +18291,31 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.7
       '@next/swc-win32-arm64-msvc': 15.5.7
       '@next/swc-win32-x64-msvc': 15.5.7
+      '@playwright/test': 1.58.2
+      sharp: 0.34.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
+  next@16.1.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@17.0.2))(react@17.0.2):
+    dependencies:
+      '@next/env': 16.1.6
+      '@swc/helpers': 0.5.15
+      baseline-browser-mapping: 2.10.0
+      caniuse-lite: 1.0.30001774
+      postcss: 8.4.31
+      react: 17.0.2
+      react-dom: 19.2.4(react@17.0.2)
+      styled-jsx: 5.1.6(@babel/core@7.29.0)(babel-plugin-macros@3.1.0)(react@17.0.2)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 16.1.6
+      '@next/swc-darwin-x64': 16.1.6
+      '@next/swc-linux-arm64-gnu': 16.1.6
+      '@next/swc-linux-arm64-musl': 16.1.6
+      '@next/swc-linux-x64-gnu': 16.1.6
+      '@next/swc-linux-x64-musl': 16.1.6
+      '@next/swc-win32-arm64-msvc': 16.1.6
+      '@next/swc-win32-x64-msvc': 16.1.6
       '@playwright/test': 1.58.2
       sharp: 0.34.5
     transitivePeerDependencies:
