@@ -1,0 +1,38 @@
+{
+  "name": "@opensourceframework/sleep-analysis",
+  "version": "0.1.0",
+  "description": "Biometric sleep data analysis and interpretation utility",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "llms.txt"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc"
+  },
+  "keywords": [
+    "sleep",
+    "analysis",
+    "biometric",
+    "health",
+    "data"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

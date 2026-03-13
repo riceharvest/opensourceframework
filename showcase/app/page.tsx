@@ -53,9 +53,9 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             App Router compatible CSRF protection with async header/cookie support.
           </p>
-          <div className="flex gap-2">
-            <span className="px-2 py-1 bg-red-50 text-red-700 text-xs rounded font-mono">Secured</span>
-          </div>
+          <Link href="/csrf-demo" className="text-red-600 font-medium hover:underline inline-flex items-center gap-1">
+            View Security <MousePointer2 size={14} />
+          </Link>
         </section>
 
         {/* Tier 2: Performance & Rendering */}
@@ -67,7 +67,9 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             Optimized critical CSS inlining with improved font preloading.
           </p>
-          <span className="px-2 py-1 bg-cyan-50 text-cyan-700 text-xs rounded font-mono">Perf++</span>
+          <Link href="/seo-preview" className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1">
+            Test SEO <MousePointer2 size={14} />
+          </Link>
         </section>
 
         <section className="p-6 rounded-2xl bg-white shadow-xl border border-gray-100 hover:border-green-200 transition-all group">
@@ -80,6 +82,19 @@ export default function Home() {
           </p>
           <Link href="/api/session-info" className="text-green-600 font-medium hover:underline inline-flex items-center gap-1">
             Check Session <MousePointer2 size={14} />
+          </Link>
+        </section>
+
+        <section className="p-6 rounded-2xl bg-white shadow-xl border border-gray-100 hover:border-purple-200 transition-all group">
+          <div className="w-12 h-12 rounded-lg bg-cyan-50 flex items-center justify-center mb-4 group-hover:bg-cyan-100 transition-colors">
+            <Layout className="text-cyan-600" />
+          </div>
+          <h2 className="text-xl font-bold mb-2">@opensourceframework/react-virtualized</h2>
+          <p className="text-gray-600 mb-4 text-sm">
+            High-performance virtualization for massive datasets on React 18/19.
+          </p>
+          <Link href="/virtualization" className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1">
+            Run Stress Test <MousePointer2 size={14} />
           </Link>
         </section>
 
