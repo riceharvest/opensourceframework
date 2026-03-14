@@ -11,13 +11,31 @@ import { sign as jwtSign } from "jsonwebtoken"
 export default function oAuthClient(provider) {
   if (provider.version?.startsWith("2.")) {
     return {
-      getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
-      get: (accessToken, results) => getOAuth2(provider, accessToken, results)
+      getOAuthAccessToken: (code, codeVerifier) =>
+        getOAuth2AccessToken(code, provider, codeVerifier),
+      get: (accessToken, results) => getOAuth2(provider, accessToken, results),
+      getAuthorizeUrl: (params) => getOAuth2AuthorizeUrl(provider, params),
     }
   }
 
   // Handle OAuth v1.x (Simplified native implementation)
   return new OAuth1Client(provider)
+}
+
+/**
+ * Construct OAuth2 authorization URL.
+ *
+ * @param {import("types/providers").OAuthConfig} provider
+ * @param {any} params
+ */
+function getOAuth2AuthorizeUrl(provider, params) {
+  const url = new URL(provider.authorizationUrl)
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      url.searchParams.append(key, value)
+    }
+  })
+  return url.toString()
 }
 
 /**
@@ -55,7 +73,7 @@ async function getOAuth2AccessToken(code, provider, codeVerifier) {
         sub: provider.clientId,
       },
       privateKey.replace(/\\n/g, "\n"),
-      { algorithm: "ES256", keyid: keyId }
+      { algorithm: "ES256", keyid: keyId },
     )
     params.client_secret = clientSecret
   } else {
@@ -76,7 +94,7 @@ async function getOAuth2AccessToken(code, provider, codeVerifier) {
     headers.Authorization =
       "Basic " +
       Buffer.from(provider.clientId + ":" + provider.clientSecret).toString(
-        "base64"
+        "base64",
       )
   }
 
@@ -200,7 +218,7 @@ function prepareProfileUrl({ provider, url, results }) {
 
   if (!provider.headers?.["X-API-Key"]) {
     throw new Error(
-      'The Bungie provider requires the X-API-Key option to be present in "headers".'
+      'The Bungie provider requires the X-API-Key option to be present in "headers".',
     )
   }
 
@@ -208,32 +226,82 @@ function prepareProfileUrl({ provider, url, results }) {
 }
 
 /**
- * Minimal OAuth 1.x client implementation to replace the 'oauth' package.
- * Since OAuth 1.x is less common and more complex, we preserve the necessary logic
- * while using native Node.js/Fetch where possible.
+ * Minimal OAuth 1.x client implementation using the 'oauth' package.
+ * This replaces the placeholder with a working implementation.
  */
 class OAuth1Client {
+  #oauthClient
+
   constructor(provider) {
     this.provider = provider
-    // Note: This is a placeholder for actual OAuth1 signature logic if needed.
-    // For now, we will use a small internal helper or inline the logic.
-    // Given the complexity of OAuth1 signatures, for the scope of this refactor
-    // and to maintain stability, we'll implement the basics or use a lightweight helper.
-    // In many cases, OAuth1 is being deprecated, but for this fork we want to keep it.
+    // Initialize the oauth library client
+    const OAuth = require("oauth").OAuth
+    this.#oauthClient = new OAuth(
+      provider.requestTokenUrl,
+      provider.accessTokenUrl,
+      provider.clientId,
+      provider.clientSecret,
+      "1.0",
+      provider.callbackUrl,
+      "HMAC-SHA1",
+    )
   }
 
   async getOAuthRequestToken(params = {}) {
-    // Implement OAuth 1.0a request token logic
-    throw new Error("OAuth 1.0a is not yet fully implemented in the native client. Please use OAuth 2.0 or contact maintainers.")
+    const { oauth_callback = this.provider.callbackUrl } = params
+    return new Promise((resolve, reject) => {
+      this.#oauthClient.getOAuthRequestToken(
+        { oauth_callback },
+        (error, token, tokenSecret, results) => {
+          if (error) {
+            reject(new Error(`OAuth 1.0a request token error: ${error}`))
+          } else {
+            resolve({
+              oauth_token: token,
+              oauth_token_secret: tokenSecret,
+              ...results,
+            })
+          }
+        },
+      )
+    })
   }
 
   async getOAuthAccessToken(oauth_token, oauth_token_secret, oauth_verifier) {
-    // Implement OAuth 1.0a access token logic
-    throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
+    return new Promise((resolve, reject) => {
+      this.#oauthClient.getOAuthAccessToken(
+        oauth_token,
+        oauth_token_secret,
+        oauth_verifier,
+        (error, accessToken, tokenSecret, results) => {
+          if (error) {
+            reject(new Error(`OAuth 1.0a access token error: ${error}`))
+          } else {
+            resolve({
+              oauth_token: accessToken,
+              oauth_token_secret: tokenSecret,
+              ...results,
+            })
+          }
+        },
+      )
+    })
   }
 
   async get(url, oauth_token, oauth_token_secret) {
-    // Implement OAuth 1.0a authenticated request
-    throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
+    return new Promise((resolve, reject) => {
+      this.#oauthClient.get(
+        url,
+        oauth_token,
+        oauth_token_secret,
+        (error, data) => {
+          if (error) {
+            reject(new Error(`OAuth 1.0a GET error: ${error}`))
+          } else {
+            resolve(data)
+          }
+        },
+      )
+    })
   }
 }
