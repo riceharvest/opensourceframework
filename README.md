@@ -2,6 +2,7 @@
 
 > Maintained forks of abandoned npm packages
 
+[![CI](https://github.com/riceharvest/opensourceframework/actions/workflows/ci.yml/badge.svg)](https://github.com/riceharvest/opensourceframework/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/opensourceframework/opensourceframework.svg)](./LICENSE)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
@@ -94,6 +95,7 @@ This will automatically transform all `next-seo` imports and `require` calls to 
 Many npm packages become abandoned over time, leaving projects vulnerable to security risks and framework obsolescence. OpenSource Framework provides a **"Safe Haven"** for critical utilities with a focus on:
 
 - **Legacy Preservation:** We maintain "stable-forever" forks of popular versions (like NextAuth v3) that official maintainers have abandoned, ensuring legacy apps don't break as frameworks like Next.js evolve.
+- **Zero-Effort Migration:** Unlike official major upgrades that often force complete rewrites (e.g., `next-seo` v7), our forks prioritize drop-in compatibility. We restore removed components and provide compatibility aliases for legacy props to ensure your existing codebase stays functional.
 - **Modern Standards:** Every fork is migrated to modern tooling (`tsup`, `vitest`, `ESM`) and strictly tested against the latest Next.js versions (including Next.js 16/17 compatibility).
 - **Unified Ecosystem:** A single namespace (`@opensourceframework`) for a collection of drop-in replacements, reducing dependency fragmentation and audit fatigue.
 - **Simplicity over Complexity:** While other forks (like Serwist) shift philosophies, we prioritize maintaining the original, simple APIs that developers already know and love.
