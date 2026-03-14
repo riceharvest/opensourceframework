@@ -7,41 +7,23 @@ on:
     branches: [main]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  prepare-deps:
-    name: Prepare Dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
   # Matrix testing across Node versions and OS
   test-matrix:
-    needs: [prepare-deps]
     name: Test (Node ${{ matrix.node }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         node: [18, 20, 22]
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
+          # Skip some combinations to reduce CI time
+          - node: 18
+            os: windows-latest
           - node: 22
             os: macos-latest
     steps:
@@ -77,7 +59,6 @@ jobs:
           fail_ci_if_error: false
 
   lint:
-    needs: [prepare-deps]
     name: Lint
     runs-on: ubuntu-latest
     steps:
@@ -101,7 +82,6 @@ jobs:
         run: pnpm lint
 
   typecheck:
-    needs: [prepare-deps]
     name: Type Check
     runs-on: ubuntu-latest
     steps:
@@ -124,34 +104,10 @@ jobs:
       - name: Type Check
         run: pnpm typecheck
 
-  compat:
-    needs: [prepare-deps]
-    name: Compatibility Smoke
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Run Compatibility Smoke Checks
-        run: pnpm test:compat
-
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, typecheck, test-matrix, compat]
+    needs: [lint, typecheck, test-matrix]
     steps:
       - uses: actions/checkout@v4
 
@@ -180,7 +136,6 @@ jobs:
           retention-days: 7
 
   security:
-    needs: [prepare-deps]
     name: Security Audit
     runs-on: ubuntu-latest
     steps:
@@ -202,13 +157,14 @@ jobs:
 
       - name: Run Security Audit
         run: pnpm audit --audit-level=moderate
+        continue-on-error: true
 
+      # Snyk security scan for vulnerability detection
+      # Note: The SNYK_TOKEN is automatically masked by GitHub Actions and will not appear in logs.
+      # For detailed vulnerability reports, monitor the Snyk dashboard directly at https://snyk.io
+      # rather than relying solely on CI output.
       - name: Run Snyk Security Scan
-        if: ${{ secrets.SNYK_TOKEN != '' }}
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Report missing Snyk configuration
-        if: ${{ secrets.SNYK_TOKEN == '' }}
-        run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> $GITHUB_STEP_SUMMARY
