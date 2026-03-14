@@ -2,6 +2,7 @@
 
 > Maintained forks of abandoned npm packages
 
+[![CI](https://github.com/riceharvest/opensourceframework/actions/workflows/ci.yml/badge.svg)](https://github.com/riceharvest/opensourceframework/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/opensourceframework/opensourceframework.svg)](./LICENSE)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
