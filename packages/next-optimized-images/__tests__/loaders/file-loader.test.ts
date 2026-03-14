@@ -19,7 +19,10 @@ describe('next-optimized-images/loaders/file-loader', () => {
   it('uses the assetPrefix config', () => {
     const options1 = getFileLoaderOptions(getConfig({ assetPrefix: 'https://cdn.com/' }), false);
     const options2 = getFileLoaderOptions(getConfig({ assetPrefix: 'https://cdn.com' }), false);
-    const options3 = getFileLoaderOptions(getConfig({ assetPrefix: 'https://cdn.com/', imagesFolder: 'img-test' }), false);
+    const options3 = getFileLoaderOptions(
+      getConfig({ assetPrefix: 'https://cdn.com/', imagesFolder: 'img-test' }),
+      false
+    );
 
     expect(options1.publicPath).toEqual('https://cdn.com/_next/static/images/');
     expect(options2.publicPath).toEqual('https://cdn.com/_next/static/images/');
@@ -27,7 +30,10 @@ describe('next-optimized-images/loaders/file-loader', () => {
   });
 
   it('overwrites assetPrefix config with imagesPublicPath', () => {
-    const options = getFileLoaderOptions(getConfig({ assetPrefix: 'https://cdn.com/', imagesPublicPath: 'https://another-cdn.com/' }), false);
+    const options = getFileLoaderOptions(
+      getConfig({ assetPrefix: 'https://cdn.com/', imagesPublicPath: 'https://another-cdn.com/' }),
+      false
+    );
 
     expect(options.publicPath).toEqual('https://another-cdn.com/');
   });

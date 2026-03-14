@@ -34,7 +34,7 @@ describe('regexEqual', () => {
     });
 
     test('regex with multiple flags (same order does not matter)', () => {
-      expect(regexEqual(/a/gi, /a/ig)).toBe(true);
+      expect(regexEqual(/a/gi, /a/gi)).toBe(true);
     });
 
     test('complex regex pattern', () => {
@@ -166,7 +166,9 @@ describe('createWebpackMatcher', () => {
       const matcher = createWebpackMatcher(testPaths);
 
       expect(matcher('/Users/Test/app/node_modules/test/node_modules/nested/some-file.js')).toBe(false);
-      expect(matcher('/Users/Test/app/node_modules/@scoped/scoped-module/node_modules/nested/some-file.js')).toBe(false);
+      expect(matcher('/Users/Test/app/node_modules/@scoped/scoped-module/node_modules/nested/some-file.js')).toBe(
+        false,
+      );
     });
 
     test('should not match similarly-prefixed module names', () => {
@@ -234,7 +236,9 @@ describe('createWebpackMatcher', () => {
 
       matcher('/Users/Test/app/node_modules/test/some-file.js');
 
-      expect(consoleSpy).toHaveBeenCalledWith('next-transpile-modules - transpiled: /Users/Test/app/node_modules/test/some-file.js');
+      expect(consoleSpy).toHaveBeenCalledWith(
+        'next-transpile-modules - transpiled: /Users/Test/app/node_modules/test/some-file.js',
+      );
     });
 
     test('should not log when module is not transpiled', () => {

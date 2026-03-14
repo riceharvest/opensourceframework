@@ -1,5 +1,5 @@
 /* global browser */
-const browserDefined = typeof browser !== "undefined";
+const browserDefined = typeof browser !== 'undefined';
 describe.skipIf(!browserDefined).each([
   ['npm', 3500], // name of the test, port
   ['yarn-workspaces', 3501],

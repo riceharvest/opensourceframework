@@ -26,9 +26,7 @@ function hasEvilScript(html) {
   // Check for script tag containing alert(1)
   const scriptMatch = html.match(/<script[^>]*>([\s\S]*?)<\/script>/gi);
   if (!scriptMatch) return false;
-  return scriptMatch.some(script => 
-    script.toLowerCase().includes('alert(1)')
-  );
+  return scriptMatch.some((script) => script.toLowerCase().includes('alert(1)'));
 }
 
 /**
@@ -62,8 +60,7 @@ describe('Security', () => {
 
   it('should not create a new script tag from embedding linked stylesheets', async () => {
     const critters = new Critters({});
-    critters.readFile = () =>
-      `* { background: url('</style><script>alert(1)</script>') }`;
+    critters.readFile = () => `* { background: url('</style><script>alert(1)</script>') }`;
     const html = await critters.process(`
       <html>
         <head>
@@ -78,10 +75,9 @@ describe('Security', () => {
 
   it('should not create a new script tag from embedding additional stylesheets', async () => {
     const critters = new Critters({
-      additionalStylesheets: ['/style.css']
+      additionalStylesheets: ['/style.css'],
     });
-    critters.readFile = () =>
-      `* { background: url('</style><script>alert(1)</script>') }`;
+    critters.readFile = () => `* { background: url('</style><script>alert(1)</script>') }`;
     const html = await critters.process(`
       <html>
         <head>
@@ -127,8 +123,7 @@ describe('Security', () => {
 
   it('should not execute JavaScript in CSS content property', async () => {
     const critters = new Critters({});
-    critters.readFile = () =>
-      `body::after { content: '</style><script>alert(1)</script>'; }`;
+    critters.readFile = () => `body::after { content: '</style><script>alert(1)</script>'; }`;
     const html = await critters.process(`
       <html>
         <head>
@@ -143,7 +138,7 @@ describe('Security', () => {
   it('should sanitize malicious media queries', async () => {
     const critters = new Critters({
       path: '/',
-      preload: 'media'
+      preload: 'media',
     });
     critters.readFile = () => 'h1 { color: blue; }';
     const html = await critters.process(`
@@ -167,7 +162,7 @@ describe('Security', () => {
       readFileCalls.push(filename);
       return 'h1 { color: blue; }';
     };
-    
+
     await critters.process(`
       <html>
         <head>
@@ -178,7 +173,7 @@ describe('Security', () => {
         <body></body>
       </html>
     `);
-    
+
     // Should only read files within the base path
     expect(readFileCalls).toContain('/var/www/normal.css');
     expect(readFileCalls).not.toContain('/etc/passwd');
@@ -188,7 +183,7 @@ describe('Security', () => {
   it('should handle malformed HTML without crashing', async () => {
     const critters = new Critters({});
     critters.readFile = () => 'h1 { color: blue; }';
-    
+
     // Should not throw
     const malformedHtmls = [
       '<html><head><link rel="stylesheet" href="/style.css"',
@@ -196,7 +191,7 @@ describe('Security', () => {
       '<<<html>>><<<head>>><link rel="stylesheet" href="/style.css">',
       '<html><head><link rel="stylesheet" href="javascript:alert(1)"></head></html>',
     ];
-    
+
     for (const html of malformedHtmls) {
       await expect(critters.process(html)).resolves.toBeDefined();
     }
@@ -222,7 +217,7 @@ describe('Security', () => {
         </body>
       </html>
     `);
-    
+
     // The CSS should be inlined but not execute
     expect(html).toContain('background');
     // Should not have script injection

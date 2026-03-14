@@ -109,6 +109,8 @@ test("hydrates serialized MDX content through the public client wrapper", async 
   const post = await getMdxNode("post", "post-one")
   const html = renderToStaticMarkup(useHydrate(post))
 
-  expect(html).toContain("<p>Voluptatem doloribus fugiat ratione officiis voluptas.")
+  expect(html).toContain(
+    "<p>Voluptatem doloribus fugiat ratione officiis voluptas."
+  )
   expect(html).toContain("<p>Blanditiis possimus quidem asperiores.")
 })

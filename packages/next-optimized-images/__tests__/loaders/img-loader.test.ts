@@ -67,17 +67,24 @@ describe('next-optimized-images/loaders/img-loader', () => {
 
   it('adds rules to the webpack config', () => {
     const webpackConfig = { module: { rules: [] } };
-    applyImgLoader(webpackConfig, getConfig({}), true, false, {
-      jpeg: imageminPluginPath,
-      png: false,
-      svg: imageminPluginPath,
-      gif: false,
-    }, {
-      jpeg: true,
-      png: true,
-      svg: true,
-      gif: false,
-    });
+    applyImgLoader(
+      webpackConfig,
+      getConfig({}),
+      true,
+      false,
+      {
+        jpeg: imageminPluginPath,
+        png: false,
+        svg: imageminPluginPath,
+        gif: false,
+      },
+      {
+        jpeg: true,
+        png: true,
+        svg: true,
+        gif: false,
+      }
+    );
 
     const rule = webpackConfig.module.rules[0];
     const defaultRule = rule.oneOf[rule.oneOf.length - 1];

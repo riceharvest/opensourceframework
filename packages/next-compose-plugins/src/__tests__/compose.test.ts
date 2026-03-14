@@ -45,11 +45,10 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('parses the plugin with a phase restriction', async () => {
-    const withPhaseRestriction = parsePluginConfig([testPlugin, [
-      PHASE_DEVELOPMENT_SERVER,
-      PHASE_PRODUCTION_BUILD,
-      PHASE_PRODUCTION_SERVER,
-    ]]);
+    const withPhaseRestriction = parsePluginConfig([
+      testPlugin,
+      [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD, PHASE_PRODUCTION_SERVER],
+    ]);
 
     expect(withPhaseRestriction).toEqual({
       pluginFunction: { test: 'plugin' },
@@ -72,22 +71,28 @@ describe('next-compose-plugins/compose', () => {
       return nextConfig;
     });
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], { initial: 'config' });
+    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], {
+      initial: 'config',
+    });
 
     expect(result).toEqual({ initial: 'config' });
     expect(plugin).toHaveBeenCalledTimes(1);
   });
 
   it('does not execute a plugin if it is not in the correct phase', async () => {
-    const plugin1 = vi.fn(nextConfig => ({ ...nextConfig, plugin1: true }));
-    const plugin2 = vi.fn(nextConfig => ({ ...nextConfig, plugin2: true }));
-    const plugin3 = vi.fn(nextConfig => ({ ...nextConfig, plugin3: true }));
+    const plugin1 = vi.fn((nextConfig) => ({ ...nextConfig, plugin1: true }));
+    const plugin2 = vi.fn((nextConfig) => ({ ...nextConfig, plugin2: true }));
+    const plugin3 = vi.fn((nextConfig) => ({ ...nextConfig, plugin3: true }));
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [
-      [plugin1, [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD]],
-      [plugin2, [PHASE_PRODUCTION_BUILD]],
-      [plugin3, ['!', PHASE_PRODUCTION_SERVER]],
-    ], { initial: 'config' });
+    const result = await await composePlugins(
+      PHASE_DEVELOPMENT_SERVER,
+      [
+        [plugin1, [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD]],
+        [plugin2, [PHASE_PRODUCTION_BUILD]],
+        [plugin3, ['!', PHASE_PRODUCTION_SERVER]],
+      ],
+      { initial: 'config' }
+    );
 
     expect(result).toEqual({
       initial: 'config',
@@ -119,26 +124,39 @@ describe('next-compose-plugins/compose', () => {
       return nextConfig;
     });
 
-    await composePlugins(PHASE_DEVELOPMENT_SERVER, [
-      [plugin1, {
-        plugin1Config: 'bar',
-        [PHASE_PRODUCTION_SERVER]: {
-          plugin1Config: 'foo',
-        },
-      }],
-      [plugin2, {
-        plugin2Config: { hey: 'you' },
-        [PHASE_DEVELOPMENT_SERVER]: {
-          plugin2Config: { hello: 'world' },
-        },
-      }],
-      [plugin3, {
-        plugin3Config: true,
-        [PHASE_PRODUCTION_BUILD + PHASE_DEVELOPMENT_SERVER]: {
-          plugin3Config: false,
-        },
-      }],
-    ], {});
+    await composePlugins(
+      PHASE_DEVELOPMENT_SERVER,
+      [
+        [
+          plugin1,
+          {
+            plugin1Config: 'bar',
+            [PHASE_PRODUCTION_SERVER]: {
+              plugin1Config: 'foo',
+            },
+          },
+        ],
+        [
+          plugin2,
+          {
+            plugin2Config: { hey: 'you' },
+            [PHASE_DEVELOPMENT_SERVER]: {
+              plugin2Config: { hello: 'world' },
+            },
+          },
+        ],
+        [
+          plugin3,
+          {
+            plugin3Config: true,
+            [PHASE_PRODUCTION_BUILD + PHASE_DEVELOPMENT_SERVER]: {
+              plugin3Config: false,
+            },
+          },
+        ],
+      ],
+      {}
+    );
 
     expect(plugin1).toHaveBeenCalledTimes(1);
     expect(plugin2).toHaveBeenCalledTimes(1);
@@ -161,20 +179,20 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('does not pass down the updated configuration if it is in the wrong phase', async () => {
-    const plugin1 = vi.fn(nextConfig => ({
+    const plugin1 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin1Config: 'foo',
       phases: [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD],
     }));
 
-    const plugin2 = vi.fn(nextConfig => ({
+    const plugin2 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin2Config: 'bar',
       webpack: () => `changed ${nextConfig.webpack()}`,
       phases: [PHASE_DEVELOPMENT_SERVER],
     }));
 
-    const plugin3 = vi.fn(nextConfig => ({
+    const plugin3 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin3Config: 'world',
     }));
@@ -201,19 +219,23 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('lets the user overwrite the plugins phase', async () => {
-    const plugin1 = vi.fn(nextConfig => ({
+    const plugin1 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin1Config: 'foo',
       phases: [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD],
     }));
 
-    const plugin2 = vi.fn(nextConfig => ({
+    const plugin2 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin2Config: 'bar',
       phases: [PHASE_DEVELOPMENT_SERVER],
     }));
 
-    const result = await composePlugins(PHASE_PRODUCTION_BUILD, [plugin1, [plugin2, [PHASE_PRODUCTION_BUILD]]], { initial: 'config' });
+    const result = await composePlugins(
+      PHASE_PRODUCTION_BUILD,
+      [plugin1, [plugin2, [PHASE_PRODUCTION_BUILD]]],
+      { initial: 'config' }
+    );
 
     expect(result).toEqual({
       initial: 'config',
@@ -240,10 +262,14 @@ describe('next-compose-plugins/compose', () => {
       return nextConfig;
     });
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [
-      [plugin1, { plugin1Config: 'foo' }],
-      [plugin2, { plugin2Config: 'bar' }],
-    ], { initial: 'config' });
+    const result = await await composePlugins(
+      PHASE_DEVELOPMENT_SERVER,
+      [
+        [plugin1, { plugin1Config: 'foo' }],
+        [plugin2, { plugin2Config: 'bar' }],
+      ],
+      { initial: 'config' }
+    );
 
     expect(result).toEqual({ initial: 'config' });
 
@@ -252,14 +278,14 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('does not change a reference but always creates new objects', async () => {
-    const plugin1 = vi.fn(nextConfig => ({
+    const plugin1 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin1Config: 'foo',
       phases: [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD],
     }));
 
     const plugin2 = vi.fn((nextConfig) => {
-      nextConfig.illegallyUpdated = true;  
+      nextConfig.illegallyUpdated = true;
 
       return {
         ...nextConfig,
@@ -268,12 +294,14 @@ describe('next-compose-plugins/compose', () => {
       };
     });
 
-    const plugin3 = vi.fn(nextConfig => ({
+    const plugin3 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin3Config: 'world',
     }));
 
-    const result = await composePlugins(PHASE_PRODUCTION_BUILD, [plugin1, plugin2, plugin3], { initial: 'config' });
+    const result = await composePlugins(PHASE_PRODUCTION_BUILD, [plugin1, plugin2, plugin3], {
+      initial: 'config',
+    });
 
     expect(result).toEqual({
       initial: 'config',
@@ -287,20 +315,24 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('loads an optional plugin in the correct phase', async () => {
-    const plugin1 = vi.fn(nextConfig => ({
+    const plugin1 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin1Config: 'foo',
     }));
 
-    const plugin2 = vi.fn(nextConfig => ({
+    const plugin2 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin2Config: 'bar',
     }));
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [
-      [plugin1, [PHASE_DEVELOPMENT_SERVER]],
-      [markOptional(() => plugin2), [PHASE_DEVELOPMENT_SERVER]],
-    ], { initial: 'config' });
+    const result = await await composePlugins(
+      PHASE_DEVELOPMENT_SERVER,
+      [
+        [plugin1, [PHASE_DEVELOPMENT_SERVER]],
+        [markOptional(() => plugin2), [PHASE_DEVELOPMENT_SERVER]],
+      ],
+      { initial: 'config' }
+    );
 
     expect(result).toEqual({
       initial: 'config',
@@ -313,20 +345,24 @@ describe('next-compose-plugins/compose', () => {
   });
 
   it('does not load an optional plugin in the wrong phase', async () => {
-    const plugin1 = vi.fn(nextConfig => ({
+    const plugin1 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin1Config: 'foo',
     }));
 
-    const plugin2 = vi.fn(nextConfig => ({
+    const plugin2 = vi.fn((nextConfig) => ({
       ...nextConfig,
       plugin2Config: 'bar',
     }));
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [
-      [plugin1, [PHASE_DEVELOPMENT_SERVER]],
-      [markOptional(() => plugin2), [PHASE_PRODUCTION_SERVER]],
-    ], { initial: 'config' });
+    const result = await await composePlugins(
+      PHASE_DEVELOPMENT_SERVER,
+      [
+        [plugin1, [PHASE_DEVELOPMENT_SERVER]],
+        [markOptional(() => plugin2), [PHASE_PRODUCTION_SERVER]],
+      ],
+      { initial: 'config' }
+    );
 
     expect(result).toEqual({
       initial: 'config',
@@ -342,7 +378,9 @@ describe('next-compose-plugins/compose', () => {
       plugin1Config: 'foo',
     };
 
-    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], { initial: 'config' });
+    const result = await await composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], {
+      initial: 'config',
+    });
 
     expect(result).toEqual({
       initial: 'config',
@@ -353,6 +391,8 @@ describe('next-compose-plugins/compose', () => {
   it('throws an error for incompatible plugins', async () => {
     const plugin = ['something', 'weird'];
 
-    await expect(composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], {})).rejects.toThrow('Incompatible plugin');
+    await expect(composePlugins(PHASE_DEVELOPMENT_SERVER, [plugin], {})).rejects.toThrow(
+      'Incompatible plugin'
+    );
   });
 });

@@ -15,8 +15,12 @@ describe('next-optimized-images/loaders', () => {
   it('detects if a module is installed', () => {
     expect(isModuleInstalled('path')).toEqual(true);
     expect(isModuleInstalled('pathalksdfjladksfj')).toEqual(false);
-    expect(isModuleInstalled('./fixtures/imagemin-plugin', path.join(__dirname, '..'))).toEqual(true);
-    expect(isModuleInstalled('./fixtures/missing-plugin', path.join(__dirname, '..'))).toEqual(false);
+    expect(isModuleInstalled('./fixtures/imagemin-plugin', path.join(__dirname, '..'))).toEqual(
+      true
+    );
+    expect(isModuleInstalled('./fixtures/missing-plugin', path.join(__dirname, '..'))).toEqual(
+      false
+    );
   });
 
   it('detects installed loaders', () => {
@@ -63,20 +67,28 @@ describe('next-optimized-images/loaders', () => {
   });
 
   it('counts the number of optimization loaders', () => {
-    expect(getNumOptimizationLoadersInstalled({
-      jpeg: 'imagemin-jpeg',
-      png: 'imagemin-png',
-      svgSprite: 'svg-sprite-loader',
-    })).toEqual(2);
+    expect(
+      getNumOptimizationLoadersInstalled({
+        jpeg: 'imagemin-jpeg',
+        png: 'imagemin-png',
+        svgSprite: 'svg-sprite-loader',
+      })
+    ).toEqual(2);
   });
 
   it('appends loaders to the webpack config', () => {
     const webpackConfig = { module: { rules: [] } };
 
-    appendLoaders(webpackConfig, getConfig({}), {
-      jpeg: imageminPluginPath,
-      webp: imageminPluginPath,
-    }, false, true);
+    appendLoaders(
+      webpackConfig,
+      getConfig({}),
+      {
+        jpeg: imageminPluginPath,
+        webp: imageminPluginPath,
+      },
+      false,
+      true
+    );
 
     expect(webpackConfig.module.rules).toHaveLength(2);
   });

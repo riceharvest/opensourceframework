@@ -3,13 +3,13 @@ import { encode, decode, getToken } from "../jwt.js"
 
 describe("JWT", () => {
   const secret = "test-secret-key"
-  
+
   const signingKey = JSON.stringify({
     kty: "oct",
     k: "SpIWNDylLwonI7rbtIsvX08-IEN7YKPLEeVAK_ut0NLz3XInw2JHsaMyHLKctkU53QWE8zg-F-t6sXmiqLNUJA",
     alg: "HS512",
     use: "sig",
-    kid: "test-signing-key"
+    kid: "test-signing-key",
   })
 
   const encryptionKey = JSON.stringify({
@@ -17,7 +17,7 @@ describe("JWT", () => {
     k: "dz7TQcrWGuXfNqmBgrsQLI8qtijMhxoC7MECZ37i7tQ",
     alg: "A256GCM",
     use: "enc",
-    kid: "test-encryption-key"
+    kid: "test-encryption-key",
   })
 
   describe("encode", () => {
@@ -74,8 +74,20 @@ describe("JWT", () => {
 
     it("should decode an encrypted token", async () => {
       const token = { sub: "user-123", name: "Test User" }
-      const encoded = await encode({ token, secret, signingKey, encryptionKey, encryption: true })
-      const decoded = await decode({ token: encoded, secret, signingKey, encryptionKey, encryption: true })
+      const encoded = await encode({
+        token,
+        secret,
+        signingKey,
+        encryptionKey,
+        encryption: true,
+      })
+      const decoded = await decode({
+        token: encoded,
+        secret,
+        signingKey,
+        encryptionKey,
+        encryption: true,
+      })
 
       expect(decoded).toBeDefined()
       expect(decoded.sub).toBe("user-123")
