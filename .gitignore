@@ -42,3 +42,4 @@ coverage/
 .eslintcache
 
 # npm config (contains sensitive tokens)
+.desloppify/
