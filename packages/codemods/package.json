@@ -1,0 +1,30 @@
+{
+  "name": "@opensourceframework/codemods",
+  "version": "0.1.0",
+  "description": "Codemods for migrating to OpenSource Framework packages",
+  "main": "dist/index.js",
+  "bin": {
+    "osf-codemod": "bin/osf-codemod.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "nextjs",
+    "codemods",
+    "jscodeshift",
+    "migration"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "jscodeshift": "^0.15.2",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "vitest": "^2.1.9",
+    "typescript": "^5.9.3"
+  }
+}

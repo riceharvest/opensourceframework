@@ -13,6 +13,8 @@
     "test:compat": "node scripts/test-compat.mjs",
     "test:coverage": "turbo run test:coverage",
     "test:ci": "turbo run test:ci",
+    "test:types": "turbo run test:types",
+    "test:api": "turbo run test:api",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",

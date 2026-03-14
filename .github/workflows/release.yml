@@ -28,6 +28,17 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Build All Packages
+        run: pnpm build
+
+      - name: Verify Compatibility Matrix
+        run: pnpm test:compat
+
+      - name: Verify API Surface & Types
+        run: |
+          pnpm test:api
+          pnpm test:types
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1

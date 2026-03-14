@@ -160,7 +160,7 @@ async function installAndRun(packageDir, command, args = []) {
   });
 }
 
-async function smokeNextImages(tarballPath, tempRoot) {
+async function smokeNextImages(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-images');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -169,13 +169,13 @@ async function smokeNextImages(tarballPath, tempRoot) {
         name: 'compat-next-images',
         private: true,
         scripts: {
-          build: 'next build --webpack',
+          build: versions.next.startsWith('16.') ? 'next build --webpack' : 'next build',
         },
         dependencies: {
           '@opensourceframework/next-images': `file:${tarballPath}`,
-          next: '16.1.6',
-          react: '19.2.0',
-          'react-dom': '19.2.0',
+          next: versions.next,
+          react: versions.react,
+          'react-dom': versions.react,
         },
       },
       null,
@@ -202,7 +202,7 @@ async function smokeNextImages(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'pnpm', ['build']);
 }
 
-async function smokeNextComposePlugins(tarballPath, tempRoot) {
+async function smokeNextComposePlugins(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-compose-plugins');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -231,7 +231,7 @@ async function smokeNextComposePlugins(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
 }
 
-async function smokeNextOptimizedImages(tarballPath, tempRoot) {
+async function smokeNextOptimizedImages(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-optimized-images');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -240,13 +240,13 @@ async function smokeNextOptimizedImages(tarballPath, tempRoot) {
         name: 'compat-next-optimized-images',
         private: true,
         scripts: {
-          build: 'next build --webpack',
+          build: versions.next.startsWith('16.') ? 'next build --webpack' : 'next build',
         },
         dependencies: {
           '@opensourceframework/next-optimized-images': `file:${tarballPath}`,
-          next: '16.1.6',
-          react: '19.2.0',
-          'react-dom': '19.2.0',
+          next: versions.next,
+          react: versions.react,
+          'react-dom': versions.react,
         },
       },
       null,
@@ -273,7 +273,7 @@ async function smokeNextOptimizedImages(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'pnpm', ['build']);
 }
 
-async function smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot) {
+async function smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-mdx');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -284,9 +284,9 @@ async function smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot) {
         dependencies: {
           '@opensourceframework/next-mdx': `file:${nextMdxTarball}`,
           '@opensourceframework/next-mdx-toc': `file:${nextMdxTocTarball}`,
-          next: '16.1.6',
-          react: '19.2.0',
-          'react-dom': '19.2.0',
+          next: versions.next,
+          react: versions.react,
+          'react-dom': versions.react,
         },
       },
       null,
@@ -344,7 +344,7 @@ async function smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot) {
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
 }
 
-async function smokeReactVirtualized(tarballPath, tempRoot) {
+async function smokeReactVirtualized(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'react-virtualized');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -354,8 +354,8 @@ async function smokeReactVirtualized(tarballPath, tempRoot) {
         private: true,
         dependencies: {
           '@opensourceframework/react-virtualized': `file:${tarballPath}`,
-          react: '19.2.0',
-          'react-dom': '19.2.0',
+          react: versions.react,
+          'react-dom': versions.react,
         },
       },
       null,
@@ -386,7 +386,7 @@ async function smokeReactVirtualized(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
 }
 
-async function smokeNextSession(tarballPath, tempRoot) {
+async function smokeNextSession(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-session');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -416,7 +416,7 @@ async function smokeNextSession(tarballPath, tempRoot) {
   await installAndRun(fixtureDir, 'node', ['smoke.cjs']);
 }
 
-async function smokeNextAuth(tarballPath, tempRoot) {
+async function smokeNextAuth(tarballPath, tempRoot, versions) {
   const fixtureDir = path.join(tempRoot, 'next-auth');
   await mkdir(fixtureDir, { recursive: true });
   await writeFiles(fixtureDir, {
@@ -482,13 +482,48 @@ async function main() {
     );
     const reactVirtualizedTarball = await packPackage('packages/react-virtualized', tarballDir);
 
-    await smokeNextImages(nextImagesTarball, tempRoot);
-    await smokeNextComposePlugins(nextComposePluginsTarball, tempRoot);
-    await smokeNextOptimizedImages(nextOptimizedImagesTarball, tempRoot);
-    await smokeNextMdx(nextMdxTarball, nextMdxTocTarball, tempRoot);
-    await smokeNextSession(nextSessionTarball, tempRoot);
-    await smokeNextAuth(nextAuthTarball, tempRoot);
-    await smokeReactVirtualized(reactVirtualizedTarball, tempRoot);
+    
+    
+    
+    
+    
+    
+    
+
+    
+    const versionMatrix = [
+      { next: '14.2.24', react: '18.3.1' },
+      { next: '15.2.0', react: '19.0.0' },
+      { next: '16.1.6', react: '19.2.0' }
+    ];
+
+    for (const versions of versionMatrix) {
+      console.log(`\nRunning smoke tests for Next.js ${versions.next} / React ${versions.react}...`);
+      
+      const versionTempRoot = path.join(tempRoot, versions.next.replace(/\./g, '-'));
+      await mkdir(versionTempRoot, { recursive: true });
+
+      await smokeNextImages(nextImagesTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-images is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeNextComposePlugins(nextComposePluginsTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-compose-plugins is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeNextOptimizedImages(nextOptimizedImagesTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-optimized-images is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeNextMdx(nextMdxTarball, nextMdxTocTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-mdx is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeNextSession(nextSessionTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-session is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeNextAuth(nextAuthTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/next-auth is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      
+      await smokeReactVirtualized(reactVirtualizedTarball, versionTempRoot, versions);
+      console.log(`[SAFE] @opensourceframework/react-virtualized is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+    }
 
     console.log('Compatibility smoke checks passed.');
   } finally {

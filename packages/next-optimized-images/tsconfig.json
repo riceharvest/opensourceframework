@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false
+  },
+  "include": ["lib/**/*.ts", "lib/**/*.js"]
+}
