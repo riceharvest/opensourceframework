@@ -1,36 +1,35 @@
-import { EmployerAggregateRatingJsonLd } from "next-seo";
+import { EmployerAggregateRatingJsonLd } from '@opensourceframework/next-seo';
 
 export default function EmployerAggregateRatingAdvancedPage() {
   return (
     <div className="container mx-auto p-8">
       <EmployerAggregateRatingJsonLd
         itemReviewed={{
-          name: "TechCorp International",
-          sameAs: "https://www.techcorp-international.example.com",
-          url: "https://www.techcorp-international.example.com",
+          name: 'TechCorp International',
+          sameAs: 'https://www.techcorp-international.example.com',
+          url: 'https://www.techcorp-international.example.com',
           logo: {
-            url: "https://example.com/techcorp-logo.png",
+            url: 'https://example.com/techcorp-logo.png',
             width: 600,
             height: 300,
           },
-          description:
-            "Leading technology company specializing in cloud solutions and AI",
-          telephone: "+1-555-123-4567",
-          email: "careers@techcorp.example.com",
+          description: 'Leading technology company specializing in cloud solutions and AI',
+          telephone: '+1-555-123-4567',
+          email: 'careers@techcorp.example.com',
           address: [
             {
-              streetAddress: "123 Innovation Way",
-              addressLocality: "San Francisco",
-              addressRegion: "CA",
-              postalCode: "94105",
-              addressCountry: "US",
+              streetAddress: '123 Innovation Way',
+              addressLocality: 'San Francisco',
+              addressRegion: 'CA',
+              postalCode: '94105',
+              addressCountry: 'US',
             },
             {
-              streetAddress: "456 Tech Park",
-              addressLocality: "New York",
-              addressRegion: "NY",
-              postalCode: "10001",
-              addressCountry: "US",
+              streetAddress: '456 Tech Park',
+              addressLocality: 'New York',
+              addressRegion: 'NY',
+              postalCode: '10001',
+              addressCountry: 'US',
             },
           ],
           numberOfEmployees: {
@@ -50,8 +49,7 @@ export default function EmployerAggregateRatingAdvancedPage() {
             <div>
               <h1 className="text-4xl font-bold">TechCorp International</h1>
               <p className="text-xl text-gray-600">
-                Leading technology company specializing in cloud solutions and
-                AI
+                Leading technology company specializing in cloud solutions and AI
               </p>
             </div>
           </div>
@@ -72,19 +70,16 @@ export default function EmployerAggregateRatingAdvancedPage() {
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-indigo-600">1,755</div>
-                <div className="text-sm text-gray-500 mt-2">
-                  Written Reviews
-                </div>
+                <div className="text-sm text-gray-500 mt-2">Written Reviews</div>
               </div>
             </div>
           </div>
 
           <h2 className="text-2xl font-semibold mb-4">Company Overview</h2>
           <p className="text-gray-700 mb-4">
-            TechCorp International is a global leader in cloud computing and
-            artificial intelligence solutions. With over 5,000 employees across
-            multiple offices, we're committed to creating an inclusive,
-            innovative workplace where everyone can thrive.
+            TechCorp International is a global leader in cloud computing and artificial intelligence
+            solutions. With over 5,000 employees across multiple offices, we're committed to
+            creating an inclusive, innovative workplace where everyone can thrive.
           </p>
         </section>
 
@@ -111,9 +106,7 @@ export default function EmployerAggregateRatingAdvancedPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            Why Employees Love Working Here
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Why Employees Love Working Here</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="flex items-start gap-3">
               <svg
@@ -198,7 +191,7 @@ export default function EmployerAggregateRatingAdvancedPage() {
           <h2 className="text-2xl font-semibold mb-4">Contact Careers Team</h2>
           <div className="bg-gray-50 p-6 rounded-lg">
             <p className="text-gray-700 mb-2">
-              <strong>Email:</strong>{" "}
+              <strong>Email:</strong>{' '}
               <a
                 href="mailto:careers@techcorp.example.com"
                 className="text-blue-600 hover:underline"
@@ -210,7 +203,7 @@ export default function EmployerAggregateRatingAdvancedPage() {
               <strong>Phone:</strong> +1-555-123-4567
             </p>
             <p className="text-gray-700">
-              <strong>Website:</strong>{" "}
+              <strong>Website:</strong>{' '}
               <a
                 href="https://www.techcorp-international.example.com"
                 className="text-blue-600 hover:underline"

@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductVariantsMultipagePage() {
   return (
@@ -17,23 +17,23 @@ export default function ProductVariantsMultipagePage() {
         material="Genuine Leather"
         brand="Craftsman Leather Co."
         image={[
-          "https://example.com/images/wallet-brown-classic-1.jpg",
-          "https://example.com/images/wallet-brown-classic-2.jpg",
-          "https://example.com/images/wallet-brown-classic-3.jpg",
+          'https://example.com/images/wallet-brown-classic-1.jpg',
+          'https://example.com/images/wallet-brown-classic-2.jpg',
+          'https://example.com/images/wallet-brown-classic-3.jpg',
         ]}
         // Reference to the parent ProductGroup
         isVariantOf={{
-          "@id": "#wallet_group",
+          '@id': '#wallet_group',
         }}
         inProductGroupWithID="LW2024"
         offers={{
           price: 79.99,
-          priceCurrency: "USD",
-          availability: "InStock",
-          url: "https://example.com/products/leather-wallet/brown-classic",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          url: 'https://example.com/products/leather-wallet/brown-classic',
           seller: {
-            name: "Craftsman Leather Co.",
-            url: "https://example.com",
+            name: 'Craftsman Leather Co.',
+            url: 'https://example.com',
           },
         }}
         aggregateRating={{
@@ -48,41 +48,38 @@ export default function ProductVariantsMultipagePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProductGroup",
-            "@id": "#wallet_group",
-            name: "Premium Leather Wallet",
+            '@context': 'https://schema.org',
+            '@type': 'ProductGroup',
+            '@id': '#wallet_group',
+            name: 'Premium Leather Wallet',
             description:
-              "Handcrafted genuine leather wallets available in multiple colors and patterns.",
+              'Handcrafted genuine leather wallets available in multiple colors and patterns.',
             brand: {
-              "@type": "Brand",
-              name: "Craftsman Leather Co.",
+              '@type': 'Brand',
+              name: 'Craftsman Leather Co.',
             },
-            productGroupID: "LW2024",
-            material: "Genuine Leather",
-            variesBy: [
-              "https://schema.org/color",
-              "https://schema.org/pattern",
-            ],
+            productGroupID: 'LW2024',
+            material: 'Genuine Leather',
+            variesBy: ['https://schema.org/color', 'https://schema.org/pattern'],
             hasVariant: [
               {
-                "@type": "Product",
-                name: "Premium Leather Wallet - Brown Classic",
-                sku: "LW2024-BRN-CLS",
-                color: "Brown",
-                pattern: "Classic",
+                '@type': 'Product',
+                name: 'Premium Leather Wallet - Brown Classic',
+                sku: 'LW2024-BRN-CLS',
+                color: 'Brown',
+                pattern: 'Classic',
                 offers: {
-                  "@type": "Offer",
+                  '@type': 'Offer',
                   price: 79.99,
-                  priceCurrency: "USD",
-                  url: "https://example.com/products/leather-wallet/brown-classic",
+                  priceCurrency: 'USD',
+                  url: 'https://example.com/products/leather-wallet/brown-classic',
                 },
               },
               {
-                url: "https://example.com/products/leather-wallet/black-modern",
+                url: 'https://example.com/products/leather-wallet/black-modern',
               },
               {
-                url: "https://example.com/products/leather-wallet/tan-vintage",
+                url: 'https://example.com/products/leather-wallet/tan-vintage',
               },
             ],
           }),
@@ -105,14 +102,11 @@ export default function ProductVariantsMultipagePage() {
         </nav>
 
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-          <h2 className="font-semibold text-yellow-900 mb-2">
-            Multi-Page Variant Example
-          </h2>
+          <h2 className="font-semibold text-yellow-900 mb-2">Multi-Page Variant Example</h2>
           <p className="text-sm text-yellow-800">
-            This page demonstrates the multi-page approach where each product
-            variant has its own page. The variant references its parent
-            ProductGroup using the <code>isVariantOf</code> property. In a real
-            implementation, each color/pattern combination would have its own
+            This page demonstrates the multi-page approach where each product variant has its own
+            page. The variant references its parent ProductGroup using the <code>isVariantOf</code>{' '}
+            property. In a real implementation, each color/pattern combination would have its own
             URL and page.
           </p>
         </div>
@@ -132,11 +126,9 @@ export default function ProductVariantsMultipagePage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Premium Leather Wallet - Brown Classic
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Premium Leather Wallet - Brown Classic</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
                 <span className="text-gray-600">4.7 out of 5 (89 reviews)</span>
               </div>
               <p className="text-gray-600">by Craftsman Leather Co.</p>
@@ -144,23 +136,17 @@ export default function ProductVariantsMultipagePage() {
 
             <div>
               <p className="text-gray-700">
-                Handcrafted genuine leather wallet in classic brown. Features
-                multiple card slots, bill compartment, and RFID blocking
-                technology. Each wallet is carefully crafted by skilled artisans
-                ensuring premium quality and durability.
+                Handcrafted genuine leather wallet in classic brown. Features multiple card slots,
+                bill compartment, and RFID blocking technology. Each wallet is carefully crafted by
+                skilled artisans ensuring premium quality and durability.
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
-                  Color & Pattern
-                </label>
+                <label className="block text-sm font-medium mb-2">Color & Pattern</label>
                 <div className="grid grid-cols-3 gap-2">
-                  <a
-                    href="#"
-                    className="border-2 border-blue-500 rounded p-2 text-center"
-                  >
+                  <a href="#" className="border-2 border-blue-500 rounded p-2 text-center">
                     <div className="w-full h-12 bg-amber-700 rounded mb-1"></div>
                     <span className="text-xs">Brown Classic</span>
                   </a>
@@ -285,31 +271,22 @@ export default function ProductVariantsMultipagePage() {
         </div>
 
         <div className="mt-12 border-t pt-8 bg-gray-50 p-6 rounded-lg">
-          <h3 className="font-semibold mb-3">
-            Structured Data Implementation Note
-          </h3>
+          <h3 className="font-semibold mb-3">Structured Data Implementation Note</h3>
           <div className="text-sm text-gray-700 space-y-2">
             <p>
-              This page demonstrates the{" "}
-              <strong>multi-page variant approach</strong> where:
+              This page demonstrates the <strong>multi-page variant approach</strong> where:
             </p>
             <ul className="list-disc list-inside space-y-1 ml-4">
               <li>Each variant has its own dedicated page/URL</li>
               <li>
-                The variant Product includes <code>isVariantOf</code> to
-                reference the ProductGroup
+                The variant Product includes <code>isVariantOf</code> to reference the ProductGroup
               </li>
-              <li>
-                The ProductGroup definition is duplicated on each variant page
-              </li>
-              <li>
-                The ProductGroup lists all variants, with URL-only references to
-                other pages
-              </li>
+              <li>The ProductGroup definition is duplicated on each variant page</li>
+              <li>The ProductGroup lists all variants, with URL-only references to other pages</li>
             </ul>
             <p className="mt-3">
-              This approach is ideal for e-commerce sites where each variant
-              needs its own SEO-optimized page.
+              This approach is ideal for e-commerce sites where each variant needs its own
+              SEO-optimized page.
             </p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductMemberPricingPage() {
   return (
@@ -8,56 +8,56 @@ export default function ProductMemberPricingPage() {
         description="Single-origin Arabica coffee beans, medium roast, ethically sourced from Colombia"
         url="https://example.com/products/premium-coffee-beans"
         image={[
-          "https://example.com/coffee-1x1.jpg",
-          "https://example.com/coffee-4x3.jpg",
-          "https://example.com/coffee-16x9.jpg",
+          'https://example.com/coffee-1x1.jpg',
+          'https://example.com/coffee-4x3.jpg',
+          'https://example.com/coffee-16x9.jpg',
         ]}
         sku="COFFEE-COL-1KG"
         mpn="PCB1000"
         brand="Artisan Roasters"
         offers={{
-          url: "https://example.com/buy/coffee-beans",
+          url: 'https://example.com/buy/coffee-beans',
           price: 24.99,
-          priceCurrency: "USD",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
           // Multiple price specifications for member pricing
           priceSpecification: [
             {
               price: 24.99,
-              priceCurrency: "USD",
+              priceCurrency: 'USD',
             },
             {
               price: 22.49,
-              priceCurrency: "USD",
+              priceCurrency: 'USD',
               validForMemberTier: {
-                "@id": "https://example.com/membership#silver",
-                name: "Silver",
-                hasTierBenefit: "TierBenefitLoyaltyPrice",
+                '@id': 'https://example.com/membership#silver',
+                name: 'Silver',
+                hasTierBenefit: 'TierBenefitLoyaltyPrice',
               },
             },
             {
               price: 19.99,
-              priceCurrency: "USD",
+              priceCurrency: 'USD',
               validForMemberTier: [
                 {
-                  "@id": "https://example.com/membership#gold",
-                  name: "Gold",
-                  hasTierBenefit: "TierBenefitLoyaltyPrice",
+                  '@id': 'https://example.com/membership#gold',
+                  name: 'Gold',
+                  hasTierBenefit: 'TierBenefitLoyaltyPrice',
                 },
                 {
-                  "@id": "https://example.com/membership#platinum",
-                  name: "Platinum",
-                  hasTierBenefit: "TierBenefitLoyaltyPrice",
+                  '@id': 'https://example.com/membership#platinum',
+                  name: 'Platinum',
+                  hasTierBenefit: 'TierBenefitLoyaltyPrice',
                 },
               ],
             },
             {
               membershipPointsEarned: 50,
               validForMemberTier: {
-                "@id": "https://example.com/membership#any",
-                name: "All Members",
-                hasTierBenefit: "TierBenefitLoyaltyPoints",
+                '@id': 'https://example.com/membership#any',
+                name: 'All Members',
+                hasTierBenefit: 'TierBenefitLoyaltyPoints',
               },
             },
           ],
@@ -77,9 +77,7 @@ export default function ProductMemberPricingPage() {
             <li>/</li>
             <li>Whole Beans</li>
             <li>/</li>
-            <li className="font-semibold text-gray-900">
-              Premium Coffee Beans - 1kg
-            </li>
+            <li className="font-semibold text-gray-900">Premium Coffee Beans - 1kg</li>
           </ol>
         </nav>
 
@@ -97,23 +95,17 @@ export default function ProductMemberPricingPage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Premium Coffee Beans - 1kg
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Premium Coffee Beans - 1kg</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
-                <span className="text-gray-600">
-                  4.8 out of 5 (156 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
+                <span className="text-gray-600">4.8 out of 5 (156 reviews)</span>
               </div>
               <p className="text-gray-600">by Artisan Roasters</p>
             </div>
 
             <div className="space-y-4">
               <div className="border rounded-lg p-4 bg-gradient-to-r from-yellow-50 to-amber-50">
-                <h3 className="font-semibold mb-3 text-amber-900">
-                  Member Pricing Tiers
-                </h3>
+                <h3 className="font-semibold mb-3 text-amber-900">Member Pricing Tiers</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center py-2 border-b border-amber-200">
                     <span className="text-gray-700">Regular Price</span>
@@ -126,9 +118,7 @@ export default function ProductMemberPricingPage() {
                       </span>
                       <span className="text-gray-700">Member Price</span>
                     </span>
-                    <span className="font-bold text-lg text-green-600">
-                      $22.49
-                    </span>
+                    <span className="font-bold text-lg text-green-600">$22.49</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
                     <span className="flex items-center gap-2">
@@ -137,27 +127,19 @@ export default function ProductMemberPricingPage() {
                       </span>
                       <span className="text-gray-700">Premium Member</span>
                     </span>
-                    <span className="font-bold text-lg text-green-600">
-                      $19.99
-                    </span>
+                    <span className="font-bold text-lg text-green-600">$19.99</span>
                   </div>
                 </div>
                 <div className="mt-3 pt-3 border-t border-amber-200">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">
-                      Earn Loyalty Points
-                    </span>
-                    <span className="font-semibold text-amber-700">
-                      +50 points
-                    </span>
+                    <span className="text-sm text-gray-600">Earn Loyalty Points</span>
+                    <span className="font-semibold text-amber-700">+50 points</span>
                   </div>
                 </div>
               </div>
 
               <p className="text-green-600 font-medium">✓ In Stock</p>
-              <p className="text-sm text-gray-500">
-                Member prices valid until Dec 31, 2024
-              </p>
+              <p className="text-sm text-gray-500">Member prices valid until Dec 31, 2024</p>
             </div>
 
             <div className="space-y-2">
@@ -174,10 +156,9 @@ export default function ProductMemberPricingPage() {
 
             <div className="space-y-4">
               <p className="text-gray-700">
-                Experience the rich, smooth flavor of our single-origin
-                Colombian Arabica beans. Carefully selected from high-altitude
-                farms and roasted to perfection, these beans offer notes of
-                chocolate, caramel, and subtle citrus.
+                Experience the rich, smooth flavor of our single-origin Colombian Arabica beans.
+                Carefully selected from high-altitude farms and roasted to perfection, these beans
+                offer notes of chocolate, caramel, and subtle citrus.
               </p>
             </div>
 

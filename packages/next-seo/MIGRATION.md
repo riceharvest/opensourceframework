@@ -33,12 +33,12 @@ No changes required - the package exports are identical:
 
 ```javascript
 // Before
-import { NextSeo } from 'next-seo'
-import { ArticleJsonLd } from 'next-seo'
+import { NextSeo } from 'next-seo';
+import { ArticleJsonLd } from 'next-seo';
 
 // After - works exactly the same
-import { NextSeo } from '@opensourceframework/next-seo'
-import { ArticleJsonLd } from '@opensourceframework/next-seo'
+import { NextSeo } from '@opensourceframework/next-seo';
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 ```
 
 ### 3. Update App Router Usage
@@ -47,10 +47,10 @@ For Next.js App Router, the import path is unchanged:
 
 ```tsx
 // Before
-import { NextSeo } from 'next-seo'
+import { NextSeo } from 'next-seo';
 
 // After - identical usage
-import { NextSeo } from '@opensourceframework/next-seo'
+import { NextSeo } from '@opensourceframework/next-seo';
 
 export default function Page() {
   return (
@@ -58,7 +58,7 @@ export default function Page() {
       <NextSeo title="My Page" description="Description" />
       {/* Your content */}
     </>
-  )
+  );
 }
 ```
 
@@ -66,12 +66,12 @@ export default function Page() {
 
 ```jsx
 // Before
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 // After - same pattern
-import Head from 'next/head'
-import { NextSeo } from '@opensourceframework/next-seo'
+import Head from 'next/head';
+import { NextSeo } from '@opensourceframework/next-seo';
 
 export default function Page() {
   return (
@@ -82,7 +82,7 @@ export default function Page() {
       </Head>
       {/* Your content */}
     </>
-  )
+  );
 }
 ```
 
@@ -113,14 +113,16 @@ The fork includes intelligent type detection - you don't need to specify @type:
 
 ## Compatibility
 
-| Feature | Original | Fork |
-|---------|----------|------|
-| Next.js 13-14 | ✓ | ✓ |
-| Next.js 15+ | Partial | ✓ |
-| TypeScript | Partial | ✓ |
-| App Router | ✓ | ✓ |
-| Pages Router | ✓ | ✓ |
-| JSON-LD Components | 30+ | 30+ |
+| Feature            | Original | Fork |
+| ------------------ | -------- | ---- |
+| Next.js 13-14      | ✓        | ✓    |
+| Next.js 15         | Partial  | ✓    |
+| Next.js 16         | ✕        | ✓    |
+| React 19           | ✕        | ✓    |
+| TypeScript         | Partial  | ✓    |
+| App Router         | ✓        | ✓    |
+| Pages Router       | ✓        | ✓    |
+| JSON-LD Components | 30+      | 30+  |
 
 ## Rollback
 
@@ -136,12 +138,21 @@ npm install next-seo@7.x.x
 
 ## Changelog Highlights
 
+### v7.3.5
+
+- **Next.js 16** support
+- **React 19** compatibility
+- Verified App Router showcase with Next.js 16 Turbopack
+- Enhanced TypeScript 5.9+ support
+
 ### v7.3.4
+
 - Next.js 15+ optimizations
 - TypeScript 5.x support
 - Enhanced JSON-LD processing
 
 ### v7.3.x
+
 - 539+ unit tests
 - Full TypeScript rewrite
 - Improved @type detection

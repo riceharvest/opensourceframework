@@ -1,4 +1,4 @@
-import { JobPostingJsonLd } from "next-seo";
+import { JobPostingJsonLd } from '@opensourceframework/next-seo';
 
 export default function RemoteJobPostingPage() {
   return (
@@ -9,22 +9,22 @@ export default function RemoteJobPostingPage() {
         datePosted="2024-01-18"
         validThrough="2024-02-28T00:00"
         hiringOrganization={{
-          name: "Remote First Tech",
-          sameAs: "https://www.remotefirsttech.com",
-          logo: "https://www.remotefirsttech.com/logo.png",
+          name: 'Remote First Tech',
+          sameAs: 'https://www.remotefirsttech.com',
+          logo: 'https://www.remotefirsttech.com/logo.png',
         }}
         jobLocationType="TELECOMMUTE"
         applicantLocationRequirements={{
-          name: "USA",
+          name: 'USA',
         }}
         url="https://careers.remotefirsttech.com/jobs/senior-frontend-dev"
         employmentType="FULL_TIME"
         identifier="RFT-2024-001"
         baseSalary={{
-          currency: "USD",
+          currency: 'USD',
           value: {
             value: 130000,
-            unitText: "YEAR",
+            unitText: 'YEAR',
           },
         }}
         directApply={true}
@@ -47,23 +47,18 @@ export default function RemoteJobPostingPage() {
 
         <h2>About the Role</h2>
         <p>
-          Join our fully remote team to build amazing user experiences! We're
-          looking for an experienced Frontend Developer who is passionate about
-          creating beautiful, performant web applications.
+          Join our fully remote team to build amazing user experiences! We're looking for an
+          experienced Frontend Developer who is passionate about creating beautiful, performant web
+          applications.
         </p>
-        <p>
-          This is a 100% remote position open to candidates in the United
-          States.
-        </p>
+        <p>This is a 100% remote position open to candidates in the United States.</p>
 
         <h2>What You'll Do</h2>
         <ul>
           <li>Build and maintain complex React applications</li>
           <li>Collaborate with designers to implement pixel-perfect UIs</li>
           <li>Optimize applications for maximum speed and scalability</li>
-          <li>
-            Mentor junior developers and contribute to technical decisions
-          </li>
+          <li>Mentor junior developers and contribute to technical decisions</li>
           <li>Work closely with backend engineers to design APIs</li>
         </ul>
 
@@ -73,9 +68,7 @@ export default function RemoteJobPostingPage() {
           <li>Expert-level knowledge of React, TypeScript, and modern CSS</li>
           <li>Experience with state management (Redux, Zustand, etc.)</li>
           <li>Strong understanding of web performance optimization</li>
-          <li>
-            Bachelor's degree in Computer Science or equivalent experience
-          </li>
+          <li>Bachelor's degree in Computer Science or equivalent experience</li>
           <li>Excellent communication skills for remote collaboration</li>
         </ul>
 

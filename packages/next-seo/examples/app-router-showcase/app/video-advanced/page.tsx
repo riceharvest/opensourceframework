@@ -1,4 +1,4 @@
-import { VideoJsonLd } from "next-seo";
+import { VideoJsonLd } from '@opensourceframework/next-seo';
 
 export default function VideoAdvancedPage() {
   return (
@@ -7,9 +7,9 @@ export default function VideoAdvancedPage() {
         name="Complete Baking Masterclass: From Basics to Advanced"
         description="Join our comprehensive baking masterclass covering everything from basic techniques to advanced pastry skills"
         thumbnailUrl={[
-          "https://example.com/thumbnails/masterclass-1x1.jpg",
-          "https://example.com/thumbnails/masterclass-4x3.jpg",
-          "https://example.com/thumbnails/masterclass-16x9.jpg",
+          'https://example.com/thumbnails/masterclass-1x1.jpg',
+          'https://example.com/thumbnails/masterclass-4x3.jpg',
+          'https://example.com/thumbnails/masterclass-16x9.jpg',
         ]}
         uploadDate="2024-03-01T10:00:00+00:00"
         contentUrl="https://example.com/videos/baking-masterclass.mp4"
@@ -18,27 +18,27 @@ export default function VideoAdvancedPage() {
         expires="2025-03-01T00:00:00+00:00"
         interactionStatistic={[
           {
-            interactionType: "WatchAction",
+            interactionType: 'WatchAction',
             userInteractionCount: 500000,
           },
           {
-            interactionType: "LikeAction",
+            interactionType: 'LikeAction',
             userInteractionCount: 25000,
           },
         ]}
-        regionsAllowed={["US", "CA", "GB", "AU", "NZ"]}
-        ineligibleRegion={["CN", "RU"]}
+        regionsAllowed={['US', 'CA', 'GB', 'AU', 'NZ']}
+        ineligibleRegion={['CN', 'RU']}
         author={[
-          "Chef Julia Martinez",
+          'Chef Julia Martinez',
           {
-            name: "Chef Paul Anderson",
-            url: "https://example.com/chefs/paul-anderson",
+            name: 'Chef Paul Anderson',
+            url: 'https://example.com/chefs/paul-anderson',
           },
         ]}
         publisher={{
-          name: "Culinary Institute Online",
-          logo: "https://example.com/culinary-institute-logo.png",
-          url: "https://example.com",
+          name: 'Culinary Institute Online',
+          logo: 'https://example.com/culinary-institute-logo.png',
+          url: 'https://example.com',
         }}
       />
 
@@ -62,9 +62,9 @@ export default function VideoAdvancedPage() {
         <section>
           <h2>About This Masterclass</h2>
           <p>
-            Join world-renowned chefs Julia Martinez and Paul Anderson in this
-            comprehensive 2.5-hour baking masterclass. Perfect for both
-            beginners and experienced bakers looking to refine their skills.
+            Join world-renowned chefs Julia Martinez and Paul Anderson in this comprehensive
+            2.5-hour baking masterclass. Perfect for both beginners and experienced bakers looking
+            to refine their skills.
           </p>
         </section>
 
@@ -85,9 +85,8 @@ export default function VideoAdvancedPage() {
         <section>
           <h2>Availability</h2>
           <p>
-            This video is available in: United States, Canada, United Kingdom,
-            Australia, and New Zealand. The video will be available until March
-            1, 2025.
+            This video is available in: United States, Canada, United Kingdom, Australia, and New
+            Zealand. The video will be available until March 1, 2025.
           </p>
         </section>
       </main>

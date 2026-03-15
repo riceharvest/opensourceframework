@@ -1,31 +1,31 @@
-import { ProfilePageJsonLd } from "next-seo";
+import { ProfilePageJsonLd } from '@opensourceframework/next-seo';
 
 export default function AdvancedProfilePage() {
   return (
     <div className="container mx-auto p-8">
       <ProfilePageJsonLd
         mainEntity={{
-          name: "Angelo Huff",
-          alternateName: "ahuff23",
-          identifier: "123475623",
-          description: "Defender of Truth",
-          image: "https://example.com/avatars/ahuff23.jpg",
+          name: 'Angelo Huff',
+          alternateName: 'ahuff23',
+          identifier: '123475623',
+          description: 'Defender of Truth',
+          image: 'https://example.com/avatars/ahuff23.jpg',
           sameAs: [
-            "https://www.example.com/real-angelo",
-            "https://example.com/profile/therealangelohuff",
+            'https://www.example.com/real-angelo',
+            'https://example.com/profile/therealangelohuff',
           ],
           interactionStatistic: [
             {
-              interactionType: "https://schema.org/FollowAction",
+              interactionType: 'https://schema.org/FollowAction',
               userInteractionCount: 1,
             },
             {
-              interactionType: "https://schema.org/LikeAction",
+              interactionType: 'https://schema.org/LikeAction',
               userInteractionCount: 5,
             },
           ],
           agentInteractionStatistic: {
-            interactionType: "https://schema.org/WriteAction",
+            interactionType: 'https://schema.org/WriteAction',
             userInteractionCount: 2346,
           },
         }}
@@ -47,9 +47,9 @@ export default function AdvancedProfilePage() {
           <div className="mb-6">
             <h2 className="text-xl font-semibold mb-2">About</h2>
             <p className="text-gray-700">
-              I'm a passionate advocate for truth and transparency in the
-              digital age. With years of experience in fact-checking and digital
-              forensics, I help communities identify and combat misinformation.
+              I'm a passionate advocate for truth and transparency in the digital age. With years of
+              experience in fact-checking and digital forensics, I help communities identify and
+              combat misinformation.
             </p>
           </div>
 
@@ -97,18 +97,14 @@ export default function AdvancedProfilePage() {
                 <h3 className="font-semibold">How to Verify Sources Online</h3>
                 <p className="text-gray-600 text-sm">Posted 2 days ago</p>
                 <p className="text-gray-700 mt-1">
-                  A comprehensive guide to fact-checking and source
-                  verification...
+                  A comprehensive guide to fact-checking and source verification...
                 </p>
               </div>
               <div className="border-l-4 border-purple-600 pl-4">
-                <h3 className="font-semibold">
-                  The Importance of Digital Literacy
-                </h3>
+                <h3 className="font-semibold">The Importance of Digital Literacy</h3>
                 <p className="text-gray-600 text-sm">Posted 1 week ago</p>
                 <p className="text-gray-700 mt-1">
-                  In today's interconnected world, understanding how to
-                  navigate...
+                  In today's interconnected world, understanding how to navigate...
                 </p>
               </div>
             </div>

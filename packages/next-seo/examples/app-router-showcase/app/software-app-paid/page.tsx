@@ -1,4 +1,4 @@
-import { SoftwareApplicationJsonLd } from "next-seo";
+import { SoftwareApplicationJsonLd } from '@opensourceframework/next-seo';
 
 export default function SoftwareAppPaidPage() {
   return (
@@ -9,7 +9,7 @@ export default function SoftwareAppPaidPage() {
         description="Professional-grade photo editing software with AI-powered tools"
         url="https://example.com/studio-pro"
         image={{
-          url: "https://example.com/studio-pro-icon.png",
+          url: 'https://example.com/studio-pro-icon.png',
           width: 512,
           height: 512,
         }}
@@ -22,9 +22,9 @@ export default function SoftwareAppPaidPage() {
         storageRequirements="4GB available space"
         offers={{
           price: 79.99,
-          priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
-          validFrom: "2024-01-01",
+          priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
+          validFrom: '2024-01-01',
         }}
         aggregateRating={{
           ratingValue: 4.8,
@@ -35,71 +35,71 @@ export default function SoftwareAppPaidPage() {
         }}
         review={[
           {
-            author: "Sarah Johnson",
+            author: 'Sarah Johnson',
             reviewRating: {
               ratingValue: 5,
               bestRating: 5,
             },
             reviewBody:
               "Best photo editing software I've ever used. The AI features save me hours of work!",
-            datePublished: "2024-10-15",
+            datePublished: '2024-10-15',
           },
           {
             author: {
-              name: "Mike Chen",
-              url: "https://example.com/users/mikechen",
+              name: 'Mike Chen',
+              url: 'https://example.com/users/mikechen',
             },
             reviewRating: {
               ratingValue: 4,
             },
             reviewBody:
-              "Great features, but takes some time to learn. Worth the investment for professionals.",
-            datePublished: "2024-09-22",
+              'Great features, but takes some time to learn. Worth the investment for professionals.',
+            datePublished: '2024-09-22',
           },
         ]}
         screenshot={[
           {
-            url: "https://example.com/screenshots/studio-pro-main.jpg",
-            caption: "Main editing interface",
+            url: 'https://example.com/screenshots/studio-pro-main.jpg',
+            caption: 'Main editing interface',
           },
           {
-            url: "https://example.com/screenshots/studio-pro-ai-tools.jpg",
-            caption: "AI-powered enhancement tools",
+            url: 'https://example.com/screenshots/studio-pro-ai-tools.jpg',
+            caption: 'AI-powered enhancement tools',
           },
           {
-            url: "https://example.com/screenshots/studio-pro-filters.jpg",
-            caption: "Professional filter library",
+            url: 'https://example.com/screenshots/studio-pro-filters.jpg',
+            caption: 'Professional filter library',
           },
         ]}
         featureList={[
-          "AI-powered background removal",
-          "Advanced color grading tools",
-          "Non-destructive editing",
-          "RAW file processing",
-          "Batch processing",
-          "Cloud sync and backup",
-          "Plugin ecosystem",
-          "4K and 8K support",
+          'AI-powered background removal',
+          'Advanced color grading tools',
+          'Non-destructive editing',
+          'RAW file processing',
+          'Batch processing',
+          'Cloud sync and backup',
+          'Plugin ecosystem',
+          '4K and 8K support',
         ]}
         softwareVersion="2024.2.3"
         releaseNotes="New AI upscaling feature, improved performance, bug fixes"
         datePublished="2021-03-15"
         dateModified="2024-11-15"
         author={{
-          name: "Creative Software Labs",
-          url: "https://creativesoftwarelabs.com",
+          name: 'Creative Software Labs',
+          url: 'https://creativesoftwarelabs.com',
         }}
         publisher={{
-          name: "Creative Software Labs",
-          url: "https://creativesoftwarelabs.com",
+          name: 'Creative Software Labs',
+          url: 'https://creativesoftwarelabs.com',
           logo: {
-            url: "https://creativesoftwarelabs.com/logo.png",
+            url: 'https://creativesoftwarelabs.com/logo.png',
             width: 600,
             height: 60,
           },
         }}
         downloadUrl="https://example.com/downloads/studio-pro-installer"
-        countriesSupported={["US", "CA", "GB", "AU", "NZ", "IE"]}
+        countriesSupported={['US', 'CA', 'GB', 'AU', 'NZ', 'IE']}
       />
 
       <div className="max-w-4xl">
@@ -115,13 +115,10 @@ export default function SoftwareAppPaidPage() {
         </div>
 
         <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">
-            Professional Photo Editing Made Simple
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">Professional Photo Editing Made Simple</h2>
           <p className="mb-6">
-            Transform your photos with AI-powered tools and professional-grade
-            features. Join over 100,000 creative professionals who trust Studio
-            Pro.
+            Transform your photos with AI-powered tools and professional-grade features. Join over
+            100,000 creative professionals who trust Studio Pro.
           </p>
           <div className="flex items-center space-x-4">
             <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
@@ -157,29 +154,29 @@ export default function SoftwareAppPaidPage() {
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="font-semibold mb-2">AI-Powered Tools</h3>
               <p className="text-gray-700">
-                Automatic background removal, object selection, and image
-                enhancement powered by advanced machine learning.
+                Automatic background removal, object selection, and image enhancement powered by
+                advanced machine learning.
               </p>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="font-semibold mb-2">Professional Workflows</h3>
               <p className="text-gray-700">
-                Non-destructive editing, layer management, and batch processing
-                for efficient professional workflows.
+                Non-destructive editing, layer management, and batch processing for efficient
+                professional workflows.
               </p>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="font-semibold mb-2">RAW Processing</h3>
               <p className="text-gray-700">
-                Full support for RAW files from all major camera manufacturers
-                with advanced color grading tools.
+                Full support for RAW files from all major camera manufacturers with advanced color
+                grading tools.
               </p>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="font-semibold mb-2">Cloud Integration</h3>
               <p className="text-gray-700">
-                Seamless cloud sync and backup, work on your projects from any
-                device with Studio Pro installed.
+                Seamless cloud sync and backup, work on your projects from any device with Studio
+                Pro installed.
               </p>
             </div>
           </div>
@@ -220,26 +217,21 @@ export default function SoftwareAppPaidPage() {
               <div className="flex items-center mb-2">
                 <span className="text-yellow-400">★★★★★</span>
                 <span className="ml-2 font-semibold">Sarah Johnson</span>
-                <span className="ml-auto text-gray-500 text-sm">
-                  October 15, 2024
-                </span>
+                <span className="ml-auto text-gray-500 text-sm">October 15, 2024</span>
               </div>
               <p className="text-gray-700">
-                Best photo editing software I've ever used. The AI features save
-                me hours of work!
+                Best photo editing software I've ever used. The AI features save me hours of work!
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <div className="flex items-center mb-2">
                 <span className="text-yellow-400">★★★★☆</span>
                 <span className="ml-2 font-semibold">Mike Chen</span>
-                <span className="ml-auto text-gray-500 text-sm">
-                  September 22, 2024
-                </span>
+                <span className="ml-auto text-gray-500 text-sm">September 22, 2024</span>
               </div>
               <p className="text-gray-700">
-                Great features, but takes some time to learn. Worth the
-                investment for professionals.
+                Great features, but takes some time to learn. Worth the investment for
+                professionals.
               </p>
             </div>
           </div>

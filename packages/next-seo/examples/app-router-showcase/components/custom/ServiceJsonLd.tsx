@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { JsonLdScript, processors, type Organization } from "next-seo";
+import { JsonLdScript, processors, type Organization } from '@opensourceframework/next-seo';
 
 interface ServiceJsonLdProps {
   name: string;
   serviceType?: string;
-  provider?: string | Omit<Organization, "@type">;
+  provider?: string | Omit<Organization, '@type'>;
   areaServed?: string | string[];
   description?: string;
   url?: string;
@@ -37,15 +37,15 @@ export function ServiceJsonLd({
   aggregateRating,
 }: ServiceJsonLdProps) {
   const data = {
-    "@context": "https://schema.org",
-    "@type": "Service",
+    '@context': 'https://schema.org',
+    '@type': 'Service',
     name,
     ...(serviceType && { serviceType }),
     ...(description && { description }),
     ...(url && { url }),
     ...(provider && {
       provider:
-        typeof provider === "string"
+        typeof provider === 'string'
           ? processors.processOrganization(provider)
           : processors.processOrganization(provider),
     }),
@@ -54,7 +54,7 @@ export function ServiceJsonLd({
     }),
     ...(offers && {
       offers: {
-        "@type": "Offer",
+        '@type': 'Offer',
         ...(offers.price && { price: offers.price }),
         ...(offers.priceCurrency && { priceCurrency: offers.priceCurrency }),
         ...(offers.priceRange && { priceRange: offers.priceRange }),

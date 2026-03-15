@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductVariantsPage() {
   return (
@@ -12,66 +12,66 @@ export default function ProductVariantsPage() {
         brand="Nordic Style"
         pattern="striped"
         material="wool"
-        variesBy={["size", "color"]}
+        variesBy={['size', 'color']}
         aggregateRating={{
           ratingValue: 4.6,
           reviewCount: 127,
         }}
         hasVariant={[
           {
-            name: "Wool Winter Coat - Small Green",
-            sku: "WC2024-S-GRN",
-            gtin14: "98766051104214",
-            size: "small",
-            color: "Green",
-            image: "https://example.com/images/coat-small-green.jpg",
+            name: 'Wool Winter Coat - Small Green',
+            sku: 'WC2024-S-GRN',
+            gtin14: '98766051104214',
+            size: 'small',
+            color: 'Green',
+            image: 'https://example.com/images/coat-small-green.jpg',
             offers: {
               price: 119.99,
-              priceCurrency: "USD",
-              availability: "InStock",
-              url: "https://example.com/products/wool-winter-coat?size=small&color=green",
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              url: 'https://example.com/products/wool-winter-coat?size=small&color=green',
             },
           },
           {
-            name: "Wool Winter Coat - Small Light Blue",
-            sku: "WC2024-S-BLU",
-            gtin14: "98766051104207",
-            size: "small",
-            color: "Light Blue",
-            image: "https://example.com/images/coat-small-lightblue.jpg",
+            name: 'Wool Winter Coat - Small Light Blue',
+            sku: 'WC2024-S-BLU',
+            gtin14: '98766051104207',
+            size: 'small',
+            color: 'Light Blue',
+            image: 'https://example.com/images/coat-small-lightblue.jpg',
             offers: {
               price: 119.99,
-              priceCurrency: "USD",
-              availability: "InStock",
-              url: "https://example.com/products/wool-winter-coat?size=small&color=lightblue",
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              url: 'https://example.com/products/wool-winter-coat?size=small&color=lightblue',
             },
           },
           {
-            name: "Wool Winter Coat - Medium Green",
-            sku: "WC2024-M-GRN",
-            gtin14: "98766051104221",
-            size: "medium",
-            color: "Green",
-            image: "https://example.com/images/coat-medium-green.jpg",
+            name: 'Wool Winter Coat - Medium Green',
+            sku: 'WC2024-M-GRN',
+            gtin14: '98766051104221',
+            size: 'medium',
+            color: 'Green',
+            image: 'https://example.com/images/coat-medium-green.jpg',
             offers: {
               price: 129.99,
-              priceCurrency: "USD",
-              availability: "InStock",
-              url: "https://example.com/products/wool-winter-coat?size=medium&color=green",
+              priceCurrency: 'USD',
+              availability: 'InStock',
+              url: 'https://example.com/products/wool-winter-coat?size=medium&color=green',
             },
           },
           {
-            name: "Wool Winter Coat - Large Light Blue",
-            sku: "WC2024-L-BLU",
-            gtin14: "98766051104399",
-            size: "large",
-            color: "Light Blue",
-            image: "https://example.com/images/coat-large-lightblue.jpg",
+            name: 'Wool Winter Coat - Large Light Blue',
+            sku: 'WC2024-L-BLU',
+            gtin14: '98766051104399',
+            size: 'large',
+            color: 'Light Blue',
+            image: 'https://example.com/images/coat-large-lightblue.jpg',
             offers: {
               price: 139.99,
-              priceCurrency: "USD",
-              availability: "BackOrder",
-              url: "https://example.com/products/wool-winter-coat?size=large&color=lightblue",
+              priceCurrency: 'USD',
+              availability: 'BackOrder',
+              url: 'https://example.com/products/wool-winter-coat?size=large&color=lightblue',
             },
           },
         ]}
@@ -107,19 +107,17 @@ export default function ProductVariantsPage() {
             <div>
               <h1 className="text-3xl font-bold mb-2">Wool Winter Coat</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
-                <span className="text-gray-600">
-                  4.6 out of 5 (127 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
+                <span className="text-gray-600">4.6 out of 5 (127 reviews)</span>
               </div>
               <p className="text-gray-600">by Nordic Style</p>
             </div>
 
             <div>
               <p className="text-gray-700">
-                Premium wool coat designed for cold winter climates. Features a
-                classic striped pattern and exceptional warmth. Available in
-                multiple colors and sizes to suit your style.
+                Premium wool coat designed for cold winter climates. Features a classic striped
+                pattern and exceptional warmth. Available in multiple colors and sizes to suit your
+                style.
               </p>
             </div>
 
@@ -127,27 +125,17 @@ export default function ProductVariantsPage() {
               <div>
                 <label className="block text-sm font-medium mb-2">Color</label>
                 <div className="flex gap-2">
-                  <button className="px-4 py-2 border-2 border-blue-500 rounded">
-                    Light Blue
-                  </button>
-                  <button className="px-4 py-2 border rounded hover:border-gray-400">
-                    Green
-                  </button>
+                  <button className="px-4 py-2 border-2 border-blue-500 rounded">Light Blue</button>
+                  <button className="px-4 py-2 border rounded hover:border-gray-400">Green</button>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2">Size</label>
                 <div className="flex gap-2">
-                  <button className="px-4 py-2 border rounded hover:border-gray-400">
-                    Small
-                  </button>
-                  <button className="px-4 py-2 border rounded hover:border-gray-400">
-                    Medium
-                  </button>
-                  <button className="px-4 py-2 border-2 border-blue-500 rounded">
-                    Large
-                  </button>
+                  <button className="px-4 py-2 border rounded hover:border-gray-400">Small</button>
+                  <button className="px-4 py-2 border rounded hover:border-gray-400">Medium</button>
+                  <button className="px-4 py-2 border-2 border-blue-500 rounded">Large</button>
                 </div>
               </div>
             </div>
@@ -157,12 +145,8 @@ export default function ProductVariantsPage() {
                 <span className="text-3xl font-bold">$139.99</span>
                 <span className="text-sm text-gray-500">USD</span>
               </div>
-              <p className="text-orange-600 font-medium">
-                ⚠ Back Order - Ships in 2-3 weeks
-              </p>
-              <p className="text-sm text-gray-500">
-                Product ID: WC2024 | SKU: WC2024-L-BLU
-              </p>
+              <p className="text-orange-600 font-medium">⚠ Back Order - Ships in 2-3 weeks</p>
+              <p className="text-sm text-gray-500">Product ID: WC2024 | SKU: WC2024-L-BLU</p>
             </div>
 
             <div className="space-y-3">

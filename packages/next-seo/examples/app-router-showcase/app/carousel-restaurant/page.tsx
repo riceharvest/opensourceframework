@@ -1,4 +1,4 @@
-import { CarouselJsonLd } from "next-seo";
+import { CarouselJsonLd } from '@opensourceframework/next-seo';
 
 export default function CarouselRestaurantPage() {
   return (
@@ -8,16 +8,16 @@ export default function CarouselRestaurantPage() {
         items={[
           {
             name: "Luigi's Italian Bistro",
-            address: "123 Main Street, New York, NY 10001",
-            telephone: "+1-212-555-0100",
-            url: "https://example.com/restaurants/luigis",
+            address: '123 Main Street, New York, NY 10001',
+            telephone: '+1-212-555-0100',
+            url: 'https://example.com/restaurants/luigis',
             image: [
-              "https://example.com/luigis-exterior.jpg",
-              "https://example.com/luigis-interior.jpg",
+              'https://example.com/luigis-exterior.jpg',
+              'https://example.com/luigis-interior.jpg',
             ],
-            priceRange: "$$$",
-            servesCuisine: ["Italian", "Mediterranean"],
-            menu: "https://example.com/restaurants/luigis/menu",
+            priceRange: '$$$',
+            servesCuisine: ['Italian', 'Mediterranean'],
+            menu: 'https://example.com/restaurants/luigis/menu',
             aggregateRating: {
               ratingValue: 4.7,
               bestRating: 5,
@@ -25,9 +25,9 @@ export default function CarouselRestaurantPage() {
             },
             review: {
               reviewRating: { ratingValue: 5 },
-              author: "Food & Wine Magazine",
+              author: 'Food & Wine Magazine',
               reviewBody:
-                "Authentic Italian cuisine with a modern twist. Outstanding pasta and wine selection.",
+                'Authentic Italian cuisine with a modern twist. Outstanding pasta and wine selection.',
             },
             geo: {
               latitude: 40.7489,
@@ -35,41 +35,41 @@ export default function CarouselRestaurantPage() {
             },
             openingHoursSpecification: [
               {
-                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-                opens: "11:30",
-                closes: "22:00",
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+                opens: '11:30',
+                closes: '22:00',
               },
               {
-                dayOfWeek: ["Friday", "Saturday"],
-                opens: "11:30",
-                closes: "23:00",
+                dayOfWeek: ['Friday', 'Saturday'],
+                opens: '11:30',
+                closes: '23:00',
               },
               {
-                dayOfWeek: "Sunday",
-                opens: "12:00",
-                closes: "21:00",
+                dayOfWeek: 'Sunday',
+                opens: '12:00',
+                closes: '21:00',
               },
             ],
             sameAs: [
-              "https://www.facebook.com/luigisbistro",
-              "https://www.instagram.com/luigisbistro",
+              'https://www.facebook.com/luigisbistro',
+              'https://www.instagram.com/luigisbistro',
             ],
           },
           {
-            name: "Sakura Sushi House",
+            name: 'Sakura Sushi House',
             address: {
-              streetAddress: "456 Oak Avenue",
-              addressLocality: "San Francisco",
-              addressRegion: "CA",
-              postalCode: "94102",
-              addressCountry: "US",
+              streetAddress: '456 Oak Avenue',
+              addressLocality: 'San Francisco',
+              addressRegion: 'CA',
+              postalCode: '94102',
+              addressCountry: 'US',
             },
-            telephone: "+1-415-555-0200",
-            url: "https://example.com/restaurants/sakura",
-            image: "https://example.com/sakura-sushi.jpg",
-            priceRange: "$$",
-            servesCuisine: ["Japanese", "Sushi"],
-            menu: "https://example.com/restaurants/sakura/menu",
+            telephone: '+1-415-555-0200',
+            url: 'https://example.com/restaurants/sakura',
+            image: 'https://example.com/sakura-sushi.jpg',
+            priceRange: '$$',
+            servesCuisine: ['Japanese', 'Sushi'],
+            menu: 'https://example.com/restaurants/sakura/menu',
             aggregateRating: {
               ratingValue: 4.8,
               ratingCount: 1250,
@@ -79,29 +79,22 @@ export default function CarouselRestaurantPage() {
               longitude: -122.4194,
             },
             openingHoursSpecification: {
-              dayOfWeek: [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ],
-              opens: "11:00",
-              closes: "22:30",
+              dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+              opens: '11:00',
+              closes: '22:30',
             },
           },
           {
-            name: "The Garden Terrace",
-            address: "789 Park Lane, Chicago, IL 60601",
-            telephone: "+1-312-555-0300",
+            name: 'The Garden Terrace',
+            address: '789 Park Lane, Chicago, IL 60601',
+            telephone: '+1-312-555-0300',
             image: {
-              url: "https://example.com/garden-terrace.jpg",
+              url: 'https://example.com/garden-terrace.jpg',
               width: 1200,
               height: 800,
             },
-            priceRange: "$$$$",
-            servesCuisine: ["French", "Contemporary", "Vegetarian Options"],
+            priceRange: '$$$$',
+            servesCuisine: ['French', 'Contemporary', 'Vegetarian Options'],
             aggregateRating: {
               ratingValue: 4.9,
               ratingCount: 567,
@@ -109,18 +102,17 @@ export default function CarouselRestaurantPage() {
             review: [
               {
                 reviewRating: { ratingValue: 5, bestRating: 5 },
-                author: "Michelin Guide",
-                reviewBody:
-                  "Exceptional fine dining experience with innovative seasonal menus",
-                datePublished: "2024-01-20",
+                author: 'Michelin Guide',
+                reviewBody: 'Exceptional fine dining experience with innovative seasonal menus',
+                datePublished: '2024-01-20',
               },
               {
                 reviewRating: { ratingValue: 5 },
                 author: {
-                  name: "James Food Critic",
-                  url: "https://example.com/critics/james",
+                  name: 'James Food Critic',
+                  url: 'https://example.com/critics/james',
                 },
-                reviewBody: "A culinary masterpiece in every dish",
+                reviewBody: 'A culinary masterpiece in every dish',
               },
             ],
             geo: {
@@ -129,45 +121,45 @@ export default function CarouselRestaurantPage() {
             },
             openingHoursSpecification: [
               {
-                dayOfWeek: ["Tuesday", "Wednesday", "Thursday"],
-                opens: "17:00",
-                closes: "22:00",
+                dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday'],
+                opens: '17:00',
+                closes: '22:00',
               },
               {
-                dayOfWeek: ["Friday", "Saturday"],
-                opens: "17:00",
-                closes: "23:30",
+                dayOfWeek: ['Friday', 'Saturday'],
+                opens: '17:00',
+                closes: '23:30',
               },
             ],
           },
           {
-            name: "Taco Paradise",
-            address: "321 Sunset Boulevard, Los Angeles, CA 90028",
-            telephone: "+1-323-555-0400",
-            url: "https://example.com/restaurants/taco-paradise",
+            name: 'Taco Paradise',
+            address: '321 Sunset Boulevard, Los Angeles, CA 90028',
+            telephone: '+1-323-555-0400',
+            url: 'https://example.com/restaurants/taco-paradise',
             image: [
-              "https://example.com/taco-paradise-1.jpg",
-              "https://example.com/taco-paradise-2.jpg",
-              "https://example.com/taco-paradise-3.jpg",
+              'https://example.com/taco-paradise-1.jpg',
+              'https://example.com/taco-paradise-2.jpg',
+              'https://example.com/taco-paradise-3.jpg',
             ],
-            priceRange: "$",
-            servesCuisine: "Mexican",
+            priceRange: '$',
+            servesCuisine: 'Mexican',
             aggregateRating: {
               ratingValue: 4.6,
               ratingCount: 2341,
             },
             openingHoursSpecification: {
               dayOfWeek: [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday",
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday',
               ],
-              opens: "10:00",
-              closes: "23:00",
+              opens: '10:00',
+              closes: '23:00',
             },
           },
         ]}
@@ -176,10 +168,7 @@ export default function CarouselRestaurantPage() {
       <h1 className="text-4xl font-bold mb-8">Restaurant Carousel Example</h1>
 
       <div className="prose lg:prose-xl">
-        <p>
-          Discover top-rated restaurants in major cities across the United
-          States.
-        </p>
+        <p>Discover top-rated restaurants in major cities across the United States.</p>
 
         <h2>Featured Restaurants</h2>
 
@@ -188,39 +177,26 @@ export default function CarouselRestaurantPage() {
             <div className="flex gap-6">
               <div className="w-32 h-32 bg-gray-200 rounded flex-shrink-0"></div>
               <div className="flex-1">
-                <h3 className="text-2xl font-semibold">
-                  Luigi's Italian Bistro
-                </h3>
-                <p className="text-gray-600 mt-1">
-                  Italian, Mediterranean • $$$ • New York, NY
-                </p>
+                <h3 className="text-2xl font-semibold">Luigi's Italian Bistro</h3>
+                <p className="text-gray-600 mt-1">Italian, Mediterranean • $$$ • New York, NY</p>
                 <div className="flex items-center gap-4 mt-2">
                   <span className="text-yellow-500">★ 4.7/5</span>
                   <span className="text-gray-500 text-sm">(892 reviews)</span>
                 </div>
                 <p className="text-gray-600 mt-3">
-                  Authentic Italian cuisine with a modern twist. Outstanding
-                  pasta and wine selection.
+                  Authentic Italian cuisine with a modern twist. Outstanding pasta and wine
+                  selection.
                 </p>
                 <div className="mt-3 text-sm text-gray-600">
                   <p>📍 123 Main Street, New York, NY 10001</p>
                   <p>📞 +1-212-555-0100</p>
-                  <p>
-                    🕐 Mon-Thu: 11:30-22:00, Fri-Sat: 11:30-23:00, Sun:
-                    12:00-21:00
-                  </p>
+                  <p>🕐 Mon-Thu: 11:30-22:00, Fri-Sat: 11:30-23:00, Sun: 12:00-21:00</p>
                 </div>
                 <div className="mt-4 flex gap-3">
-                  <a
-                    href="https://example.com/restaurants/luigis"
-                    className="text-blue-600"
-                  >
+                  <a href="https://example.com/restaurants/luigis" className="text-blue-600">
                     Visit Website →
                   </a>
-                  <a
-                    href="https://example.com/restaurants/luigis/menu"
-                    className="text-blue-600"
-                  >
+                  <a href="https://example.com/restaurants/luigis/menu" className="text-blue-600">
                     View Menu →
                   </a>
                 </div>
@@ -233,16 +209,13 @@ export default function CarouselRestaurantPage() {
               <div className="w-32 h-32 bg-gray-200 rounded flex-shrink-0"></div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Sakura Sushi House</h3>
-                <p className="text-gray-600 mt-1">
-                  Japanese, Sushi • $$ • San Francisco, CA
-                </p>
+                <p className="text-gray-600 mt-1">Japanese, Sushi • $$ • San Francisco, CA</p>
                 <div className="flex items-center gap-4 mt-2">
                   <span className="text-yellow-500">★ 4.8/5</span>
                   <span className="text-gray-500 text-sm">(1,250 reviews)</span>
                 </div>
                 <p className="text-gray-600 mt-3">
-                  Fresh, authentic sushi and Japanese cuisine in the heart of
-                  San Francisco.
+                  Fresh, authentic sushi and Japanese cuisine in the heart of San Francisco.
                 </p>
                 <div className="mt-3 text-sm text-gray-600">
                   <p>📍 456 Oak Avenue, San Francisco, CA 94102</p>
@@ -250,16 +223,10 @@ export default function CarouselRestaurantPage() {
                   <p>🕐 Mon-Sat: 11:00-22:30, Sun: Closed</p>
                 </div>
                 <div className="mt-4 flex gap-3">
-                  <a
-                    href="https://example.com/restaurants/sakura"
-                    className="text-blue-600"
-                  >
+                  <a href="https://example.com/restaurants/sakura" className="text-blue-600">
                     Visit Website →
                   </a>
-                  <a
-                    href="https://example.com/restaurants/sakura/menu"
-                    className="text-blue-600"
-                  >
+                  <a href="https://example.com/restaurants/sakura/menu" className="text-blue-600">
                     View Menu →
                   </a>
                 </div>
@@ -272,9 +239,7 @@ export default function CarouselRestaurantPage() {
               <div className="w-32 h-32 bg-gray-200 rounded flex-shrink-0"></div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">The Garden Terrace</h3>
-                <p className="text-gray-600 mt-1">
-                  French, Contemporary • $$$$ • Chicago, IL
-                </p>
+                <p className="text-gray-600 mt-1">French, Contemporary • $$$$ • Chicago, IL</p>
                 <div className="flex items-center gap-4 mt-2">
                   <span className="text-yellow-500">★ 4.9/5</span>
                   <span className="text-gray-500 text-sm">(567 reviews)</span>
@@ -283,8 +248,7 @@ export default function CarouselRestaurantPage() {
                   </span>
                 </div>
                 <p className="text-gray-600 mt-3">
-                  Exceptional fine dining experience with innovative seasonal
-                  menus.
+                  Exceptional fine dining experience with innovative seasonal menus.
                 </p>
                 <div className="mt-3 text-sm text-gray-600">
                   <p>📍 789 Park Lane, Chicago, IL 60601</p>
@@ -303,9 +267,7 @@ export default function CarouselRestaurantPage() {
               <div className="w-32 h-32 bg-gray-200 rounded flex-shrink-0"></div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Taco Paradise</h3>
-                <p className="text-gray-600 mt-1">
-                  Mexican • $ • Los Angeles, CA
-                </p>
+                <p className="text-gray-600 mt-1">Mexican • $ • Los Angeles, CA</p>
                 <div className="flex items-center gap-4 mt-2">
                   <span className="text-yellow-500">★ 4.6/5</span>
                   <span className="text-gray-500 text-sm">(2,341 reviews)</span>

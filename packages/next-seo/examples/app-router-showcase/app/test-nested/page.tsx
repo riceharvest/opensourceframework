@@ -1,4 +1,4 @@
-import { RecipeJsonLd } from "next-seo";
+import { RecipeJsonLd } from '@opensourceframework/next-seo';
 
 export default function TestNestedPage() {
   return (
@@ -6,24 +6,24 @@ export default function TestNestedPage() {
       <RecipeJsonLd
         name="Test Recipe"
         image="https://example.com/images/chocolate-chip-cookies.jpg"
-        recipeIngredient={["1 cup flour", "2 eggs", "1/2 cup milk"]}
+        recipeIngredient={['1 cup flour', '2 eggs', '1/2 cup milk']}
         recipeInstructions={[
           {
-            "@type": "HowToStep",
-            name: "Step 1",
-            text: "Do something",
+            '@type': 'HowToStep',
+            name: 'Step 1',
+            text: 'Do something',
             image: {
-              "@type": "ImageObject",
-              url: "https://example.com/step1.jpg",
+              '@type': 'ImageObject',
+              url: 'https://example.com/step1.jpg',
               width: 300,
               height: 200,
             },
           },
         ]}
         nutrition={{
-          "@type": "NutritionInformation",
-          calories: "250 calories",
-          servingSize: "1 serving",
+          '@type': 'NutritionInformation',
+          calories: '250 calories',
+          servingSize: '1 serving',
         }}
       />
 

@@ -1,4 +1,4 @@
-import { VideoJsonLd } from "next-seo";
+import { VideoJsonLd } from '@opensourceframework/next-seo';
 
 export default function VideoPage() {
   return (
@@ -21,9 +21,9 @@ export default function VideoPage() {
         </div>
 
         <p className="lead">
-          Learn how to make the perfect chocolate cake with this easy
-          step-by-step recipe tutorial. This recipe has been perfected over
-          years and guarantees a moist, rich chocolate cake every time.
+          Learn how to make the perfect chocolate cake with this easy step-by-step recipe tutorial.
+          This recipe has been perfected over years and guarantees a moist, rich chocolate cake
+          every time.
         </p>
 
         <section>
@@ -44,9 +44,9 @@ export default function VideoPage() {
         <section>
           <h2>About This Recipe</h2>
           <p>
-            This chocolate cake recipe has been passed down through generations
-            and refined to perfection. In this video, we'll walk you through
-            every step, from measuring ingredients to the final decoration.
+            This chocolate cake recipe has been passed down through generations and refined to
+            perfection. In this video, we'll walk you through every step, from measuring ingredients
+            to the final decoration.
           </p>
         </section>
       </main>

@@ -10,11 +10,9 @@ export interface CommonProviderOptions {
   type: ProviderType
 }
 
-/**
- * OAuth Provider
- */
-
-type ProtectionType = "pkce" | "state" | "both" | "none"
+type CheckType = "pkce" | "state" | "both" | "none"
+/** @deprecated Use CheckType */
+type ProtectionType = CheckType
 
 /**
  * OAuth provider options
@@ -34,7 +32,13 @@ export interface OAuthConfig<P extends Record<string, unknown> = Profile>
   authorizationUrl: string
   profileUrl: string
   profile(profile: P, tokens: TokenSet): Awaitable<User & { id: string }>
+  /** @deprecated Use `checks` */
   protection?: ProtectionType | ProtectionType[]
+  /**
+   * OAuth 2.0 checks to enable.
+   * @default ["state"]
+   */
+  checks?: CheckType | CheckType[]
   clientId: string
   clientSecret:
     | string
@@ -172,6 +176,11 @@ export type AppProviders = Array<
 export interface AppProvider extends CommonProviderOptions {
   signinUrl: string
   callbackUrl: string
+  url: {
+    origin: string
+    pathname: string
+    href: string
+  }
 }
 
 declare const Providers: BuiltInProviders

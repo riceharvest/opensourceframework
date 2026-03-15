@@ -1,4 +1,4 @@
-import { QuizJsonLd } from "next-seo";
+import { QuizJsonLd } from '@opensourceframework/next-seo';
 
 export default function BiologyQuizPage() {
   return (
@@ -6,33 +6,31 @@ export default function BiologyQuizPage() {
       <QuizJsonLd
         questions={[
           {
-            question: "What is the powerhouse of the cell?",
-            answer: "Mitochondria",
+            question: 'What is the powerhouse of the cell?',
+            answer: 'Mitochondria',
           },
           {
-            question:
-              "What process do plants use to convert sunlight into energy?",
-            answer: "Photosynthesis",
+            question: 'What process do plants use to convert sunlight into energy?',
+            answer: 'Photosynthesis',
           },
           {
-            question: "What is DNA?",
-            answer:
-              "Deoxyribonucleic acid - the molecule that carries genetic information",
+            question: 'What is DNA?',
+            answer: 'Deoxyribonucleic acid - the molecule that carries genetic information',
           },
           {
-            question: "What are the building blocks of proteins?",
-            answer: "Amino acids",
+            question: 'What are the building blocks of proteins?',
+            answer: 'Amino acids',
           },
         ]}
         about="Cell Biology"
         educationalAlignment={[
           {
-            type: "educationalSubject",
-            name: "Biology",
+            type: 'educationalSubject',
+            name: 'Biology',
           },
           {
-            type: "educationalLevel",
-            name: "Grade 10",
+            type: 'educationalLevel',
+            name: 'Grade 10',
           },
         ]}
       />
@@ -43,9 +41,7 @@ export default function BiologyQuizPage() {
 
         <div className="space-y-6 mt-8">
           <div className="border p-4 rounded bg-green-50">
-            <p className="font-semibold">
-              Q: What is the powerhouse of the cell?
-            </p>
+            <p className="font-semibold">Q: What is the powerhouse of the cell?</p>
             <p className="mt-2 text-green-700">A: Mitochondria</p>
           </div>
 
@@ -59,15 +55,12 @@ export default function BiologyQuizPage() {
           <div className="border p-4 rounded bg-green-50">
             <p className="font-semibold">Q: What is DNA?</p>
             <p className="mt-2 text-green-700">
-              A: Deoxyribonucleic acid - the molecule that carries genetic
-              information
+              A: Deoxyribonucleic acid - the molecule that carries genetic information
             </p>
           </div>
 
           <div className="border p-4 rounded bg-green-50">
-            <p className="font-semibold">
-              Q: What are the building blocks of proteins?
-            </p>
+            <p className="font-semibold">Q: What are the building blocks of proteins?</p>
             <p className="mt-2 text-green-700">A: Amino acids</p>
           </div>
         </div>

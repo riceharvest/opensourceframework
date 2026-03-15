@@ -1,4 +1,4 @@
-import { BreadcrumbJsonLd } from "next-seo";
+import { BreadcrumbJsonLd } from '@opensourceframework/next-seo';
 
 export default function BreadcrumbPage() {
   return (
@@ -6,23 +6,23 @@ export default function BreadcrumbPage() {
       <BreadcrumbJsonLd
         items={[
           {
-            name: "Home",
-            item: "https://example.com",
+            name: 'Home',
+            item: 'https://example.com',
           },
           {
-            name: "Products",
-            item: "https://example.com/products",
+            name: 'Products',
+            item: 'https://example.com/products',
           },
           {
-            name: "Electronics",
-            item: "https://example.com/products/electronics",
+            name: 'Electronics',
+            item: 'https://example.com/products/electronics',
           },
           {
-            name: "Smartphones",
-            item: "https://example.com/products/electronics/smartphones",
+            name: 'Smartphones',
+            item: 'https://example.com/products/electronics/smartphones',
           },
           {
-            name: "iPhone 15 Pro",
+            name: 'iPhone 15 Pro',
           },
         ]}
       />
@@ -41,19 +41,13 @@ export default function BreadcrumbPage() {
             </li>
             <li className="text-gray-500">/</li>
             <li>
-              <a
-                href="/products/electronics"
-                className="text-blue-600 hover:underline"
-              >
+              <a href="/products/electronics" className="text-blue-600 hover:underline">
                 Electronics
               </a>
             </li>
             <li className="text-gray-500">/</li>
             <li>
-              <a
-                href="/products/electronics/smartphones"
-                className="text-blue-600 hover:underline"
-              >
+              <a href="/products/electronics/smartphones" className="text-blue-600 hover:underline">
                 Smartphones
               </a>
             </li>
@@ -63,9 +57,8 @@ export default function BreadcrumbPage() {
         </nav>
 
         <p>
-          This page demonstrates the basic usage of the BreadcrumbJsonLd
-          component. The breadcrumb trail shows the hierarchical path to reach
-          this product page.
+          This page demonstrates the basic usage of the BreadcrumbJsonLd component. The breadcrumb
+          trail shows the hierarchical path to reach this product page.
         </p>
 
         <h2>Features Demonstrated</h2>
@@ -77,8 +70,7 @@ export default function BreadcrumbPage() {
 
         <h2>View Source</h2>
         <p>
-          Inspect the page source to see the generated JSON-LD structured data
-          in the head section.
+          Inspect the page source to see the generated JSON-LD structured data in the head section.
         </p>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { FAQJsonLd } from "next-seo";
+import { FAQJsonLd } from '@opensourceframework/next-seo';
 
 export default function AdvancedFAQPage() {
   return (
@@ -6,7 +6,7 @@ export default function AdvancedFAQPage() {
       <FAQJsonLd
         questions={[
           {
-            question: "What documents are required for application?",
+            question: 'What documents are required for application?',
             answer: `<p>You'll need to provide the following documents:</p>
 <ul>
   <li>Valid government-issued ID</li>
@@ -17,7 +17,7 @@ export default function AdvancedFAQPage() {
 <p>All documents must be submitted within 30 days of application.</p>`,
           },
           {
-            question: "How do I apply for the program?",
+            question: 'How do I apply for the program?',
             answer: `<p>Follow these <strong>simple steps</strong> to apply:</p>
 <ol>
   <li>Create an account on our <a href="/register">registration page</a></li>
@@ -29,7 +29,7 @@ export default function AdvancedFAQPage() {
 <p><em>Note: Applications are processed in the order they are received.</em></p>`,
           },
           {
-            question: "What financial assistance is available?",
+            question: 'What financial assistance is available?',
             answer: `<p>We offer several types of financial assistance:</p>
 <div>
   <h3>Scholarships</h3>
@@ -44,9 +44,9 @@ export default function AdvancedFAQPage() {
 <p>Visit our <a href="/financial-aid">financial aid page</a> for more information.</p>`,
           },
           {
-            name: "Are there any special requirements for international students?",
+            name: 'Are there any special requirements for international students?',
             acceptedAnswer: {
-              "@type": "Answer",
+              '@type': 'Answer',
               text: `<p>International students must meet additional requirements:</p>
 <ul>
   <li><strong>English proficiency:</strong> TOEFL score of 80+ or IELTS 6.5+</li>
@@ -65,8 +65,8 @@ export default function AdvancedFAQPage() {
       <div className="prose lg:prose-xl max-w-none">
         <h1>Advanced FAQ Example - Application Process</h1>
         <p className="lead">
-          This page demonstrates FAQ structured data with rich HTML content
-          including links, lists, and formatting.
+          This page demonstrates FAQ structured data with rich HTML content including links, lists,
+          and formatting.
         </p>
 
         <div className="mt-8 space-y-8">
@@ -86,9 +86,7 @@ export default function AdvancedFAQPage() {
                   </a>
                 </li>
               </ul>
-              <p className="mt-4">
-                All documents must be submitted within 30 days of application.
-              </p>
+              <p className="mt-4">All documents must be submitted within 30 days of application.</p>
             </div>
           </details>
 
@@ -102,7 +100,7 @@ export default function AdvancedFAQPage() {
               </p>
               <ol className="list-decimal ml-6 mt-2">
                 <li>
-                  Create an account on our{" "}
+                  Create an account on our{' '}
                   <a href="/register" className="text-blue-600 underline">
                     registration page
                   </a>
@@ -127,8 +125,7 @@ export default function AdvancedFAQPage() {
               <div className="mt-4">
                 <h3 className="font-semibold text-lg">Scholarships</h3>
                 <p>
-                  Merit-based scholarships covering up to{" "}
-                  <strong>100% of tuition</strong>
+                  Merit-based scholarships covering up to <strong>100% of tuition</strong>
                 </p>
 
                 <h3 className="font-semibold text-lg mt-4">Grants</h3>
@@ -136,16 +133,14 @@ export default function AdvancedFAQPage() {
                   Need-based grants ranging from <strong>$500 to $5,000</strong>
                 </p>
 
-                <h3 className="font-semibold text-lg mt-4">
-                  Work-Study Programs
-                </h3>
+                <h3 className="font-semibold text-lg mt-4">Work-Study Programs</h3>
                 <p>Part-time employment opportunities to help offset costs</p>
               </div>
               <p className="mt-4">
-                Visit our{" "}
+                Visit our{' '}
                 <a href="/financial-aid" className="text-blue-600 underline">
                   financial aid page
-                </a>{" "}
+                </a>{' '}
                 for more information.
               </p>
             </div>
@@ -159,30 +154,23 @@ export default function AdvancedFAQPage() {
               <p>International students must meet additional requirements:</p>
               <ul className="list-disc ml-6 mt-2">
                 <li>
-                  <strong>English proficiency:</strong> TOEFL score of 80+ or
-                  IELTS 6.5+
+                  <strong>English proficiency:</strong> TOEFL score of 80+ or IELTS 6.5+
                 </li>
                 <li>
-                  <strong>Visa documentation:</strong> Valid student visa (F-1
-                  or M-1)
+                  <strong>Visa documentation:</strong> Valid student visa (F-1 or M-1)
                 </li>
                 <li>
-                  <strong>Financial proof:</strong> Bank statements showing
-                  sufficient funds
+                  <strong>Financial proof:</strong> Bank statements showing sufficient funds
                 </li>
                 <li>
-                  <strong>Health insurance:</strong> Comprehensive coverage
-                  required
+                  <strong>Health insurance:</strong> Comprehensive coverage required
                 </li>
               </ul>
               <p className="mt-4">
-                Contact our{" "}
-                <a
-                  href="mailto:international@example.com"
-                  className="text-blue-600 underline"
-                >
+                Contact our{' '}
+                <a href="mailto:international@example.com" className="text-blue-600 underline">
                   international student office
-                </a>{" "}
+                </a>{' '}
                 for assistance.
               </p>
             </div>

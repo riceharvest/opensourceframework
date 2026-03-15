@@ -1,4 +1,4 @@
-import { CourseJsonLd } from "next-seo";
+import { CourseJsonLd } from '@opensourceframework/next-seo';
 
 export default function CoursePage() {
   return (
@@ -8,8 +8,8 @@ export default function CoursePage() {
         description="This is an introductory CS course laying out the basics."
         url="https://example.com/courses/intro-cs"
         provider={{
-          name: "University of Technology - Eureka",
-          sameAs: "https://www.example.com",
+          name: 'University of Technology - Eureka',
+          sameAs: 'https://www.example.com',
         }}
       />
 
@@ -20,11 +20,8 @@ export default function CoursePage() {
 
         <div className="mb-6">
           <p className="text-gray-600">
-            Offered by{" "}
-            <a
-              href="https://www.example.com"
-              className="text-blue-600 hover:underline"
-            >
+            Offered by{' '}
+            <a href="https://www.example.com" className="text-blue-600 hover:underline">
               University of Technology - Eureka
             </a>
           </p>
@@ -33,10 +30,9 @@ export default function CoursePage() {
         <div className="prose lg:prose-xl">
           <h2>Course Description</h2>
           <p>
-            This is an introductory CS course laying out the basics. You'll
-            learn fundamental programming concepts, algorithms, and
-            problem-solving techniques that form the foundation of computer
-            science.
+            This is an introductory CS course laying out the basics. You'll learn fundamental
+            programming concepts, algorithms, and problem-solving techniques that form the
+            foundation of computer science.
           </p>
 
           <h2>What You'll Learn</h2>
@@ -50,15 +46,14 @@ export default function CoursePage() {
 
           <h2>Prerequisites</h2>
           <p>
-            No prior programming experience required. Basic mathematics
-            knowledge (algebra) is helpful but not mandatory.
+            No prior programming experience required. Basic mathematics knowledge (algebra) is
+            helpful but not mandatory.
           </p>
 
           <h2>Course Format</h2>
           <p>
-            This course consists of video lectures, hands-on programming
-            assignments, quizzes, and a final project. Expected time commitment
-            is 8-10 hours per week over 12 weeks.
+            This course consists of video lectures, hands-on programming assignments, quizzes, and a
+            final project. Expected time commitment is 8-10 hours per week over 12 weeks.
           </p>
         </div>
 

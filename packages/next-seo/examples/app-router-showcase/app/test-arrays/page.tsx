@@ -1,4 +1,4 @@
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 
 export default function TestArraysPage() {
   return (
@@ -7,23 +7,23 @@ export default function TestArraysPage() {
         headline="Test Article with Mixed Arrays"
         datePublished="2024-01-01T00:00:00.000Z"
         author={[
-          "John Doe",
+          'John Doe',
           {
-            "@type": "Person",
-            name: "Jane Smith",
-            url: "https://example.com/jane",
+            '@type': 'Person',
+            name: 'Jane Smith',
+            url: 'https://example.com/jane',
           },
           {
-            "@type": "Organization",
-            name: "Tech Corp",
-            logo: "https://example.com/logo.png",
+            '@type': 'Organization',
+            name: 'Tech Corp',
+            logo: 'https://example.com/logo.png',
           },
         ]}
         image={[
-          "https://example.com/image1.jpg",
+          'https://example.com/image1.jpg',
           {
-            "@type": "ImageObject",
-            url: "https://example.com/image2.jpg",
+            '@type': 'ImageObject',
+            url: 'https://example.com/image2.jpg',
             width: 800,
             height: 600,
           },
@@ -38,8 +38,7 @@ export default function TestArraysPage() {
         <ul>
           <li>John Doe (string author)</li>
           <li>
-            Jane Smith (Person object) -{" "}
-            <a href="https://example.com/jane">Profile</a>
+            Jane Smith (Person object) - <a href="https://example.com/jane">Profile</a>
           </li>
           <li>Tech Corp (Organization object)</li>
         </ul>
@@ -47,10 +46,7 @@ export default function TestArraysPage() {
         <h2>Images</h2>
         <ul>
           <li>Image 1: https://example.com/image1.jpg (string URL)</li>
-          <li>
-            Image 2: https://example.com/image2.jpg (ImageObject with dimensions
-            800x600)
-          </li>
+          <li>Image 2: https://example.com/image2.jpg (ImageObject with dimensions 800x600)</li>
         </ul>
       </div>
     </div>

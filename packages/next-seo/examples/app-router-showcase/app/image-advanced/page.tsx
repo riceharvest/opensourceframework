@@ -1,4 +1,4 @@
-import { ImageJsonLd } from "next-seo";
+import { ImageJsonLd } from '@opensourceframework/next-seo';
 
 export default function ImageAdvancedPage() {
   return (
@@ -6,19 +6,19 @@ export default function ImageAdvancedPage() {
       <ImageJsonLd
         contentUrl="https://example.com/photos/sunset-landscape.jpg"
         creator={{
-          name: "PhotoLab Studios",
-          logo: "https://example.com/photolab-logo.jpg",
+          name: 'PhotoLab Studios',
+          logo: 'https://example.com/photolab-logo.jpg',
           sameAs: [
-            "https://twitter.com/photolab",
-            "https://instagram.com/photolab",
-            "https://facebook.com/photolab",
+            'https://twitter.com/photolab',
+            'https://instagram.com/photolab',
+            'https://facebook.com/photolab',
           ],
           address: {
-            streetAddress: "123 Photography Lane",
-            addressLocality: "San Francisco",
-            addressRegion: "CA",
-            postalCode: "94105",
-            addressCountry: "US",
+            streetAddress: '123 Photography Lane',
+            addressLocality: 'San Francisco',
+            addressRegion: 'CA',
+            postalCode: '94105',
+            addressCountry: 'US',
           },
         }}
         license="https://creativecommons.org/licenses/by-nc/4.0/"
@@ -28,9 +28,7 @@ export default function ImageAdvancedPage() {
       />
 
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">
-          Sunset Landscape - Premium Photography
-        </h1>
+        <h1 className="text-3xl font-bold mb-6">Sunset Landscape - Premium Photography</h1>
 
         <div className="mb-8 bg-gray-200 rounded-lg p-16 text-center">
           <p className="text-gray-600">Image placeholder: Sunset Landscape</p>
@@ -44,32 +42,19 @@ export default function ImageAdvancedPage() {
             </div>
             <div>
               <h3 className="font-semibold">PhotoLab Studios</h3>
-              <p className="text-gray-600">
-                Professional Photography Since 2010
-              </p>
-              <p className="text-sm text-gray-500">
-                123 Photography Lane, San Francisco, CA 94105
-              </p>
+              <p className="text-gray-600">Professional Photography Since 2010</p>
+              <p className="text-sm text-gray-500">123 Photography Lane, San Francisco, CA 94105</p>
             </div>
           </div>
 
           <div className="flex space-x-4 mb-4">
-            <a
-              href="https://twitter.com/photolab"
-              className="text-blue-400 hover:underline"
-            >
+            <a href="https://twitter.com/photolab" className="text-blue-400 hover:underline">
               Twitter
             </a>
-            <a
-              href="https://instagram.com/photolab"
-              className="text-pink-600 hover:underline"
-            >
+            <a href="https://instagram.com/photolab" className="text-pink-600 hover:underline">
               Instagram
             </a>
-            <a
-              href="https://facebook.com/photolab"
-              className="text-blue-600 hover:underline"
-            >
+            <a href="https://facebook.com/photolab" className="text-blue-600 hover:underline">
               Facebook
             </a>
           </div>
@@ -91,16 +76,12 @@ export default function ImageAdvancedPage() {
 
           <div className="mb-4">
             <h3 className="font-medium text-gray-700 mb-2">Copyright</h3>
-            <p className="text-gray-900">
-              © 2024 PhotoLab Studios. All rights reserved.
-            </p>
+            <p className="text-gray-900">© 2024 PhotoLab Studios. All rights reserved.</p>
           </div>
 
           <div className="mb-4">
             <h3 className="font-medium text-gray-700 mb-2">Credit Line</h3>
-            <p className="text-gray-900">
-              PhotoLab Studios - Professional Photography
-            </p>
+            <p className="text-gray-900">PhotoLab Studios - Professional Photography</p>
           </div>
 
           <div className="mt-6 space-y-3">

@@ -1,4 +1,4 @@
-import { QuizJsonLd } from "next-seo";
+import { QuizJsonLd } from '@opensourceframework/next-seo';
 
 export default function QuizPage() {
   return (
@@ -6,16 +6,16 @@ export default function QuizPage() {
       <QuizJsonLd
         questions={[
           {
-            question: "What is the capital of France?",
-            answer: "Paris",
+            question: 'What is the capital of France?',
+            answer: 'Paris',
           },
           {
-            question: "What is 2 + 2?",
-            answer: "4",
+            question: 'What is 2 + 2?',
+            answer: '4',
           },
           {
-            question: "Who wrote Romeo and Juliet?",
-            answer: "William Shakespeare",
+            question: 'Who wrote Romeo and Juliet?',
+            answer: 'William Shakespeare',
           },
         ]}
       />
