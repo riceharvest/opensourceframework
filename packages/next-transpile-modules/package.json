@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-transpile-modules",
-  "version": "10.0.2",
+  "version": "10.0.3",
   "license": "MIT",
   "author": "OpenSource Framework Contributors (fork), Original: Unknown",
   "description": "Next.js plugin to transpile code from node_modules",

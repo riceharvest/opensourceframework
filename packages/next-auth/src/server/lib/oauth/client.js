@@ -10,9 +10,44 @@ import { sign as jwtSign } from "jsonwebtoken"
  */
 export default function oAuthClient(provider) {
   if (provider.version?.startsWith("2.")) {
+    let _useAuthHeader = true
+
     return {
-      getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
-      get: (accessToken, results) => getOAuth2(provider, accessToken, results)
+      /** Build the OAuth2 authorization URL with all required query params */
+      getAuthorizeUrl(params = {}) {
+        const url = new URL(provider.authorizationUrl)
+        Object.entries(params).forEach(([key, value]) => {
+          if (value != null) url.searchParams.set(key, value)
+        })
+        return url.toString()
+      },
+
+      /** Store whether to send Authorization header on GET requests (compat shim) */
+      useAuthorizationHeaderforGET(use) {
+        _useAuthHeader = use !== false
+      },
+
+      /**
+       * Exchange authorization code for access token.
+       * Accepts both legacy (code, provider, codeVerifier) and new (code, codeVerifier) signatures.
+       */
+      getOAuthAccessToken(code, arg2, arg3) {
+        // Detect legacy signature: (code, provider, codeVerifier)
+        const codeVerifier = (arg2 && typeof arg2 === 'object' && 'clientId' in arg2) ? arg3 : arg2
+        return getOAuth2AccessToken(code, provider, codeVerifier)
+      },
+
+      /**
+       * Fetch profile data using the access token.
+       * Accepts both legacy (provider, accessToken, results) and new (accessToken, results) signatures.
+       */
+      get(arg1, arg2, arg3) {
+        // Detect legacy signature: (provider, accessToken, results)
+        if (arg1 && typeof arg1 === 'object' && 'clientId' in arg1) {
+          return getOAuth2(provider, arg2, arg3)
+        }
+        return getOAuth2(provider, arg1, arg2)
+      }
     }
   }
 
