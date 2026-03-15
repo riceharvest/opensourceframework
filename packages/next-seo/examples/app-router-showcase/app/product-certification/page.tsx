@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductCertificationPage() {
   return (
@@ -8,9 +8,9 @@ export default function ProductCertificationPage() {
         description="A++ rated energy efficient refrigerator with advanced cooling technology and smart features"
         url="https://example.com/products/energy-efficient-fridge"
         image={[
-          "https://example.com/fridge-1x1.jpg",
-          "https://example.com/fridge-4x3.jpg",
-          "https://example.com/fridge-16x9.jpg",
+          'https://example.com/fridge-1x1.jpg',
+          'https://example.com/fridge-4x3.jpg',
+          'https://example.com/fridge-16x9.jpg',
         ]}
         sku="FRIDGE-EE-500L"
         mpn="REF500EE"
@@ -19,30 +19,30 @@ export default function ProductCertificationPage() {
         hasCertification={[
           {
             issuedBy: {
-              name: "European_Commission",
+              name: 'European_Commission',
             },
-            name: "EPREL",
-            url: "https://eprel.ec.europa.eu/screen/product/refrigerators/123456",
-            certificationIdentification: "123456",
+            name: 'EPREL',
+            url: 'https://eprel.ec.europa.eu/screen/product/refrigerators/123456',
+            certificationIdentification: '123456',
             certificationRating: {
-              ratingValue: "A++",
-              bestRating: "A+++",
-              worstRating: "G",
+              ratingValue: 'A++',
+              bestRating: 'A+++',
+              worstRating: 'G',
             },
           },
           {
             issuedBy: {
-              name: "ENERGY STAR",
+              name: 'ENERGY STAR',
             },
-            name: "ENERGY_STAR_Certified",
-            url: "https://www.energystar.gov/products/123456",
+            name: 'ENERGY_STAR_Certified',
+            url: 'https://www.energystar.gov/products/123456',
           },
         ]}
         offers={{
           price: 899.0,
-          priceCurrency: "EUR",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
+          priceCurrency: 'EUR',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
         }}
         aggregateRating={{
           ratingValue: 4.5,
@@ -59,9 +59,7 @@ export default function ProductCertificationPage() {
             <li>/</li>
             <li>Refrigerators</li>
             <li>/</li>
-            <li className="font-semibold text-gray-900">
-              Energy Efficient Refrigerator - 500L
-            </li>
+            <li className="font-semibold text-gray-900">Energy Efficient Refrigerator - 500L</li>
           </ol>
         </nav>
 
@@ -84,14 +82,10 @@ export default function ProductCertificationPage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Energy Efficient Refrigerator - 500L
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Energy Efficient Refrigerator - 500L</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★☆"}</div>
-                <span className="text-gray-600">
-                  4.5 out of 5 (234 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★☆'}</div>
+                <span className="text-gray-600">4.5 out of 5 (234 reviews)</span>
               </div>
               <p className="text-gray-600">by EcoAppliances</p>
             </div>
@@ -102,15 +96,11 @@ export default function ProductCertificationPage() {
                 <span className="text-sm text-gray-500">EUR</span>
               </div>
               <p className="text-green-600 font-medium">✓ In Stock</p>
-              <p className="text-sm text-gray-500">
-                Price valid until Dec 31, 2024
-              </p>
+              <p className="text-sm text-gray-500">Price valid until Dec 31, 2024</p>
             </div>
 
             <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-4 space-y-3">
-              <h3 className="font-semibold text-green-800">
-                Energy Certifications
-              </h3>
+              <h3 className="font-semibold text-green-800">Energy Certifications</h3>
               <div className="space-y-2">
                 <div className="flex items-center justify-between bg-white rounded p-2">
                   <div className="flex items-center gap-3">
@@ -133,9 +123,7 @@ export default function ProductCertificationPage() {
                     </div>
                     <div>
                       <div className="font-medium">ENERGY STAR®</div>
-                      <div className="text-xs text-gray-600">
-                        Most Efficient 2024
-                      </div>
+                      <div className="text-xs text-gray-600">Most Efficient 2024</div>
                     </div>
                   </div>
                   <a href="#" className="text-blue-600 text-sm hover:underline">
@@ -146,12 +134,10 @@ export default function ProductCertificationPage() {
             </div>
 
             <div className="border-l-4 border-green-500 pl-4 bg-green-50 p-3 rounded">
-              <p className="font-semibold text-green-800">
-                Save on Energy Bills
-              </p>
+              <p className="font-semibold text-green-800">Save on Energy Bills</p>
               <p className="text-sm text-green-700">
-                This A++ rated appliance uses 40% less energy than standard
-                models, saving approximately €120 per year
+                This A++ rated appliance uses 40% less energy than standard models, saving
+                approximately €120 per year
               </p>
             </div>
 
@@ -239,14 +225,13 @@ export default function ProductCertificationPage() {
         <div className="mt-8 bg-blue-50 rounded-lg p-6">
           <h3 className="font-semibold mb-3">About Energy Labels</h3>
           <p className="text-sm text-gray-700 mb-3">
-            The EU energy label provides clear and comparable information about
-            the energy consumption of appliances. The scale ranges from A+++
-            (most efficient) to G (least efficient).
+            The EU energy label provides clear and comparable information about the energy
+            consumption of appliances. The scale ranges from A+++ (most efficient) to G (least
+            efficient).
           </p>
           <p className="text-sm text-gray-700">
-            The EPREL (European Product Registry for Energy Labelling) number
-            allows you to access detailed product information in the official EU
-            database.
+            The EPREL (European Product Registry for Energy Labelling) number allows you to access
+            detailed product information in the official EU database.
           </p>
         </div>
       </div>

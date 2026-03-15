@@ -2,9 +2,10 @@ import type { IncomingMessage, ServerResponse } from "http";
 import type {
   GetServerSideProps,
   GetServerSidePropsResult,
+  GetServerSidePropsContext,
   NextPage,
 } from "next";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 import Head from "next/head";
 import styles from "../../styles/styles.module.css";
 import { getUsers } from "../../utils/api";
@@ -48,7 +49,7 @@ export default UserPage;
 const gsspRouter = createRouter<
   IncomingMessage & {
     body?: Record<string, string | number>;
-    params?: Record<string, string>;
+    params?: Record<string, string | string[] | undefined>;
   },
   ServerResponse
 >().get((req): GetServerSidePropsResult<PageProps> => {
@@ -70,10 +71,12 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
   req,
   res,
   params,
-}) => {
-  // @ts-ignore: attach params to req.params
-  req.params = params;
-  return gsspRouter.run(req, res) as Promise<
+}: GetServerSidePropsContext) => {
+  const requestWithParams = req as IncomingMessage & {
+    params?: Record<string, string | string[] | undefined>;
+  };
+  requestWithParams.params = params;
+  return gsspRouter.run(requestWithParams, res) as Promise<
     GetServerSidePropsResult<PageProps>
   >;
 };

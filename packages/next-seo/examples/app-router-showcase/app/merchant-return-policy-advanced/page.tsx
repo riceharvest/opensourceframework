@@ -1,48 +1,38 @@
-import { MerchantReturnPolicyJsonLd } from "next-seo";
+import { MerchantReturnPolicyJsonLd } from '@opensourceframework/next-seo';
 
 export default function MerchantReturnPolicyAdvancedPage() {
   return (
     <div className="container mx-auto p-8">
       <MerchantReturnPolicyJsonLd
-        applicableCountry={["DE", "AT", "CH"]}
+        applicableCountry={['DE', 'AT', 'CH']}
         returnPolicyCountry="IE"
         returnPolicyCategory="https://schema.org/MerchantReturnFiniteReturnWindow"
         merchantReturnDays={60}
-        itemCondition={[
-          "https://schema.org/NewCondition",
-          "https://schema.org/DamagedCondition",
-        ]}
-        returnMethod={[
-          "https://schema.org/ReturnByMail",
-          "https://schema.org/ReturnInStore",
-        ]}
+        itemCondition={['https://schema.org/NewCondition', 'https://schema.org/DamagedCondition']}
+        returnMethod={['https://schema.org/ReturnByMail', 'https://schema.org/ReturnInStore']}
         returnFees="https://schema.org/ReturnShippingFees"
         returnShippingFeesAmount={{
           value: 2.99,
-          currency: "EUR",
+          currency: 'EUR',
         }}
-        refundType={[
-          "https://schema.org/FullRefund",
-          "https://schema.org/ExchangeRefund",
-        ]}
+        refundType={['https://schema.org/FullRefund', 'https://schema.org/ExchangeRefund']}
         restockingFee={{
           value: 10,
-          currency: "EUR",
+          currency: 'EUR',
         }}
         returnLabelSource="https://schema.org/ReturnLabelInBox"
         customerRemorseReturnFees="https://schema.org/ReturnShippingFees"
         customerRemorseReturnShippingFeesAmount={{
           value: 5.99,
-          currency: "EUR",
+          currency: 'EUR',
         }}
         customerRemorseReturnLabelSource="https://schema.org/ReturnLabelDownloadAndPrint"
         itemDefectReturnFees="https://schema.org/FreeReturn"
         itemDefectReturnLabelSource="https://schema.org/ReturnLabelInBox"
         returnPolicySeasonalOverride={{
-          startDate: "2025-12-01",
-          endDate: "2025-01-05",
-          returnPolicyCategory:
-            "https://schema.org/MerchantReturnFiniteReturnWindow",
+          startDate: '2025-12-01',
+          endDate: '2025-01-05',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
           merchantReturnDays: 30,
         }}
       />
@@ -51,9 +41,7 @@ export default function MerchantReturnPolicyAdvancedPage() {
         <h1 className="text-4xl font-bold mb-6">Advanced Return Policy</h1>
 
         <section className="mb-8 bg-green-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">
-            Standard Policy (60 Days)
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Standard Policy (60 Days)</h2>
           <ul className="space-y-2 text-gray-700">
             <li>✓ 60-day return window for most items</li>
             <li>✓ Return by mail or in-store</li>
@@ -65,9 +53,7 @@ export default function MerchantReturnPolicyAdvancedPage() {
         </section>
 
         <section className="mb-8 bg-yellow-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">
-            Holiday Season Override
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Holiday Season Override</h2>
           <p className="font-medium mb-2">December 1 - January 5</p>
           <ul className="space-y-2 text-gray-700">
             <li>⚠️ Reduced to 30-day return window</li>
@@ -79,9 +65,7 @@ export default function MerchantReturnPolicyAdvancedPage() {
           <h2 className="text-2xl font-semibold mb-4">Return Conditions</h2>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">
-              Customer Remorse Returns
-            </h3>
+            <h3 className="text-lg font-semibold mb-2">Customer Remorse Returns</h3>
             <ul className="pl-6 space-y-1 text-gray-700">
               <li>• Return shipping fee: €5.99</li>
               <li>• Download and print return label</li>
@@ -90,9 +74,7 @@ export default function MerchantReturnPolicyAdvancedPage() {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold mb-2">
-              Defective Item Returns
-            </h3>
+            <h3 className="text-lg font-semibold mb-2">Defective Item Returns</h3>
             <ul className="pl-6 space-y-1 text-gray-700">
               <li>• Free return shipping</li>
               <li>• Return label included in box</li>
@@ -103,9 +85,7 @@ export default function MerchantReturnPolicyAdvancedPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
-            Acceptable Item Conditions
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4">Acceptable Item Conditions</h2>
           <ul className="pl-6 space-y-1 text-gray-700">
             <li>• New, unopened items</li>
             <li>• Damaged or defective items</li>
@@ -122,9 +102,8 @@ export default function MerchantReturnPolicyAdvancedPage() {
 
         <section className="text-sm text-gray-600">
           <p>
-            This example demonstrates an advanced merchant return policy with
-            seasonal overrides, different fees for customer remorse vs defects,
-            and multiple return methods.
+            This example demonstrates an advanced merchant return policy with seasonal overrides,
+            different fees for customer remorse vs defects, and multiple return methods.
           </p>
         </section>
       </div>

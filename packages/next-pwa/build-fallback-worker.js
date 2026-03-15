@@ -1,11 +1,10 @@
-// @ts-nocheck
 'use strict'
 
 const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const cleanMatchingFiles = require('./cleanup-assets')
 
 const getFallbackEnvs = ({ fallbacks, basedir, id, pageExtensions }) => {
   let { document, data } = fallbacks
@@ -61,6 +60,7 @@ const buildFallbackWorker = ({ id, fallbacks, basedir, destdir, minify, pageExte
 
   const name = `fallback-${id}.js`
   const fallbackJs = path.join(__dirname, `fallback.js`)
+  cleanMatchingFiles(destdir, ['fallback-*.js', 'fallback-*.js.map'])
 
   webpack({
     mode: 'none',
@@ -122,9 +122,6 @@ const buildFallbackWorker = ({ id, fallbacks, basedir, destdir, minify, pageExte
       filename: name
     },
     plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [path.join(destdir, 'fallback-*.js'), path.join(destdir, 'fallback-*.js.map')]
-      }),
       new webpack.EnvironmentPlugin(envs)
     ],
     optimization: minify

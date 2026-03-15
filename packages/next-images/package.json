@@ -1,28 +1,14 @@
 {
   "name": "@opensourceframework/next-images",
   "version": "1.9.1",
-  "description": "Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. Fork of next-images with TypeScript support.",
+  "description": "Compatibility-first image import plugin for Next.js applications",
   "keywords": [
     "next.js",
-    "nextjs",
     "images",
-    "image-loader",
-    "file-loader",
-    "url-loader",
-    "webpack",
-    "svg",
-    "png",
-    "jpg",
-    "base64"
+    "image-optimization",
+    "nextjs"
   ],
-  "author": "OpenSource Framework Contributors (original by Aref Aslani / twopluszero)",
-  "contributors": [
-    {
-      "name": "Aref Aslani (twopluszero)",
-      "url": "https://github.com/twopluszero",
-      "role": "Original author"
-    }
-  ],
+  "author": "OpenSource Framework Contributors (fork), Original: Aref Aslani",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -33,9 +19,10 @@
       },
       "require": {
         "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
+        "default": "./index.cjs"
       }
     },
+    "./package.json": "./package.json",
     "./global.d.ts": "./src/global.d.ts"
   },
   "typesVersions": {
@@ -45,11 +32,12 @@
       ]
     }
   },
-  "main": "./dist/index.cjs",
+  "main": "./index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "index.cjs",
     "src/global.d.ts",
     "README.md",
     "CHANGELOG.md",
@@ -59,33 +47,26 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint src/",
+    "lint": "eslint . --ignore-pattern examples",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist coverage node_modules"
   },
-  "dependencies": {
-    "file-loader": "^6.2.0",
-    "url-loader": "^4.1.0"
-  },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^4.0.18"
+    "eslint-plugin-jest": "^29.15.0",
+    "next": "^16.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^2.1.9",
+    "vitest": "^2.1.9"
   },
   "peerDependencies": {
-    "webpack": "^4.0.0 || ^5.0.0"
-  },
-  "peerDependenciesMeta": {
-    "webpack": {
-      "optional": true
-    }
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "next": ">=12.0.0 <22.0.0 || ^16.0.0",
+    "react": ">=18.2.0 <22.0.0 || ^19.0.0",
+    "react-dom": ">=18.2.0 <22.0.0 || ^19.0.0"
   },
   "repository": {
     "type": "git",
@@ -96,11 +77,14 @@
     "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-images"
   },
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-images#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "funding": {
-    "type": "github",
-    "url": "https://github.com/sponsors/opensourceframework"
+  "dependencies": {
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.0"
   }
 }

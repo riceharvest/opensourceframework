@@ -129,7 +129,7 @@ If you do override `rowRenderer` the easiest way is to decorate the default impl
 
 ```jsx
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
-import {defaultTableRowRenderer, Table} from 'react-virtualized';
+import {defaultTableRowRenderer, Table} from '@opensourceframework/react-virtualized';
 
 const SortableTable = SortableContainer(Table);
 const SortableTableRowRenderer = SortableElement(defaultTableRowRenderer);
@@ -168,7 +168,7 @@ Below is a very basic `Table` example. This table has only 2 columns, each conta
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Column, Table} from 'react-virtualized';
+import {Column, Table} from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // Table data as an array of objects

@@ -19,7 +19,7 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": [
+  "exclude": ["examples", 
     "node_modules"
   ],
   "include": [

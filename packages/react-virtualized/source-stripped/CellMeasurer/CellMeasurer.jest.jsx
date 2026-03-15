@@ -12,8 +12,8 @@ function mockClientWidthAndHeight(
   {height, width},
   object = HTMLElement.prototype,
 ) {
-  const heightFn = jest.fn().mockReturnValue(height);
-  const widthFn = jest.fn().mockReturnValue(width);
+  const heightFn = vi.fn().mockReturnValue(height);
+  const widthFn = vi.fn().mockReturnValue(width);
 
   Object.defineProperty(object, 'offsetHeight', {
     configurable: true,
@@ -31,7 +31,7 @@ function mockClientWidthAndHeight(
   };
 }
 
-function createParent({cache, invalidateCellSizeAfterRender = jest.fn()} = {}) {
+function createParent({cache, invalidateCellSizeAfterRender = vi.fn()} = {}) {
   return {
     invalidateCellSizeAfterRender,
     props: {
@@ -223,7 +223,7 @@ describe('CellMeasurer', () => {
       fixedWidth: true,
     });
 
-    const children = jest.fn().mockReturnValue(<div />);
+    const children = vi.fn().mockReturnValue(<div />);
 
     renderHelper({cache, children});
 
@@ -235,7 +235,7 @@ describe('CellMeasurer', () => {
   });
 
   it('should still update cache without a parent Grid', () => {
-    jest.spyOn(console, 'warn');
+    vi.spyOn(console, 'warn');
 
     mockClientWidthAndHeight({height: 20, width: 100});
 
@@ -256,7 +256,7 @@ describe('CellMeasurer', () => {
       fixedWidth: true,
     });
     const parent = createParent({cache});
-    const child = jest
+    const child = vi
       .fn()
       .mockReturnValue(<div style={{width: 100, height: 30}} />);
 
@@ -303,7 +303,7 @@ describe('CellMeasurer', () => {
       fixedHeight: true,
     });
     const parent = createParent({cache});
-    const child = jest
+    const child = vi
       .fn()
       .mockReturnValue(<div style={{width: 100, height: 30}} />);
 

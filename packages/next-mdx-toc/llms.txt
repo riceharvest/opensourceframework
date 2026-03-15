@@ -1,0 +1,22 @@
+# @opensourceframework/next-mdx-toc - AI Summary
+
+Table of contents helpers for MDX pages, designed to pair with @opensourceframework/next-mdx. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want to add MDX navigation with minimal app changes.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-mdx-toc
+# or
+pnpm add @opensourceframework/next-mdx-toc
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-mdx-toc#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-mdx-toc

@@ -1,4 +1,4 @@
-import { RecipeJsonLd } from "next-seo";
+import { RecipeJsonLd } from '@opensourceframework/next-seo';
 
 export default function RecipePage() {
   return (
@@ -18,26 +18,26 @@ export default function RecipePage() {
         recipeCuisine="American"
         keywords="cookies, chocolate chip, dessert, baking"
         recipeIngredient={[
-          "2 1/4 cups all-purpose flour",
-          "1 teaspoon baking soda",
-          "1 teaspoon salt",
-          "1 cup (2 sticks) butter, softened",
-          "3/4 cup granulated sugar",
-          "3/4 cup packed brown sugar",
-          "1 teaspoon vanilla extract",
-          "2 large eggs",
-          "2 cups chocolate chips",
+          '2 1/4 cups all-purpose flour',
+          '1 teaspoon baking soda',
+          '1 teaspoon salt',
+          '1 cup (2 sticks) butter, softened',
+          '3/4 cup granulated sugar',
+          '3/4 cup packed brown sugar',
+          '1 teaspoon vanilla extract',
+          '2 large eggs',
+          '2 cups chocolate chips',
         ]}
         recipeInstructions={[
-          "Preheat oven to 375°F",
-          "Combine flour, baking soda and salt in small bowl",
-          "Beat butter, granulated sugar, brown sugar and vanilla extract in large mixer bowl until creamy",
-          "Add eggs, one at a time, beating well after each addition",
-          "Gradually beat in flour mixture",
-          "Stir in chocolate chips",
-          "Drop by rounded tablespoon onto ungreased baking sheets",
-          "Bake for 9 to 11 minutes or until golden brown",
-          "Cool on baking sheets for 2 minutes; remove to wire racks to cool completely",
+          'Preheat oven to 375°F',
+          'Combine flour, baking soda and salt in small bowl',
+          'Beat butter, granulated sugar, brown sugar and vanilla extract in large mixer bowl until creamy',
+          'Add eggs, one at a time, beating well after each addition',
+          'Gradually beat in flour mixture',
+          'Stir in chocolate chips',
+          'Drop by rounded tablespoon onto ungreased baking sheets',
+          'Bake for 9 to 11 minutes or until golden brown',
+          'Cool on baking sheets for 2 minutes; remove to wire racks to cool completely',
         ]}
       />
 
@@ -46,9 +46,8 @@ export default function RecipePage() {
         <p className="text-gray-600">By Sarah Baker | January 20, 2024</p>
 
         <p>
-          There's nothing quite like a warm, homemade chocolate chip cookie
-          fresh from the oven. This recipe produces cookies with perfectly
-          crispy edges and soft, chewy centers.
+          There's nothing quite like a warm, homemade chocolate chip cookie fresh from the oven.
+          This recipe produces cookies with perfectly crispy edges and soft, chewy centers.
         </p>
 
         <h2>Ingredients</h2>
@@ -68,10 +67,7 @@ export default function RecipePage() {
         <ol>
           <li>Preheat oven to 375°F</li>
           <li>Combine flour, baking soda and salt in small bowl</li>
-          <li>
-            Beat butter, granulated sugar, brown sugar and vanilla extract until
-            creamy
-          </li>
+          <li>Beat butter, granulated sugar, brown sugar and vanilla extract until creamy</li>
           <li>Add eggs, one at a time, beating well after each addition</li>
           <li>Gradually beat in flour mixture</li>
           <li>Stir in chocolate chips</li>
@@ -83,9 +79,8 @@ export default function RecipePage() {
         <div className="bg-gray-100 p-4 rounded-lg my-8">
           <h3>Recipe Notes</h3>
           <p>
-            For chewier cookies, slightly underbake them. For crispier cookies,
-            bake for an additional 1-2 minutes until edges are deep golden
-            brown.
+            For chewier cookies, slightly underbake them. For crispier cookies, bake for an
+            additional 1-2 minutes until edges are deep golden brown.
           </p>
         </div>
       </article>

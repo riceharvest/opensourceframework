@@ -1,4 +1,4 @@
-import { MovieCarouselJsonLd } from "next-seo";
+import { MovieCarouselJsonLd } from '@opensourceframework/next-seo';
 
 export default function MovieCarouselAdvancedPage() {
   return (
@@ -6,31 +6,31 @@ export default function MovieCarouselAdvancedPage() {
       <MovieCarouselJsonLd
         movies={[
           {
-            name: "Everything Everywhere All at Once",
-            url: "https://example.com/movies/everything-everywhere",
+            name: 'Everything Everywhere All at Once',
+            url: 'https://example.com/movies/everything-everywhere',
             image: [
-              "https://example.com/photos/1x1/eeaao.jpg",
+              'https://example.com/photos/1x1/eeaao.jpg',
               {
-                url: "https://example.com/photos/4x3/eeaao.jpg",
+                url: 'https://example.com/photos/4x3/eeaao.jpg',
                 width: 1200,
                 height: 900,
               },
               {
-                url: "https://example.com/photos/16x9/eeaao.jpg",
+                url: 'https://example.com/photos/16x9/eeaao.jpg',
                 width: 1920,
                 height: 1080,
               },
               {
-                url: "https://example.com/photos/6x9/eeaao.jpg",
+                url: 'https://example.com/photos/6x9/eeaao.jpg',
                 width: 600,
                 height: 900,
-                caption: "Official movie poster",
+                caption: 'Official movie poster',
               },
             ],
-            dateCreated: "2024-03-25",
+            dateCreated: '2024-03-25',
             director: {
-              name: "Daniel Kwan and Daniel Scheinert",
-              url: "https://example.com/directors/daniels",
+              name: 'Daniel Kwan and Daniel Scheinert',
+              url: 'https://example.com/directors/daniels',
             },
             review: {
               reviewRating: {
@@ -39,12 +39,12 @@ export default function MovieCarouselAdvancedPage() {
                 worstRating: 1,
               },
               author: {
-                name: "Sarah Johnson",
-                url: "https://example.com/reviewers/sarah-johnson",
+                name: 'Sarah Johnson',
+                url: 'https://example.com/reviewers/sarah-johnson',
               },
               reviewBody:
-                "A mind-bending masterpiece that explores the multiverse with heart, humor, and incredible creativity. The performances are outstanding.",
-              datePublished: "2024-03-30",
+                'A mind-bending masterpiece that explores the multiverse with heart, humor, and incredible creativity. The performances are outstanding.',
+              datePublished: '2024-03-30',
             },
             aggregateRating: {
               ratingValue: 95,
@@ -55,25 +55,25 @@ export default function MovieCarouselAdvancedPage() {
             },
           },
           {
-            name: "The Banshees of Inisherin",
-            url: "https://example.com/movies/banshees-inisherin",
-            image: "https://example.com/photos/6x9/banshees.jpg",
-            dateCreated: "2024-10-21",
+            name: 'The Banshees of Inisherin',
+            url: 'https://example.com/movies/banshees-inisherin',
+            image: 'https://example.com/photos/6x9/banshees.jpg',
+            dateCreated: '2024-10-21',
             director: {
-              name: "Martin McDonagh",
-              url: "https://example.com/directors/martin-mcdonagh",
-              familyName: "McDonagh",
-              givenName: "Martin",
+              name: 'Martin McDonagh',
+              url: 'https://example.com/directors/martin-mcdonagh',
+              familyName: 'McDonagh',
+              givenName: 'Martin',
             },
             review: {
               reviewRating: {
                 ratingValue: 4.5,
                 bestRating: 5,
               },
-              author: "Michael Chen",
+              author: 'Michael Chen',
               reviewBody:
                 "A darkly comic tale of friendship's end on a remote Irish island. Colin Farrell and Brendan Gleeson deliver career-best performances.",
-              datePublished: "2024-10-25",
+              datePublished: '2024-10-25',
             },
             aggregateRating: {
               ratingValue: 87,
@@ -82,20 +82,20 @@ export default function MovieCarouselAdvancedPage() {
             },
           },
           {
-            name: "Top Gun: Maverick & Special IMAX Edition",
-            url: "https://example.com/movies/top-gun-maverick",
+            name: 'Top Gun: Maverick & Special IMAX Edition',
+            url: 'https://example.com/movies/top-gun-maverick',
             image: [
-              "https://example.com/photos/6x9/top-gun-poster.jpg",
-              "https://example.com/photos/16x9/top-gun-hero.jpg",
+              'https://example.com/photos/6x9/top-gun-poster.jpg',
+              'https://example.com/photos/16x9/top-gun-hero.jpg',
             ],
-            dateCreated: "2024-05-27",
-            director: "Joseph Kosinski",
+            dateCreated: '2024-05-27',
+            director: 'Joseph Kosinski',
             review: {
               reviewRating: {
                 ratingValue: 4,
               },
               author: {
-                name: "Alex Rivera",
+                name: 'Alex Rivera',
               },
             },
             aggregateRating: {
@@ -112,8 +112,8 @@ export default function MovieCarouselAdvancedPage() {
       <div className="prose lg:prose-xl">
         <h1>Movie Carousel - Advanced Features</h1>
         <p>
-          This page demonstrates all available features of the
-          MovieCarouselJsonLd component, including:
+          This page demonstrates all available features of the MovieCarouselJsonLd component,
+          including:
         </p>
         <ul>
           <li>Multiple image formats with ImageObject details</li>
@@ -135,12 +135,9 @@ export default function MovieCarouselAdvancedPage() {
               <strong>Rating:</strong> 95/100 (125,432 ratings, 8,956 reviews)
             </p>
             <blockquote className="italic border-l-4 pl-4">
-              "A mind-bending masterpiece that explores the multiverse with
-              heart, humor, and incredible creativity. The performances are
-              outstanding."
-              <footer className="text-sm text-gray-600">
-                — Sarah Johnson, March 30, 2024
-              </footer>
+              "A mind-bending masterpiece that explores the multiverse with heart, humor, and
+              incredible creativity. The performances are outstanding."
+              <footer className="text-sm text-gray-600">— Sarah Johnson, March 30, 2024</footer>
             </blockquote>
           </div>
 
@@ -152,12 +149,9 @@ export default function MovieCarouselAdvancedPage() {
               <strong>Rating:</strong> 87/100 (45,678 ratings)
             </p>
             <blockquote className="italic border-l-4 pl-4">
-              "A darkly comic tale of friendship's end on a remote Irish island.
-              Colin Farrell and Brendan Gleeson deliver career-best
-              performances."
-              <footer className="text-sm text-gray-600">
-                — Michael Chen, October 25, 2024
-              </footer>
+              "A darkly comic tale of friendship's end on a remote Irish island. Colin Farrell and
+              Brendan Gleeson deliver career-best performances."
+              <footer className="text-sm text-gray-600">— Michael Chen, October 25, 2024</footer>
             </blockquote>
           </div>
 
@@ -169,8 +163,8 @@ export default function MovieCarouselAdvancedPage() {
               <strong>Rating:</strong> 92/100 (234,567 ratings)
             </p>
             <p className="italic">
-              After more than 30 years of service, Pete "Maverick" Mitchell
-              continues to push the envelope as a top naval aviator.
+              After more than 30 years of service, Pete "Maverick" Mitchell continues to push the
+              envelope as a top naval aviator.
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { getUsers } from "@/utils/api";
 import { logRequest } from "@/utils/middleware";
-import { createEdgeRouter } from "next-connect";
+import { createEdgeRouter } from "@opensourceframework/next-connect";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

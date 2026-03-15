@@ -1,4 +1,4 @@
-import { OrganizationJsonLd } from "next-seo";
+import { OrganizationJsonLd } from '@opensourceframework/next-seo';
 
 export default function OrganizationPage() {
   return (
@@ -9,9 +9,9 @@ export default function OrganizationPage() {
         logo="https://www.example.com/logo.png"
         description="The example corporation is well-known for producing high-quality widgets"
         sameAs={[
-          "https://twitter.com/example",
-          "https://facebook.com/example",
-          "https://linkedin.com/company/example",
+          'https://twitter.com/example',
+          'https://facebook.com/example',
+          'https://linkedin.com/company/example',
         ]}
         telephone="+1-999-999-9999"
         email="contact@example.com"
@@ -23,9 +23,9 @@ export default function OrganizationPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            Example Corporation is dedicated to producing the highest quality
-            widgets in the industry. Since our founding, we have been committed
-            to innovation, sustainability, and customer satisfaction.
+            Example Corporation is dedicated to producing the highest quality widgets in the
+            industry. Since our founding, we have been committed to innovation, sustainability, and
+            customer satisfaction.
           </p>
         </section>
 
@@ -42,18 +42,12 @@ export default function OrganizationPage() {
           <h2 className="text-2xl font-semibold mb-4">Connect With Us</h2>
           <ul className="space-y-2">
             <li>
-              <a
-                href="https://twitter.com/example"
-                className="text-blue-600 hover:underline"
-              >
+              <a href="https://twitter.com/example" className="text-blue-600 hover:underline">
                 Twitter
               </a>
             </li>
             <li>
-              <a
-                href="https://facebook.com/example"
-                className="text-blue-600 hover:underline"
-              >
+              <a href="https://facebook.com/example" className="text-blue-600 hover:underline">
                 Facebook
               </a>
             </li>

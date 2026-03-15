@@ -4,8 +4,32 @@ import path from "path"
 import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const preserveClientDirectivePlugin = {
+  name: "preserve-client-directive",
+  renderChunk(code, chunkInfo) {
+    let nextCode = code.replace(/\/\/# sourceMappingURL=[^\n]+\.map/g, "")
+    const outputPath = chunkInfo.path.replace(/\\/g, "/")
 
-async function buildProvidersIndex() {
+    if (
+      outputPath.endsWith("/client/index.js") ||
+      outputPath.endsWith("/client/index.mjs")
+    ) {
+      return {
+        code: `"use client";\n${nextCode}`,
+        map: null,
+      }
+    }
+
+    if (nextCode !== code) {
+      return {
+        code: nextCode,
+        map: null,
+      }
+    }
+  },
+}
+
+async function _buildProvidersIndex() {
   const providersDir = path.join(__dirname, "src/providers")
 
   const files = fs
@@ -36,7 +60,18 @@ async function buildProvidersIndex() {
   console.log("[build] generated providers/index.js")
 }
 
-async function createModuleEntries() {
+const providersDir = path.join(__dirname, "src/providers")
+const providerEntries = Object.fromEntries(
+  fs
+    .readdirSync(providersDir, "utf8")
+    .filter((file) => file !== "index.js" && file.endsWith(".js"))
+    .map((file) => [
+      `providers/${path.basename(file, ".js")}`,
+      path.join("src/providers", file),
+    ]),
+)
+
+async function _createModuleEntries() {
   const entries = {
     "index.js": 'module.exports = require("./dist/server").default\n',
     "client.js": 'module.exports = require("./dist/client").default\n',
@@ -64,13 +99,16 @@ export default defineConfig({
     "adapters/typeorm": "src/adapters/typeorm.js",
     "client/index": "src/client/index.js",
     "providers/index": "src/providers/index.js",
+    ...providerEntries,
   },
   outDir: "dist",
   format: ["cjs", "esm"],
   dts: false,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false,
   clean: true,
+  silent: true,
+  plugins: [preserveClientDirectivePlugin],
   loader: {
     ".js": "jsx",
   },
@@ -89,7 +127,9 @@ export default defineConfig({
     "preact",
     "preact-render-to-string",
     "querystring",
+    "typeorm",
+    "mongodb",
   ],
   ignoreAnnotations: true,
-  treeshake: true,
+  treeshake: false,
 })

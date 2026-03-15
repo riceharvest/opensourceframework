@@ -12,7 +12,6 @@ const codeMirrorOptions = {
   theme: 'dracula',
 };
 
-// @TODO Clean up this class; it's pretty hacky.
 export default class Wizard extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,6 @@ export default class Wizard extends React.Component {
     };
   }
 
-  // TODO Remove this key hack once JedWatson/react-codemirror/issues/106 is fixed
   updateState = obj => this.setState(state => ({...obj, key: state.key + 1}));
 
   render() {

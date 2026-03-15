@@ -17,7 +17,7 @@ This guide shows you how to create your own structured data components using nex
 Create a custom JSON-LD component in just a few lines:
 
 ```tsx
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from "@opensourceframework/next-seo";
 
 export function PodcastEpisodeJsonLd({ name, author, duration, url }) {
   const data = {
@@ -48,7 +48,7 @@ export function PodcastEpisodeJsonLd({ name, author, duration, url }) {
 The `JsonLdScript` component is the foundation for rendering structured data:
 
 ```tsx
-import { JsonLdScript } from "next-seo";
+import { JsonLdScript } from "@opensourceframework/next-seo";
 
 <JsonLdScript
   data={yourStructuredData}
@@ -74,7 +74,7 @@ author="John Doe"
 Processors are functions that transform flexible inputs into properly typed Schema.org objects:
 
 ```tsx
-import { processors } from "next-seo";
+import { processors } from "@opensourceframework/next-seo";
 
 // Use built-in processors for common types
 const author = processors.processAuthor("John Doe");
@@ -89,7 +89,7 @@ Next SEO provides 60+ processors for common Schema.org types:
 ### People & Organizations
 
 ```tsx
-import { processors } from "next-seo";
+import { processors } from "@opensourceframework/next-seo";
 
 // Flexible author input
 processors.processAuthor("Jane Doe"); // → Person
@@ -166,7 +166,7 @@ processors.processMerchantReturnPolicy({
 Create processors for your specific needs:
 
 ```tsx
-import { processors } from "next-seo";
+import { processors } from "@opensourceframework/next-seo";
 
 // Custom processor for a podcast host
 function processHost(host: string | { name: string; bio?: string }) {
@@ -426,7 +426,7 @@ export function ServiceJsonLd({ ... }) { ... }
 ### 1. Podcast Series with Episodes
 
 ```tsx
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from "@opensourceframework/next-seo";
 
 interface PodcastSeriesProps {
   name: string;
@@ -486,7 +486,7 @@ export function PodcastSeriesJsonLd({
 ### 2. Real Estate Listing
 
 ```tsx
-import { JsonLdScript, processors, type ImageObject } from "next-seo";
+import { JsonLdScript, processors, type ImageObject } from "@opensourceframework/next-seo";
 
 interface RealEstateListingProps {
   name: string;
@@ -541,7 +541,7 @@ export function RealEstateListingJsonLd({
 ### 3. Service with Pricing Tiers
 
 ```tsx
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from "@opensourceframework/next-seo";
 
 interface ServiceWithPricingProps {
   name: string;
@@ -605,7 +605,7 @@ export function ServiceWithPricingJsonLd({
 ### 4. Educational Course with Modules
 
 ```tsx
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from "@opensourceframework/next-seo";
 
 interface CourseWithModulesProps {
   name: string;
@@ -730,7 +730,7 @@ If you're migrating from inline JSON-LD to next-seo custom components:
 ### After (Custom Component)
 
 ```tsx
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from "@opensourceframework/next-seo";
 
 export function ServiceJsonLd({ name, provider }) {
   const data = {

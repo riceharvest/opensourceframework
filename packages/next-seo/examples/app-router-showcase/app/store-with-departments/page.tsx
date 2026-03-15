@@ -1,4 +1,4 @@
-import { LocalBusinessJsonLd } from "next-seo";
+import { LocalBusinessJsonLd } from '@opensourceframework/next-seo';
 
 export default function StoreWithDepartmentsPage() {
   return (
@@ -7,15 +7,15 @@ export default function StoreWithDepartmentsPage() {
         type="Store"
         name="MegaMart Superstore"
         address={{
-          "@type": "PostalAddress",
-          streetAddress: "789 Shopping Plaza Drive",
-          addressLocality: "Los Angeles",
-          addressRegion: "CA",
-          postalCode: "90028",
-          addressCountry: "US",
+          '@type': 'PostalAddress',
+          streetAddress: '789 Shopping Plaza Drive',
+          addressLocality: 'Los Angeles',
+          addressRegion: 'CA',
+          postalCode: '90028',
+          addressCountry: 'US',
         }}
         geo={{
-          "@type": "GeoCoordinates",
+          '@type': 'GeoCoordinates',
           latitude: 34.1022,
           longitude: -118.3281,
         }}
@@ -24,112 +24,83 @@ export default function StoreWithDepartmentsPage() {
         image="https://example.com/images/megamart-storefront.jpg"
         priceRange="$$"
         openingHoursSpecification={{
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-          ],
-          opens: "08:00",
-          closes: "22:00",
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '08:00',
+          closes: '22:00',
         }}
         department={[
           {
-            type: "Pharmacy",
-            name: "MegaMart Pharmacy",
-            address: "789 Shopping Plaza Drive, Los Angeles, CA 90028",
-            telephone: "+13235554322",
-            priceRange: "$",
+            type: 'Pharmacy',
+            name: 'MegaMart Pharmacy',
+            address: '789 Shopping Plaza Drive, Los Angeles, CA 90028',
+            telephone: '+13235554322',
+            priceRange: '$',
             openingHoursSpecification: [
               {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                ],
-                opens: "09:00",
-                closes: "20:00",
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '09:00',
+                closes: '20:00',
               },
               {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: "Saturday",
-                opens: "09:00",
-                closes: "18:00",
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: 'Saturday',
+                opens: '09:00',
+                closes: '18:00',
               },
               {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: "Sunday",
-                opens: "10:00",
-                closes: "17:00",
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: 'Sunday',
+                opens: '10:00',
+                closes: '17:00',
               },
             ],
             description:
-              "Full-service pharmacy with prescription services and health consultations",
+              'Full-service pharmacy with prescription services and health consultations',
           },
           {
-            type: "AutoPartsStore",
-            name: "MegaMart Auto Center",
-            address: "789 Shopping Plaza Drive, Los Angeles, CA 90028",
-            telephone: "+13235554323",
-            priceRange: "$$",
+            type: 'AutoPartsStore',
+            name: 'MegaMart Auto Center',
+            address: '789 Shopping Plaza Drive, Los Angeles, CA 90028',
+            telephone: '+13235554323',
+            priceRange: '$$',
             openingHoursSpecification: {
-              "@type": "OpeningHoursSpecification",
-              dayOfWeek: [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ],
-              opens: "08:00",
-              closes: "20:00",
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+              opens: '08:00',
+              closes: '20:00',
             },
-            description: "Complete auto parts and accessories department",
+            description: 'Complete auto parts and accessories department',
           },
           {
-            type: "Bakery",
-            name: "MegaMart Fresh Bakery",
-            address: "789 Shopping Plaza Drive, Los Angeles, CA 90028",
-            telephone: "+13235554324",
-            priceRange: "$",
+            type: 'Bakery',
+            name: 'MegaMart Fresh Bakery',
+            address: '789 Shopping Plaza Drive, Los Angeles, CA 90028',
+            telephone: '+13235554324',
+            priceRange: '$',
             openingHoursSpecification: {
-              "@type": "OpeningHoursSpecification",
+              '@type': 'OpeningHoursSpecification',
               dayOfWeek: [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday",
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday',
               ],
-              opens: "06:00",
-              closes: "20:00",
+              opens: '06:00',
+              closes: '20:00',
             },
-            description: "Fresh baked goods made daily on-site",
+            description: 'Fresh baked goods made daily on-site',
           },
         ]}
-        sameAs={[
-          "https://www.facebook.com/megamartla",
-          "https://twitter.com/megamartla",
-        ]}
+        sameAs={['https://www.facebook.com/megamartla', 'https://twitter.com/megamartla']}
         description="MegaMart Superstore is your one-stop shop for groceries, pharmacy, auto parts, and more. Serving the Los Angeles community since 1985."
         paymentAccepted="Cash, Credit Card, Debit Card, Mobile Payment"
         currenciesAccepted="USD"
-        areaServed={[
-          "Los Angeles",
-          "Hollywood",
-          "West Hollywood",
-          "Beverly Hills",
-        ]}
+        areaServed={['Los Angeles', 'Hollywood', 'West Hollywood', 'Beverly Hills']}
         publicAccess={true}
       />
 
@@ -138,9 +109,8 @@ export default function StoreWithDepartmentsPage() {
         <p className="text-xl">Your neighborhood one-stop shop since 1985</p>
 
         <p>
-          MegaMart Superstore offers everything you need under one roof. From
-          fresh groceries to pharmacy services, auto parts to freshly baked
-          goods, we've got you covered.
+          MegaMart Superstore offers everything you need under one roof. From fresh groceries to
+          pharmacy services, auto parts to freshly baked goods, we've got you covered.
         </p>
 
         <h2>Store Hours</h2>
@@ -150,8 +120,8 @@ export default function StoreWithDepartmentsPage() {
 
         <h3>Pharmacy</h3>
         <p>
-          Our full-service pharmacy offers prescription services, vaccinations,
-          and health consultations.
+          Our full-service pharmacy offers prescription services, vaccinations, and health
+          consultations.
         </p>
         <ul>
           <li>Mon-Fri: 9:00 AM - 8:00 PM</li>
@@ -162,8 +132,7 @@ export default function StoreWithDepartmentsPage() {
 
         <h3>Auto Center</h3>
         <p>
-          Find all your automotive needs including parts, accessories, and
-          maintenance supplies.
+          Find all your automotive needs including parts, accessories, and maintenance supplies.
         </p>
         <ul>
           <li>Mon-Sat: 8:00 AM - 8:00 PM</li>
@@ -172,10 +141,7 @@ export default function StoreWithDepartmentsPage() {
         </ul>
 
         <h3>Fresh Bakery</h3>
-        <p>
-          Start your day with fresh bread, pastries, and custom cakes baked
-          daily on-site.
-        </p>
+        <p>Start your day with fresh bread, pastries, and custom cakes baked daily on-site.</p>
         <ul>
           <li>Daily: 6:00 AM - 8:00 PM</li>
           <li>Phone: (323) 555-4324</li>

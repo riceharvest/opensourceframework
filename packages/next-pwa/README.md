@@ -333,3 +333,8 @@ Here is the [document on how to write runtime caching configurations](https://de
 ## License
 
 MIT
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

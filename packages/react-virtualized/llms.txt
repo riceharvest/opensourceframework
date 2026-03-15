@@ -1,0 +1,22 @@
+# @opensourceframework/react-virtualized - AI Summary
+
+React components for efficiently rendering large, scrollable lists and tabular data. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want a safe replacement while keeping the established react-virtualized API.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/react-virtualized
+# or
+pnpm add @opensourceframework/react-virtualized
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/react-virtualized#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/react-virtualized

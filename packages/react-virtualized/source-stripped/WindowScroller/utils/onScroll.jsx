@@ -11,6 +11,11 @@ let mountedInstances = [];
 let originalBodyPointerEvents = null;
 let disablePointerEventsTimeoutId = null;
 
+const isWindow = element => element === window;
+
+const getScrollEventTargets = element =>
+  isWindow(element) ? [window, document] : [element];
+
 function enablePointerEventsIfDisabled() {
   if (disablePointerEventsTimeoutId) {
     disablePointerEventsTimeoutId = null;
@@ -47,20 +52,12 @@ function enablePointerEventsAfterDelay() {
   );
 }
 
-function isWindow(obj) {
-  if (!obj) return false;
-  return (
-    obj === window ||
-    obj.constructor.name === 'Window' ||
-    typeof obj.scrollTo === 'function'
-  );
-}
-
 function onScrollWindow(event       ) {
-  const currentTargetIsWindow = isWindow(event.currentTarget);
+  const currentTarget =
+    event.currentTarget === document ? window : event.currentTarget;
 
   if (
-    currentTargetIsWindow &&
+    currentTarget === window &&
     originalBodyPointerEvents == null &&
     document.body
   ) {
@@ -70,13 +67,7 @@ function onScrollWindow(event       ) {
   }
   enablePointerEventsAfterDelay();
   mountedInstances.forEach(instance => {
-    const scrollElement = instance.props.scrollElement;
-    const isInstanceScrollElementWindow = isWindow(scrollElement);
-
-    if (
-      scrollElement === event.currentTarget ||
-      (currentTargetIsWindow && isInstanceScrollElementWindow)
-    ) {
+    if (instance.props.scrollElement === currentTarget) {
       instance.__handleWindowScrollEvent();
     }
   });
@@ -89,7 +80,9 @@ export function registerScrollListener(
   if (
     !mountedInstances.some(instance => instance.props.scrollElement === element)
   ) {
-    element.addEventListener('scroll', onScrollWindow);
+    getScrollEventTargets(element).forEach(target => {
+      target.addEventListener('scroll', onScrollWindow);
+    });
   }
   mountedInstances.push(component);
 }
@@ -101,8 +94,13 @@ export function unregisterScrollListener(
   mountedInstances = mountedInstances.filter(
     instance => instance !== component,
   );
+  if (!mountedInstances.some(instance => instance.props.scrollElement === element)) {
+    getScrollEventTargets(element).forEach(target => {
+      target.removeEventListener('scroll', onScrollWindow);
+    });
+  }
+
   if (!mountedInstances.length) {
-    element.removeEventListener('scroll', onScrollWindow);
     if (disablePointerEventsTimeoutId) {
       cancelAnimationTimeout(disablePointerEventsTimeoutId);
       enablePointerEventsIfDisabled();

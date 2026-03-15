@@ -68,33 +68,32 @@ async function NextAuthHandler(req, res, userOptions) {
       error = nextauth[1],
     } = req.query
 
-    // @todo refactor all existing references to baseUrl and basePath
-    const { basePath, baseUrl } = parseUrl(
+    const { basePath, baseUrl, url } = parseUrl(
       process.env.NEXTAUTH_URL || process.env.VERCEL_URL
     )
 
     const cookies = {
       ...cookie.defaultCookies(
-        userOptions.useSecureCookies || baseUrl.startsWith("https://")
+        userOptions.useSecureCookies || url.origin.startsWith("https://")
       ),
       // Allow user cookie options to override any cookie settings above
       ...userOptions.cookies,
     }
 
-    const errorPage = userOptions.pages?.error ?? `${baseUrl}${basePath}/error`
+    const errorPage = userOptions.pages?.error ?? `${url.href}/error`
 
     const callbackUrlParam = req.query?.callbackUrl
-    if (callbackUrlParam && !isValidHttpUrl(callbackUrlParam, baseUrl)) {
+    if (callbackUrlParam && !isValidHttpUrl(callbackUrlParam, url.origin)) {
       return res.redirect(`${errorPage}?error=Configuration`)
     }
 
     const { callbackUrl: defaultCallbackUrl } = cookie.defaultCookies(
-      userOptions.useSecureCookies ?? baseUrl.startsWith("https://")
+      userOptions.useSecureCookies ?? url.origin.startsWith("https://")
     )
     const callbackUrlCookie =
       req.cookies?.[cookies?.callbackUrl?.name ?? defaultCallbackUrl.name]
 
-    if (callbackUrlCookie && !isValidHttpUrl(callbackUrlCookie, baseUrl)) {
+    if (callbackUrlCookie && !isValidHttpUrl(callbackUrlCookie, url.origin)) {
       return res.redirect(`${errorPage}?error=Configuration`)
     }
 
@@ -108,23 +107,20 @@ async function NextAuthHandler(req, res, userOptions) {
     const provider = providers.find(({ id }) => id === providerId)
 
     // Protection only works on OAuth 2.x providers
-    // TODO:
-    // - rename to `checks` in 4.x, so it is similar to `openid-client`
-    // - stop supporting `protection` as string
-    // - remove `state` property
     if (provider?.type === "oauth" && provider.version?.startsWith("2")) {
-      // Priority: (protection array > protection string) > state > default
-      if (provider.protection) {
-        provider.protection = Array.isArray(provider.protection)
-          ? provider.protection
-          : [provider.protection]
+      // Priority: (checks/protection array > checks/protection string) > state > default
+      const checks = provider.checks || provider.protection
+      if (checks) {
+        provider.checks = Array.isArray(checks) ? checks : [checks]
       } else if (provider.state !== undefined) {
-        provider.protection = [provider.state ? "state" : "none"]
+        provider.checks = [provider.state ? "state" : "none"]
       } else {
         // Default to state, as we did in 3.1
-        // REVIEW: should we use "pkce" or "none" as default?
-        provider.protection = ["state"]
+        provider.checks = ["state"]
       }
+      // Remove legacy properties
+      delete provider.protection
+      delete provider.state
     }
 
     const maxAge = 30 * 24 * 60 * 60 // Sessions expire after 30 days of being idle
@@ -149,6 +145,7 @@ async function NextAuthHandler(req, res, userOptions) {
       adapter,
       baseUrl,
       basePath,
+      url,
       action,
       provider,
       cookies,

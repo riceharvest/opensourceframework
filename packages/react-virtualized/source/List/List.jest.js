@@ -350,7 +350,7 @@ describe('List', () => {
 
   describe('overscanRowCount', () => {
     it('should not overscan by default', () => {
-      const mock = jest.fn();
+      const mock = vi.fn();
       mock.mockImplementation(overscanIndicesGetter);
 
       render(
@@ -363,7 +363,7 @@ describe('List', () => {
     });
 
     it('should overscan the specified amount', () => {
-      const mock = jest.fn();
+      const mock = vi.fn();
       mock.mockImplementation(overscanIndicesGetter);
 
       render(
@@ -525,7 +525,7 @@ describe('List', () => {
   });
 
   it('should relay the Grid :parent param to the :rowRenderer', () => {
-    const rowRenderer = jest.fn().mockReturnValue(null);
+    const rowRenderer = vi.fn().mockReturnValue(null);
     findDOMNode(render(getMarkup({rowRenderer})));
     expect(rowRenderer.mock.calls[0][0].parent).not.toBeUndefined();
   });

@@ -368,7 +368,7 @@ describe('Grid', () => {
     });
 
     it('should scroll back to a newly-added cell without a change in prop', () => {
-      let grid = render(
+      render(
         getMarkup({
           columnCount: NUM_COLUMNS,
           rowCount: NUM_ROWS,
@@ -376,7 +376,7 @@ describe('Grid', () => {
           scrollToRow: NUM_ROWS,
         }),
       );
-      grid = render(
+      const grid = render(
         getMarkup({
           columnCount: NUM_COLUMNS + 1,
           rowCount: NUM_ROWS + 1,
@@ -813,18 +813,18 @@ describe('Grid', () => {
     });
 
     it('should update scroll position if size shrinks smaller than the current scroll', () => {
-      let grid = findDOMNode(render(getMarkup({scrollToColumn: 250})));
-      grid = findDOMNode(render(getMarkup()));
-      grid = findDOMNode(
+      findDOMNode(render(getMarkup({scrollToColumn: 250})));
+      findDOMNode(render(getMarkup()));
+      const grid = findDOMNode(
         render(getMarkup({scrollToColumn: 250, columnCount: 10})),
       );
       expect(grid.textContent).toContain('column:9');
     });
 
     it('should update scroll position if size shrinks smaller than the current scroll', () => {
-      let grid = findDOMNode(render(getMarkup({scrollToRow: 500})));
-      grid = findDOMNode(render(getMarkup()));
-      grid = findDOMNode(render(getMarkup({scrollToRow: 500, rowCount: 10})));
+      findDOMNode(render(getMarkup({scrollToRow: 500})));
+      findDOMNode(render(getMarkup()));
+      const grid = findDOMNode(render(getMarkup({scrollToRow: 500, rowCount: 10})));
       expect(grid.textContent).toContain('row:9');
     });
   });
@@ -1677,7 +1677,7 @@ describe('Grid', () => {
   });
 
   it('should pass the cellRenderer an :isScrolling flag based on props override', () => {
-    const cellRenderer = jest.fn();
+    const cellRenderer = vi.fn();
     cellRenderer.mockImplementation(({key, style}) => (
       <div key={key} style={style} />
     ));
@@ -1888,7 +1888,7 @@ describe('Grid', () => {
     });
 
     it('should clear cache once :isScrolling via props is false', async () => {
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(params => (
         <div key={params.key} style={params.style} />
       ));
@@ -2514,7 +2514,7 @@ describe('Grid', () => {
       expect(console.warn).toHaveBeenCalledWith(
         'Rendered cell should include style property for positioning.',
       );
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.warn).toHaveBeenCalledTimes(1);
     });
 
     it('should warn about CellMeasurer measured cells that forget to include the :style property', () => {
@@ -2524,7 +2524,7 @@ describe('Grid', () => {
         fixedWidth: true,
       });
 
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(params => (
         <CellMeasurer
           cache={cache}
@@ -2549,7 +2549,7 @@ describe('Grid', () => {
       expect(console.warn).toHaveBeenCalledWith(
         'Rendered cell should include style property for positioning.',
       );
-      expect(console.warn).toHaveBeenCalled();
+      expect(console.warn).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -2561,7 +2561,7 @@ describe('Grid', () => {
 
       let invalidateCellSizeAfterRender = true;
 
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(params => {
         // Don't get stuck in a loop
         if (invalidateCellSizeAfterRender) {
@@ -2593,7 +2593,7 @@ describe('Grid', () => {
         fixedWidth: true,
       });
 
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(params => (
         <div key={params.key} style={params.style} />
       ));
@@ -2639,7 +2639,7 @@ describe('Grid', () => {
       // Fake measure cell 0,0 but not cell 0,1
       cache.set(0, 0, 100, 30);
 
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(params => (
         <div key={params.key} style={params.style} />
       ));
@@ -2670,7 +2670,7 @@ describe('Grid', () => {
 
   describe('onScrollbarPresenceChange', () => {
     it('should not trigger on-mount if scrollbars are hidden', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
 
       render(
         getMarkup({
@@ -2684,7 +2684,7 @@ describe('Grid', () => {
     });
 
     it('should trigger on-mount if scrollbars are visible', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
 
       render(
         getMarkup({
@@ -2703,7 +2703,7 @@ describe('Grid', () => {
     });
 
     it('should trigger on-update if scrollbar visibility has changed', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
       render(
         getMarkup({
           columnCount: 1,
@@ -2731,7 +2731,7 @@ describe('Grid', () => {
     });
 
     it('should not trigger on-update if scrollbar visibility does not change', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
       render(
         getMarkup({
           columnCount: 1,

@@ -1,4 +1,4 @@
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 
 export default function NewsArticlePage() {
   return (
@@ -11,27 +11,27 @@ export default function NewsArticlePage() {
         dateModified="2024-01-15T14:30:00+00:00"
         author={[
           {
-            "@type": "Person",
-            name: "Alex Chen",
-            url: "https://example.com/authors/alex-chen",
+            '@type': 'Person',
+            name: 'Alex Chen',
+            url: 'https://example.com/authors/alex-chen',
           },
           {
-            "@type": "Person",
-            name: "Maria Garcia",
-            url: "https://example.com/authors/maria-garcia",
+            '@type': 'Person',
+            name: 'Maria Garcia',
+            url: 'https://example.com/authors/maria-garcia',
           },
         ]}
         image={[
-          "https://example.com/images/nextjs-14-16x9.jpg",
-          "https://example.com/images/nextjs-14-4x3.jpg",
-          "https://example.com/images/nextjs-14-1x1.jpg",
+          'https://example.com/images/nextjs-14-16x9.jpg',
+          'https://example.com/images/nextjs-14-4x3.jpg',
+          'https://example.com/images/nextjs-14-1x1.jpg',
         ]}
         publisher={{
-          "@type": "Organization",
-          name: "Tech News Daily",
+          '@type': 'Organization',
+          name: 'Tech News Daily',
           logo: {
-            "@type": "ImageObject",
-            url: "https://example.com/logo.png",
+            '@type': 'ImageObject',
+            url: 'https://example.com/logo.png',
             width: 600,
             height: 60,
           },
@@ -54,9 +54,8 @@ export default function NewsArticlePage() {
         </div>
 
         <p className="lead text-xl">
-          Vercel today announced the release of Next.js 14, bringing significant
-          performance improvements and developer experience enhancements to the
-          popular React framework.
+          Vercel today announced the release of Next.js 14, bringing significant performance
+          improvements and developer experience enhancements to the popular React framework.
         </p>
 
         <h2>Key Improvements</h2>
@@ -67,8 +66,8 @@ export default function NewsArticlePage() {
         </ul>
 
         <p>
-          The development team has focused on improving local development
-          performance, with Turbopack showing remarkable speed improvements...
+          The development team has focused on improving local development performance, with
+          Turbopack showing remarkable speed improvements...
         </p>
       </article>
     </div>

@@ -1,4 +1,4 @@
-import { BreadcrumbJsonLd } from "next-seo";
+import { BreadcrumbJsonLd } from '@opensourceframework/next-seo';
 
 export default function AdvancedBreadcrumbPage() {
   return (
@@ -6,19 +6,19 @@ export default function AdvancedBreadcrumbPage() {
       <BreadcrumbJsonLd
         items={[
           {
-            name: "Home",
-            item: "https://example.com",
+            name: 'Home',
+            item: 'https://example.com',
           },
           {
-            name: "Blog",
-            item: { "@id": "https://example.com/blog" },
+            name: 'Blog',
+            item: { '@id': 'https://example.com/blog' },
           },
           {
-            name: "Technology",
-            item: { "@id": "https://example.com/blog/technology" },
+            name: 'Technology',
+            item: { '@id': 'https://example.com/blog/technology' },
           },
           {
-            name: "Understanding JSON-LD and Structured Data",
+            name: 'Understanding JSON-LD and Structured Data',
           },
         ]}
         scriptId="blog-breadcrumb"
@@ -39,17 +39,12 @@ export default function AdvancedBreadcrumbPage() {
             </li>
             <li className="text-gray-500">›</li>
             <li>
-              <a
-                href="/blog/technology"
-                className="text-blue-600 hover:underline"
-              >
+              <a href="/blog/technology" className="text-blue-600 hover:underline">
                 Technology
               </a>
             </li>
             <li className="text-gray-500">›</li>
-            <li className="text-gray-700">
-              Understanding JSON-LD and Structured Data
-            </li>
+            <li className="text-gray-700">Understanding JSON-LD and Structured Data</li>
           </ol>
         </nav>
 
@@ -58,9 +53,8 @@ export default function AdvancedBreadcrumbPage() {
           <p className="text-gray-600 mb-4">Published on November 15, 2024</p>
 
           <p>
-            This example demonstrates advanced features of the BreadcrumbJsonLd
-            component, including the use of Thing objects with @id properties
-            and custom script attributes.
+            This example demonstrates advanced features of the BreadcrumbJsonLd component, including
+            the use of Thing objects with @id properties and custom script attributes.
           </p>
 
           <h3>Features Demonstrated</h3>
@@ -73,31 +67,22 @@ export default function AdvancedBreadcrumbPage() {
 
           <h3>When to Use Thing Objects</h3>
           <p>
-            While plain URL strings work perfectly fine for most use cases,
-            using Thing objects with @id can be beneficial when:
+            While plain URL strings work perfectly fine for most use cases, using Thing objects with
+            @id can be beneficial when:
           </p>
           <ul>
-            <li>
-              You need to maintain consistency with other structured data on
-              your page
-            </li>
+            <li>You need to maintain consistency with other structured data on your page</li>
             <li>You're integrating with systems that expect Thing objects</li>
-            <li>
-              You want to be explicit about the semantic meaning of the
-              reference
-            </li>
+            <li>You want to be explicit about the semantic meaning of the reference</li>
           </ul>
 
           <h3>Custom Script Attributes</h3>
           <p>
-            The <code>scriptId</code> and <code>scriptKey</code> props allow you
-            to:
+            The <code>scriptId</code> and <code>scriptKey</code> props allow you to:
           </p>
           <ul>
             <li>Target specific JSON-LD scripts with JavaScript if needed</li>
-            <li>
-              Differentiate between multiple structured data blocks in tests
-            </li>
+            <li>Differentiate between multiple structured data blocks in tests</li>
             <li>Maintain consistent identifiers across page renders</li>
           </ul>
         </article>

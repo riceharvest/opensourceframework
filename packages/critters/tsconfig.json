@@ -1,0 +1,11 @@
+{
+  "extends": "@opensourceframework/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["examples", "node_modules", "dist", "test"]
+}

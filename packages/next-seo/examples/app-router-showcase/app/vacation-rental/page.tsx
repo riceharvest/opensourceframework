@@ -1,4 +1,4 @@
-import { VacationRentalJsonLd } from "next-seo";
+import { VacationRentalJsonLd } from '@opensourceframework/next-seo';
 
 export default function VacationRentalPage() {
   return (
@@ -21,16 +21,16 @@ export default function VacationRentalPage() {
       <div className="prose lg:prose-xl">
         <h2>About this rental</h2>
         <p>
-          Welcome to our beautiful beach house! This stunning property can
-          accommodate up to 5 guests and offers breathtaking ocean views.
-          Perfect for families or groups looking for a relaxing getaway.
+          Welcome to our beautiful beach house! This stunning property can accommodate up to 5
+          guests and offers breathtaking ocean views. Perfect for families or groups looking for a
+          relaxing getaway.
         </p>
 
         <h3>Location</h3>
         <p>
-          Located at coordinates 42.12345, -71.98765, our beach house is just
-          steps away from the pristine sandy beach. Enjoy morning walks along
-          the shore and spectacular sunsets from your private deck.
+          Located at coordinates 42.12345, -71.98765, our beach house is just steps away from the
+          pristine sandy beach. Enjoy morning walks along the shore and spectacular sunsets from
+          your private deck.
         </p>
 
         <h3>Occupancy</h3>

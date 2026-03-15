@@ -4,7 +4,7 @@ import type {
   GetServerSidePropsResult,
   NextPage,
 } from "next";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 import ErrorPage from "next/error";
 import Head from "next/head";
 import Link from "next/link";

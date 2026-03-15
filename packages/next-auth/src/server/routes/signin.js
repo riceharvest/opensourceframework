@@ -8,7 +8,7 @@ import adapterErrorHandler from "../../adapters/error-handler"
  * @param {import("types/internals").NextAuthResponse} res
  */
 export default async function signin(req, res) {
-  const { provider, baseUrl, basePath, adapter, callbacks, logger } =
+  const { provider, url, adapter, callbacks, logger } =
     req.options
 
   if (!provider.type) {
@@ -21,12 +21,12 @@ export default async function signin(req, res) {
       return res.redirect(authorizationUrl)
     } catch (error) {
       logger.error("SIGNIN_OAUTH_ERROR", error)
-      return res.redirect(`${baseUrl}${basePath}/error?error=OAuthSignin`)
+      return res.redirect(`${url.href}/error?error=OAuthSignin`)
     }
   } else if (provider.type === "email" && req.method === "POST") {
     if (!adapter) {
       logger.error("EMAIL_REQUIRES_ADAPTER_ERROR")
-      return res.redirect(`${baseUrl}${basePath}/error?error=Configuration`)
+      return res.redirect(`${url.href}/error?error=Configuration`)
     }
     const { getUserByEmail } = adapterErrorHandler(
       await adapter.getAdapter(req.options),
@@ -41,7 +41,7 @@ export default async function signin(req, res) {
     const email = req.body.email?.toLowerCase() ?? null
 
     if (!email) {
-      return res.redirect(`${baseUrl}${basePath}/error?error=EmailSignin`)
+      return res.redirect(`${url.href}/error?error=EmailSignin`)
     }
 
     // If is an existing user return a user object (otherwise use placeholder)
@@ -55,14 +55,14 @@ export default async function signin(req, res) {
         verificationRequest: true,
       })
       if (signInCallbackResponse === false) {
-        return res.redirect(`${baseUrl}${basePath}/error?error=AccessDenied`)
+        return res.redirect(`${url.href}/error?error=AccessDenied`)
       } else if (typeof signInCallbackResponse === "string") {
         return res.redirect(signInCallbackResponse)
       }
     } catch (error) {
       if (error instanceof Error) {
         return res.redirect(
-          `${baseUrl}${basePath}/error?error=${encodeURIComponent(error)}`
+          `${url.href}/error?error=${encodeURIComponent(error)}`
         )
       }
       // TODO: Remove in a future major release
@@ -74,14 +74,14 @@ export default async function signin(req, res) {
       await emailSignin(email, provider, req.options)
     } catch (error) {
       logger.error("SIGNIN_EMAIL_ERROR", error)
-      return res.redirect(`${baseUrl}${basePath}/error?error=EmailSignin`)
+      return res.redirect(`${url.href}/error?error=EmailSignin`)
     }
 
     return res.redirect(
-      `${baseUrl}${basePath}/verify-request?provider=${encodeURIComponent(
+      `${url.href}/verify-request?provider=${encodeURIComponent(
         provider.id
       )}&type=${encodeURIComponent(provider.type)}`
     )
   }
-  return res.redirect(`${baseUrl}${basePath}/signin`)
+  return res.redirect(`${url.href}/signin`)
 }

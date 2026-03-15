@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductSalePricingPage() {
   return (
@@ -8,29 +8,29 @@ export default function ProductSalePricingPage() {
         description="Ultra HD 4K Smart TV with HDR, built-in streaming apps, and voice control"
         url="https://example.com/products/smart-tv-55"
         image={[
-          "https://example.com/tv-1x1.jpg",
-          "https://example.com/tv-4x3.jpg",
-          "https://example.com/tv-16x9.jpg",
+          'https://example.com/tv-1x1.jpg',
+          'https://example.com/tv-4x3.jpg',
+          'https://example.com/tv-16x9.jpg',
         ]}
         sku="TV-4K-55-2024"
         mpn="STV55UHD"
         brand="TechVision"
         offers={{
-          url: "https://example.com/buy/smart-tv",
+          url: 'https://example.com/buy/smart-tv',
           price: 599.99,
-          priceCurrency: "USD",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
           // Multiple price specifications for sale pricing
           priceSpecification: [
             {
               price: 599.99,
-              priceCurrency: "USD",
+              priceCurrency: 'USD',
             },
             {
-              priceType: "https://schema.org/StrikethroughPrice",
+              priceType: 'https://schema.org/StrikethroughPrice',
               price: 899.99,
-              priceCurrency: "USD",
+              priceCurrency: 'USD',
             },
           ],
         }}
@@ -70,10 +70,8 @@ export default function ProductSalePricingPage() {
             <div>
               <h1 className="text-3xl font-bold mb-2">4K Smart TV - 55 inch</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★☆"}</div>
-                <span className="text-gray-600">
-                  4.6 out of 5 (342 reviews)
-                </span>
+                <div className="flex text-yellow-400">{'★★★★☆'}</div>
+                <span className="text-gray-600">4.6 out of 5 (342 reviews)</span>
               </div>
               <p className="text-gray-600">by TechVision</p>
             </div>
@@ -81,24 +79,18 @@ export default function ProductSalePricingPage() {
             <div className="space-y-2">
               <div className="flex items-baseline gap-3">
                 <span className="text-3xl font-bold text-red-600">$599.99</span>
-                <span className="text-xl text-gray-500 line-through">
-                  $899.99
-                </span>
+                <span className="text-xl text-gray-500 line-through">$899.99</span>
               </div>
               <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                 SAVE $300 (33% OFF)
               </div>
               <p className="text-green-600 font-medium">✓ In Stock</p>
-              <p className="text-sm text-gray-500">
-                Sale price valid until Dec 31, 2024
-              </p>
+              <p className="text-sm text-gray-500">Sale price valid until Dec 31, 2024</p>
             </div>
 
             <div className="border-l-4 border-red-600 pl-4 bg-red-50 p-3 rounded">
               <p className="font-semibold text-red-800">Limited Time Offer!</p>
-              <p className="text-sm text-red-700">
-                Black Friday pricing - while supplies last
-              </p>
+              <p className="text-sm text-red-700">Black Friday pricing - while supplies last</p>
             </div>
 
             <div className="space-y-2">
@@ -112,10 +104,9 @@ export default function ProductSalePricingPage() {
 
             <div className="space-y-4">
               <p className="text-gray-700">
-                Experience stunning picture quality with our 55-inch 4K Smart
-                TV. Features HDR10+ support, built-in streaming apps including
-                Netflix and Prime Video, and voice control compatibility with
-                Alexa and Google Assistant.
+                Experience stunning picture quality with our 55-inch 4K Smart TV. Features HDR10+
+                support, built-in streaming apps including Netflix and Prime Video, and voice
+                control compatibility with Alexa and Google Assistant.
               </p>
             </div>
 

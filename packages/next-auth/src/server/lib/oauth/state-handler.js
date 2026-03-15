@@ -13,7 +13,8 @@ export async function handleCallback (req, res) {
   const { csrfToken, provider, baseUrl, basePath } = req.options
   try {
     // Provider does not support state, nothing to do.
-    if (!provider.protection?.includes('state')) {
+    const checks = provider.checks || provider.protection || []
+    if (!checks.includes('state')) {
       return
     }
 
@@ -42,7 +43,8 @@ export async function handleCallback (req, res) {
 export async function handleSignin (req, res) {
   const { provider, baseUrl, basePath, csrfToken } = req.options
   try {
-    if (!provider.protection?.includes('state')) { // Provider does not support state, nothing to do.
+    const checks = provider.checks || provider.protection || []
+    if (!checks.includes('state')) { // Provider does not support state, nothing to do.
       return
     }
 

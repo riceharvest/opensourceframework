@@ -1,0 +1,28 @@
+{
+  "next-auth": "next-auth",
+  "next-seo": "next-seo",
+  "next-pwa": "next-pwa",
+  "critters": "critters",
+  "next-iron-session": "next-iron-session",
+  "--- Tier 3 ---": {
+    "type": "separator"
+  },
+  "next-connect": "next-connect",
+  "next-csrf": "next-csrf",
+  "next-images": "next-images",
+  "next-optimized-images": "next-optimized-images",
+  "next-session": "next-session",
+  "next-transpile-modules": "next-transpile-modules",
+  "react-query-auth": "react-query-auth",
+  "react-virtualized": "react-virtualized",
+  "seeded-rng": "seeded-rng",
+  "--- Utilities ---": {
+    "type": "separator"
+  },
+  "next-cookies": "next-cookies",
+  "next-json-ld": "next-json-ld",
+  "next-mdx": "next-mdx",
+  "next-mdx-toc": "next-mdx-toc",
+  "next-circuit-breaker": "next-circuit-breaker",
+  "react-a11y-utils": "react-a11y-utils"
+}

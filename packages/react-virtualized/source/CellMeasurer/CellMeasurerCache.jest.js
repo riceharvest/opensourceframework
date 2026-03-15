@@ -110,7 +110,7 @@ describe('CellMeasurerCache', () => {
   });
 
   it('should support a custom :keyMapper', () => {
-    const keyMapper = jest.fn();
+    const keyMapper = vi.fn();
     keyMapper.mockReturnValue('a');
 
     spyOn(console, 'warn'); // Ignore warning about variable width and height

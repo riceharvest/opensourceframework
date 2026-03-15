@@ -1,5 +1,3 @@
-import { h } from 'preact' // eslint-disable-line no-unused-vars
-
 export default function signout ({ baseUrl, basePath, csrfToken }) {
   return (
     <div className='signout'>

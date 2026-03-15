@@ -1,0 +1,22 @@
+# @opensourceframework/seeded-rng - AI Summary
+
+Seeded random number generation for reproducible non-cryptographic randomness. This package is maintained in the OpenSource Framework monorepo as a practical utility package with a focus on clear behavior and minimal migration friction.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/seeded-rng
+# or
+pnpm add @opensourceframework/seeded-rng
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/seeded-rng#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/seeded-rng

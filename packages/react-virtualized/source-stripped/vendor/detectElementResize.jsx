@@ -100,27 +100,26 @@ export default function createDetectElementResize(nonce, hostWindow) {
     };
 
     /* Detect CSS Animations support to detect element display/re-attach */
-    var animation = false,
+    var animationSupported = false,
       keyframeprefix = '',
       animationstartevent = 'animationstart',
       domPrefixes = 'Webkit Moz O ms'.split(' '),
       startEvents = 'webkitAnimationStart animationstart oAnimationStart MSAnimationStart'.split(
         ' ',
       ),
-      pfx = '';
+      pfx;
     {
       var elm = _window.document.createElement('fakeelement');
       if (elm.style.animationName !== undefined) {
-        animation = true;
+        animationSupported = true;
       }
 
-      if (animation === false) {
+      if (animationSupported === false) {
         for (var i = 0; i < domPrefixes.length; i++) {
           if (elm.style[domPrefixes[i] + 'AnimationName'] !== undefined) {
             pfx = domPrefixes[i];
             keyframeprefix = '-' + pfx.toLowerCase() + '-';
             animationstartevent = startEvents[i];
-            animation = true;
             break;
           }
         }

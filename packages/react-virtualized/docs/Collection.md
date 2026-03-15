@@ -56,7 +56,7 @@ Below is a very basic `Collection` example. It displays an array of objects with
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Collection} from 'react-virtualized';
+import {Collection} from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // Collection data as an array of objects

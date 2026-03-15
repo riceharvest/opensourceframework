@@ -3,7 +3,7 @@ For advanced use cases, you may want to sort by multiple fields.
 This can be accomplished using the `createMultiSort` utility.
 
 ```jsx
-import {createTableMultiSort, Column, Table} from 'react-virtualized';
+import {createTableMultiSort, Column, Table} from '@opensourceframework/react-virtualized';
 
 function sort({sortBy, sortDirection}) {
   // 'sortBy' is an ordered Array of fields.

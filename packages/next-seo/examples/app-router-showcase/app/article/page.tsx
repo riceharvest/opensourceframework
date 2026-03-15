@@ -1,4 +1,4 @@
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 
 export default function ArticlePage() {
   return (
@@ -17,21 +17,20 @@ export default function ArticlePage() {
         <p className="text-gray-600">By Sarah Johnson | January 1, 2024</p>
 
         <p>
-          The Next.js App Router represents a significant evolution in how we
-          build React applications. This article explores its key features and
-          benefits.
+          The Next.js App Router represents a significant evolution in how we build React
+          applications. This article explores its key features and benefits.
         </p>
 
         <h2>Server Components</h2>
         <p>
-          React Server Components allow us to render components on the server,
-          reducing the JavaScript bundle size sent to the client...
+          React Server Components allow us to render components on the server, reducing the
+          JavaScript bundle size sent to the client...
         </p>
 
         <h2>Nested Layouts</h2>
         <p>
-          The App Router introduces a powerful nested layout system that makes
-          it easy to share UI between routes...
+          The App Router introduces a powerful nested layout system that makes it easy to share UI
+          between routes...
         </p>
       </article>
     </div>

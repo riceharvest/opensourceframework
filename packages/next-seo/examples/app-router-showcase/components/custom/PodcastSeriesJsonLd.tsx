@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { JsonLdScript, processors } from "next-seo";
+import { JsonLdScript, processors } from '@opensourceframework/next-seo';
 
 interface PodcastEpisode {
   name: string;
@@ -32,22 +32,20 @@ export function PodcastSeriesJsonLd({
   url,
 }: PodcastSeriesJsonLdProps) {
   const data = {
-    "@context": "https://schema.org",
-    "@type": "PodcastSeries",
+    '@context': 'https://schema.org',
+    '@type': 'PodcastSeries',
     name,
     ...(description && { description }),
     ...(url && { url }),
     ...(host && {
       host:
-        typeof host === "string"
-          ? processors.processAuthor(host)
-          : processors.processAuthor(host),
+        typeof host === 'string' ? processors.processAuthor(host) : processors.processAuthor(host),
     }),
     ...(image && { image: processors.processImage(image) }),
     ...(episodes &&
       episodes.length > 0 && {
         episode: episodes.map((ep, index) => ({
-          "@type": "PodcastEpisode",
+          '@type': 'PodcastEpisode',
           name: ep.name,
           position: index + 1,
           ...(ep.duration && { duration: ep.duration }),

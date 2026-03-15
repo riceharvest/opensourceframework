@@ -8,13 +8,12 @@ import { getIronSession } from "iron-session";
 import { SessionData, sessionOptions } from "../lib";
 import Link from "next/link";
 
-// Broken: None of these parameters is working, thus we have caching issues
-// TODO fix this
+// Next.js 16: 'use cache' with private data (cookies) makes it dynamic
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 async function getSession() {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
+  const cookieStore = await cookies();
+  const session = await getIronSession<SessionData>(cookieStore, sessionOptions);
 
   return session;
 }

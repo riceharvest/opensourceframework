@@ -420,6 +420,31 @@ describe("Router", () => {
     expect(await Router.exec(fns, rreq, rres)).toBe("final");
   });
 
+  test("exec() - throws when next() is called in the last handler", async () => {
+    const fns: Nextable<any>[] = [
+      async (_req, _res, next) => next(),
+      async (_req, _res, next) => next(),
+    ];
+
+    await expect(Router.exec(fns, {}, {})).rejects.toThrow(
+      "next() called with no middleware remaining"
+    );
+  });
+
+  test("exec() - throws when next() is called multiple times", async () => {
+    const fns: Nextable<any>[] = [
+      async (_req, _res, next) => {
+        await next();
+        return next();
+      },
+      async () => "done",
+    ];
+
+    await expect(Router.exec(fns, {}, {})).rejects.toThrow(
+      "next() called multiple times"
+    );
+  });
+
   test("find() - returns middleOnly", () => {
     const ctx = new Router();
     const fn = () => undefined;

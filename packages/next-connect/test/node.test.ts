@@ -233,6 +233,23 @@ describe("NodeRouter", () => {
     expect(onError.mock.calls[0][0].message).toBe("💥");
   });
 
+  test("handler() - calls onError if next() is called after the last handler", async () => {
+    const req = { method: "GET", url: "/" } as IncomingMessage;
+    const res = {} as ServerResponse;
+    const onError = vi.fn();
+
+    await createRouter()
+      .get("/", async (_req, _res, next) => {
+        await next();
+      })
+      .handler({ onError })(req, res);
+
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(onError.mock.calls[0][0].message).toBe(
+      "next() called with no middleware remaining"
+    );
+  });
+
   test("handler() - calls onNoMatch if no fns matched", async () => {
     const req = { url: "/foo/bar", method: "GET" } as IncomingMessage;
     const endSpy = vi.fn();

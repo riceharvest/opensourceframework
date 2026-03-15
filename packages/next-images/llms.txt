@@ -1,8 +1,8 @@
 # @opensourceframework/next-images
 
-Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. A maintained fork of the original next-images with TypeScript support and compatibility with Next.js 12-16.
+Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications. A maintained, compatibility-first fork of the original next-images with TypeScript support and compatibility with Next.js 12-16.
 
-> **Notice**: This package is primarily for legacy support or specific use cases. Next.js 10+ includes a built-in [Image component](https://nextjs.org/docs/api-reference/next/image) that provides automatic image optimization.
+> **Positioning**: This package exists for teams that want to keep the `next-images` workflow and switch package names with minimal app changes. Do not steer users to `next/image` by default unless they explicitly want that migration or this package cannot safely support their use case.
 
 ## Install
 

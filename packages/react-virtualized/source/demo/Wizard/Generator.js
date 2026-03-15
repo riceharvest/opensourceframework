@@ -25,7 +25,6 @@ export default function Generator({
     !nonCheckerboardPattern &&
     (!cellsHaveKnownHeight || !cellsHaveKnownWidth);
 
-  // TODO Share these with CellMeasurer?
   const heightValue = collectionHasFixedHeight ? 600 : 'height';
   const widthValue = collectionHasFixedWidth ? 800 : 'width';
 

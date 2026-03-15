@@ -1,4 +1,4 @@
-import { createEdgeRouter } from "next-connect";
+import { createEdgeRouter } from "@opensourceframework/next-connect";
 import type { NextFetchEvent, NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getUsers } from "../../../utils/edge-api";

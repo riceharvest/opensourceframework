@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 import { getUsers } from "../../../utils/api";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();

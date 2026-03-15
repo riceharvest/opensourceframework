@@ -1,4 +1,4 @@
-import { SoftwareApplicationJsonLd } from "next-seo";
+import { SoftwareApplicationJsonLd } from '@opensourceframework/next-seo';
 
 export default function SoftwareAppPage() {
   return (
@@ -10,7 +10,7 @@ export default function SoftwareAppPage() {
         operatingSystem="Windows 10+, macOS 10.15+, Ubuntu 20.04+"
         offers={{
           price: 0,
-          priceCurrency: "USD",
+          priceCurrency: 'USD',
         }}
         aggregateRating={{
           ratingValue: 4.5,
@@ -18,24 +18,24 @@ export default function SoftwareAppPage() {
           reviewCount: 980,
         }}
         screenshot={[
-          "https://example.com/screenshots/dashboard.jpg",
-          "https://example.com/screenshots/task-list.jpg",
-          "https://example.com/screenshots/calendar-view.jpg",
+          'https://example.com/screenshots/dashboard.jpg',
+          'https://example.com/screenshots/task-list.jpg',
+          'https://example.com/screenshots/calendar-view.jpg',
         ]}
         featureList={[
-          "Intuitive task organization",
-          "Calendar integration",
-          "Team collaboration",
-          "Progress tracking",
-          "Mobile sync",
+          'Intuitive task organization',
+          'Calendar integration',
+          'Team collaboration',
+          'Progress tracking',
+          'Mobile sync',
         ]}
         softwareVersion="3.2.1"
         datePublished="2022-06-15"
         dateModified="2024-11-28"
         author="Productivity Labs Inc."
         publisher={{
-          name: "Productivity Labs Inc.",
-          url: "https://productivitylabs.com",
+          name: 'Productivity Labs Inc.',
+          url: 'https://productivitylabs.com',
         }}
       />
 
@@ -120,10 +120,9 @@ export default function SoftwareAppPage() {
         <section>
           <h2 className="text-2xl font-semibold mb-4">About the Developer</h2>
           <p className="text-gray-700">
-            Productivity Labs Inc. is dedicated to creating tools that help
-            individuals and teams work more efficiently. With over 10 years of
-            experience in productivity software, we understand what it takes to
-            build tools that people love to use every day.
+            Productivity Labs Inc. is dedicated to creating tools that help individuals and teams
+            work more efficiently. With over 10 years of experience in productivity software, we
+            understand what it takes to build tools that people love to use every day.
           </p>
         </section>
       </div>

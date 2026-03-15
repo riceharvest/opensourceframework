@@ -1,4 +1,4 @@
-import { ReviewJsonLd } from "next-seo";
+import { ReviewJsonLd } from '@opensourceframework/next-seo';
 
 export default function Page() {
   return (
@@ -6,8 +6,8 @@ export default function Page() {
       <h1 className="text-2xl font-semibold">Movie Review Example</h1>
       <ReviewJsonLd
         author={{
-          name: "Roger Ebert",
-          url: "https://example.com/reviewers/roger-ebert",
+          name: 'Roger Ebert',
+          url: 'https://example.com/reviewers/roger-ebert',
         }}
         reviewRating={{
           ratingValue: 4,
@@ -15,19 +15,19 @@ export default function Page() {
           worstRating: 0,
         }}
         itemReviewed={{
-          "@type": "Movie",
-          name: "The Shawshank Redemption",
-          director: "Frank Darabont",
-          actor: ["Tim Robbins", "Morgan Freeman"],
-          dateCreated: "1994-09-23",
-          image: "https://example.com/shawshank.jpg",
-          duration: "PT2H22M",
+          '@type': 'Movie',
+          name: 'The Shawshank Redemption',
+          director: 'Frank Darabont',
+          actor: ['Tim Robbins', 'Morgan Freeman'],
+          dateCreated: '1994-09-23',
+          image: 'https://example.com/shawshank.jpg',
+          duration: 'PT2H22M',
         }}
         reviewBody="A masterful adaptation of Stephen King's novella, The Shawshank Redemption is a powerful tale of hope and friendship that resonates deeply with audiences. The performances by Robbins and Freeman are nothing short of extraordinary."
         datePublished="2024-03-15"
         publisher={{
-          name: "Film Critics United",
-          logo: "https://example.com/fcu-logo.jpg",
+          name: 'Film Critics United',
+          logo: 'https://example.com/fcu-logo.jpg',
         }}
         url="https://example.com/reviews/shawshank-redemption"
         mainEntityOfPage="https://example.com/reviews/shawshank-redemption"
@@ -35,9 +35,8 @@ export default function Page() {
       <div className="prose max-w-none">
         <h2>About This Review</h2>
         <p>
-          This example shows a movie review with comprehensive structured data
-          including the movie details, reviewer information, and publisher
-          details.
+          This example shows a movie review with comprehensive structured data including the movie
+          details, reviewer information, and publisher details.
         </p>
         <h3>Key Features:</h3>
         <ul>

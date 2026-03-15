@@ -26,5 +26,5 @@
     "target": "ES2022",
     "verbatimModuleSyntax": true
   },
-  "exclude": ["dist", "examples/next"]
+  "exclude": ["examples", "dist", "examples/next"]
 }

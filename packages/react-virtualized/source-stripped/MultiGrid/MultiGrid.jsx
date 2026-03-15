@@ -209,10 +209,10 @@ class MultiGrid extends React.PureComponent {
     const {
       onScroll,
       onSectionRendered,
-      onScrollbarPresenceChange, // eslint-disable-line no-unused-vars
-      scrollLeft: scrollLeftProp, // eslint-disable-line no-unused-vars
+      onScrollbarPresenceChange,
+      scrollLeft: scrollLeftProp,
       scrollToColumn,
-      scrollTop: scrollTopProp, // eslint-disable-line no-unused-vars
+      scrollTop: scrollTopProp,
       scrollToRow,
       ...rest
     } = this.props;

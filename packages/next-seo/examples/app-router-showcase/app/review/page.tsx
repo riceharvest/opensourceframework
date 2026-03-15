@@ -1,4 +1,4 @@
-import { ReviewJsonLd } from "next-seo";
+import { ReviewJsonLd } from '@opensourceframework/next-seo';
 
 export default function Page() {
   return (
@@ -7,14 +7,12 @@ export default function Page() {
       <ReviewJsonLd
         author="Bob Smith"
         reviewRating={{ ratingValue: 4 }}
-        itemReviewed={{ "@type": "LocalBusiness", name: "Legal Seafood" }}
+        itemReviewed={{ '@type': 'LocalBusiness', name: 'Legal Seafood' }}
         reviewBody="Fresh seafood and great service!"
         datePublished="2024-01-01"
         url="/review"
       />
-      <p>
-        This page demonstrates a standalone Review JSON-LD for a local business.
-      </p>
+      <p>This page demonstrates a standalone Review JSON-LD for a local business.</p>
     </div>
   );
 }

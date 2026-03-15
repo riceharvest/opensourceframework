@@ -26,7 +26,7 @@ The default table name is `next-auth`, but you can customise that by passing `{ 
 
 ```javascript title="pages/api/auth/[...nextauth].js"
 import AWS from "aws-sdk";
-import NextAuth from "next-auth";
+import NextAuth from "@opensourceframework/next-auth";
 import Providers from "next-auth/providers";
 import { DynamoDBAdapter } from "@next-auth/dynamodb-adapter"
 

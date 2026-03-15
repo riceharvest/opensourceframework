@@ -1,4 +1,4 @@
-import { OrganizationJsonLd } from "next-seo";
+import { OrganizationJsonLd } from '@opensourceframework/next-seo';
 
 export default function OrganizationAdvancedPage() {
   return (
@@ -7,63 +7,63 @@ export default function OrganizationAdvancedPage() {
         name="Global Widget Corporation"
         url="https://www.globalwidget.com"
         logo={{
-          "@type": "ImageObject",
-          url: "https://www.globalwidget.com/logo.png",
+          '@type': 'ImageObject',
+          url: 'https://www.globalwidget.com/logo.png',
           width: 800,
           height: 600,
-          caption: "Global Widget Corporation Logo",
+          caption: 'Global Widget Corporation Logo',
         }}
         description="A multinational corporation specializing in innovative widget solutions with offices worldwide"
         sameAs={[
-          "https://twitter.com/globalwidget",
-          "https://facebook.com/globalwidget",
-          "https://linkedin.com/company/global-widget-corp",
-          "https://instagram.com/globalwidget",
+          'https://twitter.com/globalwidget',
+          'https://facebook.com/globalwidget',
+          'https://linkedin.com/company/global-widget-corp',
+          'https://instagram.com/globalwidget',
         ]}
         address={[
           {
-            "@type": "PostalAddress",
-            streetAddress: "123 Tech Plaza, Suite 1000",
-            addressLocality: "San Francisco",
-            addressRegion: "CA",
-            postalCode: "94105",
-            addressCountry: "US",
+            '@type': 'PostalAddress',
+            streetAddress: '123 Tech Plaza, Suite 1000',
+            addressLocality: 'San Francisco',
+            addressRegion: 'CA',
+            postalCode: '94105',
+            addressCountry: 'US',
           },
           {
-            "@type": "PostalAddress",
-            streetAddress: "456 Innovation Drive",
-            addressLocality: "London",
-            addressRegion: "England",
-            postalCode: "EC2A 4BX",
-            addressCountry: "GB",
+            '@type': 'PostalAddress',
+            streetAddress: '456 Innovation Drive',
+            addressLocality: 'London',
+            addressRegion: 'England',
+            postalCode: 'EC2A 4BX',
+            addressCountry: 'GB',
           },
           {
-            "@type": "PostalAddress",
-            streetAddress: "789 Business Center",
-            addressLocality: "Tokyo",
-            addressRegion: "Tokyo",
-            postalCode: "100-0001",
-            addressCountry: "JP",
+            '@type': 'PostalAddress',
+            streetAddress: '789 Business Center',
+            addressLocality: 'Tokyo',
+            addressRegion: 'Tokyo',
+            postalCode: '100-0001',
+            addressCountry: 'JP',
           },
         ]}
         contactPoint={[
           {
-            "@type": "ContactPoint",
-            contactType: "Customer Service",
-            telephone: "+1-800-123-4567",
-            email: "support@globalwidget.com",
+            '@type': 'ContactPoint',
+            contactType: 'Customer Service',
+            telephone: '+1-800-123-4567',
+            email: 'support@globalwidget.com',
           },
           {
-            "@type": "ContactPoint",
-            contactType: "Sales",
-            telephone: "+1-800-123-4568",
-            email: "sales@globalwidget.com",
+            '@type': 'ContactPoint',
+            contactType: 'Sales',
+            telephone: '+1-800-123-4568',
+            email: 'sales@globalwidget.com',
           },
           {
-            "@type": "ContactPoint",
-            contactType: "Technical Support",
-            telephone: "+1-800-123-4569",
-            email: "tech@globalwidget.com",
+            '@type': 'ContactPoint',
+            contactType: 'Technical Support',
+            telephone: '+1-800-123-4569',
+            email: 'tech@globalwidget.com',
           },
         ]}
         telephone="+1-800-123-4567"
@@ -90,10 +90,9 @@ export default function OrganizationAdvancedPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">About GWC</h2>
           <p className="text-gray-700 mb-4">
-            Founded in 1995, Global Widget Corporation (GWC) has grown from a
-            small startup to a multinational corporation with over 5,000
-            employees worldwide. We specialize in innovative widget solutions
-            that power businesses across the globe.
+            Founded in 1995, Global Widget Corporation (GWC) has grown from a small startup to a
+            multinational corporation with over 5,000 employees worldwide. We specialize in
+            innovative widget solutions that power businesses across the globe.
           </p>
         </section>
 
@@ -150,9 +149,7 @@ export default function OrganizationAdvancedPage() {
             </div>
             <div>
               <h3 className="font-semibold">Technical Support</h3>
-              <p className="text-gray-700">
-                Phone: +1-800-123-4569 | Email: tech@globalwidget.com
-              </p>
+              <p className="text-gray-700">Phone: +1-800-123-4569 | Email: tech@globalwidget.com</p>
             </div>
           </div>
         </section>

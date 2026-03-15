@@ -1,6 +1,6 @@
 import { isDestroyed, isNew, isTouched } from "./symbol";
 
-export type SessionRecord = Record<string, unknown>
+export type SessionRecord = Record<string, any>
 
 export type SessionData<T = SessionRecord> = {
   cookie: Cookie;
@@ -43,7 +43,7 @@ export interface Options {
   genid?: () => string;
   encode?: (rawSid: string) => string;
   decode?: (encryptedSid: string) => string | null;
-  touchAfter?: number;
+  touchAfter?: number | string;
   cookie?: Partial<
     Pick<
       Cookie,
@@ -51,4 +51,10 @@ export interface Options {
     >
   >;
   autoCommit?: boolean;
+}
+
+declare module "http" {
+  interface IncomingMessage {
+    session?: Session;
+  }
 }

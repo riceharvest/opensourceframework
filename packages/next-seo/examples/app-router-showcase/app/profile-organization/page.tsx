@@ -1,34 +1,34 @@
-import { ProfilePageJsonLd } from "next-seo";
+import { ProfilePageJsonLd } from '@opensourceframework/next-seo';
 
 export default function OrganizationProfilePage() {
   return (
     <div className="container mx-auto p-8">
       <ProfilePageJsonLd
         mainEntity={{
-          "@type": "Organization",
-          name: "TechForum Community",
-          url: "https://techforum.example.com",
-          logo: "https://techforum.example.com/logo.png",
-          alternateName: "TechForum",
-          identifier: "org-789012",
-          description: "A vibrant community for technology enthusiasts",
+          '@type': 'Organization',
+          name: 'TechForum Community',
+          url: 'https://techforum.example.com',
+          logo: 'https://techforum.example.com/logo.png',
+          alternateName: 'TechForum',
+          identifier: 'org-789012',
+          description: 'A vibrant community for technology enthusiasts',
           sameAs: [
-            "https://twitter.com/techforum",
-            "https://linkedin.com/company/techforum",
-            "https://github.com/techforum",
+            'https://twitter.com/techforum',
+            'https://linkedin.com/company/techforum',
+            'https://github.com/techforum',
           ],
           interactionStatistic: [
             {
-              interactionType: "https://schema.org/FollowAction",
+              interactionType: 'https://schema.org/FollowAction',
               userInteractionCount: 15000,
             },
             {
-              interactionType: "https://schema.org/LikeAction",
+              interactionType: 'https://schema.org/LikeAction',
               userInteractionCount: 45000,
             },
           ],
           agentInteractionStatistic: {
-            interactionType: "https://schema.org/WriteAction",
+            interactionType: 'https://schema.org/WriteAction',
             userInteractionCount: 8500,
           },
         }}
@@ -42,9 +42,7 @@ export default function OrganizationProfilePage() {
             <div>
               <h1 className="text-3xl font-bold">TechForum Community</h1>
               <p className="text-xl text-gray-600">@TechForum</p>
-              <p className="text-gray-700 mt-1">
-                A vibrant community for technology enthusiasts
-              </p>
+              <p className="text-gray-700 mt-1">A vibrant community for technology enthusiasts</p>
               <a
                 href="https://techforum.example.com"
                 className="text-blue-600 hover:underline text-sm mt-1 inline-block"
@@ -57,11 +55,10 @@ export default function OrganizationProfilePage() {
           <div className="mb-6">
             <h2 className="text-xl font-semibold mb-2">About</h2>
             <p className="text-gray-700">
-              TechForum Community is a leading online platform where technology
-              enthusiasts, professionals, and learners come together to share
-              knowledge, discuss latest trends, and collaborate on innovative
-              projects. Founded in 2020, we've grown to become one of the most
-              active tech communities online.
+              TechForum Community is a leading online platform where technology enthusiasts,
+              professionals, and learners come together to share knowledge, discuss latest trends,
+              and collaborate on innovative projects. Founded in 2020, we've grown to become one of
+              the most active tech communities online.
             </p>
           </div>
 
@@ -117,19 +114,14 @@ export default function OrganizationProfilePage() {
             <h2 className="text-xl font-semibold mb-4">Recent Updates</h2>
             <div className="space-y-4">
               <div className="border-l-4 border-blue-600 pl-4">
-                <h3 className="font-semibold">
-                  New AI & Machine Learning Section
-                </h3>
+                <h3 className="font-semibold">New AI & Machine Learning Section</h3>
                 <p className="text-gray-600 text-sm">Posted 3 days ago</p>
                 <p className="text-gray-700 mt-1">
-                  We've launched a dedicated section for AI and ML
-                  discussions...
+                  We've launched a dedicated section for AI and ML discussions...
                 </p>
               </div>
               <div className="border-l-4 border-blue-600 pl-4">
-                <h3 className="font-semibold">
-                  Community Hackathon 2025 Announced
-                </h3>
+                <h3 className="font-semibold">Community Hackathon 2025 Announced</h3>
                 <p className="text-gray-600 text-sm">Posted 1 week ago</p>
                 <p className="text-gray-700 mt-1">
                   Join us for our annual hackathon event this March...

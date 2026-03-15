@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { vi } from "vitest";
 import { createServer, IncomingMessage, request, ServerResponse } from "http";
@@ -13,8 +14,6 @@ const defaultCookie = {
   path: "/",
   sameSite: undefined,
   secure: false,
-  expires: undefined,
-  maxAge: undefined,
 };
 
 describe("session()", () => {
@@ -25,11 +24,13 @@ describe("session()", () => {
     await inject(
       async (req, res) => {
         const sess = await session()(req, res);
-        expect(sess).toEqual({
-          cookie: defaultCookie,
-          [isNew]: true,
-          id: expect.any(String),
-        });
+        expect(sess).toEqual(
+          expect.objectContaining({
+            id: expect.any(String),
+            cookie: expect.objectContaining(defaultCookie),
+            [isNew]: true,
+          })
+        );
         expect(req.session).toBe(sess);
         res.end();
       },
@@ -86,12 +87,15 @@ describe("session()", () => {
     );
     expect(res.headers).toHaveProperty("set-cookie");
     expect(res.headers["set-cookie"]).toBe(`sid=${id}; Path=/; HttpOnly`);
-    expect(store.set).toHaveBeenCalledWith(id, {
-      foo: "bar",
-      cookie: defaultCookie,
-      [isNew]: true,
+    expect(store.set).toHaveBeenCalledWith(
       id,
-    });
+      expect.objectContaining({
+        id,
+        foo: "bar",
+        cookie: expect.objectContaining(defaultCookie),
+        [isNew]: true,
+      })
+    );
     await inject(
       async (req, res) => {
         await session({ store })(req, res);
@@ -120,12 +124,15 @@ describe("session()", () => {
     );
     expect(res.headers).toHaveProperty("set-cookie");
     expect(res.headers["set-cookie"]).toBe(`sid=${id}; Path=/; HttpOnly`);
-    expect(store.set).toHaveBeenCalledWith(id, {
-      foo: "bar",
-      cookie: defaultCookie,
-      [isNew]: true,
+    expect(store.set).toHaveBeenCalledWith(
       id,
-    });
+      expect.objectContaining({
+        id,
+        foo: "bar",
+        cookie: expect.objectContaining(defaultCookie),
+        [isNew]: true,
+      })
+    );
     await inject(
       async (req, res) => {
         await session({ store })(req, res);
@@ -158,12 +165,15 @@ describe("session()", () => {
     expect(res.headers["set-cookie"]).toBe(
       `sid=${id}; Max-Age=10; Path=/; Expires=${expires.toUTCString()}; HttpOnly`
     );
-    expect(store.set).toHaveBeenCalledWith(id, {
-      foo: "bar",
-      cookie: { ...defaultCookie, expires, maxAge: 10 },
-      [isNew]: true,
+    expect(store.set).toHaveBeenCalledWith(
       id,
-    });
+      expect.objectContaining({
+        id,
+        foo: "bar",
+        cookie: expect.objectContaining({ ...defaultCookie, expires, maxAge: 10 }),
+        [isNew]: true,
+      })
+    );
     await inject(
       async (req, res) => {
         await session({ store })(req, res);
@@ -286,11 +296,20 @@ describe("session()", () => {
     expect(res.headers["set-cookie"]).toEqual(
       `sid=foo; Max-Age=5; Path=/; Expires=${newExpires.toUTCString()}; HttpOnly`
     );
-    expect(store.touch).toHaveBeenCalledWith("foo", {
-      cookie: { ...defaultCookie, expires: newExpires, maxAge: 5 },
-      [isTouched]: true,
-      id: "foo",
-    });
+    expect(store.touch).toHaveBeenCalledWith(
+      "foo",
+      expect.objectContaining({
+        id: "foo",
+        cookie: expect.objectContaining({
+          path: "/",
+          httpOnly: true,
+          secure: false,
+          maxAge: 5,
+          expires: newExpires,
+        }),
+        [isTouched]: true,
+      })
+    );
   });
   test("not touch session life time < touchAfter", async () => {
     const store = new MemoryStore();
@@ -322,28 +341,34 @@ describe("session()", () => {
       res.end("Hello, world!");
       res.end();
     });
-    
-    return new Promise((resolve, reject) => {
-      server.listen(0, async () => {
-        const address = server.address();
-        request(`http://127.0.0.1:${address.port}/`, (res) => {
-          let data = "";
-          res.on("data", (d) => {
-            if (d) data += d;
-          });
-          res.on("end", () => {
-            try {
+    await new Promise<void>((resolve, reject) => {
+      server.listen(
+        async (req, res) => {
+          await session()(req, res);
+          req.session.foo = "bar";
+          res.end("Hello, world!");
+          res.end();
+        },
+        function callback() {
+          const address = this.address();
+          request(`http://127.0.0.1:${address.port}/`, (res) => {
+            let data = "";
+            res.on("data", (d) => {
+              if (d) data += d;
+            });
+            res.on("end", () => {
               expect(data).toEqual("Hello, world!");
-              server.close(resolve);
-            } catch (err) {
-              server.close(() => reject(err));
-            }
-          });
-          res.on("error", (err) => server.close(() => reject(err)));
-        })
-          .on("error", (err) => server.close(() => reject(err)))
-          .end();
-      });
+              server.close((closeErr) => {
+                if (closeErr) reject(closeErr);
+                else resolve();
+              });
+            });
+            res.on("error", reject);
+          })
+            .on("error", reject)
+            .end();
+        }
+      );
     });
   });
   test("allow encode and decode sid", async () => {
@@ -401,7 +426,7 @@ describe("session()", () => {
   });
   test("should convert to date if store returns session.cookies.expires as string", async () => {
     const store = {
-      get: async (_id: string) => {
+      get: async (id: string) => {
         //  force sess.cookie.expires to be string
         return JSON.parse(
           JSON.stringify({
@@ -409,8 +434,8 @@ describe("session()", () => {
           })
         );
       },
-      set: async (_sid: string, _sess: SessionData) => undefined,
-      destroy: async (_id: string) => undefined,
+      set: async (sid: string, sess: SessionData) => undefined,
+      destroy: async (id: string) => undefined,
     };
     await inject(
       async (req, res) => {

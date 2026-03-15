@@ -90,7 +90,7 @@ The package at `@types/next-auth` is now deprecated.
 ### Add API Route
 
 ```javascript
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 
 export default NextAuth({
@@ -150,3 +150,8 @@ ISC
 ---
 
 This package is part of the [OpenSource Framework](https://github.com/riceharvest/opensourceframework) monorepo.
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

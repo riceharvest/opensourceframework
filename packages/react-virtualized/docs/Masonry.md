@@ -146,7 +146,7 @@ import {
   CellMeasurerCache,
   createMasonryCellPositioner,
   Masonry,
-} from 'react-virtualized';
+} from '@opensourceframework/react-virtualized';
 
 // Array of images with captions
 const list = [];
@@ -218,7 +218,7 @@ import {
   CellMeasurerCache,
   createMasonryCellPositioner,
   Masonry,
-} from 'react-virtualized';
+} from '@opensourceframework/react-virtualized';
 import ImageMeasurer from 'react-virtualized-image-measurer';
 
 // Array of images with captions

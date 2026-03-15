@@ -1,4 +1,4 @@
-import { DatasetJsonLd } from "next-seo";
+import { DatasetJsonLd } from '@opensourceframework/next-seo';
 
 export default function DatasetPage() {
   return (
@@ -9,10 +9,10 @@ export default function DatasetPage() {
         url="https://example.com/dataset/storm-events"
         creator="NOAA"
         distribution={{
-          contentUrl: "https://www.ncdc.noaa.gov/stormevents/ftp.jsp",
-          encodingFormat: "CSV",
+          contentUrl: 'https://www.ncdc.noaa.gov/stormevents/ftp.jsp',
+          encodingFormat: 'CSV',
         }}
-        keywords={["storm", "weather", "climate", "natural disasters"]}
+        keywords={['storm', 'weather', 'climate', 'natural disasters']}
         isAccessibleForFree={true}
       />
 
@@ -29,22 +29,20 @@ export default function DatasetPage() {
         <section className="prose max-w-none">
           <h2>Description</h2>
           <p>
-            Storm Data is provided by the National Weather Service (NWS) and
-            contain statistics on personal injuries and damage estimates.
+            Storm Data is provided by the National Weather Service (NWS) and contain statistics on
+            personal injuries and damage estimates.
           </p>
 
           <h2>Keywords</h2>
           <div className="flex gap-2 mt-2">
-            {["storm", "weather", "climate", "natural disasters"].map(
-              (keyword) => (
-                <span
-                  key={keyword}
-                  className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                >
-                  {keyword}
-                </span>
-              ),
-            )}
+            {['storm', 'weather', 'climate', 'natural disasters'].map((keyword) => (
+              <span
+                key={keyword}
+                className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+              >
+                {keyword}
+              </span>
+            ))}
           </div>
 
           <h2>Download</h2>

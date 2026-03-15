@@ -433,7 +433,7 @@ describe('isRangeVisible', () => {
 
 describe('forceUpdateReactVirtualizedComponent', () => {
   it('should call :recomputeGridSize if defined', () => {
-    const recomputeGridSize = jest.fn();
+    const recomputeGridSize = vi.fn();
     class TestComponent extends React.Component {
       recomputeGridSize = recomputeGridSize;
       render() {
@@ -446,7 +446,7 @@ describe('forceUpdateReactVirtualizedComponent', () => {
   });
 
   it('should called :recomputeRowHeights if defined', () => {
-    const recomputeRowHeights = jest.fn();
+    const recomputeRowHeights = vi.fn();
     class TestComponent extends React.Component {
       recomputeRowHeights = recomputeRowHeights;
       render() {
@@ -459,7 +459,7 @@ describe('forceUpdateReactVirtualizedComponent', () => {
   });
 
   it('should call :forceUpdate otherwise', () => {
-    const forceUpdate = jest.fn();
+    const forceUpdate = vi.fn();
     class TestComponent extends React.Component {
       forceUpdate = forceUpdate;
       render() {

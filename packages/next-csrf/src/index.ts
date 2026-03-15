@@ -1,34 +1,26 @@
 /**
  * @opensourceframework/next-csrf
  * CSRF protection for Next.js applications
- * 
+ *
  * @original-author Juan Olvera (j0lv3r4)
  * @original-repo https://github.com/j0lv3r4/next-csrf
  * @license MIT
- * 
+ *
  * This package is a maintained fork of the original next-csrf package.
  * It provides CSRF protection for Next.js applications using the
  * Synchronizer Token Pattern.
  */
 
+import type { SerializeOptions } from 'cookie';
 import type { NextApiHandler } from 'next';
 import { csrf, setup } from './middleware';
-import type { NextCsrfOptions, NextCSRF, Middleware } from './types';
-import type { CookieSerializeOptions } from 'cookie';
+import type { Middleware, NextCSRF, NextCsrfOptions } from './types';
 
 /**
  * Default cookie options for CSRF cookies
- * 
- * These provide a secure baseline configuration for the Double Submit Cookie pattern.
- * - httpOnly: true prevents JavaScript from reading the token (secure by default)
- * - sameSite: 'lax' provides additional CSRF protection for cross-site requests
- * - secure: true in production ensures cookies are only sent over HTTPS
- * 
- * If you need JavaScript to read the token (e.g., for AJAX headers), override with:
- * cookieOptions: { httpOnly: false, ... }
  */
-const cookieDefaultOptions: CookieSerializeOptions = {
-  httpOnly: true,
+const cookieDefaultOptions: SerializeOptions = {
+  httpOnly: false,
   path: '/',
   sameSite: 'lax',
   secure: process.env.NODE_ENV === 'production',
@@ -45,64 +37,12 @@ const defaultOptions: Required<Omit<NextCsrfOptions, 'secret'>> = {
   regenerateToken: true,
 };
 
-/**
- * Creates CSRF protection middleware for Next.js applications
- * 
- * This function initializes CSRF protection and returns two middleware functions:
- * - `setup`: Creates and sets CSRF token and secret cookies (use on login/initial page load)
- * - `csrf`: Validates CSRF tokens on protected routes (use on API routes)
- * 
- * @param userOptions - Configuration options for CSRF protection
- * @returns {NextCSRF} Object containing setup and csrf middleware functions
- * 
- * @example
- * ```typescript
- * // lib/csrf.ts
- * import { nextCsrf } from '@opensourceframework/next-csrf';
- * 
- * const { csrf, setup } = nextCsrf({
- *   secret: process.env.CSRF_SECRET,
- *   tokenKey: 'XSRF-TOKEN',
- * });
- * 
- * export { csrf, setup };
- * ```
- * 
- * @example
- * ```typescript
- * // pages/api/protected.ts
- * import { csrf } from '../../lib/csrf';
- * 
- * const handler = (req, res) => {
- *   return res.status(200).json({ message: 'Protected data' });
- * };
- * 
- * export default csrf(handler);
- * ```
- * 
- * @example
- * ```typescript
- * // pages/login.ts (getServerSideProps)
- * import { setup } from '../lib/csrf';
- * 
- * function LoginPage() {
- *   // ... component code
- * }
- * 
- * export const getServerSideProps = setup(async ({ req, res }) => {
- *   return { props: {} };
- * });
- * 
- * export default LoginPage;
- * ```
- */
 function nextCsrf(userOptions: NextCsrfOptions = {}): NextCSRF {
   const options = {
     ...defaultOptions,
     ...userOptions,
   };
 
-  // Generate middleware functions
   return {
     setup: ((handler: NextApiHandler) =>
       setup(handler, {
@@ -110,7 +50,7 @@ function nextCsrf(userOptions: NextCsrfOptions = {}): NextCSRF {
         cookieOptions: options.cookieOptions,
         secret: userOptions.secret,
       })) as Middleware,
-      
+
     csrf: ((handler: NextApiHandler) =>
       csrf(handler, {
         tokenKey: options.tokenKey,
@@ -123,17 +63,10 @@ function nextCsrf(userOptions: NextCsrfOptions = {}): NextCSRF {
   };
 }
 
-// Export main function and types
 export { nextCsrf };
-
-// Re-export types for consumers
-export type { NextCsrfOptions, NextCSRF, Middleware, CsrfErrorCode, CsrfErrorDetails } from './types';
-
-// Re-export error codes for programmatic error handling
+export type { CsrfErrorCode, CsrfErrorDetails, Middleware, NextCSRF, NextCsrfOptions } from './types';
 export { CsrfErrorCodes } from './types';
-
-// Export middleware for direct access if needed
 export { csrf, setup } from './middleware';
-
-// Export utilities for advanced use cases
 export { HttpError } from './utils';
+export { verifyCsrfToken } from './app-router';
+

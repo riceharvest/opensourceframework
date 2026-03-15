@@ -1,4 +1,4 @@
-import { SoftwareApplicationJsonLd } from "next-seo";
+import { SoftwareApplicationJsonLd } from '@opensourceframework/next-seo';
 
 export default function MobileAppPage() {
   return (
@@ -9,14 +9,14 @@ export default function MobileAppPage() {
         description="Your personal fitness companion for tracking workouts, nutrition, and health goals"
         url="https://example.com/fittrack"
         image={[
-          "https://example.com/fittrack-icon-1x1.png",
+          'https://example.com/fittrack-icon-1x1.png',
           {
-            url: "https://example.com/fittrack-icon-4x3.png",
+            url: 'https://example.com/fittrack-icon-4x3.png',
             width: 1200,
             height: 900,
           },
           {
-            url: "https://example.com/fittrack-icon-16x9.png",
+            url: 'https://example.com/fittrack-icon-16x9.png',
             width: 1920,
             height: 1080,
           },
@@ -26,7 +26,7 @@ export default function MobileAppPage() {
         operatingSystem="Android 7.0+, iOS 13.0+"
         offers={{
           price: 0,
-          priceCurrency: "USD",
+          priceCurrency: 'USD',
         }}
         aggregateRating={{
           ratingValue: 4.7,
@@ -35,68 +35,68 @@ export default function MobileAppPage() {
         }}
         review={[
           {
-            author: "Alex Rivera",
+            author: 'Alex Rivera',
             reviewRating: { ratingValue: 5 },
             reviewBody:
-              "This app transformed my fitness journey! The workout tracking is incredibly detailed.",
-            datePublished: "2024-11-10",
+              'This app transformed my fitness journey! The workout tracking is incredibly detailed.',
+            datePublished: '2024-11-10',
           },
           {
-            author: "Emma Thompson",
+            author: 'Emma Thompson',
             reviewRating: { ratingValue: 4 },
             reviewBody:
-              "Great app with useful features. Would love to see more yoga workouts added.",
-            datePublished: "2024-10-28",
+              'Great app with useful features. Would love to see more yoga workouts added.',
+            datePublished: '2024-10-28',
           },
         ]}
         permissions={[
-          "android.permission.ACTIVITY_RECOGNITION",
-          "android.permission.ACCESS_FINE_LOCATION",
-          "android.permission.CAMERA",
-          "android.permission.READ_EXTERNAL_STORAGE",
-          "android.permission.RECEIVE_BOOT_COMPLETED",
+          'android.permission.ACTIVITY_RECOGNITION',
+          'android.permission.ACCESS_FINE_LOCATION',
+          'android.permission.CAMERA',
+          'android.permission.READ_EXTERNAL_STORAGE',
+          'android.permission.RECEIVE_BOOT_COMPLETED',
         ]}
         screenshot={[
           {
-            url: "https://example.com/screenshots/fittrack-dashboard.jpg",
-            caption: "Personal fitness dashboard",
+            url: 'https://example.com/screenshots/fittrack-dashboard.jpg',
+            caption: 'Personal fitness dashboard',
           },
           {
-            url: "https://example.com/screenshots/fittrack-workout.jpg",
-            caption: "Workout tracking in progress",
+            url: 'https://example.com/screenshots/fittrack-workout.jpg',
+            caption: 'Workout tracking in progress',
           },
           {
-            url: "https://example.com/screenshots/fittrack-nutrition.jpg",
-            caption: "Nutrition tracking and meal planning",
+            url: 'https://example.com/screenshots/fittrack-nutrition.jpg',
+            caption: 'Nutrition tracking and meal planning',
           },
           {
-            url: "https://example.com/screenshots/fittrack-progress.jpg",
-            caption: "Progress charts and analytics",
+            url: 'https://example.com/screenshots/fittrack-progress.jpg',
+            caption: 'Progress charts and analytics',
           },
         ]}
         featureList={[
-          "500+ exercise library with videos",
-          "Custom workout creation",
-          "GPS route tracking for runs",
-          "Calorie and macro tracking",
-          "Progress photos and measurements",
-          "Apple Health and Google Fit sync",
-          "Social challenges with friends",
-          "Offline mode support",
-          "Wearable device integration",
+          '500+ exercise library with videos',
+          'Custom workout creation',
+          'GPS route tracking for runs',
+          'Calorie and macro tracking',
+          'Progress photos and measurements',
+          'Apple Health and Google Fit sync',
+          'Social challenges with friends',
+          'Offline mode support',
+          'Wearable device integration',
         ]}
         softwareVersion="5.3.2"
         datePublished="2019-01-15"
         dateModified="2024-11-20"
         author="FitTech Solutions"
         publisher={{
-          name: "FitTech Solutions Ltd.",
-          url: "https://fittechsolutions.com",
-          logo: "https://fittechsolutions.com/logo.png",
+          name: 'FitTech Solutions Ltd.',
+          url: 'https://fittechsolutions.com',
+          logo: 'https://fittechsolutions.com/logo.png',
         }}
         downloadUrl="https://play.google.com/store/apps/details?id=com.fittech.fittrack"
         installUrl="https://apps.apple.com/app/fittrack/id123456789"
-        countriesSupported={["US", "CA", "GB", "AU", "NZ", "IE", "SG", "IN"]}
+        countriesSupported={['US', 'CA', 'GB', 'AU', 'NZ', 'IE', 'SG', 'IN']}
         storageRequirements="150MB"
       />
 
@@ -112,24 +112,17 @@ export default function MobileAppPage() {
         </div>
 
         <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-8 mb-8">
-          <h2 className="text-2xl font-bold mb-4">
-            Start Your Fitness Journey Today
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">Start Your Fitness Journey Today</h2>
           <p className="text-gray-700 mb-6">
-            Join millions of users who have transformed their lives with
-            FitTrack. Track workouts, monitor nutrition, and achieve your health
-            goals.
+            Join millions of users who have transformed their lives with FitTrack. Track workouts,
+            monitor nutrition, and achieve your health goals.
           </p>
           <div className="flex flex-wrap gap-4">
             <a
               href="#"
               className="inline-flex items-center bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
             >
-              <svg
-                className="w-6 h-6 mr-2"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
+              <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
               </svg>
               Download on App Store
@@ -138,11 +131,7 @@ export default function MobileAppPage() {
               href="#"
               className="inline-flex items-center bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
             >
-              <svg
-                className="w-6 h-6 mr-2"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
+              <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
               </svg>
               Get it on Google Play
@@ -177,8 +166,7 @@ export default function MobileAppPage() {
               <div className="text-3xl mb-3">🏋️‍♂️</div>
               <h3 className="font-semibold mb-2">Workout Tracking</h3>
               <p className="text-gray-600 text-sm">
-                500+ exercises with video guides, custom workout creation, and
-                real-time tracking
+                500+ exercises with video guides, custom workout creation, and real-time tracking
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
@@ -241,8 +229,7 @@ export default function MobileAppPage() {
           <h2 className="text-2xl font-semibold mb-4">Permissions</h2>
           <div className="bg-gray-50 rounded-lg p-6">
             <p className="text-gray-700 mb-4">
-              FitTrack requires the following permissions to provide the best
-              experience:
+              FitTrack requires the following permissions to provide the best experience:
             </p>
             <ul className="space-y-2">
               <li className="flex items-start">
@@ -258,27 +245,21 @@ export default function MobileAppPage() {
                 <span className="text-green-500 mr-2">📷</span>
                 <div>
                   <span className="font-medium">Camera</span>
-                  <p className="text-sm text-gray-600">
-                    For progress photos and barcode scanning
-                  </p>
+                  <p className="text-sm text-gray-600">For progress photos and barcode scanning</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">🏃</span>
                 <div>
                   <span className="font-medium">Activity Recognition</span>
-                  <p className="text-sm text-gray-600">
-                    For automatic workout detection
-                  </p>
+                  <p className="text-sm text-gray-600">For automatic workout detection</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">💾</span>
                 <div>
                   <span className="font-medium">Storage</span>
-                  <p className="text-sm text-gray-600">
-                    For saving workout data and photos
-                  </p>
+                  <p className="text-sm text-gray-600">For saving workout data and photos</p>
                 </div>
               </li>
             </ul>
@@ -290,11 +271,7 @@ export default function MobileAppPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="font-semibold mb-3 flex items-center">
-                <svg
-                  className="w-5 h-5 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
+                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                 </svg>
                 iOS Requirements
@@ -308,11 +285,7 @@ export default function MobileAppPage() {
             </div>
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="font-semibold mb-3 flex items-center">
-                <svg
-                  className="w-5 h-5 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="#3DDC84"
-                >
+                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="#3DDC84">
                   <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
                 </svg>
                 Android Requirements

@@ -1,4 +1,4 @@
-const withPWA = require('next-pwa')({
+const withPWA = require('@opensourceframework/next-pwa')({
   dest: 'public',
   register: false,
   skipWaiting: false

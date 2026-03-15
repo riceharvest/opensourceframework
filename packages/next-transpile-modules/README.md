@@ -136,7 +136,7 @@ const withTM = require('@opensourceframework/next-transpile-modules')(transpiled
 ### With `next-compose-plugins`:
 
 ```js
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const withTM = require('@opensourceframework/next-transpile-modules')(['some-module', 'and-another']);
 
 module.exports = withPlugins([withTM], {
@@ -341,3 +341,8 @@ It is not a great solution, but it works. Any help to find a more future-proof s
 ## Credits
 
 All the honor goes to [James Gorrie](https://github.com/jamesgorrie) who created the first version of this plugin.
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

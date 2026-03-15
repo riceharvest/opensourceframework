@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 // Note about signIn() and signOut() methods:
 //
@@ -30,6 +30,7 @@ import parseUrl from "../lib/parse-url"
 const __NEXTAUTH = {
   baseUrl: parseUrl(process.env.NEXTAUTH_URL || process.env.VERCEL_URL).baseUrl,
   basePath: parseUrl(process.env.NEXTAUTH_URL).basePath,
+  url: parseUrl(process.env.NEXTAUTH_URL || process.env.VERCEL_URL).url,
   baseUrlServer: parseUrl(
     process.env.NEXTAUTH_URL_INTERNAL ||
       process.env.NEXTAUTH_URL ||
@@ -38,6 +39,11 @@ const __NEXTAUTH = {
   basePathServer: parseUrl(
     process.env.NEXTAUTH_URL_INTERNAL || process.env.NEXTAUTH_URL
   ).basePath,
+  urlServer: parseUrl(
+    process.env.NEXTAUTH_URL_INTERNAL ||
+      process.env.NEXTAUTH_URL ||
+      process.env.VERCEL_URL
+  ).url,
   keepAlive: 0,
   clientMaxAge: 0,
   // Properties starting with _ are used for tracking internal app state
@@ -189,16 +195,16 @@ export async function getProviders() {
 export async function signIn(provider, options = {}, authorizationParams = {}) {
   const { callbackUrl = window.location.href, redirect = true } = options
 
-  const baseUrl = _apiBaseUrl()
+  const apiBaseUrl = _apiBaseUrl()
   const providers = await getProviders()
 
   if (!providers) {
-    return window.location.replace(`${baseUrl}/error`)
+    return window.location.replace(`${apiBaseUrl}/error`)
   }
 
   if (!(provider in providers)) {
     return window.location.replace(
-      `${baseUrl}/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
+      `${apiBaseUrl}/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`
     )
   }
 
@@ -207,8 +213,8 @@ export async function signIn(provider, options = {}, authorizationParams = {}) {
   const isSupportingReturn = isCredentials || isEmail
 
   const signInUrl = isCredentials
-    ? `${baseUrl}/callback/${provider}`
-    : `${baseUrl}/signin/${provider}`
+    ? `${apiBaseUrl}/callback/${provider}`
+    : `${apiBaseUrl}/signin/${provider}`
 
   const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`
 
@@ -251,7 +257,7 @@ export async function signIn(provider, options = {}, authorizationParams = {}) {
 
 export async function signOut(options = {}) {
   const { callbackUrl = window.location.href, redirect = true } = options
-  const baseUrl = _apiBaseUrl()
+  const apiBaseUrl = _apiBaseUrl()
   const fetchOptions = {
     method: "post",
     headers: {
@@ -263,7 +269,7 @@ export async function signOut(options = {}) {
       json: true,
     }),
   }
-  const res = await fetch(`${baseUrl}/signout`, fetchOptions)
+  const res = await fetch(`${apiBaseUrl}/signout`, fetchOptions)
   const data = await res.json()
   _getBroadcast().post({ event: "session", data: { trigger: "signout" } })
 
@@ -348,10 +354,10 @@ function _apiBaseUrl() {
     }
 
     // Return absolute path when called server side
-    return `${__NEXTAUTH.baseUrlServer}${__NEXTAUTH.basePathServer}`
+    return __NEXTAUTH.urlServer.href
   }
   // Return relative path when called client side
-  return __NEXTAUTH.basePath
+  return __NEXTAUTH.url.pathname
 }
 
 /** Returns the number of seconds elapsed since January 1, 1970 00:00:00 UTC. */
@@ -393,11 +399,7 @@ function BroadcastChannel(name = "nextauth.message") {
   }
 }
 
-// Some methods are exported with more than one name. This provides some
-// flexibility over how they can be invoked and backwards compatibility
-// with earlier releases. These should be removed in a newer release, as it only
-// creates problems for bundlers and adds confusion to users. TypeScript declarations
-// will provide sufficient help when importing
+// Named exports
 export {
   setOptions as options,
   getSession as session,
@@ -407,6 +409,7 @@ export {
   signOut as signout,
 }
 
+// Default export
 export default {
   getSession,
   getCsrfToken,
@@ -415,12 +418,7 @@ export default {
   signIn,
   signOut,
   Provider,
-  /* Deprecated / unsupported features below this line */
-  // Use setOptions() set options globally in the app.
   setOptions,
-  // Some methods are exported with more than one name. This provides some
-  // flexibility over how they can be invoked and backwards compatibility
-  // with earlier releases.
   options: setOptions,
   session: getSession,
   providers: getProviders,

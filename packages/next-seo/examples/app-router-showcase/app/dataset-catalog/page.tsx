@@ -1,4 +1,4 @@
-import { DatasetJsonLd } from "next-seo";
+import { DatasetJsonLd } from '@opensourceframework/next-seo';
 
 export default function DatasetCatalogPage() {
   return (
@@ -8,42 +8,41 @@ export default function DatasetCatalogPage() {
         description="Daily ocean temperature measurements from Pacific Ocean monitoring stations. Part of the larger Pacific Ocean Climate Monitoring Program dataset collection."
         url="https://example.com/datasets/ocean-temp-2023"
         identifier="https://doi.org/10.5000/ocean-temp-2023"
-        keywords={["ocean", "temperature", "Pacific", "climate", "time series"]}
+        keywords={['ocean', 'temperature', 'Pacific', 'climate', 'time series']}
         license="https://creativecommons.org/licenses/by/4.0/"
         isAccessibleForFree={true}
         creator={{
-          name: "Pacific Ocean Research Institute",
-          url: "https://example.com/pori",
-          logo: "https://example.com/pori-logo.png",
+          name: 'Pacific Ocean Research Institute',
+          url: 'https://example.com/pori',
+          logo: 'https://example.com/pori-logo.png',
         }}
         includedInDataCatalog={{
-          name: "Pacific Ocean Climate Data Catalog",
-          url: "https://example.com/pacific-climate-catalog",
-          description:
-            "Comprehensive collection of Pacific Ocean climate datasets",
+          name: 'Pacific Ocean Climate Data Catalog',
+          url: 'https://example.com/pacific-climate-catalog',
+          description: 'Comprehensive collection of Pacific Ocean climate datasets',
         }}
         distribution={{
-          contentUrl: "https://example.com/data/ocean-temp-2023.csv",
-          encodingFormat: "CSV",
-          contentSize: "156MB",
+          contentUrl: 'https://example.com/data/ocean-temp-2023.csv',
+          encodingFormat: 'CSV',
+          contentSize: '156MB',
         }}
         temporalCoverage="2023-01-01/2023-12-31"
         spatialCoverage={{
-          name: "Pacific Ocean",
+          name: 'Pacific Ocean',
           geo: {
-            box: "-60 120 60 -80",
+            box: '-60 120 60 -80',
           },
         }}
         variableMeasured={[
           {
-            name: "Sea Surface Temperature",
-            value: "degrees Celsius",
-            propertyID: "SST",
+            name: 'Sea Surface Temperature',
+            value: 'degrees Celsius',
+            propertyID: 'SST',
           },
           {
-            name: "Temperature at 10m depth",
-            value: "degrees Celsius",
-            propertyID: "T10",
+            name: 'Temperature at 10m depth',
+            value: 'degrees Celsius',
+            propertyID: 'T10',
           },
         ]}
       />
@@ -55,16 +54,13 @@ export default function DatasetCatalogPage() {
           </p>
         </div>
 
-        <h1 className="text-3xl font-bold mb-4">
-          Ocean Temperature Time Series 2023
-        </h1>
+        <h1 className="text-3xl font-bold mb-4">Ocean Temperature Time Series 2023</h1>
 
         <section className="prose max-w-none mb-8">
           <h2>Dataset Overview</h2>
           <p>
-            Daily ocean temperature measurements from Pacific Ocean monitoring
-            stations. Part of the larger Pacific Ocean Climate Monitoring
-            Program dataset collection.
+            Daily ocean temperature measurements from Pacific Ocean monitoring stations. Part of the
+            larger Pacific Ocean Climate Monitoring Program dataset collection.
           </p>
 
           <div className="bg-gray-100 p-4 rounded my-4">
@@ -115,13 +111,10 @@ export default function DatasetCatalogPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Data Catalog</h2>
           <div className="border rounded-lg p-6 bg-gradient-to-r from-blue-50 to-cyan-50">
-            <h3 className="text-xl font-semibold mb-2">
-              Pacific Ocean Climate Data Catalog
-            </h3>
+            <h3 className="text-xl font-semibold mb-2">Pacific Ocean Climate Data Catalog</h3>
             <p className="text-gray-700 mb-4">
-              This dataset is part of a comprehensive collection of Pacific
-              Ocean climate datasets maintained by the Pacific Ocean Research
-              Institute.
+              This dataset is part of a comprehensive collection of Pacific Ocean climate datasets
+              maintained by the Pacific Ocean Research Institute.
             </p>
             <a
               href="https://example.com/pacific-climate-catalog"
@@ -152,8 +145,8 @@ export default function DatasetCatalogPage() {
 
         <footer className="text-sm text-gray-600 border-t pt-4">
           <p>
-            Dataset provided by the Pacific Ocean Research Institute. Licensed
-            under Creative Commons Attribution 4.0 International.
+            Dataset provided by the Pacific Ocean Research Institute. Licensed under Creative
+            Commons Attribution 4.0 International.
           </p>
         </footer>
       </main>

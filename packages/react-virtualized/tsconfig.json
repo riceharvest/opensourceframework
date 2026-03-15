@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./source-stripped",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "declaration": false,
+    "declarationMap": false
+  },
+  "include": ["source-stripped/**/*"],
+  "exclude": ["examples", "node_modules", "dist", "**/*.jest.jsx"]
+}

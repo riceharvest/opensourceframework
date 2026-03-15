@@ -1,4 +1,4 @@
-import { VideoJsonLd } from "next-seo";
+import { VideoJsonLd } from '@opensourceframework/next-seo';
 
 export default function VideoClipsPage() {
   return (
@@ -12,45 +12,45 @@ export default function VideoClipsPage() {
         embedUrl="https://example.com/embed/french-pastries-guide"
         duration="PT45M"
         interactionStatistic={{
-          interactionType: "WatchAction",
+          interactionType: 'WatchAction',
           userInteractionCount: 75000,
         }}
         hasPart={[
           {
-            name: "Introduction to French Pastries",
+            name: 'Introduction to French Pastries',
             startOffset: 0,
             endOffset: 180,
-            url: "https://example.com/videos/french-pastries-guide?t=0",
+            url: 'https://example.com/videos/french-pastries-guide?t=0',
           },
           {
-            name: "Making Croissants",
+            name: 'Making Croissants',
             startOffset: 180,
             endOffset: 720,
-            url: "https://example.com/videos/french-pastries-guide?t=180",
+            url: 'https://example.com/videos/french-pastries-guide?t=180',
           },
           {
-            name: "Perfect Pain au Chocolat",
+            name: 'Perfect Pain au Chocolat',
             startOffset: 720,
             endOffset: 1200,
-            url: "https://example.com/videos/french-pastries-guide?t=720",
+            url: 'https://example.com/videos/french-pastries-guide?t=720',
           },
           {
-            name: "Classic Éclairs",
+            name: 'Classic Éclairs',
             startOffset: 1200,
             endOffset: 1800,
-            url: "https://example.com/videos/french-pastries-guide?t=1200",
+            url: 'https://example.com/videos/french-pastries-guide?t=1200',
           },
           {
-            name: "Fruit Tarts and Final Tips",
+            name: 'Fruit Tarts and Final Tips',
             startOffset: 1800,
             endOffset: 2700,
-            url: "https://example.com/videos/french-pastries-guide?t=1800",
+            url: 'https://example.com/videos/french-pastries-guide?t=1800',
           },
         ]}
         author="Chef Pierre Dubois"
         publisher={{
-          name: "French Culinary Academy",
-          logo: "https://example.com/french-culinary-academy-logo.png",
+          name: 'French Culinary Academy',
+          logo: 'https://example.com/french-culinary-academy-logo.png',
         }}
       />
 
@@ -70,9 +70,7 @@ export default function VideoClipsPage() {
             >
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-semibold">
-                    Introduction to French Pastries
-                  </p>
+                  <p className="font-semibold">Introduction to French Pastries</p>
                   <p className="text-sm text-gray-600">0:00 - 3:00</p>
                 </div>
                 <span className="text-gray-400">→</span>
@@ -132,10 +130,9 @@ export default function VideoClipsPage() {
         <section>
           <h2>About This Tutorial</h2>
           <p>
-            Master the art of French pastry making with Chef Pierre Dubois in
-            this comprehensive 45-minute tutorial. Each chapter focuses on a
-            different classic French pastry, with detailed step-by-step
-            instructions.
+            Master the art of French pastry making with Chef Pierre Dubois in this comprehensive
+            45-minute tutorial. Each chapter focuses on a different classic French pastry, with
+            detailed step-by-step instructions.
           </p>
         </section>
 
@@ -152,9 +149,9 @@ export default function VideoClipsPage() {
 
         <div className="bg-blue-50 p-6 rounded-lg">
           <p className="text-lg">
-            <strong>Pro Tip:</strong> Use the chapter navigation above to jump
-            directly to the pastry you want to learn about. Each section is
-            self-contained with all the information you need.
+            <strong>Pro Tip:</strong> Use the chapter navigation above to jump directly to the
+            pastry you want to learn about. Each section is self-contained with all the information
+            you need.
           </p>
         </div>
       </main>

@@ -1,4 +1,4 @@
-import { ArticleJsonLd } from "next-seo";
+import { ArticleJsonLd } from '@opensourceframework/next-seo';
 
 export default function TestUrlParamsPage() {
   return (
@@ -9,41 +9,36 @@ export default function TestUrlParamsPage() {
         mainEntityOfPage="https://example.com/main?category=tech&sort=date"
         datePublished="2024-01-01T00:00:00.000Z"
         author={{
-          "@type": "Person",
-          name: "John Doe",
-          url: "https://example.com/authors/john?bio=full&lang=en",
+          '@type': 'Person',
+          name: 'John Doe',
+          url: 'https://example.com/authors/john?bio=full&lang=en',
         }}
         publisher={{
-          name: "Example Corp",
-          url: "https://example.com?ref=article&campaign=2024",
+          name: 'Example Corp',
+          url: 'https://example.com?ref=article&campaign=2024',
         }}
       />
 
       <div className="prose lg:prose-xl">
         <h1>Test Article with URL Parameters</h1>
-        <p>
-          This page tests that URL query parameters are preserved correctly in
-          JSON-LD.
-        </p>
+        <p>This page tests that URL query parameters are preserved correctly in JSON-LD.</p>
 
         <h2>URLs with Parameters</h2>
         <ul>
           <li>
-            <strong>Article URL:</strong>{" "}
-            <code>
-              https://example.com/article?title=yes&page=1&utm_source=google&filter=new
-            </code>
+            <strong>Article URL:</strong>{' '}
+            <code>https://example.com/article?title=yes&page=1&utm_source=google&filter=new</code>
           </li>
           <li>
-            <strong>Main Entity:</strong>{" "}
+            <strong>Main Entity:</strong>{' '}
             <code>https://example.com/main?category=tech&sort=date</code>
           </li>
           <li>
-            <strong>Author URL:</strong>{" "}
+            <strong>Author URL:</strong>{' '}
             <code>https://example.com/authors/john?bio=full&lang=en</code>
           </li>
           <li>
-            <strong>Publisher URL:</strong>{" "}
+            <strong>Publisher URL:</strong>{' '}
             <code>https://example.com?ref=article&campaign=2024</code>
           </li>
         </ul>

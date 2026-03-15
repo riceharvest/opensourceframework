@@ -1,4 +1,4 @@
-import { ProductJsonLd } from "next-seo";
+import { ProductJsonLd } from '@opensourceframework/next-seo';
 
 export default function ProductShippingOptionsPage() {
   return (
@@ -8,39 +8,39 @@ export default function ProductShippingOptionsPage() {
         description="Solid oak desk with modern design, perfect for home office setups"
         url="https://example.com/products/wooden-desk"
         image={[
-          "https://example.com/desk-1x1.jpg",
-          "https://example.com/desk-4x3.jpg",
-          "https://example.com/desk-16x9.jpg",
+          'https://example.com/desk-1x1.jpg',
+          'https://example.com/desk-4x3.jpg',
+          'https://example.com/desk-16x9.jpg',
         ]}
         sku="DESK-OAK-001"
         mpn="WD2024OAK"
         brand="Artisan Furniture Co."
         offers={{
           price: 799.99,
-          priceCurrency: "USD",
-          availability: "InStock",
-          priceValidUntil: "2024-12-31",
+          priceCurrency: 'USD',
+          availability: 'InStock',
+          priceValidUntil: '2024-12-31',
           // Multiple shipping options
           shippingDetails: [
             {
               // Standard shipping
               shippingRate: {
                 value: 49.99,
-                currency: "USD",
+                currency: 'USD',
               },
               shippingDestination: {
-                addressCountry: "US",
+                addressCountry: 'US',
               },
               deliveryTime: {
                 handlingTime: {
                   minValue: 1,
                   maxValue: 2,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
                 transitTime: {
                   minValue: 5,
                   maxValue: 7,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
               },
             },
@@ -48,21 +48,21 @@ export default function ProductShippingOptionsPage() {
               // Express shipping
               shippingRate: {
                 value: 99.99,
-                currency: "USD",
+                currency: 'USD',
               },
               shippingDestination: {
-                addressCountry: "US",
+                addressCountry: 'US',
               },
               deliveryTime: {
                 handlingTime: {
                   minValue: 0,
                   maxValue: 1,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
                 transitTime: {
                   minValue: 2,
                   maxValue: 3,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
               },
             },
@@ -70,22 +70,22 @@ export default function ProductShippingOptionsPage() {
               // Free shipping to specific states
               shippingRate: {
                 value: 0,
-                currency: "USD",
+                currency: 'USD',
               },
               shippingDestination: {
-                addressCountry: "US",
-                addressRegion: ["CA", "NY", "TX"],
+                addressCountry: 'US',
+                addressRegion: ['CA', 'NY', 'TX'],
               },
               deliveryTime: {
                 handlingTime: {
                   minValue: 2,
                   maxValue: 3,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
                 transitTime: {
                   minValue: 7,
                   maxValue: 10,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
               },
             },
@@ -93,29 +93,29 @@ export default function ProductShippingOptionsPage() {
               // International shipping
               shippingRate: {
                 value: 199.99,
-                currency: "USD",
+                currency: 'USD',
               },
               shippingDestination: [
                 {
-                  addressCountry: "CA",
+                  addressCountry: 'CA',
                 },
                 {
-                  addressCountry: "GB",
+                  addressCountry: 'GB',
                 },
                 {
-                  addressCountry: "DE",
+                  addressCountry: 'DE',
                 },
               ],
               deliveryTime: {
                 handlingTime: {
                   minValue: 2,
                   maxValue: 3,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
                 transitTime: {
                   minValue: 10,
                   maxValue: 21,
-                  unitCode: "DAY",
+                  unitCode: 'DAY',
                 },
               },
             },
@@ -136,9 +136,7 @@ export default function ProductShippingOptionsPage() {
             <li>/</li>
             <li>Office</li>
             <li>/</li>
-            <li className="font-semibold text-gray-900">
-              Handcrafted Wooden Desk
-            </li>
+            <li className="font-semibold text-gray-900">Handcrafted Wooden Desk</li>
           </ol>
         </nav>
 
@@ -157,11 +155,9 @@ export default function ProductShippingOptionsPage() {
 
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">
-                Handcrafted Wooden Desk
-              </h1>
+              <h1 className="text-3xl font-bold mb-2">Handcrafted Wooden Desk</h1>
               <div className="flex items-center gap-4 mb-4">
-                <div className="flex text-yellow-400">{"★★★★★"}</div>
+                <div className="flex text-yellow-400">{'★★★★★'}</div>
                 <span className="text-gray-600">4.7 out of 5 (58 reviews)</span>
               </div>
               <p className="text-gray-600">by Artisan Furniture Co.</p>
@@ -180,19 +176,12 @@ export default function ProductShippingOptionsPage() {
               <h3 className="font-semibold">Shipping Options</h3>
               <div className="space-y-3">
                 <label className="flex items-start gap-3 p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
-                  <input
-                    type="radio"
-                    name="shipping"
-                    className="mt-1"
-                    defaultChecked
-                  />
+                  <input type="radio" name="shipping" className="mt-1" defaultChecked />
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium">Standard Delivery</div>
-                        <div className="text-sm text-gray-600">
-                          5-7 business days
-                        </div>
+                        <div className="text-sm text-gray-600">5-7 business days</div>
                       </div>
                       <span className="font-medium">$49.99</span>
                     </div>
@@ -205,9 +194,7 @@ export default function ProductShippingOptionsPage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium">Express Delivery</div>
-                        <div className="text-sm text-gray-600">
-                          2-3 business days
-                        </div>
+                        <div className="text-sm text-gray-600">2-3 business days</div>
                       </div>
                       <span className="font-medium">$99.99</span>
                     </div>
@@ -219,15 +206,9 @@ export default function ProductShippingOptionsPage() {
                   <div className="flex-1">
                     <div className="flex justify-between items-start">
                       <div>
-                        <div className="font-medium text-green-700">
-                          Free Shipping
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          7-10 business days
-                        </div>
-                        <div className="text-xs text-green-600 mt-1">
-                          Available in CA, NY, TX
-                        </div>
+                        <div className="font-medium text-green-700">Free Shipping</div>
+                        <div className="text-sm text-gray-600">7-10 business days</div>
+                        <div className="text-xs text-green-600 mt-1">Available in CA, NY, TX</div>
                       </div>
                       <span className="font-medium text-green-700">FREE</span>
                     </div>
@@ -238,8 +219,7 @@ export default function ProductShippingOptionsPage() {
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span className="text-blue-600">ℹ</span>
                     <span>
-                      International shipping available to Canada, UK, and
-                      Germany ($199.99)
+                      International shipping available to Canada, UK, and Germany ($199.99)
                     </span>
                   </div>
                 </div>
@@ -248,8 +228,8 @@ export default function ProductShippingOptionsPage() {
 
             <div className="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
               <p className="text-sm text-blue-800">
-                <strong>White Glove Service:</strong> Professional assembly
-                available for an additional $150 in select areas
+                <strong>White Glove Service:</strong> Professional assembly available for an
+                additional $150 in select areas
               </p>
             </div>
 
@@ -297,23 +277,15 @@ export default function ProductShippingOptionsPage() {
               <dl className="space-y-2 text-sm">
                 <div>
                   <dt className="font-medium text-gray-700">Continental US:</dt>
-                  <dd className="text-gray-600 ml-4">
-                    All shipping options available
-                  </dd>
+                  <dd className="text-gray-600 ml-4">All shipping options available</dd>
                 </div>
                 <div>
-                  <dt className="font-medium text-gray-700">
-                    Alaska & Hawaii:
-                  </dt>
-                  <dd className="text-gray-600 ml-4">
-                    Standard shipping only (+$50)
-                  </dd>
+                  <dt className="font-medium text-gray-700">Alaska & Hawaii:</dt>
+                  <dd className="text-gray-600 ml-4">Standard shipping only (+$50)</dd>
                 </div>
                 <div>
                   <dt className="font-medium text-gray-700">International:</dt>
-                  <dd className="text-gray-600 ml-4">
-                    Select countries, 10-21 days
-                  </dd>
+                  <dd className="text-gray-600 ml-4">Select countries, 10-21 days</dd>
                 </div>
               </dl>
             </div>
@@ -323,10 +295,10 @@ export default function ProductShippingOptionsPage() {
         <div className="mt-8 bg-gray-50 rounded-lg p-6">
           <h3 className="font-semibold mb-3">Product Details</h3>
           <p className="text-gray-700 mb-4">
-            This handcrafted wooden desk is made from sustainably sourced solid
-            oak, featuring a modern minimalist design that complements any home
-            office. Each piece is unique, showcasing the natural wood grain and
-            finished with eco-friendly Danish oil for durability and beauty.
+            This handcrafted wooden desk is made from sustainably sourced solid oak, featuring a
+            modern minimalist design that complements any home office. Each piece is unique,
+            showcasing the natural wood grain and finished with eco-friendly Danish oil for
+            durability and beauty.
           </p>
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>

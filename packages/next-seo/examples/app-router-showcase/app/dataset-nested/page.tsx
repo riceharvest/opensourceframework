@@ -1,4 +1,4 @@
-import { DatasetJsonLd } from "next-seo";
+import { DatasetJsonLd } from '@opensourceframework/next-seo';
 
 export default function DatasetNestedPage() {
   return (
@@ -8,118 +8,104 @@ export default function DatasetNestedPage() {
         description="Comprehensive global climate database containing regional climate datasets from all continents. This parent dataset aggregates climate measurements from North America, Europe, Asia, and other regions."
         url="https://example.com/datasets/world-climate-database"
         identifier="https://doi.org/10.1000/world-climate-2024"
-        keywords={[
-          "climate",
-          "global",
-          "weather",
-          "temperature",
-          "aggregate dataset",
-        ]}
+        keywords={['climate', 'global', 'weather', 'temperature', 'aggregate dataset']}
         license="https://creativecommons.org/publicdomain/zero/1.0/"
         isAccessibleForFree={true}
         creator={{
-          name: "Global Climate Research Consortium",
-          url: "https://example.com/gcrc",
+          name: 'Global Climate Research Consortium',
+          url: 'https://example.com/gcrc',
         }}
         hasPart={[
           {
-            "@type": "Dataset",
-            name: "North America Climate Data 2020-2024",
+            '@type': 'Dataset',
+            name: 'North America Climate Data 2020-2024',
             description:
-              "Climate measurements from weather stations across North America including temperature, precipitation, and wind data.",
-            url: "https://example.com/datasets/na-climate-2024",
-            license: "https://creativecommons.org/publicdomain/zero/1.0/",
+              'Climate measurements from weather stations across North America including temperature, precipitation, and wind data.',
+            url: 'https://example.com/datasets/na-climate-2024',
+            license: 'https://creativecommons.org/publicdomain/zero/1.0/',
             creator: {
-              "@type": "Organization",
-              name: "North American Weather Service",
+              '@type': 'Organization',
+              name: 'North American Weather Service',
             },
             distribution: {
-              "@type": "DataDownload",
-              contentUrl: "https://example.com/data/na-climate.csv",
-              encodingFormat: "CSV",
+              '@type': 'DataDownload',
+              contentUrl: 'https://example.com/data/na-climate.csv',
+              encodingFormat: 'CSV',
             },
             spatialCoverage: {
-              "@type": "Place",
-              name: "North America",
+              '@type': 'Place',
+              name: 'North America',
             },
           },
           {
-            "@type": "Dataset",
-            name: "Europe Climate Data 2020-2024",
+            '@type': 'Dataset',
+            name: 'Europe Climate Data 2020-2024',
             description:
-              "Comprehensive climate data from European monitoring stations with hourly measurements.",
-            url: "https://example.com/datasets/eu-climate-2024",
-            license: "https://creativecommons.org/publicdomain/zero/1.0/",
+              'Comprehensive climate data from European monitoring stations with hourly measurements.',
+            url: 'https://example.com/datasets/eu-climate-2024',
+            license: 'https://creativecommons.org/publicdomain/zero/1.0/',
             creator: {
-              "@type": "Organization",
-              name: "European Climate Agency",
+              '@type': 'Organization',
+              name: 'European Climate Agency',
             },
             distribution: {
-              "@type": "DataDownload",
-              contentUrl: "https://example.com/data/eu-climate.csv",
-              encodingFormat: "CSV",
+              '@type': 'DataDownload',
+              contentUrl: 'https://example.com/data/eu-climate.csv',
+              encodingFormat: 'CSV',
             },
             spatialCoverage: {
-              "@type": "Place",
-              name: "Europe",
+              '@type': 'Place',
+              name: 'Europe',
             },
           },
           {
-            "@type": "Dataset",
-            name: "Asia Pacific Climate Data 2020-2024",
+            '@type': 'Dataset',
+            name: 'Asia Pacific Climate Data 2020-2024',
             description:
-              "Climate observations from the Asia Pacific region including monsoon patterns and tropical systems.",
-            url: "https://example.com/datasets/apac-climate-2024",
-            license: "https://creativecommons.org/publicdomain/zero/1.0/",
+              'Climate observations from the Asia Pacific region including monsoon patterns and tropical systems.',
+            url: 'https://example.com/datasets/apac-climate-2024',
+            license: 'https://creativecommons.org/publicdomain/zero/1.0/',
             creator: {
-              "@type": "Organization",
-              name: "Asia Pacific Climate Center",
+              '@type': 'Organization',
+              name: 'Asia Pacific Climate Center',
             },
             distribution: {
-              "@type": "DataDownload",
-              contentUrl: "https://example.com/data/apac-climate.csv",
-              encodingFormat: "CSV",
+              '@type': 'DataDownload',
+              contentUrl: 'https://example.com/data/apac-climate.csv',
+              encodingFormat: 'CSV',
             },
             spatialCoverage: {
-              "@type": "Place",
-              name: "Asia Pacific",
+              '@type': 'Place',
+              name: 'Asia Pacific',
             },
           },
         ]}
         distribution={{
-          contentUrl: "https://example.com/data/world-climate-complete.zip",
-          encodingFormat: "ZIP",
-          contentSize: "12.5GB",
-          description: "Complete aggregated dataset with all regional data",
+          contentUrl: 'https://example.com/data/world-climate-complete.zip',
+          encodingFormat: 'ZIP',
+          contentSize: '12.5GB',
+          description: 'Complete aggregated dataset with all regional data',
         }}
         temporalCoverage="2020-01-01/2024-12-31"
         spatialCoverage="Global"
-        variableMeasured={[
-          "temperature",
-          "precipitation",
-          "wind speed",
-          "humidity",
-        ]}
+        variableMeasured={['temperature', 'precipitation', 'wind speed', 'humidity']}
       />
 
       <main className="max-w-5xl">
-        <h1 className="text-4xl font-bold mb-6">
-          World Climate Database 2020-2024
-        </h1>
+        <h1 className="text-4xl font-bold mb-6">World Climate Database 2020-2024</h1>
 
         <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
           <p className="text-sm">
-            <strong>Aggregate Dataset:</strong> This parent dataset contains 3
-            regional sub-datasets
+            <strong>Aggregate Dataset:</strong> This parent dataset contains 3 regional sub-datasets
           </p>
         </div>
 
         <section className="prose max-w-none mb-8">
           <h2>Overview</h2>
           <p>
-            Comprehensive global climate database containing regional climate
-            datasets from all continents. This parent dataset aggregates climate
-            measurements from North America, Europe, Asia, and other regions.
+            Comprehensive global climate database containing regional climate datasets from all
+            continents. This parent dataset aggregates climate measurements from North America,
+            Europe, Asia, and other regions.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -152,13 +138,11 @@ export default function DatasetNestedPage() {
                 🌎 North America Climate Data 2020-2024
               </h3>
               <p className="text-gray-700 mb-3">
-                Climate measurements from weather stations across North America
-                including temperature, precipitation, and wind data.
+                Climate measurements from weather stations across North America including
+                temperature, precipitation, and wind data.
               </p>
               <div className="flex gap-4 text-sm">
-                <span className="text-gray-600">
-                  Provider: North American Weather Service
-                </span>
+                <span className="text-gray-600">Provider: North American Weather Service</span>
                 <span className="text-gray-600">Format: CSV</span>
               </div>
               <a
@@ -170,17 +154,13 @@ export default function DatasetNestedPage() {
             </div>
 
             <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-2">
-                🌍 Europe Climate Data 2020-2024
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">🌍 Europe Climate Data 2020-2024</h3>
               <p className="text-gray-700 mb-3">
-                Comprehensive climate data from European monitoring stations
-                with hourly measurements.
+                Comprehensive climate data from European monitoring stations with hourly
+                measurements.
               </p>
               <div className="flex gap-4 text-sm">
-                <span className="text-gray-600">
-                  Provider: European Climate Agency
-                </span>
+                <span className="text-gray-600">Provider: European Climate Agency</span>
                 <span className="text-gray-600">Format: CSV</span>
               </div>
               <a
@@ -192,17 +172,13 @@ export default function DatasetNestedPage() {
             </div>
 
             <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-2">
-                🌏 Asia Pacific Climate Data 2020-2024
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">🌏 Asia Pacific Climate Data 2020-2024</h3>
               <p className="text-gray-700 mb-3">
-                Climate observations from the Asia Pacific region including
-                monsoon patterns and tropical systems.
+                Climate observations from the Asia Pacific region including monsoon patterns and
+                tropical systems.
               </p>
               <div className="flex gap-4 text-sm">
-                <span className="text-gray-600">
-                  Provider: Asia Pacific Climate Center
-                </span>
+                <span className="text-gray-600">Provider: Asia Pacific Climate Center</span>
                 <span className="text-gray-600">Format: CSV</span>
               </div>
               <a
@@ -219,8 +195,8 @@ export default function DatasetNestedPage() {
           <h2 className="text-2xl font-bold mb-4">Download Complete Dataset</h2>
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
             <p className="mb-4">
-              Download the complete aggregated dataset containing all regional
-              data in a single archive.
+              Download the complete aggregated dataset containing all regional data in a single
+              archive.
             </p>
             <div className="flex items-center gap-6">
               <a
@@ -229,9 +205,7 @@ export default function DatasetNestedPage() {
               >
                 Download Complete Dataset (ZIP, 12.5GB)
               </a>
-              <span className="text-sm text-gray-600">
-                Contains all 3 regional datasets
-              </span>
+              <span className="text-sm text-gray-600">Contains all 3 regional datasets</span>
             </div>
           </div>
         </section>

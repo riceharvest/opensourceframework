@@ -23,5 +23,13 @@ export default function parseUrl (url) {
   const baseUrl = _host ? `${protocol}://${_host}` : defaultHost
   const basePath = _path.length > 0 ? `/${_path.join('/')}` : defaultPath
 
-  return { baseUrl, basePath }
+  return {
+    baseUrl,
+    basePath,
+    url: {
+      origin: baseUrl,
+      pathname: basePath,
+      href: `${baseUrl}${basePath}`
+    }
+  }
 }

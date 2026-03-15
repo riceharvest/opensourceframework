@@ -75,14 +75,14 @@ const renderWindowScroller = updateScrollTopOnUpdatePosition => {
   );
 };
 
-jest.setTimeout(1200000);
+vi.setTimeout(1200000);
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 test('will react to header height updates if notified through updatePosition', async () => {
   const page = await bootstrap();
-  const scrollFn = jest.fn();
-  const resizeFn = jest.fn();
+  const scrollFn = vi.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('scrollFn', scrollFn);
   await page.exposeFunction('resizeFn', resizeFn);
 
@@ -123,8 +123,8 @@ test('will react to header height updates if notified through updatePosition', a
 
 test('will NOT react to header height updates if notified through updatePosition if `updateScrollTopOnUpdatePosition` is false', async () => {
   const page = await bootstrap();
-  const scrollFn = jest.fn();
-  const resizeFn = jest.fn();
+  const scrollFn = vi.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('scrollFn', scrollFn);
   await page.exposeFunction('resizeFn', resizeFn);
 
@@ -166,8 +166,8 @@ test('will NOT react to header height updates if notified through updatePosition
 
 test('will properly process scroll events after header height updates', async () => {
   const page = await bootstrap();
-  const scrollFn = jest.fn();
-  const resizeFn = jest.fn();
+  const scrollFn = vi.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('scrollFn', scrollFn);
   await page.exposeFunction('resizeFn', resizeFn);
 

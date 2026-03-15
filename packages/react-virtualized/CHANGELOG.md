@@ -1,15 +1,5 @@
 ## Changelog
 
-## 9.22.8
-
-### Patch Changes
-
-- Modernization and stabilization fixes:
-  - Standardized scripts and CI/CD lockfiles
-  - Fixed lint rules and CI/CD unblocking
-  - Added llms.txt for AI-First Discovery
-  - Include llms.txt in published files
-
 ##### NEXT
 
 - Update peer dependencies to allow React 17 ([levenleven](https://github.com/levenleven) - [#1625](https://github.com/bvaughn/react-virtualized/pull/1625))
@@ -1177,7 +1167,7 @@ A secondary goal was to cut redundant code from `VirtualScroll` and rely more he
 ###### Backwards-incompatible changes
 
 - Refactored `FlexTable` and `VirtualScroll` to be HOCs that use `Grid` internally. This change makes `width` a required attribute for all virtualized components. A simple upgrade strategy is to use the `AutoSizer` HOC (learn more [here](docs/AutoSizer.md)).
-- Changed globally exported library name (for use with vanilla `<script>` tags) to `window.ReactVirtualized` instead of `window["react-virtualized"]` (see [issue #86](https://github.com/bvaughn/react-virtualized/issues/86)).
+- Changed globally exported library name (for use with vanilla `<script>` tags) to `window.ReactVirtualized` instead of `window["@opensourceframework/react-virtualized"]` (see [issue #86](https://github.com/bvaughn/react-virtualized/issues/86)).
 - Removed `horizontalPadding` and `verticalPadding` properties from `FlexTable`. These properties were redundant. Such padding should be the responsibility of the parent container and taken into consideration by the injected `width` and `height`.
 - Refactored `InfiniteLoader` and `AutoSizer` to require function children so as to be more easily composable with each other and new HOCs like `ScrollSync` (learn more [here](docs/usingAutoSizer.md#using-autosizer-with-infiniteloader)).
 - `AutoSizer` no longer supports a `className` property or uses the global 'AutoSizer' class.

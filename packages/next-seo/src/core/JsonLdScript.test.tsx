@@ -51,7 +51,7 @@ describe("JsonLdScript", () => {
 
   it("should return null if no data is provided", () => {
     const { container } = render(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       <JsonLdScript data={null as any} scriptKey={scriptKey} id={scriptId} />,
     );
     expect(container.firstChild).toBeNull();

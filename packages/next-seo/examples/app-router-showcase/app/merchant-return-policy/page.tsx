@@ -1,10 +1,10 @@
-import { MerchantReturnPolicyJsonLd } from "next-seo";
+import { MerchantReturnPolicyJsonLd } from '@opensourceframework/next-seo';
 
 export default function MerchantReturnPolicyPage() {
   return (
     <div className="container mx-auto p-8">
       <MerchantReturnPolicyJsonLd
-        applicableCountry={["US", "CA"]}
+        applicableCountry={['US', 'CA']}
         returnPolicyCountry="US"
         returnPolicyCategory="https://schema.org/MerchantReturnFiniteReturnWindow"
         merchantReturnDays={30}
@@ -42,16 +42,15 @@ export default function MerchantReturnPolicyPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Refund Processing</h2>
           <p className="text-gray-700">
-            Once we receive your return, we'll inspect the items and process
-            your refund within 3-5 business days. The refund will be credited to
-            your original payment method.
+            Once we receive your return, we'll inspect the items and process your refund within 3-5
+            business days. The refund will be credited to your original payment method.
           </p>
         </section>
 
         <section className="text-sm text-gray-600">
           <p>
-            This example demonstrates a basic merchant return policy with a
-            30-day return window, free returns, and full refunds.
+            This example demonstrates a basic merchant return policy with a 30-day return window,
+            free returns, and full refunds.
           </p>
         </section>
       </div>

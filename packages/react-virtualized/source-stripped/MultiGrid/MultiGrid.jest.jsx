@@ -349,7 +349,7 @@ describe('MultiGrid', () => {
 
   describe('#forceUpdateGrids', () => {
     it('should call forceUpdate() on inner Grids', () => {
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(({key}) => <div key={key} style={{}} />);
 
       const rendered = render(
@@ -373,7 +373,7 @@ describe('MultiGrid', () => {
 
   describe('#invalidateCellSizeAfterRender', () => {
     it('should call invalidateCellSizeAfterRender() on inner Grids', () => {
-      const cellRenderer = jest.fn();
+      const cellRenderer = vi.fn();
       cellRenderer.mockImplementation(({key}) => <div key={key} style={{}} />);
 
       const rendered = render(
@@ -630,7 +630,7 @@ describe('MultiGrid', () => {
     }
 
     it('should not trigger on-mount if scrollbars are hidden', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
 
       render(
         getMarkup({
@@ -644,7 +644,7 @@ describe('MultiGrid', () => {
     });
 
     it('should trigger on-mount if scrollbars are visible', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
 
       render(
         getMarkup({
@@ -663,7 +663,7 @@ describe('MultiGrid', () => {
     });
 
     it('should trigger on-update if scrollbar visibility has changed', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
       render(
         getMarkup({
           columnCount: 1,
@@ -691,7 +691,7 @@ describe('MultiGrid', () => {
     });
 
     it('should not trigger on-update if scrollbar visibility does not change', () => {
-      const onScrollbarPresenceChange = jest.fn();
+      const onScrollbarPresenceChange = vi.fn();
       render(
         getMarkup({
           columnCount: 1,

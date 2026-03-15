@@ -15,7 +15,7 @@ pnpm example:start  # Start production build
 ## Critical Rules
 
 - **Every example page must be real and functional** - E2E tests depend on these
-- **Import components from "next-seo"** not from local paths
+- **Import components from "@opensourceframework/next-seo"** not from local paths
 - **Each component variation needs its own page** for E2E testing
 
 ## Page Structure
@@ -39,7 +39,7 @@ app/
 
 ```tsx
 // app/[component]/page.tsx
-import { [Component]JsonLd } from "next-seo";
+import { [Component]JsonLd } from "@opensourceframework/next-seo";
 
 export default function [Component]Page() {
   return (

@@ -1,11 +1,10 @@
-// @ts-nocheck
 'use strict'
 
 const path = require('path')
 const fs = require('fs')
 const webpack = require('webpack')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const cleanMatchingFiles = require('./cleanup-assets')
 
 const buildCustomWorker = ({ id, basedir, customWorkerDir, destdir, plugins, minify }) => {
   let workerDir = undefined
@@ -37,6 +36,7 @@ const buildCustomWorker = ({ id, basedir, customWorkerDir, destdir, plugins, min
   const customWorkerEntry = customWorkerEntries[0]
   console.log(`> [PWA] Custom worker found: ${customWorkerEntry}`)
   console.log(`> [PWA] Build custom worker: ${path.join(destdir, name)}`)
+  cleanMatchingFiles(destdir, ['worker-*.js', 'worker-*.js.map'])
   webpack({
     mode: 'none',
     target: 'webworker',
@@ -96,11 +96,7 @@ const buildCustomWorker = ({ id, basedir, customWorkerDir, destdir, plugins, min
       path: destdir,
       filename: name
     },
-    plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [path.join(destdir, 'worker-*.js'), path.join(destdir, 'worker-*.js.map')]
-      })
-    ].concat(plugins),
+    plugins: [].concat(plugins),
     optimization: minify
       ? {
           minimize: true,

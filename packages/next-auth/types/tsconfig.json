@@ -9,6 +9,7 @@
     "strictNullChecks": true,
     "esModuleInterop": true,
     "noEmit": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
