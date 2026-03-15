@@ -28,6 +28,7 @@ import parseUrl from "../lib/parse-url"
 const __NEXTAUTH = {
   baseUrl: parseUrl(process.env.NEXTAUTH_URL || process.env.VERCEL_URL).baseUrl,
   basePath: parseUrl(process.env.NEXTAUTH_URL).basePath,
+  url: parseUrl(process.env.NEXTAUTH_URL || process.env.VERCEL_URL).url,
   baseUrlServer: parseUrl(
     process.env.NEXTAUTH_URL_INTERNAL ||
       process.env.NEXTAUTH_URL ||
@@ -36,6 +37,11 @@ const __NEXTAUTH = {
   basePathServer: parseUrl(
     process.env.NEXTAUTH_URL_INTERNAL || process.env.NEXTAUTH_URL
   ).basePath,
+  urlServer: parseUrl(
+    process.env.NEXTAUTH_URL_INTERNAL ||
+      process.env.NEXTAUTH_URL ||
+      process.env.VERCEL_URL
+  ).url,
   keepAlive: 0,
   clientMaxAge: 0,
   // Properties starting with _ are used for tracking internal app state
@@ -346,10 +352,10 @@ function _apiBaseUrl() {
     }
 
     // Return absolute path when called server side
-    return `${__NEXTAUTH.baseUrlServer}${__NEXTAUTH.basePathServer}`
+    return __NEXTAUTH.urlServer.href
   }
   // Return relative path when called client side
-  return __NEXTAUTH.basePath
+  return __NEXTAUTH.url.pathname
 }
 
 /** Returns the number of seconds elapsed since January 1, 1970 00:00:00 UTC. */
