@@ -27,10 +27,11 @@ export async function verifyCsrfToken(options: VerifyCsrfTokenOptions = {}) {
     throw new Error('Missing CSRF cookies');
   }
   
-  // Get token from headers
+  // Get token from headers (consistent with Pages Router middleware)
   const requestToken = headersList.get(tokenKey.toLowerCase()) || 
                       headersList.get('x-csrf-token') || 
-                      headersList.get('x-xsrf-token');
+                      headersList.get('x-xsrf-token') ||
+                      headersList.get('csrf-token');
                       
   if (!requestToken) {
     throw new Error('Missing CSRF request token');
