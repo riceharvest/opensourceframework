@@ -12,7 +12,7 @@ export type Nextable<H extends FunctionLike> = (
 
 export type FindResult<H extends FunctionLike> = {
   fns: Nextable<H>[];
-  params: Record<string, string>;
+  params: Record<string, string | undefined>;
   middleOnly: boolean;
 };
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use strict';
 
 const path = require('path');
@@ -6,7 +5,7 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 let globbyModule,
-  CleanWebpackPlugin,
+  cleanMatchingFiles,
   WorkboxPlugin,
   defaultCache,
   buildCustomWorker,
@@ -187,11 +186,9 @@ self.addEventListener('fetch', (event) => {
     }
 
     try {
-      const { CleanWebpackPlugin: CWP } = require('clean-webpack-plugin');
       const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
-      CleanWebpackPlugin = CWP;
       WorkboxPlugin = { GenerateSW, InjectManifest };
-    } catch (e) {
+    } catch {
       console.warn(
         '> [PWA] Warning: workbox-webpack-plugin not installed. Run: npm install workbox-webpack-plugin'
       );
@@ -199,6 +196,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     try {
+      cleanMatchingFiles = require('./cleanup-assets');
       defaultCache = require('./cache');
       buildCustomWorker = require('./build-custom-worker');
       buildFallbackWorker = require('./build-fallback-worker');
@@ -271,7 +269,7 @@ self.addEventListener('fetch', (event) => {
             minify: !dev,
           });
 
-          if (!!customWorkerScriptName) {
+          if (customWorkerScriptName) {
             importScripts.unshift(customWorkerScriptName);
           }
 
@@ -288,17 +286,13 @@ self.addEventListener('fetch', (event) => {
           console.log(`> [PWA]   url: ${_sw}`);
           console.log(`> [PWA]   scope: ${_scope}`);
 
-          config.plugins.push(
-            new CleanWebpackPlugin({
-              cleanOnceBeforeBuildPatterns: [
-                path.join(_dest, 'workbox-*.js'),
-                path.join(_dest, 'worker-*.js.LICENSE.txt'),
-                path.join(_dest, 'workbox-*.js.map'),
-                path.join(_dest, sw),
-                path.join(_dest, `${sw}.map`),
-              ],
-            })
-          );
+          cleanMatchingFiles(_dest, [
+            'workbox-*.js',
+            'worker-*.js.LICENSE.txt',
+            'workbox-*.js.map',
+            sw.replace(/^.*[\\/]/, ''),
+            `${sw.replace(/^.*[\\/]/, '')}.map`,
+          ]);
 
           let manifestEntries = additionalManifestEntries;
           if (!Array.isArray(manifestEntries)) {
@@ -375,7 +369,7 @@ self.addEventListener('fetch', (event) => {
             additionalManifestEntries: dev ? [] : manifestEntries,
             exclude: [
               ...buildExcludes,
-              ({ asset, compilation }) => {
+              ({ asset }) => {
                 if (
                   asset.name.startsWith('server/') ||
                   asset.name.match(/^(build-manifest\.json|react-loadable-manifest\.json)$/)
@@ -458,7 +452,7 @@ self.addEventListener('fetch', (event) => {
                   cacheName: 'start-url',
                   plugins: [
                     {
-                      cacheWillUpdate: async ({ request, response, event, state }) => {
+                      cacheWillUpdate: async ({ response }) => {
                         if (response && response.type === 'opaqueredirect') {
                           return new Response(response.body, {
                             status: 200,

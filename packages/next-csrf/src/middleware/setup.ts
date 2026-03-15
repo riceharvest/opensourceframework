@@ -41,17 +41,14 @@ import { getSecret } from '../utils/get-secret';
  * });
  */
 
-// Function overloads for type-safe dual-purpose handler
 export function setup(
   handler: NextApiHandler,
   options: SetupMiddlewareArgs
 ): (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
-
 export function setup<P extends { [key: string]: unknown } = { [key: string]: unknown }>(
   handler: (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>,
   options: SetupMiddlewareArgs
 ): (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<P>>;
-
 export function setup(
   handler: NextApiHandler | ((context: GetServerSidePropsContext) => Promise<unknown>),
   { secret, tokenKey, cookieOptions }: SetupMiddlewareArgs
@@ -93,10 +90,19 @@ export function setup(
       token = unsignedToken;
     }
 
-    // Set both cookies: csrfSecret and token
+    const secretCookieOptions = {
+      ...cookieOptions,
+      httpOnly: true,
+    };
+    const tokenCookieOptions = {
+      ...cookieOptions,
+      httpOnly: cookieOptions.httpOnly ?? false,
+    };
+
+    // Set both cookies: csrfSecret (always httpOnly) and token (client-readable by default)
     res.setHeader('Set-Cookie', [
-      serialize('csrfSecret', csrfSecret, cookieOptions),
-      serialize(tokenKey, token, cookieOptions),
+      serialize('csrfSecret', csrfSecret, secretCookieOptions),
+      serialize(tokenKey, token, tokenCookieOptions),
     ]);
 
     // Call the original handler with the appropriate arguments

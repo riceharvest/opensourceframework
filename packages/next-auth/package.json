@@ -2,11 +2,18 @@
   "name": "@opensourceframework/next-auth",
   "version": "3.29.11",
   "description": "Authentication for Next.js",
-  "homepage": "https://next-auth.js.org",
-  "repository": "https://github.com/nextauthjs/next-auth.git",
-  "author": "Iain Collins <me@iaincollins.com>",
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-auth#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-auth"
+  },
+  "author": "OpenSource Framework Contributors (fork), Original: Iain Collins",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-auth"
+  },
   "main": "index.js",
-  "types": "./index.d.ts",
+  "types": "./types/index.d.ts",
   "keywords": [
     "react",
     "nodejs",
@@ -20,61 +27,83 @@
     "nextauth"
   ],
   "exports": {
-    ".": "./dist/server/index.js",
-    "./jwt": "./dist/lib/jwt.js",
-    "./adapters": "./dist/adapters/index.js",
-    "./client": "./dist/client/index.js",
-    "./providers": "./dist/providers/index.js",
-    "./providers/*": "./dist/providers/*.js",
-    "./errors": "./dist/lib/errors.js"
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./index.js"
+    },
+    "./jwt": {
+      "types": "./types/jwt.d.ts",
+      "import": "./dist/lib/jwt.mjs",
+      "require": "./jwt.js"
+    },
+    "./adapters": {
+      "types": "./types/adapters.d.ts",
+      "import": "./dist/adapters/index.mjs",
+      "require": "./adapters.js"
+    },
+    "./client": {
+      "types": "./types/client.d.ts",
+      "import": "./dist/client/index.mjs",
+      "require": "./client.js"
+    },
+    "./providers": {
+      "types": "./types/providers.d.ts",
+      "import": "./dist/providers/index.mjs",
+      "require": "./providers.js"
+    },
+    "./providers/*": {
+      "types": "./dist/providers/*.d.ts",
+      "import": "./dist/providers/*.mjs",
+      "require": "./dist/providers-cjs/*.cjs"
+    },
+    "./errors": {
+      "types": "./types/errors.d.ts",
+      "import": "./dist/lib/errors.mjs",
+      "require": "./errors.js"
+    }
   },
   "scripts": {
-    "build": "node scripts/prebuild.mjs && tsup --config tsup.config.mjs",
-    "build:js": "tsup --config tsup.config.mjs",
+    "build": "node scripts/prebuild.mjs && tsup --config tsup.config.mjs && node scripts/postbuild.mjs",
+    "build:js": "tsup --config tsup.config.mjs && node scripts/postbuild.mjs",
     "build:css": "postcss --config config/postcss.config.js src/**/*.css --base src --dir dist && node config/wrap-css.js",
     "dev:setup": "npm i && npm run build:css && cd app && npm i",
     "dev": "cd app && npm run dev",
     "watch": "tsup --config tsup.config.mjs --watch",
     "test": "vitest run --config vitest.config.js --passWithNoTests",
+    "test:coverage": "pnpm test",
     "test:e2e": "playwright test --config playwright.config.js",
     "test:ci": "npm run lint && npm run test:types && npm run test",
-    "test:types": "dtslint types --onlyTestTsNext",
+    "test:types": "pnpm --dir ../.. exec tsc -p packages/next-auth/types/tsconfig.json --noEmit",
     "prepublishOnly": "npm run build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "pnpm --dir ../.. exec eslint packages/next-auth --ignore-pattern packages/next-auth/examples",
+    "lint:fix": "pnpm --dir ../.. exec eslint packages/next-auth --ignore-pattern packages/next-auth/examples --fix",
     "version:pr": "node ./config/version-pr"
   },
   "files": [
     "dist",
     "index.js",
-    "index.d.ts",
     "providers.js",
-    "providers.d.ts",
     "adapters.js",
-    "adapters.d.ts",
     "client.js",
-    "client.d.ts",
     "errors.js",
-    "errors.d.ts",
     "jwt.js",
-    "jwt.d.ts",
-    "internals",
+    "types",
     "llms.txt"
   ],
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@next-auth/prisma-legacy-adapter": "0.1.2",
-    "@next-auth/typeorm-legacy-adapter": "0.1.4",
     "futoin-hkdf": "^1.3.2",
-    "jose": "^1.27.2",
-    "jsonwebtoken": "^8.5.1",
-    "nodemailer": "^6.4.16",
-    "oauth": "^0.9.15",
+    "jose": "^2.0.7",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^8.0.2",
+    "oauth": "^0.10.2",
     "pkce-challenge": "^2.1.0",
     "preact": "^10.4.1",
     "preact-render-to-string": "^5.1.14",
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "typeorm": "^0.3.28"
   },
   "peerDependencies": {
     "next": "^11.1.4 || ^12 || ^13 || ^14 || ^15 || ^16",
@@ -102,81 +131,29 @@
     "@testing-library/user-event": "^13.1.9",
     "@types/nodemailer": "^6.4.2",
     "@types/react": "^17.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "autoprefixer": "^9.7.6",
-    "babel-jest": "^26.6.3",
+    "autoprefixer": "^10.4.27",
     "babel-preset-preact": "^2.0.0",
     "conventional-changelog-conventionalcommits": "4.4.0",
-    "cssnano": "^4.1.10",
+    "cssnano": "^7.1.3",
     "dotenv": "^8.2.0",
-    "dtslint": "^4.0.8",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-config-standard-with-typescript": "^19.0.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-standard": "^5.0.0",
+    "fs-extra": "^11.1.1",
     "husky": "^6.0.0",
-    "jest": "^26.6.3",
-    "msw": "^0.28.2",
-    "next": "^11.0.1",
+    "msw": "^2.12.10",
     "playwright": "^1.58.2",
-    "postcss-cli": "^7.1.1",
-    "postcss-nested": "^4.2.1",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1",
+    "postcss-nested": "^7.0.2",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tsup": "^8.5.1",
-    "typescript": "^4.1.3",
-    "vitest": "^4.0.18",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9",
     "whatwg-fetch": "^3.6.2"
   },
   "prettier": {
     "semi": false
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "extends": [
-      "standard-with-typescript",
-      "prettier"
-    ],
-    "ignorePatterns": [
-      "node_modules",
-      "test",
-      "next-env.d.ts",
-      "types",
-      "www",
-      ".next",
-      "dist"
-    ],
-    "globals": {
-      "localStorage": "readonly",
-      "location": "readonly",
-      "fetch": "readonly"
-    },
-    "overrides": [
-      {
-        "files": [
-          "./**/*test.js"
-        ],
-        "env": {
-          "jest/globals": true
-        },
-        "extends": [
-          "plugin:jest/recommended"
-        ],
-        "plugins": [
-          "jest"
-        ]
-      }
-    ]
   },
   "release": {
     "branches": [

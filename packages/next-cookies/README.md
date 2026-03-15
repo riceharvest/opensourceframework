@@ -141,3 +141,8 @@ This package includes TypeScript definitions out of the box.
 ## License
 
 MIT
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

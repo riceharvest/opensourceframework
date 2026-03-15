@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-use-before-define
+ 
 import * as React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import Layout from 'components/layout'
@@ -21,7 +21,7 @@ export default function Page () {
     setResponse(response)
   }
 
-  const handleLogout = (options) => async (event) => {
+  const handleLogout = (options) => async (_event) => {
     if (options.redirect) {
       return signOut(options)
     }

@@ -165,7 +165,7 @@ server.listen(8080);
 | genid           | The function that generates a string for a new session ID.                                                                                   | [`nanoid`](https://github.com/ai/nanoid) |
 | encode          | Transforms session ID before setting cookie. It takes the raw session ID and returns the decoded/decrypted session ID.                       | undefined                                |
 | decode          | Transforms session ID back while getting from cookie. It should return the encoded/encrypted session ID                                      | undefined                                |
-| touchAfter      | Only touch after an amount of time **(in seconds)** since last access. Disabled by default or if set to `-1`. See [touchAfter](#touchAfter). | `-1` (Disabled)                          |
+| touchAfter      | Only touch after an amount of time since last access. Accepts seconds (`number`) or duration strings with suffixes (`s`, `m`, `h`, `d`) like `30s`, `5m`, `1h`, `1d`. Disabled by default or if set to `-1`. See [touchAfter](#touchAfter). | `-1` (Disabled)                          |
 | autoCommit      | Automatically commit session. Disable this if you want to manually `session.commit()`                                                        | `true`                                   |
 | cookie.secure   | Specifies the boolean value for the **Secure** `Set-Cookie` attribute.                                                                       | `false`                                  |
 | cookie.httpOnly | Specifies the boolean value for the **httpOnly** `Set-Cookie` attribute.                                                                     | `true`                                   |
@@ -179,6 +179,10 @@ server.listen(8080);
 Touching refers to the extension of session lifetime, both in browser (by modifying `Expires` attribute in [Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie) header) and session store (using its respective method) upon access. This prevents the session from being expired after a while.
 
 In `autoCommit` mode (which is enabled by default), for optimization, a session is only touched, not saved, if it is not modified. The value of `touchAfter` allows you to skip touching if the session is still recent, thus, decreasing database load.
+
+`touchAfter` accepts:
+- a number representing seconds (for example `300`)
+- a duration string with one of these suffixes: `s`, `m`, `h`, `d` (for example `30s`, `5m`, `1h`, `1d`)
 
 ### encode/decode
 
@@ -309,3 +313,8 @@ Please see my [contributing.md](CONTRIBUTING.md).
 ## License
 
 [MIT](LICENSE)
+
+
+---
+
+Maintained by @opensourceframework in the [monorepo](https://github.com/riceharvest/opensourceframework).

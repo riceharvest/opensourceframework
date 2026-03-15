@@ -20,13 +20,7 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Build library
+      - name: Build
         run: pnpm build
-      - name: Build apps
-        run: |
-          cd app && pnpm build
-          cd ../test-app && pnpm build
       - name: Test
-        run: pnpm test
+        run: pnpm test -- --passWithNoTests

@@ -1,25 +1,13 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.js'],
+  entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
-  dts: false, // types are already in src/index.d.ts
+  dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
-  minify: false,
+  minify: true,
   treeshake: true,
-  external: ['postcss', 'htmlparser2', 'domhandler', 'dom-serializer', 'css-select', 'css-what'],
-  esbuildOptions(options) {
-    options.banner = {
-      js: `/**
- * @opensourceframework/critters
- * Critical CSS inliner
- * 
- * @original-author The Chromium Authors
- * @original-repo https://github.com/GoogleChromeLabs/critters
- * @license Apache-2.0
- */`,
-    };
-  },
+  external: ['next', 'react', 'react-dom'],
 });

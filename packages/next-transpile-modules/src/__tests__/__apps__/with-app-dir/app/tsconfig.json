@@ -24,7 +24,7 @@
       }
     ]
   },
-  "exclude": [
+  "exclude": ["examples", 
     "node_modules"
   ],
   "include": [

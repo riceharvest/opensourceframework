@@ -10,7 +10,10 @@ interface NextCookiesContext {
   };
 }
 
+
 const UniversalCookie = (Cookies as { default?: typeof Cookies }).default || Cookies;
+const browserCookie = typeof window !== 'undefined' ? new UniversalCookie() : null;
+
 
 export interface CookieOptions extends CookieGetOptions, CookieSetOptions {}
 
@@ -36,11 +39,12 @@ export function useCookies(
 
   const [cookies, setCookies] = useState<Record<string, string | undefined>>(() => {
     if (!isBrowser()) return {};
-    return new UniversalCookie().getAll(options);
+    return (browserCookie as Cookies).getAll(options);
   });
 
   useEffect(() => {
-    const uc = new UniversalCookie();
+    if (!isBrowser()) return;
+    const uc = browserCookie as Cookies;
     const handleChange = () => {
       setCookies(uc.getAll(options));
     };
@@ -51,12 +55,12 @@ export function useCookies(
   }, [options]);
 
   const set = useCallback((key: string, value: string, cookieOptions?: CookieSetOptions) => {
-    const uc = new UniversalCookie();
+    const uc = isBrowser() ? (browserCookie as Cookies) : new UniversalCookie();
     uc.set(key, value, cookieOptions);
   }, []);
 
   const remove = useCallback((key: string, cookieOptions?: CookieSetOptions) => {
-    const uc = new UniversalCookie();
+    const uc = isBrowser() ? (browserCookie as Cookies) : new UniversalCookie();
     uc.remove(key, cookieOptions);
   }, []);
 

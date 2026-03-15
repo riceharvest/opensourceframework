@@ -76,15 +76,60 @@ export class Router<H extends FunctionLike> {
     fns: Nextable<H>[],
     ...args: Parameters<H>
   ): Promise<unknown> {
-    let i = 0;
-    const next = () => fns[++i](...args, next);
-    return fns[i](...args, next);
+    let index = -1;
+    const dispatch = async (position: number): Promise<unknown> => {
+      if (position <= index) {
+        throw new Error("next() called multiple times");
+      }
+      index = position;
+
+      const fn = fns[position];
+      if (!fn) {
+        throw new Error("next() called with no middleware remaining");
+      }
+      let nextResult: Promise<unknown> | undefined;
+      const next = () => {
+        if (nextResult) {
+          throw new Error("next() called multiple times");
+        }
+        nextResult = dispatch(position + 1);
+        return nextResult;
+      };
+
+      const result = fn(...args, next);
+      const isPromiseLike =
+        result !== null &&
+        result !== undefined &&
+        typeof (result as PromiseLike<unknown>).then === "function";
+
+      if (!isPromiseLike) {
+        if (result === undefined && nextResult) {
+          return nextResult;
+        }
+        if (nextResult) {
+          await nextResult;
+        }
+        return result;
+      }
+
+      const resolved = await result;
+      if (nextResult && result !== nextResult && resolved === undefined) {
+        return nextResult;
+      }
+      return resolved;
+    };
+
+    if (fns.length === 0) {
+      return Promise.resolve();
+    }
+
+    return dispatch(0);
   }
 
   find(method: HttpMethod, pathname: string): FindResult<H> {
     let middleOnly = true;
     const fns: Nextable<H>[] = [];
-    const params: Record<string, string> = {};
+    const params: Record<string, string | undefined> = {};
     const isHead = method === "HEAD";
     for (const route of this.routes) {
       if (
@@ -107,11 +152,14 @@ export class Router<H extends FunctionLike> {
           if (matches.groups !== void 0)
             for (const k in matches.groups) params[k] = matches.groups[k];
           matched = true;
-        } else if (route.keys.length > 0) {
+        } else if (route.keys && route.keys.length > 0) {
           const matches = route.pattern.exec(pathname);
           if (matches === null) continue;
-          for (let j = 0; j < route.keys.length; )
-            params[route.keys[j]] = matches[++j];
+          for (let j = 0; j < route.keys.length; ) {
+            const key = route.keys[j];
+            if (key) params[key] = matches[++j];
+            else j++;
+          }
           matched = true;
         } else if (route.pattern.test(pathname)) {
           matched = true;

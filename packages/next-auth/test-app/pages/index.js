@@ -1,8 +1,8 @@
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/client"
 import Head from "next/head"
 
 export default function Home() {
-  const { data: session, status } = useSession()
+  const [session, loading] = useSession()
 
   return (
     <div>
@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <h1>NextAuth.js Hydration Test</h1>
-        <p>Status: {status}</p>
+        <p>Status: {loading ? "loading" : "idle"}</p>
         {session ? (
           <div>
             <p>Signed in as: {session.user?.name}</p>

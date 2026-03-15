@@ -1,364 +1,107 @@
 # @opensourceframework/next-images
 
 [![npm version](https://img.shields.io/npm/v/@opensourceframework/next-images.svg)](https://www.npmjs.com/package/@opensourceframework/next-images)
-[![npm downloads](https://img.shields.io/npm/dm/@opensourceframework/next-images.svg)](https://www.npmjs.com/package/@opensourceframework/next-images)
-[![MIT License](https://img.shields.io/npm/l/@opensourceframework/next-images.svg)](https://github.com/opensourceframework/opensourceframework/blob/main/packages/next-images/LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/opensourceframework/opensourceframework/ci.yml?branch=main)](https://github.com/opensourceframework/opensourceframework/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Import images (jpg, jpeg, png, svg, gif, ico, webp, jp2, avif) in Next.js applications
+> Compatibility-first image imports for Next.js applications
 
-This is a maintained fork of the original [next-images](https://github.com/twopluszero/next-images) package by [Aref Aslani (twopluszero)](https://github.com/twopluszero), with TypeScript support and continued maintenance.
+> [!IMPORTANT]
+> This is a maintained fork of the original `next-images` package for teams that want to keep the existing plugin workflow and switch package names with minimal app changes.
+> If `next/image` fits your app, you can use it, but this package is still actively maintained as a compatibility option.
 
-> **Notice**: This package is deprecated. Next.js 10+ includes a built-in [Image component](https://nextjs.org/docs/api-reference/next/image) that provides automatic image optimization, lazy loading, and better performance. We strongly recommend migrating to `next/image` for new projects.
+## Why This Fork?
 
-## Features
+The original package is no longer actively maintained. This fork provides:
 
-- Load images from local filesystem
-- Load images from remote CDN (with assetPrefix)
-- Inline small images as Base64 to reduce HTTP requests
-- Content hash in filenames for cache busting
-- Full TypeScript support
-- Compatible with Next.js 12-16
+- 🔄 **Drop-In Migration**: Keep the classic `next-images` plugin shape and image import workflow
+- 🔒 **Active Maintenance**: Security fixes and compatibility work for modern Next.js environments
+- 📦 **Modern Tooling**: Built with TypeScript, tsup, and modern build tools
+- 📖 **Documentation**: Improved and up-to-date documentation
+- 🧪 **Regression Coverage**: Tests for webpack rule generation and compatibility behavior
 
 ## Installation
 
 ```bash
 npm install @opensourceframework/next-images
-```
-
-or
-
-```bash
+# or
 yarn add @opensourceframework/next-images
-```
-
-or
-
-```bash
+# or
 pnpm add @opensourceframework/next-images
 ```
 
-## Quick Start
+## Migration from Original
 
-Create or update your `next.config.js`:
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages();
-```
-
-Then import images in your components:
-
-```jsx
-// Using import
-import img from './my-image.jpg';
-
-export default function MyComponent() {
-  return <img src={img} alt="My Image" />;
-}
-```
-
-```jsx
-// Using require
-export default function MyComponent() {
-  return <img src={require('./my-image.jpg')} alt="My Image" />;
-}
-```
-
-## Configuration Options
-
-### `inlineImageLimit`
-
-Maximum file size (in bytes) for inlining images as Base64. Images smaller than this limit will be inlined as data URLs.
-
-- **Type**: `number | false`
-- **Default**: `8192` (8KB)
-- **Set to `false`**: Disable inlining entirely
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  inlineImageLimit: 16384, // 16KB
-});
-```
-
-### `assetPrefix`
-
-Serve images from a CDN or external domain.
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  assetPrefix: 'https://cdn.example.com',
-});
-```
-
-### `basePath`
-
-Set the base path for your application.
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  basePath: '/my-app',
-});
-```
-
-### `dynamicAssetPrefix`
-
-Enable dynamic asset prefix resolution at runtime. Useful when `assetPrefix` can change dynamically.
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  assetPrefix: 'https://cdn.example.com',
-  dynamicAssetPrefix: true,
-});
-```
-
-### `fileExtensions`
-
-Customize which file extensions to handle.
-
-- **Type**: `string[]`
-- **Default**: `["jpg", "jpeg", "png", "svg", "gif", "ico", "webp", "jp2", "avif"]`
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  fileExtensions: ['jpg', 'jpeg', 'png', 'webp'],
-});
-```
-
-### `exclude`
-
-Exclude specific paths from the loader. Useful when you want to handle certain files with a different loader (e.g., `svg-react-loader`).
-
-```js
-// next.config.js
-const path = require('path');
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  exclude: path.resolve(__dirname, 'src/assets/svg'),
-});
-```
-
-### `name`
-
-Customize the output file name template.
-
-- **Type**: `string`
-- **Default**: `"[name]-[hash].[ext]"`
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  name: '[name].[hash:base64:8].[ext]',
-});
-```
-
-Available tokens: `[name]`, `[hash]`, `[hash:base64:N]`, `[ext]`. See [webpack/loader-utils](https://github.com/webpack/loader-utils#interpolatename) for more options.
-
-### `esModule`
-
-Enable ES modules syntax for the output.
-
-- **Type**: `boolean`
-- **Default**: `false`
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  esModule: true,
-});
-```
-
-When enabled, you need to use `.default` when using `require()`:
-
-```jsx
-// With esModule: true
-<img src={require('./image.png').default} />
-
-// import statements work as before
-import img from './image.png';
-```
-
-## TypeScript Support
-
-This package includes TypeScript type definitions. For image imports, add a reference to the types in your project:
-
-Create `additional.d.ts`:
-
-```ts
-/// <reference types="@opensourceframework/next-images" />
-```
-
-Update `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    // ...
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "additional.d.ts"]
-}
-```
-
-## Using with `next/image`
-
-Next.js 10+ includes a built-in Image component that provides automatic optimization. If you want to use `next/image`, set `inlineImageLimit: false` to disable Base64 inlining:
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-
-module.exports = withImages({
-  inlineImageLimit: false,
-});
-```
-
-Then use the Image component:
-
-```jsx
-import Image from 'next/image';
-import myImage from './my-image.jpg';
-
-export default function MyComponent() {
-  return (
-    <Image
-      src={myImage}
-      alt="My Image"
-      width={500}
-      height={300}
-    />
-  );
-}
-```
-
-## Combining with Other Plugins
-
-You can combine `withImages` with other Next.js plugins:
-
-```js
-// next.config.js
-const withImages = require('@opensourceframework/next-images');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-module.exports = withBundleAnalyzer(
-  withImages({
-    // your config here
-  })
-);
-```
-
-## Migration from `next-images`
-
-If you're migrating from the original `next-images` package:
-
-1. Update your package dependencies:
+Replace:
 
 ```bash
-npm uninstall next-images
+npm install next-images
+```
+
+with:
+
+```bash
 npm install @opensourceframework/next-images
 ```
 
-2. Update your `next.config.js`:
+Then update your `next.config.js` import:
 
-```js
-// Before
-const withImages = require('next-images');
-
-// After
+```javascript
 const withImages = require('@opensourceframework/next-images');
 ```
 
-3. Update TypeScript references:
+Existing `withImages(...)` configuration can stay the same.
 
-```ts
-// Before
-/// <reference types="next-images" />
+## Usage
 
-// After
+```javascript
+// next.config.js
+const withImages = require('@opensourceframework/next-images');
+
+module.exports = withImages({
+  inlineImageLimit: 8192,
+});
+```
+
+```jsx
+import logo from './logo.png';
+
+export function Header() {
+  return <img src={logo} alt="Company logo" />;
+}
+```
+
+## Configuration
+
+`withImages` accepts the classic `next-images` options:
+
+- `inlineImageLimit`: Max size in bytes for Base64 inlining. Set `false` to always emit files.
+- `assetPrefix`: Prefix emitted asset URLs for CDN support.
+- `basePath`: Respect a Next.js base path when building asset URLs.
+- `fileExtensions`: Control which image extensions the loader handles.
+- `exclude`: Skip matching files or directories.
+- `name`: Customize emitted filename format. Default: `[name]-[hash].[ext]`.
+- `esModule`: Emit ES module loader output.
+- `dynamicAssetPrefix`: Resolve the asset prefix from runtime config on the server.
+- `webpack`: Chain custom webpack logic after the image rule is applied.
+
+## TypeScript Support
+
+Add the type reference once in your app if needed:
+
+```typescript
 /// <reference types="@opensourceframework/next-images" />
 ```
 
-## API Reference
+## Contributing
 
-### `withImages(options?)`
-
-Creates a Next.js configuration with image handling support.
-
-**Parameters:**
-- `options` (optional): Configuration options object
-
-**Returns:**
-- Modified Next.js configuration object
-
-**Example:**
-
-```ts
-import withImages from '@opensourceframework/next-images';
-
-const config = withImages({
-  inlineImageLimit: 8192,
-  fileExtensions: ['jpg', 'png', 'svg'],
-  assetPrefix: 'https://cdn.example.com',
-});
-
-export default config;
-```
-
-## Why This Fork?
-
-The original [next-images](https://github.com/twopluszero/next-images) package was last updated in April 2023 and appears to be unmaintained. This fork provides:
-
-- Continued maintenance and bug fixes
-- Full TypeScript support with type definitions
-- Compatibility with Next.js 12-16
-- Modern build tooling (tsup, vitest)
-- Active community support
-
-## Attribution
-
-This package is a fork of [next-images](https://github.com/twopluszero/next-images) originally created by [Aref Aslani (twopluszero)](https://github.com/twopluszero).
-
-Original license: MIT
+We welcome contributions! Please see our [Contributing Guide](../../CONTRIBUTING.md) for details.
 
 ## License
 
-MIT License - see [LICENSE](./LICENSE) for details.
-
-## Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](https://github.com/opensourceframework/opensourceframework/blob/main/CONTRIBUTING.md) for details.
-
-## Related Projects
-
-- [next/image](https://nextjs.org/docs/api-reference/next/image) - Built-in Next.js Image component (recommended for new projects)
-- [next-optimized-images](https://github.com/cyrilwanner/next-optimized-images) - Image optimization for Next.js
+MIT © OpenSource Framework Contributors
 
 ## Links
 
-- [GitHub Repository](https://github.com/opensourceframework/opensourceframework/tree/main/packages/next-images)
-- [npm Package](https://www.npmjs.com/package/@opensourceframework/next-images)
-- [Original Repository](https://github.com/twopluszero/next-images)
-- [Issue Tracker](https://github.com/opensourceframework/opensourceframework/issues)
+- [Original Package](https://www.npmjs.com/package/next-images)
+- [Issue Tracker](https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-images)
+- [Changelog](./CHANGELOG.md)

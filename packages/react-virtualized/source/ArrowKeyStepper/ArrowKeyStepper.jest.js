@@ -149,7 +149,7 @@ describe('ArrowKeyStepper', () => {
 
   it('should call :onScrollToChange for key down', () => {
     [true, false].forEach(() => {
-      const onScrollToChange = jest.fn();
+      const onScrollToChange = vi.fn();
       const {node} = renderHelper({
         isControlled: true,
         onScrollToChange,

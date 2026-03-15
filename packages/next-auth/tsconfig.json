@@ -31,5 +31,5 @@
     "**/*.js",
     ".eslintrc.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["examples", "node_modules"]
 }

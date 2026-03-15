@@ -2,7 +2,6 @@
 
 /// <reference types="node" />
 
-import { ConnectionOptions } from "typeorm"
 import { Adapter } from "./adapters"
 import { JWTOptions, JWT } from "./jwt"
 import { AppProviders } from "./providers"
@@ -36,7 +35,7 @@ export interface NextAuthOptions {
    *
    * [Documentation](https://next-auth.js.org/configuration/options#database) | [Databases](https://next-auth.js.org/configuration/databases)
    */
-  database?: string | Record<string, any> | ConnectionOptions
+  database?: string | Record<string, any>
   /**
    * A random string used to hash tokens, sign cookies and generate cryptographic keys.
    * If not specified is uses a hash of all configuration options, including Client ID / Secrets for entropy.

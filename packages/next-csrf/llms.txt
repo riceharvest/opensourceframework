@@ -1,0 +1,22 @@
+# @opensourceframework/next-csrf - AI Summary
+
+CSRF protection utilities for Next.js applications. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want safer request protection with minimal integration changes.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-csrf
+# or
+pnpm add @opensourceframework/next-csrf
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-csrf#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-csrf

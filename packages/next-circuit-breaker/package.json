@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-circuit-breaker",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "description": "Circuit breaker pattern implementation for Next.js API routes - Prevent cascading failures by failing fast when downstream services are unavailable",
   "keywords": [
     "next.js",
@@ -34,12 +34,13 @@
     "dist",
     "README.md",
     "CHANGELOG.md",
-    "LICENSE"
+    "LICENSE",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "lint": "eslint src/",
+    "lint": "eslint . --ignore-pattern examples",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
@@ -48,9 +49,11 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^4.0.18"
+    "eslint-plugin-jest": "^29.15.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^2.1.9",
+    "vitest": "^2.1.9"
   },
   "peerDependencies": {
     "next": ">=12.0.0"

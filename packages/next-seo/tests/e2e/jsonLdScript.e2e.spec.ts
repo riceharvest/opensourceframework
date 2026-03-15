@@ -1,5 +1,6 @@
 // tests/e2e/jsonLdScript.e2e.spec.ts
 import { test, expect } from "@playwright/test";
+import Ajv from "ajv";
 
 const PAGE_URL = "/jsonld-test-page"; // The path to your test page in the example app
 const SCRIPT_SELECTOR = 'script[type="application/ld+json"]#e2e-jsonld-script'; // More specific selector
@@ -55,22 +56,31 @@ test.describe("JsonLdScript E2E Test", () => {
     await expect(nonExistentScript).toHaveCount(0); // Expect no such element
   });
 
-  // Later, you will use Ajv here for schema validation
-  test.skip("TODO: should validate JSON-LD against a schema using Ajv", async ({
+  test("should validate JSON-LD against a minimal WebPage schema", async ({
     page,
   }) => {
     await page.goto(PAGE_URL);
     const scriptHandle = await page.waitForSelector(SCRIPT_SELECTOR);
     const scriptContent = await scriptHandle.innerHTML();
     const jsonData = JSON.parse(scriptContent);
+    const ajv = new Ajv();
+    const validate = ajv.compile({
+      type: "object",
+      required: ["@context", "@type", "name", "description", "url"],
+      properties: {
+        "@context": { const: "https://schema.org" },
+        "@type": { const: "WebPage" },
+        name: { type: "string", minLength: 1 },
+        description: { type: "string", minLength: 1 },
+        url: { type: "string", minLength: 1 },
+      },
+      additionalProperties: true,
+    });
 
-    // Placeholder for Ajv validation
-    // const ajv = new Ajv();
-    // const webPageSchema = require('../../schemas/webpage.schema.json'); // You'll create this
-    // const validate = ajv.compile(webPageSchema);
-    // const valid = validate(jsonData);
-    // if (!valid) console.error(validate.errors);
-    // expect(valid, `JSON-LD should be valid according to WebPage schema. Errors: ${JSON.stringify(validate.errors)}`).toBe(true);
-    expect(jsonData).toBeTruthy(); // Keep a basic assertion for now
+    const valid = validate(jsonData);
+    expect(
+      valid,
+      `JSON-LD should match schema. Errors: ${JSON.stringify(validate.errors)}`
+    ).toBe(true);
   });
 });

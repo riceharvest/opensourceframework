@@ -1,0 +1,22 @@
+# @opensourceframework/next-iron-session - AI Summary
+
+Secure, stateless, cookie-based session management for JavaScript and Next.js applications. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want the familiar iron-session model with minimal app changes.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-iron-session
+# or
+pnpm add @opensourceframework/next-iron-session
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-iron-session#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-iron-session

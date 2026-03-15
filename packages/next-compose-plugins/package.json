@@ -1,0 +1,63 @@
+{
+  "name": "@opensourceframework/next-compose-plugins",
+  "version": "2.3.1",
+  "description": "Provides a cleaner API for enabling and configuring plugins for next.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "llms.txt"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "lint": "eslint . --ignore-pattern examples",
+    "lint:fix": "eslint . --ignore-pattern examples --fix",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-compose-plugins"
+  },
+  "keywords": [
+    "next.js",
+    "next",
+    "react",
+    "plugins",
+    "compose"
+  ],
+  "author": "OpenSource Framework Contributors (fork), Original: Cyril Wanner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-compose-plugins"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-compose-plugins#readme",
+  "devDependencies": {
+    "eslint-plugin-jest": "^29.15.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^2.1.9",
+    "vitest": "^2.1.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}

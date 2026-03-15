@@ -1,5 +1,3 @@
-"use client"
-
 // Note about signIn() and signOut() methods:
 //
 // On signIn() and signOut() we pass 'json: true' to request a response in JSON

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { cleanup, render } from "@testing-library/react";
 import { describe, it, expect, afterEach } from "vitest";
 import { BuildTagsParams, ImagePrevSize } from "../types";

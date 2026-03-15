@@ -1,15 +1,5 @@
 # CHANGELOG
 
-## 3.29.11
-
-### Patch Changes
-
-- Modernization and stabilization fixes:
-  - Standardized scripts and CI/CD lockfiles
-  - Fixed lint rules and CI/CD unblocking
-  - Added llms.txt for AI-First Discovery
-  - Include llms.txt in published files
-
 The changelog is automatically updated using
 [semantic-release](https://github.com/semantic-release/semantic-release). You
 can see it on the [releases page](../../releases).

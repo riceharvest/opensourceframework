@@ -11,7 +11,7 @@ export default async function oAuthCallback(req) {
   if (provider.version?.startsWith("2.")) {
     // The "user" object is specific to the Apple provider and is provided on first sign in
     // e.g. {"name":{"firstName":"Johnny","lastName":"Appleseed"},"email":"johnny.appleseed@nextauth.com"}
-    let { code, user } = req.query // eslint-disable-line camelcase
+    let { code, user } = req.query  
 
     if (req.method === "POST") {
       try {
@@ -70,10 +70,10 @@ export default async function oAuthCallback(req) {
 
   try {
     // Handle OAuth v1.x
-    // eslint-disable-next-line camelcase
+     
     const { oauth_token, oauth_verifier } = req.query
 
-    // eslint-disable-next-line camelcase
+     
     const { token_secret } = await client.getOAuthRequestToken(provider.params)
     const tokens = await client.getOAuthAccessToken(
       oauth_token,

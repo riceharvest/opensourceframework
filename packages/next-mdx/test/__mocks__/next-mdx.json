@@ -1,0 +1,13 @@
+{
+  "post": {
+    "contentPath": "__fixtures__/content/posts",
+    "basePath": "/blog"
+  },
+  "author": {
+    "contentPath": "__fixtures__/content/authors"
+  },
+  "page": {
+    "contentPath": "__fixtures__/content/pages",
+    "basePath": "/"
+  }
+}

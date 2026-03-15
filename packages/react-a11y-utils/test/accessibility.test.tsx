@@ -1,4 +1,4 @@
-/// <reference types="axe-core" />
+import 'axe-core';
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import * as axe from 'axe-core';
@@ -27,16 +27,6 @@ import {
 const runAxe = async (element: HTMLElement) => {
   // @ts-expect-error - axe-core types require explicit call to run()
   return await axe.run(element);
-};
-
-// Helper component to test props application
-interface TestPropsComponentProps {
-  children: React.ReactNode;
-  [key: string]: unknown;
-}
-
-const TestPropsComponent = ({ children, ...props }: TestPropsComponentProps) => {
-  return <div {...props}>{children}</div>;
 };
 
 describe('Accessibility Tests with axe-core', () => {
@@ -367,7 +357,7 @@ describe('Accessibility Tests with axe-core', () => {
       const Toast = ({
         message,
         type,
-        autoDismiss = false,
+        autoDismiss: _autoDismiss = false,
       }: {
         message: string;
         type: 'success' | 'error' | 'info';

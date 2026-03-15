@@ -1,13 +1,29 @@
-import { describe, it, expect, beforeEach, vi } from "vitest"
+import { describe, it, expect } from "vitest"
 import { encode, decode, getToken } from "../jwt.js"
 
 describe("JWT", () => {
   const secret = "test-secret-key"
+  
+  const signingKey = JSON.stringify({
+    kty: "oct",
+    k: "SpIWNDylLwonI7rbtIsvX08-IEN7YKPLEeVAK_ut0NLz3XInw2JHsaMyHLKctkU53QWE8zg-F-t6sXmiqLNUJA",
+    alg: "HS512",
+    use: "sig",
+    kid: "test-signing-key"
+  })
+
+  const encryptionKey = JSON.stringify({
+    kty: "oct",
+    k: "dz7TQcrWGuXfNqmBgrsQLI8qtijMhxoC7MECZ37i7tQ",
+    alg: "A256GCM",
+    use: "enc",
+    kid: "test-encryption-key"
+  })
 
   describe("encode", () => {
     it("should encode a token with default options", async () => {
       const token = { sub: "user-123", name: "Test User" }
-      const encoded = await encode({ token, secret })
+      const encoded = await encode({ token, secret, signingKey })
 
       expect(encoded).toBeDefined()
       expect(typeof encoded).toBe("string")
@@ -15,7 +31,7 @@ describe("JWT", () => {
 
     it("should encode a token with custom maxAge", async () => {
       const token = { sub: "user-123" }
-      const encoded = await encode({ token, secret, maxAge: 3600 })
+      const encoded = await encode({ token, secret, signingKey, maxAge: 3600 })
 
       expect(encoded).toBeDefined()
     })
@@ -25,6 +41,8 @@ describe("JWT", () => {
       const encoded = await encode({
         token,
         secret,
+        signingKey,
+        encryptionKey,
         encryption: true,
       })
 
@@ -36,8 +54,8 @@ describe("JWT", () => {
   describe("decode", () => {
     it("should decode a previously encoded token", async () => {
       const token = { sub: "user-123", name: "Test User" }
-      const encoded = await encode({ token, secret })
-      const decoded = await decode({ token: encoded, secret })
+      const encoded = await encode({ token, secret, signingKey })
+      const decoded = await decode({ token: encoded, secret, signingKey })
 
       expect(decoded).toBeDefined()
       expect(decoded.sub).toBe("user-123")
@@ -45,19 +63,19 @@ describe("JWT", () => {
     })
 
     it("should return null for null token", async () => {
-      const decoded = await decode({ token: null, secret })
+      const decoded = await decode({ token: null, secret, signingKey })
       expect(decoded).toBeNull()
     })
 
     it("should return null for undefined token", async () => {
-      const decoded = await decode({ token: undefined, secret })
+      const decoded = await decode({ token: undefined, secret, signingKey })
       expect(decoded).toBeNull()
     })
 
     it("should decode an encrypted token", async () => {
       const token = { sub: "user-123", name: "Test User" }
-      const encoded = await encode({ token, secret, encryption: true })
-      const decoded = await decode({ token: encoded, secret, encryption: true })
+      const encoded = await encode({ token, secret, signingKey, encryptionKey, encryption: true })
+      const decoded = await decode({ token: encoded, secret, signingKey, encryptionKey, encryption: true })
 
       expect(decoded).toBeDefined()
       expect(decoded.sub).toBe("user-123")
@@ -88,7 +106,7 @@ describe("JWT", () => {
 
     it("should return decoded token from cookie", async () => {
       const token = { sub: "user-123" }
-      const encoded = await encode({ token, secret })
+      const encoded = await encode({ token, secret, signingKey })
 
       const mockReq = {
         cookies: {
@@ -96,14 +114,14 @@ describe("JWT", () => {
         },
       }
 
-      const result = await getToken({ req: mockReq, secret })
+      const result = await getToken({ req: mockReq, secret, signingKey })
       expect(result).toBeDefined()
       expect(result.sub).toBe("user-123")
     })
 
     it("should return token from Authorization header", async () => {
       const token = { sub: "user-123" }
-      const encoded = await encode({ token, secret })
+      const encoded = await encode({ token, secret, signingKey })
       const encodedURI = encodeURIComponent(encoded)
 
       const mockReq = {
@@ -113,7 +131,7 @@ describe("JWT", () => {
         },
       }
 
-      const result = await getToken({ req: mockReq, secret })
+      const result = await getToken({ req: mockReq, secret, signingKey })
       expect(result).toBeDefined()
       expect(result.sub).toBe("user-123")
     })
@@ -126,7 +144,7 @@ describe("JWT", () => {
       }
 
       try {
-        const result = await getToken({ req: mockReq, secret })
+        const result = await getToken({ req: mockReq, secret, signingKey })
         expect(result).toBeNull()
       } catch (error) {
         expect(error).toBeDefined()
@@ -135,7 +153,7 @@ describe("JWT", () => {
 
     it("should use secure cookie name when secureCookie is true", async () => {
       const token = { sub: "user-123" }
-      const encoded = await encode({ token, secret })
+      const encoded = await encode({ token, secret, signingKey })
 
       const mockReq = {
         cookies: {
@@ -146,6 +164,7 @@ describe("JWT", () => {
       const result = await getToken({
         req: mockReq,
         secret,
+        signingKey,
         secureCookie: true,
       })
 

@@ -4,19 +4,101 @@ import { EmailConfig } from "./providers"
 
 /** Legacy */
 
-export {
-  TypeORMAccountModel,
-  TypeORMSessionModel,
-  TypeORMUserModel,
-  TypeORMVerificationRequestModel,
-} from "@next-auth/typeorm-legacy-adapter"
+type Schema = Record<string, unknown>
 
-import {
-  TypeORMAdapter,
-  TypeORMAdapterModels,
-} from "@next-auth/typeorm-legacy-adapter"
+export class TypeORMUserModel implements User {
+  name?: string
+  email?: string
+  image?: string
+  emailVerified?: Date
 
-import { PrismaLegacyAdapter } from "@next-auth/prisma-legacy-adapter"
+  constructor(
+    name?: string,
+    email?: string,
+    image?: string,
+    emailVerified?: Date
+  )
+  [x: string]: unknown
+}
+
+export class TypeORMSessionModel {
+  userId: number
+  expires: Date | string
+  sessionToken: string
+  accessToken: string
+
+  constructor(
+    userId: number,
+    expires: Date,
+    sessionToken?: string,
+    accessToken?: string
+  )
+}
+
+export class TypeORMVerificationRequestModel {
+  identifier: string
+  token: string
+  expires: Date
+  constructor(identifier: string, token: string, expires: Date)
+}
+
+export class TypeORMAccountModel {
+  compoundId: string
+  userId: number
+  providerType: string
+  providerId: string
+  providerAccountId: string
+  refreshToken?: string
+  accessToken?: string
+  accessTokenExpires?: Date
+
+  constructor(
+    userId: number,
+    providerId: string,
+    providerType: string,
+    providerAccountId: string,
+    refreshToken?: string,
+    accessToken?: string,
+    accessTokenExpires?: Date
+  )
+}
+
+export interface TypeORMAdapterModels {
+  Account: {
+    model: typeof TypeORMAccountModel
+    schema: Schema
+  }
+  User: {
+    model: typeof TypeORMUserModel
+    schema: Schema
+  }
+  Session: {
+    model: typeof TypeORMSessionModel
+    schema: Schema
+  }
+  VerificationRequest: {
+    model: typeof TypeORMVerificationRequestModel
+    schema: Schema
+  }
+}
+
+export type TypeORMAdapter<
+  C = string | Record<string, unknown>,
+  O = { models?: TypeORMAdapterModels },
+  U = User,
+  P = Profile,
+  S = Omit<Session, "expires"> & { expires: Date }
+> = Adapter<C, O, U, P, S>
+
+export type PrismaLegacyAdapter = Adapter<{
+  prisma: any
+  modelMapping?: {
+    User: string
+    Account: string
+    Session: string
+    VerificationRequest: string
+  }
+}>
 
 export const TypeORM: {
   Models: TypeORMAdapterModels

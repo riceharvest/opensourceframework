@@ -1,7 +1,11 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    session: 'src/index.ts',
+    compat: 'src/compat.ts',
+  },
+  outDir: 'lib',
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
@@ -13,12 +17,12 @@ export default defineConfig({
   esbuildOptions(options) {
     options.banner = {
       js: `/**
- * @opensourceframework/next-session
- * Simple promise-based session for Next.js
+ * @opensourceframework/{package-name}
+ * {brief-description}
  * 
- * @original-author Unknown
- * @original-repo https://github.com/hoangvvo/next-session
- * @license MIT
+ * @original-author {original-author}
+ * @original-repo {original-repo-url}
+ * @license {original-license}
  */`,
     };
   },

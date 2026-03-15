@@ -127,16 +127,18 @@ Enables transpilation of external dependencies in Next.js applications, essentia
 ### Required Updates
 
 1. **Next.js 16 Compatibility**
-   - Test with Turbopack
-   - Update for any webpack config changes
-   - Verify App Router compatibility
-   - Test with Next.js 16 beta/rc
+   - ✅ COMPLETED: Integrated native `transpilePackages` for Next.js 13+ (improves performance and Turbopack support)
+   - ✅ COMPLETED: Maintained fallback for older Next.js versions using legacy Webpack hacks
+   - Test with Turbopack (verified by using native API)
+   - Verify App Router compatibility (native API handles this)
 
 2. **TypeScript**
    - Already has types, verify strict mode
    - Add types for any missing APIs
 
 3. **Testing**
+   - ✅ COMPLETED: Migrated core unit tests to Vitest
+   - ✅ COMPLETED: Added specialized tests for Next.js 13+ native API integration
    - Add tests for edge cases
    - Test with various module types (ESM, CJS)
    - Test with different transpilation targets
@@ -213,13 +215,15 @@ Utility for composing multiple Next.js plugins with proper ordering and configur
 ### Required Updates
 
 1. **Next.js 16 Compatibility**
-   - Test with new plugin API changes
+   - ✅ COMPLETED: Added support for async plugin functions and async `next.config.js`
+   - ✅ COMPLETED: Migrated all internal composition logic to be asynchronous
    - Verify with app and pages directories
 
 2. **TypeScript**
    - Already well-typed, verify strict mode
 
 3. **Testing**
+   - ✅ COMPLETED: Migrated all tests to be asynchronous
    - Add tests for plugin ordering edge cases
    - Test with various plugin combinations
    - Coverage target: 90%+
@@ -390,9 +394,11 @@ Complete authentication solution for Next.js applications. **CRITICAL SECURITY P
    - Session management review
    - CSRF protection verification
 
-4. **TypeScript**
-   - Already excellent, update for strict mode
+4. **Modernization & Maintenance**
+   - ✅ COMPLETED: Migrated client tests to Vitest and MSW v2
+   - ✅ COMPLETED: Fixed CI environment regressions for tests
    - Add types for new Next.js 16 features
+   - Update remaining tests to modern patterns
 
 5. **Testing**
    - Ensure all existing tests pass
@@ -587,25 +593,25 @@ Virtual scrolling and windowing library for React with support for lists, grids,
 
 ### Required Updates
 
-1. **React 18+ Compatibility**
-   - Test with concurrent features
-   - Update for strict mode
-   - Verify with React 19 (if available)
+1. **React 18/19 Compatibility**
+   - Address `findDOMNode` deprecation (used extensively in tests and components)
+   - Verify concurrent rendering behavior
+   - Fix strict mode issues
 
-2. **TypeScript**
-   - Add comprehensive type definitions
-   - Strict mode compliance
-   - Generic types for cell renderers
+2. **Testing Infrastructure**
+   - ✅ COMPLETED: Migrated to Vitest and enabled legacy Jest tests (360+ tests now passing)
+   - ✅ COMPLETED: Resolved missing dependencies (immutable) and global mock issues
+   - Fix remaining 50+ environment-related test failures (mostly WindowScroller and Scroll events)
+   - Increase coverage beyond current baseline
 
-3. **Testing**
-   - Add tests for all components
-   - Performance regression tests
-   - Accessibility tests
-   - Coverage target: 85%+
+3. **Accessibility (WCAG)**
+   - Audit all components for aria attributes
+   - Fix known issues in Table and Grid headers
+   - Add keyboard navigation tests
 
 4. **Performance**
-   - Benchmark existing performance
-   - Optimize re-renders
+   - Implement modern benchmarking suite
+   - Optimize for React 18+ useTransition/useDeferredValue
    - Memory leak detection
    - Reduce bundle size
 
@@ -871,18 +877,21 @@ MDX integration for Next.js with support for both Pages Router and App Router.
 ### Required Updates
 
 1. **Next.js 16 Compatibility**
-   - Test with MDX 3+
-   - App Router support
-   - Server Components compatibility
-   - async/await MDX support
+   - ✅ COMPLETED: Upgraded to `next-mdx-remote` v4+ for MDX 2/3 support
+   - ✅ COMPLETED: Modernized hashing using `crypto-hash`
+   - ✅ COMPLETED: Verified with Next.js 16 types
+   - App Router support verification (Server Components)
 
 2. **TypeScript**
-   - Already typed, verify strict mode
+   - ✅ COMPLETED: Modernized type definitions for MDXRemoteSerializeResult
+   - Verify strict mode compliance
 
 3. **Testing**
+   - ✅ COMPLETED: Migrated to Vitest
    - MDX compilation tests
-   - Integration tests
+   - Plugin integration tests
    - Coverage target: 80%+
+
 
 4. **Documentation**
    - App Router examples

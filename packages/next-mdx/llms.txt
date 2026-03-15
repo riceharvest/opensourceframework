@@ -1,0 +1,22 @@
+# @opensourceframework/next-mdx - AI Summary
+
+MDX content helpers for Next.js applications. This package is maintained in the OpenSource Framework monorepo as a compatibility-first package for teams that want to keep a config-driven MDX workflow with minimal app changes.
+
+## Maintainer Intent
+
+- Preserve the original package workflow and public API where safely possible.
+- Prefer drop-in or low-friction adoption over recommending a different library by default.
+- Modernize internals, testing, and framework compatibility without forcing rewrites.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-mdx
+# or
+pnpm add @opensourceframework/next-mdx
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-mdx#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-mdx

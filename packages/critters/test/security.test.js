@@ -108,6 +108,23 @@ describe('Security', () => {
     expect(hasEvilScript(html)).toBe(false);
   });
 
+  it('should block dangerous stylesheet href schemes for preload strategies', async () => {
+    const critters = new Critters({ preload: 'js' });
+    critters.readFile = () => `* { background: red }`;
+    const html = await critters.process(`
+      <html>
+        <head>
+          <link rel=stylesheet href="javascript:alert(1)">
+        </head>
+        <body>
+        </body>
+      </html>
+    `);
+
+    expect(html).not.toContain('javascript:alert(1)');
+    expect(html).not.toContain('data-href=');
+  });
+
   it('should not execute JavaScript in CSS content property', async () => {
     const critters = new Critters({});
     critters.readFile = () =>

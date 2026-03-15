@@ -34,10 +34,10 @@ export interface JWTDecodeParams {
   secret: string | Buffer
   signingKey?: string
   verificationKey?: string
-  verificationOptions?: JoseJWT.VerifyOptions<false>
+  verificationOptions?: JoseJWT.VerifyOptions
   encryptionKey?: string
   decryptionKey?: string
-  decryptionOptions?: JWE.DecryptOptions<false>
+  decryptionOptions?: JWE.DecryptOptions
   encryption?: boolean
 }
 
@@ -65,5 +65,5 @@ export interface JWTOptions {
   encryptionKey?: string
   encode?: typeof encode
   decode?: typeof decode
-  verificationOptions?: JoseJWT.VerifyOptions<false>
+  verificationOptions?: JoseJWT.VerifyOptions
 }

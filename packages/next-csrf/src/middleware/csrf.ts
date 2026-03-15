@@ -29,6 +29,46 @@ const createCsrfError = (code: CsrfErrorCode, genericMessage: string): HttpError
   return error;
 };
 
+const pickFirstHeaderValue = (
+  value: string | string[] | undefined
+): string | undefined => {
+  if (Array.isArray(value)) return value[0];
+  return value;
+};
+
+const getRequestToken = (
+  req: NextApiRequest,
+  tokenKey: string
+): string | undefined => {
+  const headerCandidates = [
+    tokenKey.toLowerCase(),
+    'x-csrf-token',
+    'x-xsrf-token',
+    'csrf-token',
+  ];
+
+  for (const headerName of headerCandidates) {
+    const headerValue = pickFirstHeaderValue(req.headers[headerName]);
+    if (typeof headerValue === 'string' && headerValue.length > 0) {
+      return headerValue;
+    }
+  }
+
+  if (req.body && typeof req.body === 'object' && !Array.isArray(req.body)) {
+    const bodyToken = (req.body as Record<string, unknown>)[tokenKey];
+    if (typeof bodyToken === 'string' && bodyToken.length > 0) {
+      return bodyToken;
+    }
+  }
+
+  const queryToken = req.query?.[tokenKey];
+  if (typeof queryToken === 'string' && queryToken.length > 0) {
+    return queryToken;
+  }
+
+  return undefined;
+};
+
 /**
  * CSRF validation middleware for Next.js API routes
  * 
@@ -75,12 +115,18 @@ const csrf = (
     const cookie = parse(req.headers.cookie);
     
     // Extract token and secret from cookies
-    let token = cookie[tokenKey];
+    let cookieToken = cookie[tokenKey];
     const csrfSecret = cookie['csrfSecret'];
+    const requestToken = getRequestToken(req, tokenKey);
 
     // Check token exists in cookie
-    if (!token) {
+    if (!cookieToken) {
       throw createCsrfError(CsrfErrorCodes.MISSING_TOKEN, csrfErrorMessage);
+    }
+
+    // Check request token exists in header/body/query
+    if (!requestToken) {
+      throw createCsrfError(CsrfErrorCodes.MISSING_REQUEST_TOKEN, csrfErrorMessage);
     }
 
     // Check csrfSecret exists
@@ -91,18 +137,28 @@ const csrf = (
     // If a secret was provided, the cookie is signed
     // Unsign and verify (Synchronizer token pattern)
     if (secret != null) {
-      const unsignedToken = unsign(token, secret);
+      const unsignedToken = unsign(cookieToken, secret);
 
       // Validate signature - this indicates tampering or corruption
       if (!unsignedToken) {
         throw createCsrfError(CsrfErrorCodes.INVALID_SIGNATURE, csrfErrorMessage);
       }
 
-      token = unsignedToken;
+      cookieToken = unsignedToken;
+    }
+
+    let normalizedRequestToken = requestToken;
+    if (secret != null) {
+      const unsignedRequestToken = unsign(requestToken, secret);
+      if (unsignedRequestToken) normalizedRequestToken = unsignedRequestToken;
+    }
+
+    if (normalizedRequestToken !== cookieToken) {
+      throw createCsrfError(CsrfErrorCodes.TOKEN_MISMATCH, csrfErrorMessage);
     }
 
     // Verify CSRF token against the secret
-    if (!createToken.verify(csrfSecret, token)) {
+    if (!createToken.verify(csrfSecret, cookieToken)) {
       throw createCsrfError(CsrfErrorCodes.VERIFICATION_FAILED, csrfErrorMessage);
     }
 

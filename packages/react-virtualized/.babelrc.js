@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV;
 if (env === 'commonjs' || env === 'es') {
   module.exports = {
     ignore: [
-      '*.jest.js',
+      '*.vi.js',
       '*.e2e.js',
       '*.ssr.js',
       '*.example.js',

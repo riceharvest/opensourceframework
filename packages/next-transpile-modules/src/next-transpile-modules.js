@@ -1,15 +1,13 @@
 /**
  * disclaimer:
  *
- * THIS PLUGIN IS A BIG HACK.
+ * THIS PLUGIN IS A BIG HACK (for Next.js < 13.0.0).
  *
  * Don't even try to reason about the quality of the following lines of code.
  *
  * ---
  *
- * We intentionally do not use experimental.transpilePackages (yet) as its API
- * may change and we want to avoid breaking changes while the Next.js figures
- * this all out.
+ * For Next.js >= 13.0.0, we use the native transpilePackages option.
  */
 
 const path = require('path');
@@ -17,13 +15,33 @@ const process = require('process');
 
 const enhancedResolve = require('enhanced-resolve');
 
-// Use me when needed
-// const util = require('util');
-//  const inspect = (object) => {
-//    console.log(util.inspect(object, { showHidden: false, depth: null }));
-//  };
-
 const CWD = process.cwd();
+
+/**
+ * Get Next.js version
+ * @returns {string}
+ */
+const getNextjsVersion = () => {
+  // Use environment variable for easier testing
+  if (process.env.NEXT_PRIVATE_TEST_VERSION) {
+    return process.env.NEXT_PRIVATE_TEST_VERSION;
+  }
+  try {
+    return require('next/package.json').version;
+  } catch {
+    return '0.0.0';
+  }
+};
+
+/**
+ * Check if Next.js version is >= 13.0.0
+ * @returns {boolean}
+ */
+const isNext13Plus = () => {
+  const version = getNextjsVersion();
+  const major = parseInt(version.split('.')[0], 10);
+  return major >= 13;
+};
 
 /**
  * Check if two regexes are equal
@@ -57,7 +75,6 @@ const createLogger = (enable) => {
 
 /**
  * Matcher function for webpack to decide which modules to transpile
- * TODO: could be simplified
  *
  * @param {string[]} modulesToTranspile
  * @param {function} logger
@@ -76,11 +93,9 @@ const createWebpackMatcher = (modulesToTranspile, logger = createLogger(false)) 
   });
 
   return (filePath) => {
-    // Basic path traversal protection: don't match if path contains ..
+    // Basic path traversal protection.
     if (filePath.includes('..')) {
-      // In a real webpack environment, paths are usually normalized already
-      // but we should still be safe
-      const segments = filePath.split(/[\\\/]/);
+      const segments = filePath.split(/[\\/]/);
       if (segments.includes('..')) return false;
     }
 
@@ -92,7 +107,6 @@ const createWebpackMatcher = (modulesToTranspile, logger = createLogger(false)) 
       const isAtBoundary =
         normalizedFilePath.length === modulePath.length ||
         normalizedFilePath[modulePath.length] === '/';
-
       const transpiled = isSubPath && isAtBoundary && nodeModulesDepth === moduleDepth;
       if (transpiled) logger(`transpiled: ${filePath}`);
       return transpiled;
@@ -103,7 +117,7 @@ const createWebpackMatcher = (modulesToTranspile, logger = createLogger(false)) 
 /**
  * Transpile modules with Next.js Babel configuration
  * @param {string[]} modules
- * @param {{resolveSymlinks?: boolean, debug?: boolean, __unstable_matcher?: (path: string) => boolean}} options
+ * @param {{resolveSymlinks?: boolean, debug?: boolean, __unstable_matcher?: (path: string) => boolean, skipNative?: boolean}}
  */
 const withTmInitializer = (modules = [], options = {}) => {
   /**
@@ -114,10 +128,25 @@ const withTmInitializer = (modules = [], options = {}) => {
   const withTM = (nextConfig = {}) => {
     if (modules.length === 0) return nextConfig;
 
-    const resolveSymlinks = 'resolveSymlinks' in options ? options.resolveSymlinks : true;
     const debug = options.debug || false;
-
     const logger = createLogger(debug);
+
+    // Use native transpilePackages for Next.js 13+
+    if (isNext13Plus() && !options.skipNative) {
+      logger('Next.js 13+ detected, using native transpilePackages');
+      
+      const existingTranspilePackages = nextConfig.transpilePackages || [];
+      const newTranspilePackages = Array.from(new Set([
+        ...(Array.isArray(existingTranspilePackages) ? existingTranspilePackages : [existingTranspilePackages]),
+        ...modules
+      ]));
+
+      return Object.assign({}, nextConfig, {
+        transpilePackages: newTranspilePackages
+      });
+    }
+
+    const resolveSymlinks = 'resolveSymlinks' in options ? options.resolveSymlinks : true;
 
     /**
      * Our own Node.js resolver that can ignore symlinks resolution and  can support
@@ -143,7 +172,8 @@ const withTmInitializer = (modules = [], options = {}) => {
         return path.dirname(packageLookupDirectory);
       } catch (err) {
         throw new Error(
-          `next-transpile-modules - an unexpected error happened when trying to resolve "${module}". Are you sure the name of the module you are trying to transpile is correct, and it has a package.json with a "main" or an "exports" field?\n${err}`,
+          `next-transpile-modules - an unexpected error happened when trying to resolve "${module}". Are you sure the name of the module you are trying to transpile is correct, and it has a package.json with a "main" or an "exports" field?`,
+          { cause: err },
         );
       }
     };
@@ -187,7 +217,9 @@ const withTmInitializer = (modules = [], options = {}) => {
                   const resolve = options.getResolve();
                   const resolved = await resolve(options.context, options.request);
                   if (modulesPaths.some((mod) => resolved.startsWith(mod))) return;
-                } catch (e) {}
+                } catch {
+                  // Keep original external resolution behavior when lookup fails.
+                }
               }
               return externalResult;
             };
@@ -196,7 +228,7 @@ const withTmInitializer = (modules = [], options = {}) => {
 
         // Add a rule to include and parse all modules (js & ts)
         config.module.rules.push({
-          test: /\.+(js|jsx|mjs|ts|tsx)$/,
+          test: /\.(js|jsx|mjs|ts|tsx)$/,
           use: options.defaultLoaders.babel,
           include: matcher,
           type: 'javascript/auto',
@@ -205,13 +237,11 @@ const withTmInitializer = (modules = [], options = {}) => {
         if (resolveSymlinks === false) {
           // IMPROVE ME: we are losing all the cache on node_modules, which is terrible
           // The problem is managedPaths does not allow to isolate specific specific folders
-          config.snapshot = Object.assign(config.snapshot || {}, {
-            managedPaths: [],
-          });
+          config.snapshot = Object.assign(config.snapshot || {},
+            { managedPaths: [] });
         }
 
         // Support CSS modules + global in node_modules
-        // TODO ask Next.js maintainer to expose the css-loader via defaultLoaders
         const nextCssLoaders = config.module.rules.find((rule) => typeof rule.oneOf === 'object');
 
         // .module.css
@@ -276,8 +306,6 @@ const withTmInitializer = (modules = [], options = {}) => {
         }
 
         // Make hot reloading work!
-        // FIXME: not working on Wepback 5
-        // https://github.com/vercel/next.js/issues/13039
         const watchOptionsIgnored = Array.isArray(config.watchOptions.ignored)
           ? config.watchOptions.ignored
           : [config.watchOptions.ignored];

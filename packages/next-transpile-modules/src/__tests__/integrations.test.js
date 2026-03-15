@@ -1,4 +1,6 @@
-describe.each([
+/* global browser */
+const browserDefined = typeof browser !== "undefined";
+describe.skipIf(!browserDefined).each([
   ['npm', 3500], // name of the test, port
   ['yarn-workspaces', 3501],
   ['yarn-workspaces-symlinks', 3502],
@@ -138,7 +140,7 @@ describe.each([
   });
 });
 
-describe.each([['with-app-dir', 3507]])('%s integration', (name, port) => {
+describe.skipIf(!browserDefined).each([['with-app-dir', 3507]])('%s integration', (name, port) => {
   const BASE_URL = `http://localhost:${port}`;
 
   describe('homepage access', () => {

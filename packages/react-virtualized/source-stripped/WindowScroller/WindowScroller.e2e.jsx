@@ -53,8 +53,8 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 test('save position after resize and then scroll in window', async () => {
   const page = await bootstrap();
-  const scrollFn = jest.fn();
-  const resizeFn = jest.fn();
+  const scrollFn = vi.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('scrollFn', scrollFn);
   await page.exposeFunction('resizeFn', resizeFn);
 
@@ -82,8 +82,8 @@ test('save position after resize and then scroll in window', async () => {
 
 test('save position after resize and then scroll in container', async () => {
   const page = await bootstrap();
-  const scrollFn = jest.fn();
-  const resizeFn = jest.fn();
+  const scrollFn = vi.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('scrollFn', scrollFn);
   await page.exposeFunction('resizeFn', resizeFn);
 
@@ -114,7 +114,7 @@ test('save position after resize and then scroll in container', async () => {
 
 test('react on container resize without window changing', async () => {
   const page = await bootstrap();
-  const resizeFn = jest.fn();
+  const resizeFn = vi.fn();
   await page.exposeFunction('resizeFn', resizeFn);
 
   await page.evaluate(() => {

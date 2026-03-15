@@ -199,7 +199,7 @@ function setCookie(res: ResponseType, cookieValue: string): void {
   ]);
 }
 
-export function createSealData(_crypto: Crypto) {
+export function createSealData(_crypto: any) {
   return async function sealData(
     data: unknown,
     {
@@ -212,12 +212,16 @@ export function createSealData(_crypto: Crypto) {
     const mostRecentPasswordId = Math.max(
       ...Object.keys(passwordsMap).map(Number),
     );
+    const mostRecentPasswordSecret = passwordsMap[mostRecentPasswordId];
+    if (typeof mostRecentPasswordSecret !== "string") {
+      throw new Error("No valid password configured for sealing data.");
+    }
     const passwordForSeal = {
       id: mostRecentPasswordId.toString(),
-      secret: passwordsMap[mostRecentPasswordId]!,
+      secret: mostRecentPasswordSecret,
     };
 
-    const seal = await ironSeal(_crypto, data, passwordForSeal, {
+    const seal = await ironSeal(_crypto as any, data, passwordForSeal, {
       ...ironDefaults,
       ttl: ttl * 1000,
     });
@@ -226,7 +230,7 @@ export function createSealData(_crypto: Crypto) {
   };
 }
 
-export function createUnsealData(_crypto: Crypto) {
+export function createUnsealData(_crypto: any) {
   return async function unsealData<T>(
     seal: string,
     {
@@ -239,7 +243,7 @@ export function createUnsealData(_crypto: Crypto) {
 
     try {
       const data =
-        (await ironUnseal(_crypto, sealWithoutVersion, passwordsMap, {
+        (await ironUnseal(_crypto as any, sealWithoutVersion, passwordsMap, {
           ...ironDefaults,
           ttl: ttl * 1000,
         })) ?? {};

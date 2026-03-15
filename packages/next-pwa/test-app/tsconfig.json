@@ -34,7 +34,7 @@
     "**/*.js",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
+  "exclude": ["examples", 
     "node_modules"
   ]
 }

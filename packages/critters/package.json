@@ -1,96 +1,82 @@
 {
   "name": "@opensourceframework/critters",
-  "version": "2.0.1",
-  "description": "Inline critical CSS and lazy-load the rest. Forked from GoogleChromeLabs/critters.",
+  "version": "0.0.1",
+  "description": "Embedded CSS critical path extraction for Next.js applications",
   "keywords": [
     "critters",
     "critical-css",
+    "next.js",
     "css",
-    "inline-css",
     "performance",
-    "optimization",
-    "webpack-plugin",
-    "next.js"
+    "optimization"
   ],
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/critters#readme",
   "bugs": {
-    "url": "https://github.com/riceharvest/opensourceframework/issues"
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+critters"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riceharvest/opensourceframework.git",
     "directory": "packages/critters"
   },
-  "license": "Apache-2.0",
-  "author": "The Chromium Authors",
-  "contributors": [
-    {
-      "name": "Jason Miller",
-      "email": "developit@google.com"
-    },
-    {
-      "name": "Janicklas Ralph",
-      "email": "janicklas@google.com"
-    },
-    {
-      "name": "OpenSource Framework Contributors"
-    }
-  ],
+  "license": "MIT",
+  "author": "OpenSource Framework Contributors",
   "type": "module",
   "exports": {
     ".": {
       "import": {
-        "types": "./src/index.d.ts",
+        "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
       },
       "require": {
-        "types": "./src/index.d.ts",
+        "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
     }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "llms.txt"
   ],
   "scripts": {
     "build": "tsup",
     "build:watch": "tsup --watch",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src test",
+    "lint": "eslint . --ignore-pattern examples",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
     "css-select": "^5.1.0",
     "css-what": "^6.1.0",
     "dom-serializer": "^2.0.0",
     "domhandler": "^5.0.3",
-    "htmlparser2": "^8.0.2",
-    "postcss": "^8.4.38",
+    "htmlparser2": "^9.1.0",
+    "postcss": "^8.4.49",
     "postcss-media-query-parser": "^0.2.3"
   },
   "devDependencies": {
-    "tsup": "^8.0.0",
-    "typescript": "^5.3.0",
+    "@opensourceframework/tsconfig": "*",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "@vitest/coverage-v8": "^4.0.18",
     "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "next": ">=12.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "funding": {
-    "type": "GitHub",
-    "url": "https://github.com/sponsors/riceharvest"
   }
 }
