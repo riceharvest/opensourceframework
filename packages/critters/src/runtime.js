@@ -822,7 +822,8 @@ export default class Critters {
               }
               preload.setAttribute('crossorigin', 'anonymous');
               preload.setAttribute('href', fontUrl);
-              document.head.appendChild(preload);
+              const head = document.head || document.querySelector('head');
+              if (head) head.appendChild(preload);
             }
           }
         }
