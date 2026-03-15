@@ -24,7 +24,7 @@ describe('next-optimized-images/loaders', () => {
       jpeg: false,
       gif: false,
       svg: false,
-      svgSprite: 'svg-sprite-loader',
+      svgSprite: false,
       webp: false,
       png: false,
       lqip: false,
@@ -66,7 +66,7 @@ describe('next-optimized-images/loaders', () => {
     expect(getNumOptimizationLoadersInstalled({
       jpeg: 'imagemin-jpeg',
       png: 'imagemin-png',
-      svgSprite: 'svg-sprite-loader',
+      svgSprite: false,
     })).toEqual(2);
   });
 
