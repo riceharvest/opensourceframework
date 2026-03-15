@@ -15,7 +15,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import Critters from '../src/index.js';
+import Critters from '../src/runtime.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
