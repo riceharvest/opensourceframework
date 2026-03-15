@@ -4,13 +4,15 @@ import path from 'path';
 
 import { getConfig } from '../src/get-config';
 
+// Skip on Windows: temp paths with ~ get URL-encoded, breaking dynamic import
+const isWindows = process.platform === 'win32';
 const originalCwd = process.cwd();
 
 afterEach(() => {
   process.chdir(originalCwd);
 });
 
-test.sequential('prefers next-mdx.config.mjs over next-mdx.json', async () => {
+test.sequential.skipIf(isWindows)('prefers next-mdx.config.mjs over next-mdx.json', async () => {
   const tempDir = await mkdtemp(path.join(os.tmpdir(), 'next-mdx-config-'));
 
   try {
