@@ -15,7 +15,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import Critters from '../src/index.js';
+import Critters from '../src/runtime.js';
 
 /**
  * Check if HTML contains a script tag with specific content
