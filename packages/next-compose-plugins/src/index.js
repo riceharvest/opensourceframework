@@ -34,10 +34,5 @@ const extend = baseConfig => ({
   },
 });
 
-// define exports
-const exports = withPlugins;
-exports.withPlugins = withPlugins;
-exports.optional = markOptional;
-exports.extend = extend;
-
-module.exports = exports;
+export { withPlugins, extend, markOptional as optional };
+export default withPlugins;
