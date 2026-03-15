@@ -46,6 +46,7 @@ export default defineConfig({
       'cache.js',
       'build-custom-worker.js',
       'build-fallback-worker.js',
+      'cleanup-assets.js',
     ];
 
     for (const file of filesToCopy) {

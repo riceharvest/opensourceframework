@@ -42,6 +42,7 @@
     "cache.js",
     "build-custom-worker.js",
     "build-fallback-worker.js",
+    "cleanup-assets.js",
     "llms.txt"
   ],
   "scripts": {
