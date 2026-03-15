@@ -45,7 +45,7 @@ An interactive demo can be seen [here](https://bvaughn.github.io/react-virtualiz
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { InfiniteLoader, List } from 'react-virtualized';
+import { InfiniteLoader, List } from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // This example assumes you have a way to know/load this information

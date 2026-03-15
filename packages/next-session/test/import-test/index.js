@@ -1,5 +1,5 @@
 import assert from "assert";
-import session from "next-session";
+import session from "@opensourceframework/next-session";
 import { expressSession, promisifyStore } from "next-session/lib/compat";
 
 assert(session);

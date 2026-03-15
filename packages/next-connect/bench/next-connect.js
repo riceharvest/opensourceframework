@@ -1,5 +1,5 @@
 import { createServer } from "http";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 
 function one(req, res, next) {
   req.one = true;

@@ -2,7 +2,7 @@ import { getUsers, randomId, saveUsers } from "@/utils/api";
 import type { User } from "@/utils/common";
 import { validateUser } from "@/utils/common";
 import { logRequest } from "@/utils/middleware";
-import { createEdgeRouter } from "next-connect";
+import { createEdgeRouter } from "@opensourceframework/next-connect";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

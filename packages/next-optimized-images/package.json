@@ -2,12 +2,16 @@
   "name": "@opensourceframework/next-optimized-images",
   "version": "2.6.2",
   "description": "Automatically optimize images used in next.js projects (jpeg, png, gif, svg).",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib",
+    "dist",
     "llms.txt"
   ],
   "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
     "lint": "eslint . --ignore-pattern examples",
     "lint:fix": "eslint . --ignore-pattern examples --fix",
     "test": "vitest run --globals",
@@ -54,6 +58,9 @@
     "next": ">=12.0.0 <22.0.0 || ^16.0.0",
     "react": ">=18.2.0 <22.0.0 || ^19.0.0",
     "react-dom": ">=18.2.0 <22.0.0 || ^19.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "publishConfig": {
     "access": "public"

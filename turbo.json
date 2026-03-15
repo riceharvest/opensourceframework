@@ -27,6 +27,13 @@
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
+    "test:types": {
+      "dependsOn": ["build"]
+    },
+    "test:api": {
+      "dependsOn": ["build"],
+      "outputs": ["etc/**"]
+    },
     "clean": {
       "cache": false
     }

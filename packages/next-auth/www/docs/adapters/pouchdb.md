@@ -22,7 +22,7 @@ npm install next-auth @next-auth/pouchdb-adapter
 2. Add this adapter to your `pages/api/auth/[...nextauth].js` next-auth configuration object
 
 ```javascript title="pages/api/auth/[...nextauth].js"
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 import { PouchDBAdapter } from "@next-auth/pouchdb-adapter"
 import PouchDB from "pouchdb"

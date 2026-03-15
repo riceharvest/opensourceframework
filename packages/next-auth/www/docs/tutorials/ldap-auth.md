@@ -11,7 +11,7 @@ Then you must setup the `Providers.Credentials()` provider key like so:
 
 ```js title="[...nextauth].js"
 const ldap = require("ldapjs");
-import NextAuth from "next-auth";
+import NextAuth from "@opensourceframework/next-auth";
 import Providers from "next-auth/providers";
 
 export default NextAuth({

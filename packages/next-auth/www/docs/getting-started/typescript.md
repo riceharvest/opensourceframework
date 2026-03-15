@@ -60,7 +60,7 @@ This will work in code editors with a strong TypeScript integration like VSCode 
 Let's look at `Session`:
 
 ```ts title="pages/api/[...nextauth].ts"
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 
 export default NextAuth({
   callbacks: {
@@ -87,9 +87,9 @@ export default function IndexPage() {
 To extend/augment this type, create a `types/next-auth.d.ts` file in your project:
 
 ```ts title="types/next-auth.d.ts"
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 
-declare module "next-auth" {
+declare module "@opensourceframework/next-auth" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `Provider` React Context
    */

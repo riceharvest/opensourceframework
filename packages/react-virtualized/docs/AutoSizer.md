@@ -30,7 +30,7 @@ Read more about common `AutoSizer` questions [here](usingAutoSizer.md).
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AutoSizer, List} from 'react-virtualized';
+import {AutoSizer, List} from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // List data as an array of strings

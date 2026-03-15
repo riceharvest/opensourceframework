@@ -47,7 +47,7 @@ Enable the plugin in your Next.js configuration file:
 
 ```javascript
 // next.config.js
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 
 module.exports = withPlugins([
@@ -716,7 +716,7 @@ So if they are good enough for your use-case, you don't have to specify them to 
 
 ```javascript
 // next.config.js
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 
 module.exports = withPlugins([

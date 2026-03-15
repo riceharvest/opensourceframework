@@ -4,7 +4,7 @@ import { withPlugins, extend } from '../index';
 const PHASE_DEVELOPMENT_SERVER = 'phase-development-server';
 const PHASE_PRODUCTION_SERVER = 'phase-production-server';
 
-describe('next-compose-plugins', () => {
+describe('@opensourceframework/next-compose-plugins', () => {
   it('extends a base config', async () => {
     const plugin1 = vi.fn(nextConfig => ({ ...nextConfig, plugin1: true }));
     const plugin2 = vi.fn(nextConfig => ({ ...nextConfig, plugin2: true }));

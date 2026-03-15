@@ -1,4 +1,4 @@
-const withPlugins = require('next-compose-plugins');
+const withPlugins = require('@opensourceframework/next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 
 module.exports = withPlugins([

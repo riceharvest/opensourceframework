@@ -3,6 +3,9 @@
   "version": "2.4.3",
   "author": "OpenSource Framework Contributors (fork), Original: alan2207",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riceharvest/opensourceframework.git",

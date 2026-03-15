@@ -44,7 +44,7 @@ Pass-thru that calls `recomputeGridSize` on all child `Grid`s.
 ### Examples
 
 ```jsx
-import {MultiGrid} from 'react-virtualized';
+import {MultiGrid} from '@opensourceframework/react-virtualized';
 
 function render() {
   return (

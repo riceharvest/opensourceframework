@@ -9,7 +9,7 @@ export default defineConfig({
     setupFiles: ['source-stripped/vitest-setup.ts'],
     include: ['test/**/*.test.ts', 'source-stripped/**/*.jest.jsx'],
     alias: {
-      'react-virtualized': '/source-stripped/index.jsx'
+      '@opensourceframework/react-virtualized': '/source-stripped/index.jsx'
     },
     coverage: {
       provider: 'v8',

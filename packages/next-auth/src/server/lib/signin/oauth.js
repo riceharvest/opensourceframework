@@ -14,24 +14,11 @@ export default async function getAuthorizationUrl (req) {
   const client = oAuthClient(provider)
   if (provider.version?.startsWith('2.')) {
     // Handle OAuth v2.x
-    let url = client.getAuthorizeUrl({
+    const url = client.getAuthorizeUrl({
       scope: provider.scope,
       ...params,
       redirect_uri: provider.callbackUrl
     })
-
-    // If the authorizationUrl specified in the config has query parameters on it
-    // make sure they are included in the URL we return.
-    //
-    // This is a fix for an open issue with the OAuthClient library we are using
-    // which inadvertantly strips them.
-    //
-    // https://github.com/ciaranj/node-oauth/pull/193
-    if (provider.authorizationUrl.includes('?')) {
-      const parseUrl = new URL(provider.authorizationUrl)
-      const baseUrl = `${parseUrl.origin}${parseUrl.pathname}?`
-      url = url.replace(baseUrl, provider.authorizationUrl + '&')
-    }
 
     logger.debug('GET_AUTHORIZATION_URL', url)
     return url

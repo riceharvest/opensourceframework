@@ -69,7 +69,7 @@ For more examples check out the component [demo page](https://bvaughn.github.io/
 
 ```jsx
 import React from 'react';
-import { CellMeasurer, CellMeasurerCache, Grid } from 'react-virtualized';
+import { CellMeasurer, CellMeasurerCache, Grid } from '@opensourceframework/react-virtualized';
 
 // In this example, average cell width is assumed to be about 100px.
 // This value will be used for the initial `Grid` layout.
@@ -125,7 +125,7 @@ As an alternative, you can use `registerChild` render prop to specify the elemen
 
 ```jsx
 import React from 'react';
-import { CellMeasurer, CellMeasurerCache, Grid } from 'react-virtualized';
+import { CellMeasurer, CellMeasurerCache, Grid } from '@opensourceframework/react-virtualized';
 
 // In this example, average cell width is assumed to be about 100px.
 // This value will be used for the initial `Grid` layout.
@@ -184,7 +184,7 @@ To support this, a function-child is passed to `CellMeasurer` which then receive
 
 ```jsx
 import React from 'react';
-import { CellMeasurer, CellMeasurerCache, List } from 'react-virtualized';
+import { CellMeasurer, CellMeasurerCache, List } from '@opensourceframework/react-virtualized';
 
 // In this example, average cell height is assumed to be about 50px.
 // This value will be used for the initial `Grid` layout.

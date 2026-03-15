@@ -1,0 +1,37 @@
+{
+  "name": "showcase",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@opensourceframework/critters": "workspace:*",
+    "@opensourceframework/next-auth": "workspace:*",
+    "@opensourceframework/next-connect": "workspace:*",
+    "@opensourceframework/next-csrf": "workspace:*",
+    "@opensourceframework/next-json-ld": "workspace:*",
+    "@opensourceframework/next-pwa": "workspace:*",
+    "@opensourceframework/next-seo": "workspace:*",
+    "@opensourceframework/next-session": "workspace:*",
+    "@tailwindcss/postcss": "^4.2.1",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "typescript": "^5.0.0"
+  }
+}

@@ -107,7 +107,7 @@ Many use cases can be solved more easily using the `onScroll` callback or the `S
 If you do want to override `cellRangeRenderer` the easiest way is to decorate the default implementation like so:
 
 ```jsx
-import {defaultCellRangeRenderer, Grid} from 'react-virtualized';
+import {defaultCellRangeRenderer, Grid} from '@opensourceframework/react-virtualized';
 
 function cellRangeRenderer(props) {
   const children = defaultCellRangeRenderer(props);
@@ -245,7 +245,7 @@ Below is a very basic `Grid` example. The grid displays an array of objects with
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Grid} from 'react-virtualized';
+import {Grid} from '@opensourceframework/react-virtualized';
 
 // Grid data as an array of arrays
 const list = [

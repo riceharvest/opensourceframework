@@ -414,9 +414,9 @@ pnpm-lock.yaml
       2,
       "always",
       [
-        "next-csrf",
-        "next-images",
-        "critters",
+        "@opensourceframework/next-csrf",
+        "@opensourceframework/next-images",
+        "@opensourceframework/critters",
         "repo",
         "deps",
         "release"

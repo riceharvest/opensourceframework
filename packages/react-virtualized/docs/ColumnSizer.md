@@ -29,7 +29,7 @@ This example displays a `Grid` that shrinks to fit sparse content (using the `ad
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {ColumnSizer, Grid} from 'react-virtualized';
+import {ColumnSizer, Grid} from '@opensourceframework/react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 
 // numColumns, numRows, someCalculatedHeight, and someCalculatedWidth determined here...

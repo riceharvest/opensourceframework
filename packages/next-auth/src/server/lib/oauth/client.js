@@ -13,46 +13,30 @@ export default function oAuthClient(provider) {
     let _useAuthHeader = true
 
     return {
-      /** Build the OAuth2 authorization URL with all required query params */
-      getAuthorizeUrl(params = {}) {
-        const url = new URL(provider.authorizationUrl)
-        Object.entries(params).forEach(([key, value]) => {
-          if (value != null) url.searchParams.set(key, value)
-        })
-        return url.toString()
-      },
-
-      /** Store whether to send Authorization header on GET requests (compat shim) */
-      useAuthorizationHeaderforGET(use) {
-        _useAuthHeader = use !== false
-      },
-
-      /**
-       * Exchange authorization code for access token.
-       * Accepts both legacy (code, provider, codeVerifier) and new (code, codeVerifier) signatures.
-       */
-      getOAuthAccessToken(code, arg2, arg3) {
-        // Detect legacy signature: (code, provider, codeVerifier)
-        const codeVerifier = (arg2 && typeof arg2 === 'object' && 'clientId' in arg2) ? arg3 : arg2
-        return getOAuth2AccessToken(code, provider, codeVerifier)
-      },
-
-      /**
-       * Fetch profile data using the access token.
-       * Accepts both legacy (provider, accessToken, results) and new (accessToken, results) signatures.
-       */
-      get(arg1, arg2, arg3) {
-        // Detect legacy signature: (provider, accessToken, results)
-        if (arg1 && typeof arg1 === 'object' && 'clientId' in arg1) {
-          return getOAuth2(provider, arg2, arg3)
-        }
-        return getOAuth2(provider, arg1, arg2)
-      }
+      getAuthorizeUrl: (params) => getOAuth2AuthorizeUrl(provider, params),
+      getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
+      get: (accessToken, results) => getOAuth2(provider, accessToken, results)
     }
   }
 
   // Handle OAuth v1.x (Simplified native implementation)
   return new OAuth1Client(provider)
+}
+
+/**
+ * Generate authorization URL for OAuth 2.x
+ *
+ * @param {import("types/providers").OAuthConfig} provider
+ * @param {any} params
+ */
+function getOAuth2AuthorizeUrl(provider, params) {
+  const url = new URL(provider.authorizationUrl)
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined) {
+      url.searchParams.set(key, value)
+    }
+  }
+  return url.href
 }
 
 /**
@@ -250,25 +234,17 @@ function prepareProfileUrl({ provider, url, results }) {
 class OAuth1Client {
   constructor(provider) {
     this.provider = provider
-    // Note: This is a placeholder for actual OAuth1 signature logic if needed.
-    // For now, we will use a small internal helper or inline the logic.
-    // Given the complexity of OAuth1 signatures, for the scope of this refactor
-    // and to maintain stability, we'll implement the basics or use a lightweight helper.
-    // In many cases, OAuth1 is being deprecated, but for this fork we want to keep it.
   }
 
   async getOAuthRequestToken(params = {}) {
-    // Implement OAuth 1.0a request token logic
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client. Please use OAuth 2.0 or contact maintainers.")
   }
 
   async getOAuthAccessToken(oauth_token, oauth_token_secret, oauth_verifier) {
-    // Implement OAuth 1.0a access token logic
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
   }
 
   async get(url, oauth_token, oauth_token_secret) {
-    // Implement OAuth 1.0a authenticated request
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
   }
 }

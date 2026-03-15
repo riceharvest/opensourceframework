@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createRouter } from "next-connect";
+import { createRouter } from "@opensourceframework/next-connect";
 import { getUsers, randomId, saveUsers } from "../../../utils/api";
 import type { User } from "../../../utils/common";
 import { validateUser } from "../../../utils/common";

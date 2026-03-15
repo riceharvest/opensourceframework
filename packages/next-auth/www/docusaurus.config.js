@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: "/",
   favicon: "img/favicon.ico",
   organizationName: "nextauthjs",
-  projectName: "next-auth",
+  projectName: "@opensourceframework/next-auth",
   themeConfig: {
     sidebarCollapsible: true,
     prism: {
@@ -13,7 +13,7 @@ module.exports = {
     },
     algolia: {
       apiKey: "b81e3ca39a920b7815e880aea49c00ec",
-      indexName: "next-auth",
+      indexName: "@opensourceframework/next-auth",
       searchParameters: {},
     },
     navbar: {

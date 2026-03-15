@@ -13,8 +13,7 @@ export default async function callback(req, res) {
   const {
     provider,
     adapter,
-    baseUrl,
-    basePath,
+    url,
     secret,
     cookies,
     callbackUrl,
@@ -49,7 +48,7 @@ export default async function callback(req, res) {
         // should at least be visible to developers what happened if it is an
         // error with the provider.
         if (!profile) {
-          return res.redirect(`${baseUrl}${basePath}/signin`)
+          return res.redirect(`${url.href}/signin`)
         }
 
         // Check if user is allowed to sign in
@@ -79,7 +78,7 @@ export default async function callback(req, res) {
           )
           if (signInCallbackResponse === false) {
             return res.redirect(
-              `${baseUrl}${basePath}/error?error=AccessDenied`
+              `${url.href}/error?error=AccessDenied`
             )
           } else if (typeof signInCallbackResponse === "string") {
             return res.redirect(signInCallbackResponse)
@@ -87,7 +86,7 @@ export default async function callback(req, res) {
         } catch (error) {
           if (error instanceof Error) {
             return res.redirect(
-              `${baseUrl}${basePath}/error?error=${encodeURIComponent(
+              `${url.href}/error?error=${encodeURIComponent(
                 error.message
               )}`
             )
@@ -153,34 +152,34 @@ export default async function callback(req, res) {
         }
 
         // Callback URL is already verified at this point, so safe to use if specified
-        return res.redirect(callbackUrl || baseUrl)
+        return res.redirect(callbackUrl || url.origin)
       } catch (error) {
         if (error.name === "AccountNotLinkedError") {
           // If the email on the account is already linked, but not with this OAuth account
           return res.redirect(
-            `${baseUrl}${basePath}/error?error=OAuthAccountNotLinked`
+            `${url.href}/error?error=OAuthAccountNotLinked`
           )
         } else if (error.name === "CreateUserError") {
           return res.redirect(
-            `${baseUrl}${basePath}/error?error=OAuthCreateAccount`
+            `${url.href}/error?error=OAuthCreateAccount`
           )
         }
         logger.error("OAUTH_CALLBACK_HANDLER_ERROR", error)
-        return res.redirect(`${baseUrl}${basePath}/error?error=Callback`)
+        return res.redirect(`${url.href}/error?error=Callback`)
       }
     } catch (error) {
       if (error.name === "OAuthCallbackError") {
         logger.error("CALLBACK_OAUTH_ERROR", error)
-        return res.redirect(`${baseUrl}${basePath}/error?error=OAuthCallback`)
+        return res.redirect(`${url.href}/error?error=OAuthCallback`)
       }
       logger.error("OAUTH_CALLBACK_ERROR", error)
-      return res.redirect(`${baseUrl}${basePath}/error?error=Callback`)
+      return res.redirect(`${url.href}/error?error=Callback`)
     }
   } else if (provider.type === "email") {
     try {
       if (!adapter) {
         logger.error("EMAIL_REQUIRES_ADAPTER_ERROR")
-        return res.redirect(`${baseUrl}${basePath}/error?error=Configuration`)
+        return res.redirect(`${url.href}/error?error=Configuration`)
       }
 
       const {
@@ -199,7 +198,7 @@ export default async function callback(req, res) {
         provider
       )
       if (!invite) {
-        return res.redirect(`${baseUrl}${basePath}/error?error=Verification`)
+        return res.redirect(`${url.href}/error?error=Verification`)
       }
 
       // If verification token is valid, delete verification request token from
@@ -227,14 +226,14 @@ export default async function callback(req, res) {
           { email }
         )
         if (signInCallbackResponse === false) {
-          return res.redirect(`${baseUrl}${basePath}/error?error=AccessDenied`)
+          return res.redirect(`${url.href}/error?error=AccessDenied`)
         } else if (typeof signInCallbackResponse === "string") {
           return res.redirect(signInCallbackResponse)
         }
       } catch (error) {
         if (error instanceof Error) {
           return res.redirect(
-            `${baseUrl}${basePath}/error?error=${encodeURIComponent(
+            `${url.href}/error?error=${encodeURIComponent(
               error.message
             )}`
           )
@@ -300,15 +299,15 @@ export default async function callback(req, res) {
       }
 
       // Callback URL is already verified at this point, so safe to use if specified
-      return res.redirect(callbackUrl || baseUrl)
+      return res.redirect(callbackUrl || url.origin)
     } catch (error) {
       if (error.name === "CreateUserError") {
         return res.redirect(
-          `${baseUrl}${basePath}/error?error=EmailCreateAccount`
+          `${url.href}/error?error=EmailCreateAccount`
         )
       }
       logger.error("CALLBACK_EMAIL_ERROR", error)
-      return res.redirect(`${baseUrl}${basePath}/error?error=Callback`)
+      return res.redirect(`${url.href}/error?error=Callback`)
     }
   } else if (provider.type === "credentials" && req.method === "POST") {
     if (!useJwtSession) {
@@ -318,7 +317,7 @@ export default async function callback(req, res) {
       )
       return res
         .status(500)
-        .redirect(`${baseUrl}${basePath}/error?error=Configuration`)
+        .redirect(`${url.href}/error?error=Configuration`)
     }
 
     if (!provider.authorize) {
@@ -328,7 +327,7 @@ export default async function callback(req, res) {
       )
       return res
         .status(500)
-        .redirect(`${baseUrl}${basePath}/error?error=Configuration`)
+        .redirect(`${url.href}/error?error=Configuration`)
     }
 
     const credentials = req.body
@@ -342,7 +341,7 @@ export default async function callback(req, res) {
         return res
           .status(401)
           .redirect(
-            `${baseUrl}${basePath}/error?error=CredentialsSignin&provider=${encodeURIComponent(
+            `${url.href}/error?error=CredentialsSignin&provider=${encodeURIComponent(
               provider.id
             )}`
           )
@@ -350,7 +349,7 @@ export default async function callback(req, res) {
     } catch (error) {
       if (error instanceof Error) {
         return res.redirect(
-          `${baseUrl}${basePath}/error?error=${encodeURIComponent(
+          `${url.href}/error?error=${encodeURIComponent(
             error.message
           )}`
         )
@@ -370,12 +369,12 @@ export default async function callback(req, res) {
       if (signInCallbackResponse === false) {
         return res
           .status(403)
-          .redirect(`${baseUrl}${basePath}/error?error=AccessDenied`)
+          .redirect(`${url.href}/error?error=AccessDenied`)
       }
     } catch (error) {
       if (error instanceof Error) {
         return res.redirect(
-          `${baseUrl}${basePath}/error?error=${encodeURIComponent(
+          `${url.href}/error?error=${encodeURIComponent(
             error.message
           )}`
         )
@@ -411,7 +410,7 @@ export default async function callback(req, res) {
 
     await dispatchEvent(events.signIn, { user, account })
 
-    return res.redirect(callbackUrl || baseUrl)
+    return res.redirect(callbackUrl || url.origin)
   }
   return res
     .status(500)

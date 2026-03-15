@@ -20,7 +20,7 @@ npm install next-auth @next-auth/fauna-adapter
 2. Add this adapter to your `pages/api/[...nextauth].js` next-auth configuration object.
 
 ```javascript title="pages/api/auth/[...nextauth].js"
-import NextAuth from "next-auth"
+import NextAuth from "@opensourceframework/next-auth"
 import Providers from "next-auth/providers"
 import * as Fauna from "faunadb"
 import { FaunaAdapter } from "@next-auth/fauna-adapter"

@@ -77,6 +77,9 @@
     "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-images"
   },
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-images#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public"
   },

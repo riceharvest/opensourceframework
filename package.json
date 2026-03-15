@@ -13,6 +13,8 @@
     "test:compat": "node scripts/test-compat.mjs",
     "test:coverage": "turbo run test:coverage",
     "test:ci": "turbo run test:ci",
+    "test:types": "turbo run test:types",
+    "test:api": "turbo run test:api",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
@@ -66,5 +68,8 @@
       "minimatch@>=10.0.0 <10.2.3": ">=10.2.3",
       "serialize-javascript@<7.0.3": ">=7.0.3"
     }
+  },
+  "dependencies": {
+    "oauth": "^0.10.2"
   }
 }

@@ -70,6 +70,9 @@
     "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-csrf"
   },
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-csrf#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "publishConfig": {
     "access": "public"
   },

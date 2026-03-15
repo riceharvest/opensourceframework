@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["next-auth"],
+  transpilePackages: ["@opensourceframework/next-auth"],
 }
 
 module.exports = nextConfig
