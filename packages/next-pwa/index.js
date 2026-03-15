@@ -233,7 +233,7 @@ self.addEventListener('fetch', (event) => {
 
         console.log(`> [PWA] Compile ${options.isServer ? 'server' : 'client (static)'}`);
 
-        let { runtimeCaching = defaultCache } = pluginOptions;
+        let { runtimeCaching = defaultCache || [] } = pluginOptions;
         const _scope = path.posix.join(scope || basePath, '/');
 
         const _sw = path.posix.join(basePath, sw.startsWith('/') ? sw : `/${sw}`);
@@ -260,14 +260,14 @@ self.addEventListener('fetch', (event) => {
 
         if (!options.isServer) {
           const _dest = path.join(options.dir, dest || distDir);
-          const customWorkerScriptName = buildCustomWorker({
+          const customWorkerScriptName = buildCustomWorker ? buildCustomWorker({
             id: buildId,
             basedir: options.dir,
             customWorkerDir,
             destdir: _dest,
             plugins: config.plugins.filter((plugin) => plugin instanceof webpack.DefinePlugin),
             minify: !dev,
-          });
+          }) : null;
 
           if (customWorkerScriptName) {
             importScripts.unshift(customWorkerScriptName);
@@ -286,13 +286,15 @@ self.addEventListener('fetch', (event) => {
           console.log(`> [PWA]   url: ${_sw}`);
           console.log(`> [PWA]   scope: ${_scope}`);
 
-          cleanMatchingFiles(_dest, [
-            'workbox-*.js',
-            'worker-*.js.LICENSE.txt',
-            'workbox-*.js.map',
-            sw.replace(/^.*[\\/]/, ''),
-            `${sw.replace(/^.*[\\/]/, '')}.map`,
-          ]);
+          if (cleanMatchingFiles) {
+            cleanMatchingFiles(_dest, [
+              'workbox-*.js',
+              'worker-*.js.LICENSE.txt',
+              'workbox-*.js.map',
+              sw.replace(/^.*[\\/]/, ''),
+              `${sw.replace(/^.*[\\/]/, '')}.map`,
+            ]);
+          }
 
           let manifestEntries = additionalManifestEntries;
           if (!Array.isArray(manifestEntries)) {
@@ -338,7 +340,7 @@ self.addEventListener('fetch', (event) => {
           }
 
           let _fallbacks = fallbacks;
-          if (_fallbacks) {
+          if (_fallbacks && buildFallbackWorker) {
             const res = buildFallbackWorker({
               id: buildId,
               fallbacks,
