@@ -125,7 +125,7 @@ const appendLoaders = (
     // img-loader no longer has to handle jpeg and png images
     imgLoaderHandledTypes = { ...imgLoaderHandledTypes, jpeg: false, png: false };
 
-    config = applyResponsiveLoader(webpackConfig, nextConfig, isServer, detectLoaders);
+    config = applyResponsiveLoader(webpackConfig, nextConfig, isServer, detectedLoaders);
   }
 
   // apply img loader
@@ -143,9 +143,9 @@ const appendLoaders = (
 
   // apply webp loader
   if (detectedLoaders.webp && handledImageTypes.webp) {
-    config = applyWebpLoader(webpackConfig, nextConfig, optimize, isServer, detectLoaders);
+    config = applyWebpLoader(webpackConfig, nextConfig, optimize, isServer, detectedLoaders);
   } else if (handledImageTypes.webp) {
-    config = applyWebpLoader(webpackConfig, nextConfig, false, isServer, detectLoaders);
+    config = applyWebpLoader(webpackConfig, nextConfig, false, isServer, detectedLoaders);
   }
 
   // apply file loader for non optimizable image types
