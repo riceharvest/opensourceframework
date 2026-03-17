@@ -117,6 +117,9 @@ importers:
         specifier: ^0.15.2
         version: 0.15.2(@babel/preset-env@7.29.0(@babel/core@7.29.0))
     devDependencies:
+      '@types/jscodeshift':
+        specifier: ^17.3.0
+        version: 17.3.0
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
@@ -4392,6 +4395,9 @@ packages:
 
   '@types/jest-environment-puppeteer@5.0.3':
     resolution: {integrity: sha512-vWGfeb+0TOPZy7+VscKURWzE5lzYjclSWLxtjVpDAYcjUv8arAS1av06xK3mpgeNCDVx7XvavD8Elq1a4w9wIA==}
+
+  '@types/jscodeshift@17.3.0':
+    resolution: {integrity: sha512-ogvGG8VQQqAQQ096uRh+d6tBHrYuZjsumHirKtvBa5qEyTMN3IQJ7apo+sw9lxaB/iKWIhbbLlF3zmAWk9XQIg==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -15141,6 +15147,11 @@ snapshots:
       '@jest/types': 27.5.1
       '@types/puppeteer': 5.4.7
       jest-environment-node: 27.5.1
+
+  '@types/jscodeshift@17.3.0':
+    dependencies:
+      ast-types: 0.16.1
+      recast: 0.23.11
 
   '@types/json-schema@7.0.15': {}
 

@@ -20,7 +20,7 @@ export default function transformer(file: FileInfo, api: API) {
     arguments: [{ value: 'next-seo' }]
   }).forEach(path => {
     const arg = path.node.arguments[0];
-    if (arg.type === 'Literal' || arg.type === 'StringLiteral') {
+    if (arg && (arg.type === 'Literal' || arg.type === 'StringLiteral')) {
       arg.value = '@opensourceframework/next-seo';
     }
   });
