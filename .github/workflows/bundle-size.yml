@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .turbo
-          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'packages/**', 'package.json') }}
+          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'pnpm-workspace.yaml', 'package.json') }}
           restore-keys: |
             turbo-${{ runner.os }}-20-
 
