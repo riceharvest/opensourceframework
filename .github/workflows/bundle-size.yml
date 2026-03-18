@@ -3,7 +3,7 @@ name: Bundle Size
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   bundle-size:
@@ -27,21 +27,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'pnpm'
-      
+
       - name: Install dependencies
         run: pnpm install
-      
+
       - name: Build packages
         run: pnpm build
-      
+
       - name: Check bundle sizes
         run: |
           for pkg in next-compose-plugins next-transpile-modules next-cookies next-seo next-session next-iron-session next-pwa next-auth critters next-csrf; do
             npx bundle-phobia-cli @opensourceframework/$pkg --limit 50 || echo "Failed to check $pkg"
           done
-      
+
       - name: Upload bundle size report
         uses: actions/upload-artifact@v4
         with:
