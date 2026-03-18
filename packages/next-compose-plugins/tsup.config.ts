@@ -6,4 +6,11 @@ export default defineConfig({
   dts: true,
   clean: true,
   external: ['next'],
+  splitting: false,
+  footer(ctx) {
+    if (ctx.format === 'cjs') {
+      return { js: 'if (module.exports.default) module.exports = module.exports.default;' }
+    }
+    return {}
+  },
 })
