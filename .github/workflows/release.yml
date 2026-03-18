@@ -152,9 +152,11 @@ jobs:
           case "$SMOKE_PACKAGE" in
             next-images)
               FIXTURE="$TEMP_DIR/next-images"
-              mkdir -p "$FIXTURE/assets"
+              mkdir -p "$FIXTURE/assets" "$FIXTURE/pages"
+              BUILD_CMD="next build"
+              [ "$SMOKE_NEXT" = "16.1.6" ] && BUILD_CMD="next build --webpack"
               cat > "$FIXTURE/package.json" <<EOF
-          {"name":"compat","private":true,"scripts":{"build":"next build"},"dependencies":{"@opensourceframework/next-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
+          {"name":"compat","private":true,"scripts":{"build":"$BUILD_CMD"},"dependencies":{"@opensourceframework/next-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
           EOF
               cat > "$FIXTURE/next.config.js" <<'EOF'
           const withImages = require('@opensourceframework/next-images');
@@ -186,7 +188,7 @@ jobs:
 
             next-optimized-images)
               FIXTURE="$TEMP_DIR/next-optimized-images"
-              mkdir -p "$FIXTURE/assets"
+              mkdir -p "$FIXTURE/assets" "$FIXTURE/pages"
               BUILD_CMD="next build"
               [ "$SMOKE_NEXT" = "16.1.6" ] && BUILD_CMD="next build --webpack"
               cat > "$FIXTURE/package.json" <<EOF
