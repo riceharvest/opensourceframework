@@ -34,5 +34,8 @@ const extend = baseConfig => ({
   },
 });
 
+withPlugins.optional = markOptional;
+withPlugins.extend = extend;
+
 export { withPlugins, extend, markOptional as optional };
 export default withPlugins;

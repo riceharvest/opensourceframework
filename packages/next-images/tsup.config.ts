@@ -10,4 +10,10 @@ export default defineConfig({
   minify: false,
   treeshake: true,
   external: [],
+  footer(ctx) {
+    if (ctx.format === 'cjs') {
+      return { js: 'if (module.exports.default) module.exports = module.exports.default;' }
+    }
+    return {}
+  },
 });
