@@ -7,13 +7,318 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+env:
+  HUSKY: 0
+
 jobs:
+  build-and-pack:
+    name: Build & Pack
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.list.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Build All Packages
+        run: pnpm build
+
+      - name: Verify API Surface & Types
+        run: |
+          pnpm test:api
+          pnpm test:types
+
+      - name: Pack Packages
+        id: pack
+        run: |
+          mkdir -p tarballs
+          for pkg in next-images next-compose-plugins next-optimized-images next-mdx next-mdx-toc next-session next-auth react-virtualized; do
+            cd packages/$pkg
+            npm pack --json > /dev/null 2>&1
+            mv *.tgz ../../tarballs/ 2>/dev/null || true
+            cd ../..
+          done
+          echo "packages=[\"next-images\",\"next-compose-plugins\",\"next-optimized-images\",\"next-mdx\",\"next-mdx-toc\",\"next-session\",\"next-auth\",\"react-virtualized\"]" >> "$GITHUB_OUTPUT"
+
+      - name: List tarballs
+        run: ls -la tarballs/
+
+      - name: Upload tarballs
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-tarballs
+          path: tarballs/
+          retention-days: 1
+
+  compat-matrix:
+    name: Compat (${{ matrix.package }}, Next ${{ matrix.next-version }})
+    needs: build-and-pack
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          [
+            next-images,
+            next-compose-plugins,
+            next-optimized-images,
+            next-mdx,
+            next-session,
+            next-auth,
+            react-virtualized,
+          ]
+        next-version: ['14.2.24', '15.2.0', '16.1.6']
+        include:
+          - next-version: '14.2.24'
+            react-version: '18.3.1'
+          - next-version: '15.2.0'
+            react-version: '19.0.0'
+          - next-version: '16.1.6'
+            react-version: '19.2.0'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Download tarballs
+        uses: actions/download-artifact@v4
+        with:
+          name: package-tarballs
+          path: tarballs/
+
+      - name: Run smoke test
+        env:
+          SMOKE_PACKAGE: ${{ matrix.package }}
+          SMOKE_NEXT: ${{ matrix.next-version }}
+          SMOKE_REACT: ${{ matrix.react-version }}
+        run: |
+          set -euo pipefail
+
+          TARBALL_DIR="$(pwd)/tarballs"
+          TEMP_DIR=$(mktemp -d)
+
+          find_tarball() {
+            local pkg="$1"
+            ls "$TARBALL_DIR"/opensourceframework-"$pkg"-*.tgz 2>/dev/null | head -1
+          }
+
+          # next-mdx also needs next-mdx-toc
+          if [ "$SMOKE_PACKAGE" = "next-mdx" ]; then
+            MDX_TARBALL=$(find_tarball next-mdx)
+            MDX_TOC_TARBALL=$(find_tarball next-mdx-toc)
+            if [ -z "$MDX_TARBALL" ] || [ -z "$MDX_TOC_TARBALL" ]; then
+              echo "Missing tarballs for next-mdx compat test"
+              exit 1
+            fi
+          else
+            TARBALL=$(find_tarball "$SMOKE_PACKAGE")
+            if [ -z "$TARBALL" ]; then
+              echo "Missing tarball for $SMOKE_PACKAGE"
+              exit 1
+            fi
+          fi
+
+          case "$SMOKE_PACKAGE" in
+            next-images)
+              FIXTURE="$TEMP_DIR/next-images"
+              mkdir -p "$FIXTURE/assets"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"scripts":{"build":"next build"},"dependencies":{"@opensourceframework/next-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
+          EOF
+              cat > "$FIXTURE/next.config.js" <<'EOF'
+          const withImages = require('@opensourceframework/next-images');
+          module.exports = withImages({ fileExtensions: ['svg'], inlineImageLimit: false });
+          EOF
+              cat > "$FIXTURE/pages/index.js" <<'EOF'
+          import logo from '../assets/logo.svg';
+          export default function Home() { return <main><img src={logo} alt="logo" /></main>; }
+          EOF
+              echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="red"/></svg>' > "$FIXTURE/assets/logo.svg"
+              cd "$FIXTURE" && pnpm install --reporter append-only && pnpm build
+              ;;
+
+            next-compose-plugins)
+              FIXTURE="$TEMP_DIR/next-compose-plugins"
+              mkdir -p "$FIXTURE"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"dependencies":{"@opensourceframework/next-compose-plugins":"file:$TARBALL"}}
+          EOF
+              cat > "$FIXTURE/smoke.cjs" <<'EOF'
+          const assert = require('node:assert/strict');
+          const withPlugins = require('@opensourceframework/next-compose-plugins');
+          assert.equal(typeof withPlugins, 'function');
+          assert.equal(typeof withPlugins.optional, 'function');
+          assert.equal(typeof withPlugins.extend, 'function');
+          EOF
+              cd "$FIXTURE" && pnpm install --reporter append-only && node smoke.cjs
+              ;;
+
+            next-optimized-images)
+              FIXTURE="$TEMP_DIR/next-optimized-images"
+              mkdir -p "$FIXTURE/assets"
+              BUILD_CMD="next build"
+              [ "$SMOKE_NEXT" = "16.1.6" ] && BUILD_CMD="next build --webpack"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"scripts":{"build":"$BUILD_CMD"},"dependencies":{"@opensourceframework/next-optimized-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
+          EOF
+              cat > "$FIXTURE/next.config.js" <<'EOF'
+          const withOptimizedImages = require('@opensourceframework/next-optimized-images');
+          module.exports = withOptimizedImages({ handleImages: ['svg'], inlineImageLimit: false, optimizeImages: false });
+          EOF
+              cat > "$FIXTURE/pages/index.js" <<'EOF'
+          import logo from '../assets/logo.svg';
+          export default function Home() { return <main><img src={logo} alt="logo" /></main>; }
+          EOF
+              echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="blue"/></svg>' > "$FIXTURE/assets/logo.svg"
+              cd "$FIXTURE" && pnpm install --reporter append-only && pnpm build
+              ;;
+
+            next-mdx)
+              FIXTURE="$TEMP_DIR/next-mdx"
+              mkdir -p "$FIXTURE/content/posts"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"dependencies":{"@opensourceframework/next-mdx":"file:$MDX_TARBALL","@opensourceframework/next-mdx-toc":"file:$MDX_TOC_TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
+          EOF
+              cat > "$FIXTURE/next-mdx.config.mjs" <<'EOF'
+          export default { post: { contentPath: 'content/posts', basePath: '/blog' } };
+          EOF
+              cat > "$FIXTURE/content/posts/hello.mdx" <<'EOF'
+          ---
+          title: Hello World
+          date: 2026-03-11
+          ---
+          # Heading One
+          This is a compatibility smoke test.
+          ## Heading Two
+          EOF
+              cat > "$FIXTURE/smoke.cjs" <<'EOF'
+          const assert = require('node:assert/strict');
+          const { getMdxNode, getMdxPaths } = require('@opensourceframework/next-mdx/server');
+          const { getTableOfContents } = require('@opensourceframework/next-mdx-toc');
+          (async () => {
+            const node = await getMdxNode('post', 'hello');
+            assert.equal(node.frontMatter.title, 'Hello World');
+            assert.equal(node.url, '/blog/hello');
+            const paths = await getMdxPaths('post');
+            assert.deepEqual(paths, [{ params: { slug: ['hello'] } }]);
+            const toc = await getTableOfContents(node);
+            assert.equal(toc.items?.[0]?.title, 'Heading One');
+            assert.equal(toc.items?.[0]?.items?.[0]?.title, 'Heading Two');
+          })().catch(e => { console.error(e); process.exit(1); });
+          EOF
+              cd "$FIXTURE" && pnpm install --reporter append-only && node smoke.cjs
+              ;;
+
+            next-session)
+              FIXTURE="$TEMP_DIR/next-session"
+              mkdir -p "$FIXTURE"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"dependencies":{"@opensourceframework/next-session":"file:$TARBALL"}}
+          EOF
+              cat > "$FIXTURE/smoke.cjs" <<'EOF'
+          const assert = require('node:assert/strict');
+          const nextSession = require('@opensourceframework/next-session');
+          const compat = require('@opensourceframework/next-session/lib/compat');
+          assert.equal(typeof nextSession, 'function');
+          assert.equal(typeof compat.expressSession, 'function');
+          assert.equal(typeof compat.promisifyStore, 'function');
+          EOF
+              cd "$FIXTURE" && pnpm install --reporter append-only && node smoke.cjs
+              ;;
+
+            next-auth)
+              FIXTURE="$TEMP_DIR/next-auth"
+              mkdir -p "$FIXTURE"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"dependencies":{"@opensourceframework/next-auth":"file:$TARBALL"}}
+          EOF
+              cat > "$FIXTURE/smoke.cjs" <<'EOF'
+          const assert = require('node:assert/strict');
+          const GoogleProvider = require('@opensourceframework/next-auth/providers/google');
+          assert.equal(typeof GoogleProvider, 'function');
+          assert.equal(GoogleProvider({ clientId: 'id', clientSecret: 'secret' }).id, 'google');
+          EOF
+              cat > "$FIXTURE/smoke.mjs" <<'EOF'
+          import assert from 'node:assert/strict';
+          import GoogleProvider from '@opensourceframework/next-auth/providers/google';
+          assert.equal(typeof GoogleProvider, 'function');
+          assert.equal(GoogleProvider({ clientId: 'id', clientSecret: 'secret' }).id, 'google');
+          EOF
+              cd "$FIXTURE" && pnpm install --reporter append-only && node smoke.cjs && node smoke.mjs
+              ;;
+
+            react-virtualized)
+              FIXTURE="$TEMP_DIR/react-virtualized"
+              mkdir -p "$FIXTURE"
+              cat > "$FIXTURE/package.json" <<EOF
+          {"name":"compat","private":true,"dependencies":{"@opensourceframework/react-virtualized":"file:$TARBALL","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
+          EOF
+              cat > "$FIXTURE/smoke.cjs" <<'EOF'
+          const assert = require('node:assert/strict');
+          const React = require('react');
+          const { renderToStaticMarkup } = require('react-dom/server');
+          const { List } = require('@opensourceframework/react-virtualized');
+          const html = renderToStaticMarkup(
+            React.createElement(List, {
+              width: 200, height: 100, rowCount: 2, rowHeight: 20,
+              rowRenderer: ({ key, index, style }) => React.createElement('div', { key, style }, `Row ${index}`),
+            })
+          );
+          assert.match(html, /Row 0/);
+          assert.match(html, /ReactVirtualized__List/);
+          EOF
+              cd "$FIXTURE" && pnpm install --reporter append-only && node smoke.cjs
+              ;;
+
+            *)
+              echo "Unknown package: $SMOKE_PACKAGE"
+              exit 1
+              ;;
+          esac
+
+          echo "✅ $SMOKE_PACKAGE compat test passed with Next.js $SMOKE_NEXT / React $SMOKE_REACT"
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf /tmp/osf-compat-* 2>/dev/null || true
+
   release:
-    name: Release
+    name: Publish
+    needs: [build-and-pack, compat-matrix]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,24 +331,15 @@ jobs:
           version: 9
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build All Packages
         run: pnpm build
-
-      - name: Verify Compatibility Matrix
-        run: pnpm test:compat
-
-      - name: Verify API Surface & Types
-        run: |
-          pnpm test:api
-          pnpm test:types
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          # This expects a GITHUB_TOKEN and NPM_TOKEN to be set in repo secrets
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
