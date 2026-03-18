@@ -56,8 +56,7 @@ jobs:
           mkdir -p tarballs
           for pkg in next-images next-compose-plugins next-optimized-images next-mdx next-mdx-toc next-session next-auth react-virtualized; do
             cd packages/$pkg
-            npm pack --json > /dev/null 2>&1
-            mv *.tgz ../../tarballs/ 2>/dev/null || true
+            pnpm pack --pack-destination ../../tarballs/ > /dev/null 2>&1
             cd ../..
           done
           echo "packages=[\"next-images\",\"next-compose-plugins\",\"next-optimized-images\",\"next-mdx\",\"next-mdx-toc\",\"next-session\",\"next-auth\",\"react-virtualized\"]" >> "$GITHUB_OUTPUT"
