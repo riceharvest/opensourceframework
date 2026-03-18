@@ -21,9 +21,14 @@ jobs:
         node: [18, 20, 22]
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
-          # Skip some combinations to reduce CI time
+          # Only run full matrix on Linux.
+          # For Windows and macOS, only run the LTS version (Node 20)
           - node: 18
             os: windows-latest
+          - node: 22
+            os: windows-latest
+          - node: 18
+            os: macos-latest
           - node: 22
             os: macos-latest
     steps:
@@ -40,15 +45,23 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
 
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ matrix.node }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ matrix.node }}-
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Test
-        run: pnpm test:coverage
+        run: pnpm test:coverage --cache-dir=".turbo"
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
 
       - name: Test (no coverage)
-        run: pnpm test
+        run: pnpm test --cache-dir=".turbo"
         if: matrix.os != 'ubuntu-latest' || matrix.node != 20
 
       - name: Upload Coverage
@@ -75,11 +88,19 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-ubuntu-latest-20-${{ github.sha }}
+          restore-keys: |
+            turbo-ubuntu-latest-20-
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm lint --cache-dir=".turbo"
 
   typecheck:
     name: Type Check
@@ -98,11 +119,19 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-ubuntu-latest-20-${{ github.sha }}
+          restore-keys: |
+            turbo-ubuntu-latest-20-
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Type Check
-        run: pnpm typecheck
+        run: pnpm typecheck --cache-dir=".turbo"
 
   build:
     name: Build
@@ -122,11 +151,19 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-ubuntu-latest-20-${{ github.sha }}
+          restore-keys: |
+            turbo-ubuntu-latest-20-
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build
-        run: pnpm build
+        run: pnpm build --cache-dir=".turbo"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

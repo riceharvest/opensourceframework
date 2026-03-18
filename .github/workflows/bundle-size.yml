@@ -30,11 +30,19 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-ubuntu-latest-20-${{ github.sha }}
+          restore-keys: |
+            turbo-ubuntu-latest-20-
+      
       - name: Install dependencies
-        run: pnpm install
-
+        run: pnpm install --frozen-lockfile --prefer-offline
+      
       - name: Build packages
-        run: pnpm build
+        run: pnpm build --cache-dir=".turbo"
 
       - name: Check bundle sizes
         run: |
