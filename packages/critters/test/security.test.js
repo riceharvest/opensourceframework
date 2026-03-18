@@ -180,9 +180,13 @@ describe('Security', () => {
     `);
     
     // Should only read files within the base path
-    expect(readFileCalls).toContain('/var/www/normal.css');
-    expect(readFileCalls).not.toContain('/etc/passwd');
-    expect(readFileCalls).not.toContain('/etc/shadow');
+    const normalizedReadFileCalls = readFileCalls.map((filename) =>
+      filename.replace(/\\/g, '/')
+    );
+
+    expect(normalizedReadFileCalls).toContain('/var/www/normal.css');
+    expect(normalizedReadFileCalls).not.toContain('/etc/passwd');
+    expect(normalizedReadFileCalls).not.toContain('/etc/shadow');
   });
 
   it('should handle malformed HTML without crashing', async () => {
