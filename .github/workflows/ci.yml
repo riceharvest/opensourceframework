@@ -30,7 +30,7 @@ jobs:
     name: Detect affected packages
     runs-on: ubuntu-latest
     outputs:
-      turbo_filter: ${{ steps.detect.outputs.turbo_filter }}
+      affected_filter: ${{ steps.detect.outputs.affected_filter }}
       has_targets: ${{ steps.detect.outputs.has_targets }}
       run_core: ${{ steps.detect.outputs.run_core }}
       base_sha: ${{ steps.detect.outputs.base_sha }}
@@ -74,15 +74,15 @@ jobs:
 
           # If package files changed, use changed-since filter.
           if echo "$CHANGED_FILES" | grep -Eq '^packages/|^tools/'; then
-            echo "turbo_filter=...[${BASE_SHA}]" >> "$GITHUB_OUTPUT"
+            echo "affected_filter=[${BASE_SHA}]" >> "$GITHUB_OUTPUT"
             echo "has_targets=true" >> "$GITHUB_OUTPUT"
             echo "run_core=true" >> "$GITHUB_OUTPUT"
           elif [ "$RUN_CORE" = "false" ]; then
-            echo "turbo_filter=" >> "$GITHUB_OUTPUT"
+            echo "affected_filter=" >> "$GITHUB_OUTPUT"
             echo "has_targets=false" >> "$GITHUB_OUTPUT"
             echo "run_core=false" >> "$GITHUB_OUTPUT"
           else
-            echo "turbo_filter=" >> "$GITHUB_OUTPUT"
+            echo "affected_filter=" >> "$GITHUB_OUTPUT"
             echo "has_targets=false" >> "$GITHUB_OUTPUT"
             echo "run_core=true" >> "$GITHUB_OUTPUT"
           fi
@@ -153,12 +153,7 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: |
-          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm install --frozen-lockfile --prefer-offline --filter="${{ needs.detect-affected.outputs.turbo_filter }}"
-          else
-            pnpm install --frozen-lockfile --prefer-offline
-          fi
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Test
         run: |
@@ -230,12 +225,7 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: |
-          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm install --frozen-lockfile --prefer-offline --filter="${{ needs.detect-affected.outputs.turbo_filter }}"
-          else
-            pnpm install --frozen-lockfile --prefer-offline
-          fi
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Lint
         run: |
@@ -290,12 +280,7 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: |
-          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm install --frozen-lockfile --prefer-offline --filter="${{ needs.detect-affected.outputs.turbo_filter }}"
-          else
-            pnpm install --frozen-lockfile --prefer-offline
-          fi
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Type Check
         run: |
@@ -350,12 +335,7 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: |
-          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm install --frozen-lockfile --prefer-offline --filter="${{ needs.detect-affected.outputs.turbo_filter }}"
-          else
-            pnpm install --frozen-lockfile --prefer-offline
-          fi
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build
         run: |
