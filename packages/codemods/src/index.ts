@@ -1,0 +1,1 @@
+export { default as nextSeoImport } from './transforms/next-seo-import';

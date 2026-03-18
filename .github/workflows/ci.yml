@@ -3,31 +3,120 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  HUSKY: 0
+  TURBO_CACHE_DIR: .turbo
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+  TURBO_REMOTE_CACHE_SIGNATURE_KEY: ${{ secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY }}
+  PUPPETEER_SKIP_DOWNLOAD: 1
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+
 jobs:
+  detect-affected:
+    name: Detect affected packages
+    runs-on: ubuntu-latest
+    outputs:
+      turbo_filter: ${{ steps.detect.outputs.turbo_filter }}
+      has_targets: ${{ steps.detect.outputs.has_targets }}
+      run_core: ${{ steps.detect.outputs.run_core }}
+      base_sha: ${{ steps.detect.outputs.base_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed scope
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            if [ -n "${{ github.base_ref }}" ]; then
+              git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+            fi
+          else
+            BASE_SHA="${{ github.event.before }}"
+            if [ -z "$BASE_SHA" ]; then
+              BASE_SHA="$(git rev-parse HEAD~1)"
+            fi
+          fi
+
+          if ! git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            BASE_SHA="$(git rev-parse HEAD~1)"
+          fi
+
+          CHANGED_FILES=$(git diff --name-only "$BASE_SHA"...HEAD)
+
+          # If root files changed, decide whether to run full CI jobs.
+          RUN_CORE=true
+          if ! echo "$CHANGED_FILES" | grep -q '^packages/\|^tools/'; then
+            if ! echo "$CHANGED_FILES" | grep -vE '^\.github/workflows/' | grep -q .; then
+              # only workflow-only changes -> skip heavy matrix jobs
+              RUN_CORE=false
+            fi
+          fi
+
+          # If package files changed, use changed-since filter.
+          if echo "$CHANGED_FILES" | grep -Eq '^packages/|^tools/'; then
+            echo "turbo_filter=[${BASE_SHA}]" >> "$GITHUB_OUTPUT"
+            echo "has_targets=true" >> "$GITHUB_OUTPUT"
+            echo "run_core=true" >> "$GITHUB_OUTPUT"
+          elif [ "$RUN_CORE" = "false" ]; then
+            echo "turbo_filter=" >> "$GITHUB_OUTPUT"
+            echo "has_targets=false" >> "$GITHUB_OUTPUT"
+            echo "run_core=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "turbo_filter=" >> "$GITHUB_OUTPUT"
+            echo "has_targets=false" >> "$GITHUB_OUTPUT"
+            echo "run_core=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "base_sha=${BASE_SHA}" >> "$GITHUB_OUTPUT"
+
   # Matrix testing across Node versions and OS
   test-matrix:
     name: Test (Node ${{ matrix.node }}, ${{ matrix.os }})
+    needs: [detect-affected]
     runs-on: ${{ matrix.os }}
+    if: needs.detect-affected.outputs.run_core == 'true'
+    defaults:
+      run:
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
         node: [18, 20, 22]
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
-          # Skip some combinations to reduce CI time
+          # Only run full matrix on Linux.
+          # For Windows and macOS, only run the LTS version (Node 20)
           - node: 18
             os: windows-latest
+          - node: 22
+            os: windows-latest
+          - node: 18
+            os: macos-latest
           - node: 22
             os: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -40,15 +129,48 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'package.json', 'pnpm-workspace.yaml', '.github/workflows/ci.yml') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-${{ matrix.node }}-
+
+      - name: Fetch base commit
+        if: needs.detect-affected.outputs.base_sha != ''
+        run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Test
-        run: pnpm test:coverage
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR"
+          fi
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
 
       - name: Test (no coverage)
-        run: pnpm test
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR"
+          fi
         if: matrix.os != 'ubuntu-latest' || matrix.node != 20
 
       - name: Upload Coverage
@@ -60,9 +182,13 @@ jobs:
 
   lint:
     name: Lint
+    needs: [detect-affected]
     runs-on: ubuntu-latest
+    if: needs.detect-affected.outputs.run_core == 'true'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -75,17 +201,49 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'pnpm-workspace.yaml', 'package.json') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-20-
+
+      - name: Fetch base commit
+        if: needs.detect-affected.outputs.base_sha != ''
+        run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Lint
-        run: pnpm lint
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run lint --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run lint --cache-dir="$TURBO_CACHE_DIR"
+          fi
 
   typecheck:
     name: Type Check
+    needs: [detect-affected]
     runs-on: ubuntu-latest
+    if: needs.detect-affected.outputs.run_core == 'true'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -98,18 +256,49 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'pnpm-workspace.yaml', 'package.json') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-20-
+
+      - name: Fetch base commit
+        if: needs.detect-affected.outputs.base_sha != ''
+        run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Type Check
-        run: pnpm typecheck
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run typecheck --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run typecheck --cache-dir="$TURBO_CACHE_DIR"
+          fi
 
   build:
     name: Build
+    needs: [lint, typecheck, test-matrix, detect-affected]
     runs-on: ubuntu-latest
-    needs: [lint, typecheck, test-matrix]
+    if: needs.detect-affected.outputs.run_core == 'true'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -122,11 +311,39 @@ jobs:
           node-version: '20'
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Turbo Cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'pnpm-workspace.yaml', 'package.json') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-20-
+
+      - name: Fetch base commit
+        if: needs.detect-affected.outputs.base_sha != ''
+        run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build
-        run: pnpm build
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run build --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run build --cache-dir="$TURBO_CACHE_DIR"
+          fi
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
@@ -151,6 +368,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+            ~/.cache/pnpm
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

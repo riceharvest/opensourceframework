@@ -2,17 +2,30 @@ name: Bundle Size
 
 on:
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   push:
-    branches: [ main ]
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
 
 jobs:
   bundle-size:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - uses: pnpm/action-setup@v3
         with:
           version: 9
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -21,27 +34,30 @@ jobs:
             ~/.pnpm-store
             ~/.local/share/pnpm/store
             ~/.cache/pnpm
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml', 'pnpm-workspace.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+
+      - name: Turbo Cache
+        uses: actions/cache@v4
         with:
-          node-version: '18'
-          cache: 'pnpm'
-      
+          path: .turbo
+          key: turbo-${{ runner.os }}-20-${{ hashFiles('pnpm-lock.yaml', 'turbo.json', 'pnpm-workspace.yaml', 'package.json') }}
+          restore-keys: |
+            turbo-${{ runner.os }}-20-
+
       - name: Install dependencies
-        run: pnpm install
-      
+        run: pnpm install --frozen-lockfile --prefer-offline
+
       - name: Build packages
-        run: pnpm build
-      
+        run: pnpm turbo run build --filter="./packages/**" --cache-dir=".turbo"
+
       - name: Check bundle sizes
         run: |
           for pkg in next-compose-plugins next-transpile-modules next-cookies next-seo next-session next-iron-session next-pwa next-auth critters next-csrf; do
             npx bundle-phobia-cli @opensourceframework/$pkg --limit 50 || echo "Failed to check $pkg"
           done
-      
+
       - name: Upload bundle size report
         uses: actions/upload-artifact@v4
         with:

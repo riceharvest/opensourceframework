@@ -86,9 +86,9 @@ export function configureAuth<User, Error, LoginCredentials, RegisterCredentials
 		renderError = () => <>Something went wrong. Please try again.</>,
 	}: {
 		children: React.ReactNode
-		renderLoading: () => JSX.Element
-		renderUnauthenticated?: () => JSX.Element
-		renderError?: (error: Error) => JSX.Element
+		renderLoading: () => React.ReactElement
+		renderUnauthenticated?: () => React.ReactElement
+		renderError?: (error: Error) => React.ReactElement
 	}) {
 		const { isSuccess, isFetched, status, data, error } = useUser()
 
