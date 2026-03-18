@@ -5,7 +5,18 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": [
+        "dist/**",
+        "lib/**",
+        ".next/**",
+        "!.next/cache/**",
+        "index.js",
+        "client.js",
+        "adapters.js",
+        "providers.js",
+        "jwt.js",
+        "errors.js"
+      ]
     },
     "dev": {
       "cache": false,
