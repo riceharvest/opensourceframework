@@ -153,12 +153,17 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm install --frozen-lockfile --prefer-offline --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm install --frozen-lockfile --prefer-offline
+          fi
 
       - name: Test
         run: |
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR" --filter="${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
           else
             pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR"
           fi
@@ -167,7 +172,7 @@ jobs:
       - name: Test (no coverage)
         run: |
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
           else
             pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR"
           fi
@@ -225,12 +230,17 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm install --frozen-lockfile --prefer-offline --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm install --frozen-lockfile --prefer-offline
+          fi
 
       - name: Lint
         run: |
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run lint --cache-dir="$TURBO_CACHE_DIR" --filter="${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run lint --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
           else
             pnpm turbo run lint --cache-dir="$TURBO_CACHE_DIR"
           fi
@@ -280,12 +290,17 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm install --frozen-lockfile --prefer-offline --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm install --frozen-lockfile --prefer-offline
+          fi
 
       - name: Type Check
         run: |
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run typecheck --cache-dir="$TURBO_CACHE_DIR" --filter="${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run typecheck --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
           else
             pnpm turbo run typecheck --cache-dir="$TURBO_CACHE_DIR"
           fi
@@ -335,10 +350,20 @@ jobs:
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm install --frozen-lockfile --prefer-offline --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm install --frozen-lockfile --prefer-offline
+          fi
 
       - name: Build
-        run: pnpm turbo run build --cache-dir="$TURBO_CACHE_DIR"
+        run: |
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run build --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+          else
+            pnpm turbo run build --cache-dir="$TURBO_CACHE_DIR"
+          fi
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

@@ -10,12 +10,12 @@
         "lib/**",
         ".next/**",
         "!.next/cache/**",
-        "index.js",
-        "client.js",
-        "adapters.js",
-        "providers.js",
-        "jwt.js",
-        "errors.js"
+        "*.js",
+        "*.cjs",
+        "*.mjs",
+        "*.d.ts",
+        "*.d.cts",
+        "*.d.mts"
       ]
     },
     "dev": {
