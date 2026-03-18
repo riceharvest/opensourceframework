@@ -3,8 +3,14 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,6 +39,8 @@ jobs:
             os: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -57,11 +65,11 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Test
-        run: pnpm test:coverage --cache-dir=".turbo"
+        run: pnpm turbo run test:coverage --cache-dir=".turbo" --filter="...[origin/main]"
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
 
       - name: Test (no coverage)
-        run: pnpm test --cache-dir=".turbo"
+        run: pnpm turbo run test --cache-dir=".turbo" --filter="...[origin/main]"
         if: matrix.os != 'ubuntu-latest' || matrix.node != 20
 
       - name: Upload Coverage
@@ -76,6 +84,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -100,13 +110,15 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Lint
-        run: pnpm lint --cache-dir=".turbo"
+        run: pnpm turbo run lint --cache-dir=".turbo" --filter="...[origin/main]"
 
   typecheck:
     name: Type Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -131,7 +143,7 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Type Check
-        run: pnpm typecheck --cache-dir=".turbo"
+        run: pnpm turbo run typecheck --cache-dir=".turbo" --filter="...[origin/main]"
 
   build:
     name: Build
@@ -139,6 +151,8 @@ jobs:
     needs: [lint, typecheck, test-matrix]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -163,7 +177,7 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Build
-        run: pnpm build --cache-dir=".turbo"
+        run: pnpm turbo run build --cache-dir=".turbo" --filter="...[origin/main]"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
