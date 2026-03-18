@@ -184,9 +184,9 @@ describe('Security', () => {
       filename.replace(/\\/g, '/')
     );
 
-    expect(normalizedReadFileCalls).toContain('/var/www/normal.css');
-    expect(normalizedReadFileCalls).not.toContain('/etc/passwd');
-    expect(normalizedReadFileCalls).not.toContain('/etc/shadow');
+    expect(normalizedReadFileCalls.some(call => call.endsWith('/var/www/normal.css'))).toBe(true);
+    expect(normalizedReadFileCalls.some(call => call.includes('etc/passwd'))).toBe(false);
+    expect(normalizedReadFileCalls.some(call => call.includes('etc/shadow'))).toBe(false);
   });
 
   it('should handle malformed HTML without crashing', async () => {
