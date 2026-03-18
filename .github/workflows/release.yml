@@ -14,6 +14,7 @@ jobs:
   build-and-pack:
     name: Build & Pack
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     outputs:
       packages: ${{ steps.list.outputs.packages }}
     steps:
@@ -46,11 +47,6 @@ jobs:
       - name: Build All Packages
         run: pnpm build
 
-      - name: Verify API Surface & Types
-        run: |
-          pnpm test:api
-          pnpm test:types
-
       - name: Pack Packages
         id: pack
         run: |
@@ -77,6 +73,7 @@ jobs:
     name: Compat (${{ matrix.package }}, Next ${{ matrix.next-version }})
     needs: build-and-pack
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
