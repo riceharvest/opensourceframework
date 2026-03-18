@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -14,7 +15,7 @@ jobs:
   build-and-pack:
     name: Build & Pack
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     outputs:
       packages: ${{ steps.list.outputs.packages }}
     steps:
