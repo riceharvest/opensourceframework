@@ -11,7 +11,7 @@
     "llms.txt"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && mkdir -p dist/loaders && cp -rv lib/loaders/* dist/loaders/",
     "watch": "tsup --watch",
     "lint": "eslint . --ignore-pattern examples",
     "lint:fix": "eslint . --ignore-pattern examples --fix",
