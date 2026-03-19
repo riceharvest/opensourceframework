@@ -1,6 +1,6 @@
-# @opensourceframework/next-transpile-modules
+# @opensourceframework/next-compose-plugins
 
-## 10.1.0
+## 2.4.0
 
 ### Minor Changes
 
@@ -29,13 +29,3 @@
   - **critters**: Improved animation name extraction and implemented robust multi-format font preloading.
   - **Reliability**: Added safety guards to `next-pwa` build process and refined `safeHref` sanitization in `critters`.
   - **Infrastructure**: Updated `llms.txt` for better AI discovery and added missing `LICENSE` files to several packages.
-
-## 10.0.3
-
-### Patch Changes
-
-- Modernization and stabilization fixes:
-  - Standardized scripts and CI/CD lockfiles
-  - Fixed lint rules and CI/CD unblocking
-  - Added llms.txt for AI-First Discovery
-  - Include llms.txt in published files

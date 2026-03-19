@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-auth",
-  "version": "3.29.11",
+  "version": "3.29.12",
   "description": "Authentication for Next.js",
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-auth#readme",
   "engines": {

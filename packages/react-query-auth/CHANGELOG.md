@@ -1,8 +1,8 @@
-# @opensourceframework/next-transpile-modules
+# @opensourceframework/react-query-auth
 
-## 10.1.0
+## 2.4.4
 
-### Minor Changes
+### Patch Changes
 
 - 7f495f3: - **next-csrf**: Added App Router support with `verifyCsrfToken` and automated tests.
   - **next-auth**: Migrated client tests to Vitest and MSW v2, resolving CI regressions and modernization requirements.
@@ -17,9 +17,6 @@
   - **next-mdx-toc**: Migrated to Vitest and verified compatibility with modernized `next-mdx`.
   - **react-virtualized**: Stabilized the Vitest/jsdom harness, restored missing test dependencies, and fixed mount-time scrolling regressions.
   - **Package metadata**: Published packages now point to the canonical monorepo metadata and include `llms.txt` in tarballs where package-level guidance exists.
-
-### Patch Changes
-
 - 7f495f3: # Monorepo Modernization (Next.js 16 & React 19)
 
   Comprehensive modernization of all packages in the monorepo to support the latest industry standards.
@@ -29,13 +26,3 @@
   - **critters**: Improved animation name extraction and implemented robust multi-format font preloading.
   - **Reliability**: Added safety guards to `next-pwa` build process and refined `safeHref` sanitization in `critters`.
   - **Infrastructure**: Updated `llms.txt` for better AI discovery and added missing `LICENSE` files to several packages.
-
-## 10.0.3
-
-### Patch Changes
-
-- Modernization and stabilization fixes:
-  - Standardized scripts and CI/CD lockfiles
-  - Fixed lint rules and CI/CD unblocking
-  - Added llms.txt for AI-First Discovery
-  - Include llms.txt in published files

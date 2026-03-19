@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-images",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Compatibility-first image import plugin for Next.js applications",
   "keywords": [
     "next.js",

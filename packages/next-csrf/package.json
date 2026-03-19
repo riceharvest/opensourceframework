@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-csrf",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "CSRF protection for Next.js applications",
   "keywords": [
     "next.js",
