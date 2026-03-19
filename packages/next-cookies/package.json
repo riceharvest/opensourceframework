@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-cookies",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "get the cookies on both the client & server - Maintained fork of next-cookies",
   "keywords": [
     "cookies",

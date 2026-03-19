@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-circuit-breaker",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Circuit breaker pattern implementation for Next.js API routes - Prevent cascading failures by failing fast when downstream services are unavailable",
   "keywords": [
     "next.js",
