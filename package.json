@@ -23,7 +23,7 @@
     "bundle-size": "pnpm run build && bundle-phobia-cli @opensourceframework/next-compose-plugins --limit 10",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
-    "release": "changeset version && pnpm install && pnpm build",
+    "release": "changeset version && pnpm install && turbo run build --filter='./packages/*'",
     "publish": "changeset publish",
     "audit": "pnpm audit --audit-level=low",
     "audit:moderate": "pnpm audit --audit-level=moderate"
