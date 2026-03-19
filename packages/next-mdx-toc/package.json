@@ -14,7 +14,8 @@
     "watch": "microbundle watch --no-compress --jsx React.createElement",
     "test": "vitest run",
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepare": "tsup"
   },
   "files": [
     "dist",
