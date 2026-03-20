@@ -14,8 +14,7 @@
     "watch": "microbundle watch --no-compress --jsx React.createElement",
     "test": "vitest run",
     "build": "tsup",
-    "dev": "tsup --watch",
-    "prebuild": "pnpm --filter @opensourceframework/next-mdx build"
+    "dev": "tsup --watch"
   },
   "files": [
     "dist",
@@ -33,16 +32,16 @@
     "directory": "packages/next-mdx-toc"
   },
   "devDependencies": {
-    "@types/node": "^22.19.15",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@types/node": "^22.0.0",
     "microbundle": "^0.15.1",
-    "next": "^16.2.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@opensourceframework/next-mdx": "workspace:^",
+    "@opensourceframework/next-mdx": "^0.7.0",
     "mdast-util-toc": "^5.1.0",
     "remark": "^13.0.0",
     "unist-util-visit": "^2.0.3"

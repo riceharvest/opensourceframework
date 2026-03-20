@@ -41,18 +41,18 @@
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-optimized-images#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "figures": "^3.2.0",
+    "figures": "^3.0.0",
     "file-loader": "^6.2.0",
     "loader-utils": "^3.3.1",
     "raw-loader": "^4.0.2",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.0",
-    "next": "^16.2.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "next": "^16.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0",
+    "vitest": "^2.1.9",
     "webpack": "^5.105.4"
   },
   "peerDependencies": {
