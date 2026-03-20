@@ -1,7 +1,10 @@
 import * as ReactDOMNamespace from 'react-dom';
 import {afterEach} from 'vitest';
 
-const ReactDOM = ReactDOMNamespace.default || ReactDOMNamespace;
+// Fallback to older React 17/18 namespace import structure if default doesn't exist
+const ReactDOM = typeof ReactDOMNamespace.unmountComponentAtNode === 'function' 
+  ? ReactDOMNamespace 
+  : ReactDOMNamespace.default || ReactDOMNamespace;
 
 /**
  * Helper method for testing components that may use Portal and thus require cleanup.
