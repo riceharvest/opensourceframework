@@ -19,13 +19,13 @@
   "author": "OpenSource Framework Contributors",
   "license": "MIT",
   "dependencies": {
-    "commander": "^12.0.0",
+    "commander": "^12.1.0",
     "jscodeshift": "^0.15.2"
   },
   "devDependencies": {
     "@types/jscodeshift": "^17.3.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.0"
   }
 }

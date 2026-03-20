@@ -17,21 +17,21 @@
     "@opensourceframework/next-pwa": "workspace:*",
     "@opensourceframework/next-seo": "workspace:*",
     "@opensourceframework/next-session": "workspace:*",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "clsx": "latest",
     "lucide-react": "latest",
-    "next": "^16.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^16.2.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tailwind-merge": "latest"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/node": "^22.19.15",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
-    "typescript": "^5.0.0"
+    "typescript": "^5.9.3"
   }
 }

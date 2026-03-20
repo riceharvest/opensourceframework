@@ -35,21 +35,21 @@
     "directory": "packages/next-mdx"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "concurrently": "^6.0.0",
+    "@types/node": "^22.19.15",
+    "concurrently": "^6.5.1",
     "microbundle": "^0.15.1",
     "mock-fs": "^5.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "^16.0.0",
+    "next": "^16.2.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
     "crypto-hash": "^4.0.1",
-    "fast-glob": "^3.2.5",
-    "gray-matter": "^4.0.2",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
     "next-mdx-remote": "^6.0.0",
     "node-cache": "^5.1.2"
   },

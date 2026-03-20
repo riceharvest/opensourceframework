@@ -58,20 +58,20 @@
     "test:e2e": "cd test-app && npm run test:e2e"
   },
   "dependencies": {
-    "babel-loader": "^8.2.5",
-    "globby": "^11.0.4",
+    "babel-loader": "^8.4.1",
+    "globby": "^11.1.0",
     "terser-webpack-plugin": "^5.4.0",
     "workbox-webpack-plugin": "^7.4.0",
     "workbox-window": "^7.4.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.0",
+    "@types/node": "^20.19.37",
+    "@vitest/coverage-v8": "^4.1.0",
     "eslint-plugin-jest": "^29.15.0",
-    "next": "^16.0.0",
+    "next": "^16.2.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "@vitest/coverage-v8": "^2.1.9",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.0"
   },
   "peerDependencies": {
     "next": "^12 || ^13 || ^14 || ^15 || ^16 || ^17",
