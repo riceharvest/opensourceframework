@@ -1,5 +1,7 @@
-import * as ReactDOM from 'react-dom';
+import * as ReactDOMNamespace from 'react-dom';
 import {afterEach} from 'vitest';
+
+const ReactDOM = ReactDOMNamespace.default || ReactDOMNamespace;
 
 /**
  * Helper method for testing components that may use Portal and thus require cleanup.
