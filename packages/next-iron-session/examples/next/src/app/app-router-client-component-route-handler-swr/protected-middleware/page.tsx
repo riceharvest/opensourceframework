@@ -6,9 +6,6 @@ import { getIronSession } from "iron-session";
 import { SessionData, sessionOptions } from "../lib";
 import Link from "next/link";
 
-// Next.js 16: 'use cache' with private data (cookies) makes it dynamic
-export const dynamic = "force-dynamic";
-
 async function getSession() {
   const cookieStore = await cookies();
   const session = await getIronSession<SessionData>(cookieStore, sessionOptions);
