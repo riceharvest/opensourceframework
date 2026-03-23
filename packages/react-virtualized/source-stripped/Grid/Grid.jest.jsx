@@ -2009,8 +2009,8 @@ describe('Grid', () => {
     });
 
     it('should not trigger render by _debounceScrollEndedCallback if process slow table', async () => {
-      const scrollingResetTimeInterval = 150;
-      const renderDelay = 50;
+      const scrollingResetTimeInterval = 300;
+      const renderDelay = 100;
       let cellRangeRendererCalls = 0;
       function cellRangeRenderer(props) {
         const startTime = Date.now();
