@@ -1,0 +1,57 @@
+{
+  "name": "@opensourceframework/tailwindcss-animate",
+  "version": "1.0.7",
+  "description": "A Tailwind CSS plugin for creating beautiful animations. (Maintained fork of jamiebuilds/tailwindcss-animate)",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "postcss",
+    "plugin",
+    "animation",
+    "transition",
+    "animate",
+    "animated",
+    "animatecss",
+    "animate.css",
+    "fade",
+    "slide",
+    "zoom",
+    "spin",
+    "opacity",
+    "transform",
+    "translate",
+    "scale"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "contributors": [
+    "Jamie Kyle <me@thejameskyle.com> (https://github.com/jamiebuilds)"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "tailwindcss": ">=3.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "scripts": {
+    "test": "node test/plugin.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/tailwindcss-animate"
+  },
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+tailwindcss-animate"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/tailwindcss-animate#readme"
+}
