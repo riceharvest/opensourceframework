@@ -25,7 +25,7 @@ program
 
     try {
       const entries = await readdir(packagesDir, { withFileTypes: true });
-      const packages: Array<{ name: string; description: string; readmeSnippet: string }> = [];
+      const packages: Array<{ name: string; description: string; readmeSnippet: string; keywords: string[] }> = [];
 
       for (const entry of entries) {
         if (entry.isDirectory()) {
@@ -45,7 +45,8 @@ program
             packages.push({
               name: pkg.name,
               description: pkg.description || '',
-              readmeSnippet
+              readmeSnippet,
+              keywords: Array.isArray(pkg.keywords) ? pkg.keywords : []
             });
           } catch {
             // Not a valid package directory, skip
@@ -58,7 +59,8 @@ program
         (p) =>
           p.name.toLowerCase().includes(lowerQuery) ||
           p.description.toLowerCase().includes(lowerQuery) ||
-          p.readmeSnippet.toLowerCase().includes(lowerQuery)
+          p.readmeSnippet.toLowerCase().includes(lowerQuery) ||
+          p.keywords.some((k) => k.toLowerCase().includes(lowerQuery))
       );
 
       if (matches.length === 0) {
@@ -80,6 +82,10 @@ program
         if (p.readmeSnippet.toLowerCase().includes(lowerQuery)) {
           score.value += 1;
           score.fields.push('readme');
+        }
+        if (p.keywords.some((k) => k.toLowerCase().includes(lowerQuery))) {
+          score.value += 3;
+          score.fields.push('keywords');
         }
         return { ...p, score: score.value, matchedIn: score.fields };
       });
