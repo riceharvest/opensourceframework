@@ -1,0 +1,27 @@
+{
+  "name": "@opensourceframework/docs-bot",
+  "version": "0.0.1",
+  "description": "Documentation assistant for OpenSourceFramework packages",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "docs-bot": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "prepublishOnly": "pnpm build"
+  },
+  "files": ["dist"],
+  "keywords": ["documentation", "bot", "cli", "opensourceframework"],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
