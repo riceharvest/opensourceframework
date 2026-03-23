@@ -184,6 +184,24 @@ importers:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0)
 
+  packages/identity-obj-proxy:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.15
+      '@vitest/coverage-v8':
+        specifier: ^2.1.9
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(terser@5.46.0))
+      tsup:
+        specifier: ^8.5.1
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.9
+        version: 2.1.9(@types/node@22.19.15)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(terser@5.46.0)
+
   packages/next-auth:
     dependencies:
       '@babel/runtime':
@@ -12393,6 +12411,14 @@ snapshots:
       '@types/node': 22.19.11
     optional: true
 
+  '@inquirer/confirm@5.1.21(@types/node@22.19.15)':
+    dependencies:
+      '@inquirer/core': 10.3.2(@types/node@22.19.15)
+      '@inquirer/type': 3.0.10(@types/node@22.19.15)
+    optionalDependencies:
+      '@types/node': 22.19.15
+    optional: true
+
   '@inquirer/confirm@5.1.21(@types/node@24.10.13)':
     dependencies:
       '@inquirer/core': 10.3.2(@types/node@24.10.13)
@@ -12434,6 +12460,20 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 22.19.11
+    optional: true
+
+  '@inquirer/core@10.3.2(@types/node@22.19.15)':
+    dependencies:
+      '@inquirer/ansi': 1.0.2
+      '@inquirer/figures': 1.0.15
+      '@inquirer/type': 3.0.10(@types/node@22.19.15)
+      cli-width: 4.1.0
+      mute-stream: 2.0.0
+      signal-exit: 4.1.0
+      wrap-ansi: 6.2.0
+      yoctocolors-cjs: 2.1.3
+    optionalDependencies:
+      '@types/node': 22.19.15
     optional: true
 
   '@inquirer/core@10.3.2(@types/node@24.10.13)':
@@ -12487,6 +12527,11 @@ snapshots:
   '@inquirer/type@3.0.10(@types/node@22.19.11)':
     optionalDependencies:
       '@types/node': 22.19.11
+    optional: true
+
+  '@inquirer/type@3.0.10(@types/node@22.19.15)':
+    optionalDependencies:
+      '@types/node': 22.19.15
     optional: true
 
   '@inquirer/type@3.0.10(@types/node@24.10.13)':
@@ -14176,6 +14221,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@vitest/coverage-v8@2.1.9(vitest@2.1.9(@types/node@22.19.15)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(terser@5.46.0))':
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@bcoe/v8-coverage': 0.2.3
+      debug: 4.4.3
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-lib-source-maps: 5.0.6
+      istanbul-reports: 3.2.0
+      magic-string: 0.30.21
+      magicast: 0.3.5
+      std-env: 3.10.0
+      test-exclude: 7.0.2
+      tinyrainbow: 1.2.0
+      vitest: 2.1.9(@types/node@22.19.15)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(terser@5.46.0)
+    transitivePeerDependencies:
+      - supports-color
+
   '@vitest/coverage-v8@2.1.9(vitest@2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@24.1.3)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
@@ -14272,6 +14335,15 @@ snapshots:
     optionalDependencies:
       msw: 2.12.10(@types/node@22.19.11)(typescript@5.9.3)
       vite: 5.4.21(@types/node@22.19.11)(lightningcss@1.32.0)(terser@5.46.0)
+
+  '@vitest/mocker@2.1.9(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(vite@5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0))':
+    dependencies:
+      '@vitest/spy': 2.1.9
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      msw: 2.12.10(@types/node@22.19.15)(typescript@5.9.3)
+      vite: 5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0)
 
   '@vitest/mocker@2.1.9(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(vite@5.4.21(@types/node@25.4.0)(lightningcss@1.32.0)(terser@5.46.0))':
     dependencies:
@@ -19310,6 +19382,32 @@ snapshots:
       - '@types/node'
     optional: true
 
+  msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3):
+    dependencies:
+      '@inquirer/confirm': 5.1.21(@types/node@22.19.15)
+      '@mswjs/interceptors': 0.41.3
+      '@open-draft/deferred-promise': 2.2.0
+      '@types/statuses': 2.0.6
+      cookie: 1.1.1
+      graphql: 16.13.1
+      headers-polyfill: 4.0.3
+      is-node-process: 1.2.0
+      outvariant: 1.4.3
+      path-to-regexp: 6.3.0
+      picocolors: 1.1.1
+      rettime: 0.10.1
+      statuses: 2.0.2
+      strict-event-emitter: 0.5.1
+      tough-cookie: 6.0.0
+      type-fest: 5.4.4
+      until-async: 3.0.2
+      yargs: 17.7.2
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - '@types/node'
+    optional: true
+
   msw@2.12.10(@types/node@24.10.13)(typescript@5.9.3):
     dependencies:
       '@inquirer/confirm': 5.1.21(@types/node@24.10.13)
@@ -22413,6 +22511,24 @@ snapshots:
       - supports-color
       - terser
 
+  vite-node@2.1.9(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0):
+    dependencies:
+      cac: 6.7.14
+      debug: 4.4.3
+      es-module-lexer: 1.7.0
+      pathe: 1.1.2
+      vite: 5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+
   vite-node@2.1.9(@types/node@25.4.0)(lightningcss@1.32.0)(terser@5.46.0):
     dependencies:
       cac: 6.7.14
@@ -22470,6 +22586,17 @@ snapshots:
       rollup: 4.59.0
     optionalDependencies:
       '@types/node': 22.19.11
+      fsevents: 2.3.3
+      lightningcss: 1.32.0
+      terser: 5.46.0
+
+  vite@5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0):
+    dependencies:
+      esbuild: 0.25.12
+      postcss: 8.5.8
+      rollup: 4.59.0
+    optionalDependencies:
+      '@types/node': 22.19.15
       fsevents: 2.3.3
       lightningcss: 1.32.0
       terser: 5.46.0
@@ -22634,6 +22761,43 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.11
+      happy-dom: 20.8.3
+      jsdom: 25.0.1
+    transitivePeerDependencies:
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+
+  vitest@2.1.9(@types/node@22.19.15)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(terser@5.46.0):
+    dependencies:
+      '@vitest/expect': 2.1.9
+      '@vitest/mocker': 2.1.9(msw@2.12.10(@types/node@22.19.15)(typescript@5.9.3))(vite@5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0))
+      '@vitest/pretty-format': 2.1.9
+      '@vitest/runner': 2.1.9
+      '@vitest/snapshot': 2.1.9
+      '@vitest/spy': 2.1.9
+      '@vitest/utils': 2.1.9
+      chai: 5.3.3
+      debug: 4.4.3
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      pathe: 1.1.2
+      std-env: 3.10.0
+      tinybench: 2.9.0
+      tinyexec: 0.3.2
+      tinypool: 1.1.1
+      tinyrainbow: 1.2.0
+      vite: 5.4.21(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0)
+      vite-node: 2.1.9(@types/node@22.19.15)(lightningcss@1.32.0)(terser@5.46.0)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 22.19.15
       happy-dom: 20.8.3
       jsdom: 25.0.1
     transitivePeerDependencies:
