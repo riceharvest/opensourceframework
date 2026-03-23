@@ -51,12 +51,12 @@
   "devDependencies": {
     "@types/cookie": "^0.4.1",
     "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.1.9",
     "eslint-plugin-jest": "^29.15.0",
     "light-my-request": "^6.0.0",
-    "next": "^16.0.0",
+    "next": "^16.2.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "@vitest/coverage-v8": "^2.1.9",
     "vitest": "^2.1.9"
   },
   "peerDependencies": {
