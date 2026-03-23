@@ -15,6 +15,7 @@ export default function oAuthClient(provider) {
     return {
       getAuthorizeUrl: (params) => getOAuth2AuthorizeUrl(provider, params),
       getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
+      useAuthorizationHeaderforGET: (flag) => { _useAuthHeader = !!flag },
       get: (accessToken, results) => getOAuth2(provider, accessToken, results)
     }
   }
