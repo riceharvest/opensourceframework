@@ -18,7 +18,8 @@ program
   .version('0.0.1')
   .argument('<query>', 'Question or search query')
   .option('-r, --root <path>', 'Path to monorepo root', process.cwd())
-  .action(async (query: string, options: { root: string }) => {
+  .option('-v, --verbose', 'Show detailed results with relevance scores')
+  .action(async (query: string, options: { root: string; verbose: boolean }) => {
     const root = options.root;
     const packagesDir = join(root, 'packages');
 
@@ -65,9 +66,36 @@ program
         return;
       }
 
-      console.log(chalk.green(`Found ${matches.length} package(s):`));
-      for (const p of matches) {
-        console.log(chalk.bold.blue(`\n• ${p.name}`));
+      // Score and sort matches by relevance
+      const scoredMatches = matches.map(p => {
+        const score: { value: number; fields: string[] } = { value: 0, fields: [] };
+        if (p.name.toLowerCase().includes(lowerQuery)) {
+          score.value += 10;
+          score.fields.push('name');
+        }
+        if (p.description.toLowerCase().includes(lowerQuery)) {
+          score.value += 5;
+          score.fields.push('description');
+        }
+        if (p.readmeSnippet.toLowerCase().includes(lowerQuery)) {
+          score.value += 1;
+          score.fields.push('readme');
+        }
+        return { ...p, score: score.value, matchedIn: score.fields };
+      });
+
+      scoredMatches.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+
+      console.log(chalk.green(`Found ${scoredMatches.length} package(s):`));
+      for (const p of scoredMatches) {
+        if (options.verbose) {
+          console.log(chalk.bold.blue(`\n• ${p.name} (score: ${p.score})`));
+          if (p.matchedIn.length > 0) {
+            console.log(chalk.dim(`Matched in: ${p.matchedIn.join(', ')}`));
+          }
+        } else {
+          console.log(chalk.bold.blue(`\n• ${p.name}`));
+        }
         if (p.description) console.log(chalk.gray(p.description));
         if (p.readmeSnippet) console.log(chalk.dim(p.readmeSnippet));
       }
