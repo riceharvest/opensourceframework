@@ -15,7 +15,8 @@ export default function oAuthClient(provider) {
     return {
       getAuthorizeUrl: (params) => getOAuth2AuthorizeUrl(provider, params),
       getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
-      get: (accessToken, results) => getOAuth2(provider, accessToken, results)
+      get: (accessToken, results) => getOAuth2(provider, accessToken, results, _useAuthHeader),
+      useAuthorizationHeaderforGET: (flag) => { _useAuthHeader = !!flag }
     }
   }
 
@@ -162,18 +163,28 @@ async function getOAuth2AccessToken(code, provider, codeVerifier) {
  * @param {import("types/providers").OAuthConfig} provider
  * @param {string} accessToken
  * @param {any} results
+ * @param {boolean} useAuthHeader
  */
-async function getOAuth2(provider, accessToken, results) {
+async function getOAuth2(provider, accessToken, results, useAuthHeader) {
   let url = provider.profileUrl
   let httpMethod = "GET"
   const headers = { ...provider.headers }
 
-  // Build Authorization header
-  if (accessToken) {
-    headers.Authorization = `Bearer ${accessToken}`
+  // Determine whether to use Authorization header or query parameter based on configuration
+  if (useAuthHeader) {
+    if (accessToken) {
+      headers.Authorization = `Bearer ${accessToken}`
+    }
+  } else {
+    // Append access_token as query parameter
+    const safeUrl = new URL(url)
+    safeUrl.searchParams.append('access_token', accessToken)
+    url = safeUrl.href
+    // Ensure Authorization header is not set
+    delete headers.Authorization
   }
 
-  // Mail.ru & vk.com require 'access_token' as URL request parameter
+  // Mail.ru & vk.com require 'access_token' as URL request parameter (override)
   if (["mailru", "vk"].includes(provider.id)) {
     const safeAccessTokenURL = new URL(url)
     safeAccessTokenURL.searchParams.append("access_token", accessToken)
