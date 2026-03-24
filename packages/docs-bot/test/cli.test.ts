@@ -31,3 +31,13 @@ test('CLI returns non-zero exit on invalid usage', async () => {
     env: { TERM: 'dumb', FORCE_COLOR: '0', ...process.env }
   })).rejects.toThrow();
 });
+
+test('CLI compares two packages correctly', async () => {
+  const { stdout } = await execAsync('node packages/docs-bot/dist/index.js compare next-auth next-cookies', {
+    cwd: monorepoRoot,
+    env: { TERM: 'dumb', FORCE_COLOR: '0', ...process.env }
+  });
+  expect(stdout).toContain('next-auth');
+  expect(stdout).toContain('next-cookies');
+  expect(stdout).toContain('Description:');
+});
