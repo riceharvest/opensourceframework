@@ -6,4 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   external: ['commander', 'chalk'],
+  shebang: '#!/usr/bin/env node',
 });
