@@ -165,6 +165,10 @@ const ElementExtensions = {
     if (value != null) return { specified: true, value };
   },
 
+  getAttributeNames() {
+    return this.attribs ? Object.keys(this.attribs) : [];
+  },
+
   exists(sel) {
     return cachedQuerySelector(sel, this);
   },

@@ -637,6 +637,24 @@ export default class Critters {
     const shouldInlineFonts =
       options.fonts !== false && options.inlineFonts === true;
 
+    // Collect all @keyframes names from the stylesheet to avoid false positives in animation parsing
+    const allKeyframeNames = new Set();
+
+    // Helper to infer font MIME type from URL extension when format is not specified
+    function getFontMimeType(url) {
+      // Extract extension, ignoring query and hash
+      const ext = url.split('.').pop().toLowerCase().split(/[?#]/)[0];
+      switch (ext) {
+        case 'woff2': return 'font/woff2';
+        case 'woff': return 'font/woff';
+        case 'ttf': return 'font/ttf';
+        case 'otf': return 'font/otf';
+        case 'eot': return 'font/eot';
+        case 'svg': return 'font/svg';
+        default: return null;
+      }
+    }
+
     // Walk all CSS rules, marking unused rules with `.$$remove=true` for removal in the second pass.
     // This first pass is also used to collect font and keyframe usage used in the second pass.
     walkStyleRules(
@@ -670,6 +688,12 @@ export default class Critters {
                 break;
             }
           }
+        }
+
+        // Collect all @keyframes names (including -webkit- prefix)
+        if (rule.type === 'atrule' && (rule.name === 'keyframes' || rule.name === '-webkit-keyframes')) {
+          allKeyframeNames.add(rule.params);
+          return true;
         }
 
         if (rule.type === 'rule') {
@@ -753,7 +777,9 @@ export default class Critters {
                 for (const name of decl.value.split(/\s+/)) {
                   const nameTrimmed = name.trim();
                   if (nameTrimmed && !keywords.includes(nameTrimmed) && !/^\d/.test(nameTrimmed)) {
-                    criticalKeyframeNames.add(nameTrimmed);
+                    if (allKeyframeNames.has(nameTrimmed)) {
+                      criticalKeyframeNames.add(nameTrimmed);
+                    }
                   }
                 }
               }
@@ -811,14 +837,15 @@ export default class Critters {
           let match;
           while ((match = urlRegex.exec(src)) !== null) {
             const fontUrl = match[2].trim();
-            const format = match[5];
+            const rawFormat = match[5] ? match[5].trim() : null;
             if (!preloadedFonts.has(fontUrl)) {
               preloadedFonts.add(fontUrl);
               const preload = document.createElement('link');
               preload.setAttribute('rel', 'preload');
               preload.setAttribute('as', 'font');
-              if (format) {
-                preload.setAttribute('type', `font/${format}`);
+              const mimeType = rawFormat ? `font/${rawFormat}` : getFontMimeType(fontUrl);
+              if (mimeType) {
+                preload.setAttribute('type', mimeType);
               }
               preload.setAttribute('crossorigin', 'anonymous');
               preload.setAttribute('href', fontUrl);
