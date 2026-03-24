@@ -58,7 +58,7 @@ export default async function oAuthCallback(req) {
         // Support services that use OpenID ID Tokens to encode profile data
         profileData = jwtDecode(tokens.id_token, { json: true })
       } else {
-        profileData = await client.get(provider, tokens.accessToken, tokens)
+        profileData = await client.get(tokens.accessToken, tokens)
       }
 
       return getProfile({ profileData, provider, tokens, user })
