@@ -1,8 +1,10 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./packages/next-sitemap"
-    }
-  ]
+  "extends": "@corex/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist/esm",
+    "rootDir": "src",
+    "declarationDir": "dist/@types"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "bin", "dist", "**/*.test.ts", "**/__tests__/**"]
 }
