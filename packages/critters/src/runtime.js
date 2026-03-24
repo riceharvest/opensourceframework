@@ -654,7 +654,7 @@ export default class Critters {
     const astInverse = options.pruneSource ? parseStylesheet(sheet) : null;
 
     // a string to search for font names (very loose)
-    let criticalFonts = '';
+    let criticalFonts = new Set();
 
     const failedSelectors = [];
 
@@ -776,7 +776,9 @@ export default class Critters {
                 decl.prop &&
                 /\bfont(-family)?\b/i.test(decl.prop)
               ) {
-                criticalFonts += ' ' + decl.value;
+                // Add each font name to the set
+                const fonts = decl.value.split(',').map(f => f.trim()).filter(f => f);
+                fonts.forEach(f => criticalFonts.add(f));
               }
 
               // detect used keyframes
@@ -862,7 +864,7 @@ export default class Critters {
           !shouldInlineFonts ||
           !family ||
           !src ||
-          !criticalFonts.includes(family)
+          !criticalFonts.has(family)
         ) {
           return false;
         }
