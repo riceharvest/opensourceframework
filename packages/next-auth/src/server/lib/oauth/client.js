@@ -13,6 +13,7 @@ export default function oAuthClient(provider) {
     let _useAuthHeader = true
 
     return {
+      useAuthorizationHeaderforGET: (value) => { _useAuthHeader = value },
       getAuthorizeUrl: (params) => getOAuth2AuthorizeUrl(provider, params),
       getOAuthAccessToken: (code, codeVerifier) => getOAuth2AccessToken(code, provider, codeVerifier),
       get: (accessToken, results) => getOAuth2(provider, accessToken, results)
