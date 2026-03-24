@@ -212,6 +212,65 @@ program
     }
   });
 
+// Ask command
+program
+  .command('ask')
+  .description('Ask a question about the packages using AI')
+  .argument('<question>', 'Question to ask')
+  .option('-r, --root <path>', 'Path to monorepo root', process.cwd())
+  .option('-m, --model <model>', 'OpenRouter model to use', 'openrouter/auto')
+  .action(async (question: string, options: { root: string; model: string }) => {
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    if (!apiKey) {
+      throw new Error('Missing OPENROUTER_API_KEY environment variable');
+    }
+
+    const root = options.root;
+    const packages = await scanPackages(root);
+
+    // Build context from packages
+    let context = 'OpenSourceFramework packages:\n\n';
+    for (const p of packages) {
+      context += `- ${p.name}: ${p.description || 'No description'}\n`;
+      if (p.readmeSnippet) {
+        context += `  README snippet: ${p.readmeSnippet}\n`;
+      }
+    }
+
+    const systemPrompt = `You are a helpful assistant for developers using OpenSourceFramework packages. Use the following package information to answer questions. Be concise and accurate. If the information is insufficient, say so.\n\n${context}`;
+
+    try {
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+          'HTTP-Referer': 'https://opensourceframework.com',
+          'X-Title': 'docs-bot'
+        },
+        body: JSON.stringify({
+          model: options.model,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: question }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`OpenRouter API error ${response.status}: ${errorText}`);
+      }
+
+      const data = await response.json();
+      const answer = data.choices?.[0]?.message?.content || 'No response received';
+      console.log(answer);
+    } catch (error: any) {
+      console.error(chalk.red('Error:'), error.message);
+      process.exit(1);
+    }
+  });
+
 // Compare command
 program
   .command('compare')
