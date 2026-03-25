@@ -13,6 +13,7 @@ interface PackageInfo {
   description: string;
   readmeSnippet: string;
   sourceSnippet?: string;
+  exampleSnippet?: string;
 }
 
 // Helper to recursively get all source files in a directory
@@ -81,11 +82,36 @@ async function scanPackages(root: string, snippetLength: number = 200): Promise<
           void 0;
         }
 
+        // Collect example snippets from examples directory
+        let exampleSnippet = '';
+        const examplesDir = join(packagesDir, entry.name, 'examples');
+        try {
+          const exampleFiles = await getAllSourceFiles(examplesDir);
+          const snippets: string[] = [];
+          // Limit to first 3 example files
+          for (const file of exampleFiles.slice(0, 3)) {
+            try {
+              const content = await readFile(file, 'utf8');
+              const trimmed = content.trim().replace(/\n/g, ' ');
+              const snippet = trimmed.length <= snippetLength ? trimmed : trimmed.slice(0, snippetLength) + '...';
+              const relPath = relative(examplesDir, file);
+              snippets.push(`[example: ${relPath}] ${snippet}`);
+            } catch {
+              void 0;
+            }
+          }
+          exampleSnippet = snippets.join(' ... ');
+        } catch {
+          // No examples directory or error, ignore
+          void 0;
+        }
+
         packages.push({
           name: pkg.name,
           description: pkg.description || '',
           readmeSnippet,
-          sourceSnippet: sourceSnippet || undefined
+          sourceSnippet: sourceSnippet || undefined,
+          exampleSnippet: exampleSnippet || undefined
         });
       } catch {
         // Not a valid package directory, skip
@@ -153,7 +179,7 @@ program
 
       if (query) {
         const fuse = new Fuse(packages, {
-          keys: ['name', 'description', 'readmeSnippet', 'sourceSnippet'],
+          keys: ['name', 'description', 'readmeSnippet', 'sourceSnippet', 'exampleSnippet'],
           threshold: 0.4,
           includeScore: true,
           includeMatches: true,
@@ -204,6 +230,7 @@ program
           if (p.description) console.log(chalk.gray(p.description));
           if (p.readmeSnippet) console.log(chalk.dim(p.readmeSnippet));
           if (p.sourceSnippet) console.log(chalk.dim(p.sourceSnippet));
+          if (p.exampleSnippet) console.log(chalk.dim(p.exampleSnippet));
         }
       }
     } catch (error: any) {
@@ -468,10 +495,11 @@ program
   <div class="container">
     <div class="package-grid" id="grid">
 ${packages.map(p => `
-      <div class="package-card" data-name="${p.name.replace(/"/g, '&quot;')}" data-description="${p.description?.replace(/"/g, '&quot;') || ''}" data-snippet="${p.readmeSnippet?.replace(/"/g, '&quot;') || ''}">
+      <div class="package-card" data-name="${p.name.replace(/"/g, '&quot;')}" data-description="${p.description?.replace(/"/g, '&quot;') || ''}" data-snippet="${p.readmeSnippet?.replace(/"/g, '&quot;') || ''}" data-example="${p.exampleSnippet?.replace(/"/g, '&quot;') || ''}">
         <h2>${p.name}</h2>
         <p>${p.description || 'No description'}</p>
         ${p.readmeSnippet ? `<div class="snippet">${p.readmeSnippet}</div>` : ''}
+        ${p.exampleSnippet ? `<div class="snippet">${p.exampleSnippet}</div>` : ''}
       </div>`).join('\n')}
     </div>
   </div>
@@ -485,7 +513,7 @@ ${packages.map(p => `
     const searchInput = document.getElementById('search');
 
     const fuse = new Fuse(packages, {
-      keys: ['name', 'description', 'readmeSnippet'],
+      keys: ['name', 'description', 'readmeSnippet', 'exampleSnippet'],
       threshold: 0.4,
       includeScore: true
     });

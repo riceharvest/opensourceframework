@@ -184,6 +184,31 @@ importers:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0)
 
+  packages/docs-bot:
+    dependencies:
+      chalk:
+        specifier: ^4.1.2
+        version: 4.1.2
+      commander:
+        specifier: ^12.0.0
+        version: 12.1.0
+      fuse.js:
+        specifier: ^7.1.0
+        version: 7.1.0
+    devDependencies:
+      '@vitest/coverage-v8':
+        specifier: ^2.1.9
+        version: 2.1.9(vitest@2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0))
+      tsup:
+        specifier: ^8.0.0
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.9
+        version: 2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0)
+
   packages/next-auth:
     dependencies:
       '@babel/runtime':
@@ -6012,6 +6037,10 @@ packages:
 
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+
+  fuse.js@7.1.0:
+    resolution: {integrity: sha512-trLf4SzuuUxfusZADLINj+dE8clK1frKdmqiJNb1Es75fmI5oY6X2mxLVUciLLjxqw/xr72Dhy+lER6dGd02FQ==}
+    engines: {node: '>=10'}
 
   futoin-hkdf@1.5.3:
     resolution: {integrity: sha512-SewY5KdMpaoCeh7jachEWFsh1nNlaDjNHZXWqL5IGwtpEYHTgkr2+AMCgNwKWkcc0wpSYrZfR7he4WdmHFtDxQ==}
@@ -16633,6 +16662,8 @@ snapshots:
   functional-red-black-tree@1.0.1: {}
 
   functions-have-names@1.2.3: {}
+
+  fuse.js@7.1.0: {}
 
   futoin-hkdf@1.5.3: {}
 
