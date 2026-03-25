@@ -1,0 +1,23 @@
+# @opensourceframework/next-whatsapp - AI Summary
+
+WhatsApp integration for Next.js applications using whatsapp-web.js. This package provides a simple API to connect to WhatsApp, send automated messages, and track delivery status. Extracted and maintained from the itsalive project in the OpenSource Framework monorepo.
+
+## Maintainer Intent
+
+- Provide a stable, well-maintained wrapper around whatsapp-web.js.
+- Keep the API simple and intuitive for Next.js developers.
+- Handle reconnection logic and rate limiting automatically.
+- Allow flexible event handling for custom use cases.
+
+## Installation
+
+```bash
+npm install @opensourceframework/next-whatsapp
+# or
+pnpm add @opensourceframework/next-whatsapp
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/next-whatsapp#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/next-whatsapp
