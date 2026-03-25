@@ -1,0 +1,107 @@
+# @opensourceframework/react-three-portfolio - AI Summary
+
+## Package Overview
+- **Package:** @opensourceframework/react-three-portfolio
+- **Version:** v1.0.0
+- **Extracted from:** gabriel project (src/components/canvas/)
+- **Purpose:** Three.js/React Three Fiber visual components for portfolios
+
+## Key Capabilities
+
+### Components
+- **ReactThreePortfolioCanvas** - Pre-configured canvas with environment, lighting, controls
+- **PortfolioBox** - 3D box with float/rotate animations
+- **PortfolioSphere** - 3D sphere with float/pulse/rotate animations
+- **PortfolioTorus** - 3D torus with rotation animations
+
+### Features
+- Built on @react-three/fiber and @react-three/drei
+- GSAP-ready animation support (built-in float, pulse, rotate)
+- Shadow support
+- Customizable colors, materials, positions
+- TypeScript-first API
+- SSR-compatible structure
+
+## Tech Stack
+- React 18/19
+- Three.js r160
+- @react-three/fiber
+- @react-three/drei
+- GSAP
+- tsup for building
+- Vitest for testing
+
+## Installation
+```bash
+pnpm add @opensourceframework/react-three-portfolio
+```
+
+## Quick Usage
+
+```tsx
+import { ReactThreePortfolioCanvas, PortfolioBox, PortfolioSphere } from '@opensourceframework/react-three-portfolio';
+
+export default function Portfolio3D() {
+  return (
+    <ReactThreePortfolioCanvas camera={{ position: [0, 0, 8] }}>
+      <PortfolioBox
+        position={[-2, 0, 0]}
+        color="#6366f1"
+        animate
+        animationType="float"
+      />
+      <PortfolioSphere
+        position={[2, 0, 0]}
+        color="#10b981"
+        animate
+        animationType="pulse"
+      />
+    </ReactThreePortfolioCanvas>
+  );
+}
+```
+
+## Props
+
+### ReactThreePortfolioCanvas
+- `enableOrbitControls` (default: true)
+- `environmentPreset` (city|dawn|night|studio|sunset|warehouse)
+- `enableContactShadows` (default: true)
+- `camera` (position, fov)
+- `onCreated` (callback)
+
+### PortfolioBox
+- `position`, `rotation`, `scale`
+- `color`, `metalness`, `roughness`
+- `animate`, `animationType` ('float'|'rotate'|'none')
+- `animationSpeed`
+- `onClick`, `onPointerOver`, `onPointerOut`
+- `castShadow`, `receiveShadow`
+- `args` (box dimensions)
+
+### PortfolioSphere
+Similar props with `radius`, `widthSegments`, `heightSegments`
+
+### PortfolioTorus
+Similar props with `radius`, `tube`, `radialSegments`, `tubularSegments`, `arc`
+
+## Development
+
+```bash
+# Build
+pnpm build
+
+# Watch mode
+pnpm dev
+
+# Test
+pnpm test
+
+# Lint
+pnpm lint
+```
+
+## Notes
+- This package is ESM-only
+- Requires React 18+ and three.js peer dependencies
+- Built with tsup, outputs both ESM and CJS

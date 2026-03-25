@@ -1,0 +1,93 @@
+{
+  "name": "@opensourceframework/react-three-portfolio",
+  "version": "1.0.0",
+  "description": "Three.js/React Three Fiber visual components for portfolios - Maintained fork extracted from gabriel",
+  "keywords": [
+    "react",
+    "three",
+    "threejs",
+    "react-three-fiber",
+    "react-three-drei",
+    "portfolio",
+    "3d",
+    "webgl",
+    "gsap"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "llms.txt"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --ignore-pattern examples",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage node_modules"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.0",
+    "gsap": "^3.12.5",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.160.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "eslint": "^10.0.3",
+    "jsdom": "^24.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0 <22.0.0 || ^19.0.0",
+    "react-dom": ">=18.0.0 <22.0.0 || ^19.0.0",
+    "three": ">=0.150.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/react-three-portfolio"
+  },
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-three-portfolio"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-three-portfolio#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
