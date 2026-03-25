@@ -54,11 +54,9 @@ export function PortfolioSphere({
         case 'float':
           meshRef.current.position.y = initialY + Math.sin(time) * 0.15;
           break;
-        case 'pulse': {
-          const pulse = 1 + Math.sin(time * 2) * 0.1;
-          meshRef.current.scale.setScalar(initialScale * pulse);
+        case 'pulse':
+          meshRef.current.scale.setScalar(initialScale * (1 + Math.sin(time * 2) * 0.1));
           break;
-        }
         case 'rotate':
           meshRef.current.rotation.y += delta * animationSpeed;
           break;
