@@ -1,0 +1,28 @@
+# @opensourceframework/react-three-portfolio - AI Summary
+
+Three.js/React Three Fiber visual components for portfolio and landing pages. This package provides a collection of reusable 3D components with custom shaders, animations, and post-processing effects.
+
+## Maintainer Intent
+
+- Provide visually impressive, drop-in 3D components for portfolio websites
+- Balance visual quality with reasonable performance overhead
+- Support the React Three Fiber ecosystem and patterns
+- Keep components framework-agnostic where possible (only depends on React Three Fiber, not Next.js specific)
+- Document customization options and performance considerations clearly
+
+## Installation
+
+```bash
+npm install @opensourceframework/react-three-portfolio three
+# or
+pnpm add @opensourceframework/react-three-portfolio three
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/react-three-portfolio#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/react-three-portfolio
+
+## Source
+
+Extracted from the gabriel project (https://github.com/riceharvest/gabriel).
