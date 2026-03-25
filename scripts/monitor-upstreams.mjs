@@ -26,6 +26,7 @@ const UPSTREAMS = [
   { package: 'next-images', repo: 'twopluszero/next-images', branch: 'master' },
   { package: 'next-mdx', repo: 'shadcn/next-mdx', branch: 'main' },
   { package: 'next-circuit-breaker', repo: 'j0lv3r4/next-circuit-breaker', branch: 'master' },
+  { package: 'cmdk', repo: 'pacocoursey/cmdk', branch: 'main' },
 ];
 
 async function checkUpstream(upstream) {
