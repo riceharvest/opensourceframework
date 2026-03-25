@@ -199,7 +199,7 @@ app.get('/events', async (c) => {
       }, 1000);
     },
   });
-  return c.stream(stream);
+  return c.body(stream, { headers: { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', 'Connection': 'keep-alive' } });
 });
 
 app.get('/version', async (c) => {
