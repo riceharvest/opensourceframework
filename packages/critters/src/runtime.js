@@ -84,6 +84,39 @@ function isDangerousAttribute(name) {
 }
 
 /**
+ * Extract animation names from an animation or animation-name CSS property value.
+ * Handles comma-separated multiple animations and filters out keywords, times, and numbers.
+ * @param {string} value - The CSS property value.
+ * @returns {Set<string>} Set of animation names.
+ */
+function extractAnimationNames(value) {
+  if (!value) return new Set();
+  // Split multiple animations by comma
+  const animations = value.split(',').map(s => s.trim()).filter(Boolean);
+  const names = new Set();
+  const keywords = new Set([
+    'none', 'inherit', 'initial', 'unset', 'infinite', 'alternate', 'alternate-reverse',
+    'forwards', 'backwards', 'both', 'running', 'paused', 'normal', 'reverse',
+    'ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear', 'step-start', 'step-end'
+  ]);
+  const timeRegex = /^\d+(\.\d+)?(ms|s)$/;
+  const numberRegex = /^\d+(\.\d+)?$/;
+
+  for (const anim of animations) {
+    const tokens = anim.split(/\s+/).map(t => t.trim()).filter(Boolean);
+    for (const token of tokens) {
+      const lower = token.toLowerCase();
+      if (keywords.has(lower)) continue;
+      if (timeRegex.test(lower)) continue;
+      if (numberRegex.test(lower)) continue;
+      if (token) names.add(token);
+      break; // only first non-keyword token is the animation name
+    }
+  }
+  return names;
+}
+
+/**
  * The mechanism to use for lazy-loading stylesheets.
  *
  * Note: <kbd>JS</kbd> indicates a strategy requiring JavaScript (falls back to `<noscript>` unless disabled).
@@ -621,7 +654,7 @@ export default class Critters {
     const astInverse = options.pruneSource ? parseStylesheet(sheet) : null;
 
     // a string to search for font names (very loose)
-    let criticalFonts = '';
+    let criticalFonts = new Set();
 
     const failedSelectors = [];
 
@@ -743,18 +776,16 @@ export default class Critters {
                 decl.prop &&
                 /\bfont(-family)?\b/i.test(decl.prop)
               ) {
-                criticalFonts += ' ' + decl.value;
+                // Add each font name to the set
+                const fonts = decl.value.split(',').map(f => f.trim()).filter(f => f);
+                fonts.forEach(f => criticalFonts.add(f));
               }
 
               // detect used keyframes
               if (decl.prop === 'animation' || decl.prop === 'animation-name') {
-                // Filter out common animation keywords and durations
-                const keywords = ['none', 'inherit', 'initial', 'unset', 'infinite', 'alternate', 'alternate-reverse', 'forwards', 'backwards', 'both', 'running', 'paused', 'normal', 'reverse', 'ease', 'ease-in', 'ease-out', 'ease-in-out', 'linear', 'step-start', 'step-end'];
-                for (const name of decl.value.split(/\s+/)) {
-                  const nameTrimmed = name.trim();
-                  if (nameTrimmed && !keywords.includes(nameTrimmed) && !/^\d/.test(nameTrimmed)) {
-                    criticalKeyframeNames.add(nameTrimmed);
-                  }
+                const animNames = extractAnimationNames(decl.value);
+                for (const name of animNames) {
+                  criticalKeyframeNames.add(name);
                 }
               }
             }
@@ -833,7 +864,7 @@ export default class Critters {
           !shouldInlineFonts ||
           !family ||
           !src ||
-          !criticalFonts.includes(family)
+          !criticalFonts.has(family)
         ) {
           return false;
         }
