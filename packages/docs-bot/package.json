@@ -1,0 +1,40 @@
+{
+  "name": "@opensourceframework/docs-bot",
+  "version": "0.0.1",
+  "description": "Documentation assistant for OpenSourceFramework packages",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "docs-bot": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "prepublishOnly": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "documentation",
+    "bot",
+    "cli",
+    "opensourceframework"
+  ],
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^12.0.0",
+    "fuse.js": "^7.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.1.9",
+    "@vitest/coverage-v8": "^2.1.9"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "name": "@opensourceframework/next-sitemap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-sitemap"
+  },
+  "author": "OpenSource Framework Contributors (fork), Original: Unknown",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "examples/*",
+      "docs"
+    ]
+  },
+  "scripts": {
+    "clean": "tsc --build --clean",
+    "dev:test": "bun test --watch",
+    "dev:tsc": "tsc --build --watch",
+    "build": "turbo run deploy --force",
+    "test": "bun test --ci --coverage --verbose",
+    "lint": "eslint .",
+    "prettier:check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
+    "format": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\""
+  },
+  "devDependencies": {
+    "@corex/workspace": "^4.0.43",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0",
+    "fast-xml-parser": "^4.3.2",
+    "prettier": "^3.0.3",
+    "turbo": "^1.10.16"
+  },
+  "contributors": [
+    {
+      "name": "Unknown",
+      "url": "https://github.com/next-sitemap"
+    }
+  ],
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-sitemap#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "funding": {
+    "type": "GitHub",
+    "url": "https://github.com/sponsors/riceharvest"
+  }
+}
