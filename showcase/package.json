@@ -17,6 +17,7 @@
     "@opensourceframework/next-pwa": "workspace:*",
     "@opensourceframework/next-seo": "workspace:*",
     "@opensourceframework/next-session": "workspace:*",
+    "@opensourceframework/react-virtualized": "workspace:*",
     "@tailwindcss/postcss": "^4.2.2",
     "clsx": "latest",
     "lucide-react": "latest",
