@@ -7,6 +7,14 @@ on:
         description: 'PR number to resolve conflicts for'
         required: true
         type: number
+      resolve_strategy:
+        description: 'Strategy for non-lockfile conflicts (ours=keep PR, theirs=keep main)'
+        required: false
+        default: 'ours'
+        type: choice
+        options:
+          - ours
+          - theirs
 
 permissions:
   contents: write
@@ -38,21 +46,31 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@9
 
-      - name: Resolve lockfile conflict
+      - name: Resolve conflicts
         env:
           HUSKY: '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           git fetch origin ${{ steps.pr_info.outputs.base_ref }}
           git merge origin/${{ steps.pr_info.outputs.base_ref }} --no-edit --no-verify || true
-          
-          if git diff --name-only --diff-filter=U | grep -q 'pnpm-lock.yaml'; then
-            git checkout --theirs pnpm-lock.yaml
+
+          # Resolve all conflicted files
+          CONFLICTED=$(git diff --name-only --diff-filter=U || true)
+          if [ -n "$CONFLICTED" ]; then
+            for file in $CONFLICTED; do
+              if [ "$file" = "pnpm-lock.yaml" ]; then
+                git checkout --theirs "$file"
+              else
+                git checkout --${{ inputs.resolve_strategy }} "$file"
+              fi
+            done
+            
+            # Regenerate lockfile
             pnpm install --no-frozen-lockfile
-            git add pnpm-lock.yaml
+            git add -A
             git -c core.hooksPath=/dev/null commit --no-edit --no-verify
           fi
-          
+
           git push
