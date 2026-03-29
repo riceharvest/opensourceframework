@@ -39,18 +39,20 @@ jobs:
         run: npm install -g pnpm@9
 
       - name: Resolve lockfile conflict
+        env:
+          HUSKY: '0'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           git fetch origin ${{ steps.pr_info.outputs.base_ref }}
-          git merge origin/${{ steps.pr_info.outputs.base_ref }} --no-edit || true
+          git merge origin/${{ steps.pr_info.outputs.base_ref }} --no-edit --no-verify || true
           
           if git diff --name-only --diff-filter=U | grep -q 'pnpm-lock.yaml'; then
             git checkout --theirs pnpm-lock.yaml
             pnpm install --no-frozen-lockfile
             git add pnpm-lock.yaml
-            git commit --no-edit
+            git -c core.hooksPath=/dev/null commit --no-edit --no-verify
           fi
           
           git push
