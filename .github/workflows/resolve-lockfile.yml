@@ -1,0 +1,56 @@
+name: Auto-resolve lockfile conflicts
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to resolve conflicts for'
+        required: true
+        type: number
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  resolve-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get PR info
+        id: pr_info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_DATA=$(gh api repos/${{ github.repository }}/pulls/${{ inputs.pr_number }} --jq '{head_ref: .head.ref, base_ref: .base.ref}')
+          echo "head_ref=$(echo $PR_DATA | jq -r '.head_ref')" >> $GITHUB_OUTPUT
+          echo "base_ref=$(echo $PR_DATA | jq -r '.base_ref')" >> $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr_info.outputs.head_ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install -g pnpm@9
+
+      - name: Resolve lockfile conflict
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git fetch origin ${{ steps.pr_info.outputs.base_ref }}
+          git merge origin/${{ steps.pr_info.outputs.base_ref }} --no-edit || true
+          
+          if git diff --name-only --diff-filter=U | grep -q 'pnpm-lock.yaml'; then
+            git checkout --theirs pnpm-lock.yaml
+            pnpm install --no-frozen-lockfile
+            git add pnpm-lock.yaml
+            git commit --no-edit
+          fi
+          
+          git push
