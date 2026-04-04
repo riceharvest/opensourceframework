@@ -175,7 +175,7 @@ program
     }
 
     try {
-      let scoredMatches: Array<{ name: string; description: string; readmeSnippet: string; sourceSnippet?: string; score: number; matchedIn: string[] }>;
+      let scoredMatches: Array<{ name: string; description: string; readmeSnippet: string; sourceSnippet?: string; exampleSnippet?: string; score: number; matchedIn: string[] }>;
 
       if (query) {
         const fuse = new Fuse(packages, {
