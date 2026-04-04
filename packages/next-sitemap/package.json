@@ -1,57 +1,75 @@
 {
   "name": "@opensourceframework/next-sitemap",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Sitemap generator for next.js (maintained fork)",
+  "type": "module",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/@types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
+      "types": "./dist/@types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/riceharvest/opensourceframework.git",
     "directory": "packages/next-sitemap"
   },
-  "author": "OpenSource Framework Contributors (fork), Original: Unknown",
-  "license": "MIT",
-  "type": "module",
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "examples/*",
-      "docs"
-    ]
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-sitemap"
   },
-  "scripts": {
-    "clean": "tsc --build --clean",
-    "dev:test": "bun test --watch",
-    "dev:tsc": "tsc --build --watch",
-    "build": "turbo run deploy --force",
-    "test": "bun test --ci --coverage --verbose",
-    "lint": "eslint .",
-    "prettier:check": "prettier --check \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\"",
-    "format": "prettier --write \"**/*.{js,mjs,cjs,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,less,graphql,graphqls,gql}\""
-  },
-  "devDependencies": {
-    "@corex/workspace": "^4.0.43",
-    "@typescript-eslint/eslint-plugin": "^6.9.1",
-    "@typescript-eslint/parser": "^6.9.1",
-    "eslint": "^8.52.0",
-    "eslint-config-next": "^14.0.0",
-    "fast-xml-parser": "^4.3.2",
-    "prettier": "^3.0.3",
-    "turbo": "^1.10.16"
-  },
-  "contributors": [
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-sitemap#readme",
+  "funding": [
     {
-      "name": "Unknown",
-      "url": "https://github.com/next-sitemap"
+      "url": "https://github.com/riceharvest/opensourceframework"
     }
   ],
-  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-sitemap#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "nextjs",
+    "next",
+    "sitemap",
+    "seo",
+    "react"
+  ],
+  "author": "OpenSource Framework Contributors (fork), Original: Vishnu Sankar",
+  "contributors": [
+    "Vishnu Sankar <https://www.iamvishnusankar.com>"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": ">=18.0.0"
+  "bin": {
+    "next-sitemap": "./bin/next-sitemap.mjs",
+    "next-sitemap-cjs": "./bin/next-sitemap.cjs"
   },
-  "funding": {
-    "type": "GitHub",
-    "url": "https://github.com/sponsors/riceharvest"
+  "scripts": {
+    "build": "tsc && tsc --module commonjs --outDir dist/cjs && node scripts/fix-cjs.cjs",
+    "test": "pnpm build && node -e \"const p=require('./dist/cjs/index.cjs'); console.log('Package loads OK, exports:', Object.keys(p));\""
+  },
+  "dependencies": {
+    "@corex/deepmerge": "^4.0.43",
+    "@next/env": "^13.5.6",
+    "fast-glob": "^3.3.1",
+    "minimist": "^1.2.8"
+  },
+  "peerDependencies": {
+    "next": "*"
+  },
+  "devDependencies": {
+    "@corex/tsconfig": "^4.0.43",
+    "fast-xml-parser": "^5.5.9",
+    "typescript": "^5.2.2"
   }
 }
