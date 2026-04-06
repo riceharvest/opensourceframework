@@ -44,3 +44,7 @@ coverage/
 .eslintcache
 
 # npm config (contains sensitive tokens)
+
+# Local environment
+packages/next-iron-session/examples/next/.env.development
+packages/next-iron-session/examples/next/.env.production
