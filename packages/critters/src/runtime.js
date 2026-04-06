@@ -848,8 +848,25 @@ export default class Critters {
               const preload = document.createElement('link');
               preload.setAttribute('rel', 'preload');
               preload.setAttribute('as', 'font');
+              // Determine font type: use explicit format if provided, otherwise infer from file extension
+              let type;
               if (format) {
-                preload.setAttribute('type', `font/${format}`);
+                type = `font/${format}`;
+              } else {
+                // Infer MIME type from file extension
+                const ext = fontUrl.split('.').pop().toLowerCase();
+                const mimeMap = {
+                  'woff2': 'font/woff2',
+                  'woff': 'font/woff',
+                  'ttf': 'font/ttf',
+                  'otf': 'font/otf',
+                  'eot': 'application/vnd.ms-fontobject',
+                  'svg': 'image/svg+xml'
+                };
+                type = mimeMap[ext];
+              }
+              if (type) {
+                preload.setAttribute('type', type);
               }
               preload.setAttribute('crossorigin', 'anonymous');
               preload.setAttribute('href', fontUrl);

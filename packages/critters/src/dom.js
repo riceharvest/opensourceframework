@@ -106,9 +106,9 @@ const ElementExtensions = {
     }
   },
 
-  id: reflectedProperty('id'),
 
-  className: reflectedProperty('class'),
+
+
 
   insertBefore(child, referenceNode) {
     if (!referenceNode) return this.appendChild(child);
@@ -160,10 +160,7 @@ const ElementExtensions = {
     return this.attribs != null && this.attribs[name] != null;
   },
 
-  getAttributeNode(name) {
-    const value = this.getAttribute(name);
-    if (value != null) return { specified: true, value };
-  },
+
 
   exists(sel) {
     return cachedQuerySelector(sel, this);
@@ -192,11 +189,7 @@ const DocumentExtensions = {
     }
   },
 
-  contentType: {
-    get() {
-      return 'text/html';
-    }
-  },
+
 
   nodeName: {
     get() {
@@ -229,10 +222,7 @@ const DocumentExtensions = {
     return new Element(name);
   },
 
-  createTextNode(text) {
-    // there is no dedicated createTextNode equivalent exposed in htmlparser2's DOM
-    return new Text(text);
-  },
+
 
   exists(sel) {
     return cachedQuerySelector(sel, this);
