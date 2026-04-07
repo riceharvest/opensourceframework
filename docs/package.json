@@ -8,9 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@next/mdx": "^15.5.14",
+    "@next/mdx": "15.5.14",
     "@types/mdx": "^2.0.13",
-    "next": "16.2.0",
+    "next": "15.5.14",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "18.3.1",
@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.19.15",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "18",
+    "@types/react-dom": "18",
     "typescript": "^5.9.3"
   }
 }
