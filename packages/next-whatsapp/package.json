@@ -1,0 +1,65 @@
+{
+  "type": "module",
+  "name": "@opensourceframework/next-whatsapp",
+  "version": "0.1.0",
+  "description": "WhatsApp integration for Next.js applications using whatsapp-web.js",
+  "keywords": [
+    "nextjs",
+    "whatsapp",
+    "whatsapp-web",
+    "messaging"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "llms.txt"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --ignore-pattern examples",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/next-whatsapp"
+  },
+  "author": "OpenSource Framework Contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+next-whatsapp"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/next-whatsapp#readme",
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "@types/qrcode": "^1.5.6",
+    "eslint": "^10.0.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9",
+    "@vitest/coverage-v8": "^2.1.9"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.3",
+    "whatsapp-web.js": "^1.23.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
