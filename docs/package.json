@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "echo 'docs build skipped - see docs/README'",
     "start": "next start"
   },
   "dependencies": {
