@@ -48,5 +48,13 @@
     "clean": {
       "cache": false
     }
+  },
+  "//": {
+    "docs": {
+      "build": {
+        "dependsOn": [],
+        "cache": false
+      }
+    }
   }
 }

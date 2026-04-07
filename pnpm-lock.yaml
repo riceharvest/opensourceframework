@@ -82,8 +82,8 @@ importers:
   docs:
     dependencies:
       '@next/mdx':
-        specifier: 15.5.14
-        version: 15.5.14(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@18.3.1))
+        specifier: 16.2.2
+        version: 16.2.2(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@18.3.1))
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13
@@ -3174,8 +3174,8 @@ packages:
   '@next/env@16.2.0':
     resolution: {integrity: sha512-OZIbODWWAi0epQRCRjNe1VO45LOFBzgiyqmTLzIqWq6u1wrxKnAyz1HH6tgY/Mc81YzIjRPoYsPAEr4QV4l9TA==}
 
-  '@next/mdx@15.5.14':
-    resolution: {integrity: sha512-AZc3EHUfsQeKEEZoN+5GW0dvekIHLZ8nOBw2emT5GHs6KJlUYqg53a0bl62wH2lvmMbnsLh1lpZljOObwXekGQ==}
+  '@next/mdx@16.2.2':
+    resolution: {integrity: sha512-2CbRTXE6sJ7zDAaKXknb5FrrPs46iJeMPzuoBXsAOV/XVnxABGD4mSDusn0VuCoII/KjUZ+zsuo2VFbchYQXng==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -13883,7 +13883,7 @@ snapshots:
 
   '@next/env@16.2.0': {}
 
-  '@next/mdx@15.5.14(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@18.3.1))':
+  '@next/mdx@16.2.2(@mdx-js/react@3.1.1(@types/react@19.2.14)(react@18.3.1))':
     dependencies:
       source-map: 0.7.6
     optionalDependencies:
