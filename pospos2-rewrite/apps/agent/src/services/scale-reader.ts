@@ -46,10 +46,24 @@ class SerialScaleReader implements ScaleReader {
       this.port = new SerialPort({ path: this.portPath, baudRate: 9600 });
       this.parser = this.port.pipe(new ReadlineParser({ delimiter: '\n' }));
       this.parser.on('data', (line) => {
-        const grams = parseInt(line.trim(), 10);
-        if (!isNaN(grams)) {
-          this.currentWeight = grams;
-          this.stable = true;
+        const trimmed = line.trim();
+        // Try A&D style format: "ST,+00004.05  g" or "US, 000.00  kg"
+        const match = trimmed.match(/^([A-Z0-9]{2}),\s*([+-]?\d+\.?\d*)\s*([a-zA-Z]*)$/);
+        if (match) {
+          const status = match[1];
+          const weightStr = match[2];
+          const weight = parseFloat(weightStr);
+          if (!isNaN(weight)) {
+            this.currentWeight = weight;
+            this.stable = (status === 'ST');
+          }
+        } else {
+          // Fallback: raw numeric value (e.g., "123.45")
+          const grams = parseFloat(trimmed);
+          if (!isNaN(grams)) {
+            this.currentWeight = grams;
+            this.stable = true;
+          }
         }
       });
       console.log(`Scale '${this.scaleId}' connected on ${this.portPath}`);
