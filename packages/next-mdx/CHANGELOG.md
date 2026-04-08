@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.7.1
+
+### Patch Changes
+
+- 9f75983: fix: update pnpm lockfile and fix workspace link setup for next-mdx
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 0.7.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # @opensourceframework/next-cookies
 
+## 2.1.4
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 2.1.3
 
 ### Patch Changes

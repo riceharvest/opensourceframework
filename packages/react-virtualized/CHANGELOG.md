@@ -1,5 +1,11 @@
 ## Changelog
 
+## 9.22.9
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 9.22.8
 
 ### Patch Changes

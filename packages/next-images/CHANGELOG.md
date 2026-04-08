@@ -1,5 +1,11 @@
 # @opensourceframework/next-images Changelog
 
+## 1.9.3
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 1.9.2
 
 ### Patch Changes

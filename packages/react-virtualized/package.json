@@ -2,7 +2,7 @@
   "name": "@opensourceframework/react-virtualized",
   "description": "React components for efficiently rendering large, scrollable lists and tabular data",
   "author": "OpenSource Framework Contributors (fork), Original: Brian Vaughn",
-  "version": "9.22.8",
+  "version": "9.22.9",
   "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/react-virtualized#readme",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

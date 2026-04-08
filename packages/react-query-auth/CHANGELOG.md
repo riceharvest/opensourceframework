@@ -1,5 +1,11 @@
 # @opensourceframework/react-query-auth
 
+## 2.4.5
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 2.4.4
 
 ### Patch Changes

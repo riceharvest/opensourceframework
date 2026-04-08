@@ -1,5 +1,11 @@
 # @opensourceframework/next-csrf
 
+## 0.4.1
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 0.4.0
 
 ### Minor Changes

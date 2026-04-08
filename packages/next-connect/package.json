@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@opensourceframework/next-connect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The method routing and middleware layer for Next.js (and many others)",
   "keywords": [
     "javascript",

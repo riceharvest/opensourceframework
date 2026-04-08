@@ -1,3 +1,9 @@
+## 8.0.6
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 8.0.5
 
 ### Patch Changes
