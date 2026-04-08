@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/critters",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Embedded CSS critical path extraction for Next.js applications",
   "keywords": [
     "critters",

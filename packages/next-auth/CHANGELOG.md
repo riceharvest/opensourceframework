@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 3.29.13
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 3.29.12
 
 ### Patch Changes

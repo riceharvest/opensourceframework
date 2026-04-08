@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-compose-plugins",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Provides a cleaner API for enabling and configuring plugins for next.js",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

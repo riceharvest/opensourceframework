@@ -1,5 +1,11 @@
 # @opensourceframework/next-session
 
+## 4.0.6
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 4.0.5
 
 ### Patch Changes

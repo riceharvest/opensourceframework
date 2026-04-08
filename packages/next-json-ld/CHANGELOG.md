@@ -1,5 +1,11 @@
 # @opensourceframework/next-json-ld
 
+## 0.2.2
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 0.2.1
 
 ### Patch Changes

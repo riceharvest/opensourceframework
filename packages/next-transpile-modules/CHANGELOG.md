@@ -1,5 +1,11 @@
 # @opensourceframework/next-transpile-modules
 
+## 10.1.1
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 10.1.0
 
 ### Minor Changes

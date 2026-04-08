@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.1.5
+
+### Patch Changes
+
+- 9f75983: fix: update pnpm lockfile and fix workspace link setup for next-mdx
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+- Updated dependencies [9f75983]
+- Updated dependencies [4ebdbe8]
+  - @opensourceframework/next-mdx@0.7.1
+
 ## 0.1.4
 
 ### Patch Changes

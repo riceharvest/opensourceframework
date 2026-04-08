@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 1.0.1
 
 ### Patch Changes

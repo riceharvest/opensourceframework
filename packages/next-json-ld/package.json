@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/next-json-ld",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "JSON-LD structured data helpers for Next.js SEO - Generate Schema.org markup for search engines",
   "keywords": [
     "next.js",

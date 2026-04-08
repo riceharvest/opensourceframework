@@ -1,5 +1,11 @@
 # @opensourceframework/critters Changelog
 
+## 0.0.3
+
+### Patch Changes
+
+- 4ebdbe8: fix: resolve critical security vulnerabilities in dependencies
+
 ## 0.0.2
 
 ### Patch Changes
