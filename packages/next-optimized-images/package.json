@@ -11,7 +11,7 @@
     "llms.txt"
   ],
   "scripts": {
-    "build": "tsup && shx mkdir -p dist/loaders && shx cp -rv lib/loaders/* dist/loaders/ && shx cp lib/loaders/optimized-buffer-loader.js lib/loaders/svg-sprite-loader/svg-runtime-generator.js dist/",
+    "build": "tsup && shx mkdir -p dist/loaders && shx cp -r lib/loaders/* dist/loaders/ && shx cp lib/loaders/optimized-buffer-loader.js lib/loaders/svg-sprite-loader/svg-runtime-generator.js dist/",
     "watch": "tsup --watch",
     "lint": "eslint . --ignore-pattern examples",
     "lint:fix": "eslint . --ignore-pattern examples --fix",
