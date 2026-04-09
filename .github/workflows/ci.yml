@@ -157,21 +157,33 @@ jobs:
 
       - name: Test
         run: |
+          TURBO_FILTER="${{ needs.detect-affected.outputs.turbo_filter }}"
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR" --filter="...${TURBO_FILTER}..."
           else
             pnpm turbo run test:coverage --cache-dir="$TURBO_CACHE_DIR"
           fi
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
 
+      - name: Test (Node 18, exclude showcase)
+        run: |
+          TURBO_FILTER="${{ needs.detect-affected.outputs.turbo_filter }}"
+          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${TURBO_FILTER}..." --filter="!showcase"
+          else
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="!showcase"
+          fi
+        if: matrix.node == 18
+
       - name: Test (no coverage)
         run: |
+          TURBO_FILTER="${{ needs.detect-affected.outputs.turbo_filter }}"
           if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${{ needs.detect-affected.outputs.turbo_filter }}..."
+            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${TURBO_FILTER}..."
           else
             pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR"
           fi
-        if: matrix.os != 'ubuntu-latest' || matrix.node != 20
+        if: matrix.os != 'ubuntu-latest' || (matrix.node != 20 && matrix.node != 18)
 
       - name: Upload Coverage
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20

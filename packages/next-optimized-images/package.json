@@ -11,7 +11,7 @@
     "llms.txt"
   ],
   "scripts": {
-    "build": "tsup && mkdir -p dist/loaders && cp -rv lib/loaders/* dist/loaders/ && cp lib/loaders/optimized-buffer-loader.js lib/loaders/svg-sprite-loader/svg-runtime-generator.js dist/",
+    "build": "tsup && shx mkdir -p dist/loaders && shx cp -rv lib/loaders/* dist/loaders/ && shx cp lib/loaders/optimized-buffer-loader.js lib/loaders/svg-sprite-loader/svg-runtime-generator.js dist/",
     "watch": "tsup --watch",
     "lint": "eslint . --ignore-pattern examples",
     "lint:fix": "eslint . --ignore-pattern examples --fix",
@@ -50,6 +50,7 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.9",
     "next": "^16.0.0",
+    "shx": "^0.4.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vitest": "^2.1.9",
