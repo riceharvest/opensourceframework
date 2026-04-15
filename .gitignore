@@ -44,3 +44,4 @@ coverage/
 .eslintcache
 
 # npm config (contains sensitive tokens)
+package-lock.json
