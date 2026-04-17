@@ -1,12 +1,13 @@
 import { test, expect } from 'vitest';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
-import { resolve } from 'node:path';
+import { resolve, sep } from 'node:path';
 import { existsSync, rmSync, readFileSync } from 'node:fs';
 
 const execAsync = promisify(exec);
 const monorepoRoot = resolve(process.cwd(), '..', '..');
 const testOutputDir = resolve(monorepoRoot, 'test-docs-site-tmp');
+const indexPathStr = `test-docs-site-tmp${sep}index.html`;
 
 // Ensure clean state before tests
 if (existsSync(testOutputDir)) {
@@ -20,7 +21,7 @@ test('site command generates static HTML site', async () => {
   });
 
   expect(stdout).toContain('Static site generated at');
-  expect(stdout).toContain('test-docs-site-tmp/index.html');
+  expect(stdout).toContain(indexPathStr);
 
   const indexPath = resolve(testOutputDir, 'index.html');
   expect(existsSync(indexPath)).toBe(true);
