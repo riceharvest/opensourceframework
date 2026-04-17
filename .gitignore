@@ -45,3 +45,4 @@ coverage/
 
 # npm config (contains sensitive tokens)
 package-lock.json
+test-docs-site-tmp/
