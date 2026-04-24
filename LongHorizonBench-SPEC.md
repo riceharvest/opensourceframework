@@ -2,7 +2,8 @@
 
 **Working Title:** LongHorizonBench  
 **Inspiration:** pinchbench/skill (mechanics), LOCA-bench (compaction measurement), GAIA (real-world difficulty), ToolComp (multi-step tool chains)  
-**Goal:** Benchmark AI agents on 10–50+ sequential tool calls, compaction survival, research-before-implementation, and deep ML/LLM domain knowledge  
+**Goal:** Benchmark AI agents as the brain of Hermes-Agent — test 10–50+ sequential tool calls across the full Hermes capability surface, compaction survival, research-before-implementation, and cross-domain skill chaining  
+**Note:** This is a TASK FRAMEWORK only — not a benchmarking submission service. The goal is to have a runnable task suite that makes it trivial to swap in different models and compare them as potential Hermes brains.  
 
 ---
 
@@ -29,107 +30,193 @@ Current agent benchmarks have a ceiling of 3–6 tool calls per task. Real ML en
 
 ## 3. CATEGORIES & TASKS
 
-### Category A: Inference Serving (5 tasks)
+Hermes spans 18 skill categories. Tasks map to these domains, testing agents on real-world combinations that cross skill boundaries — because that's how Hermes gets used in practice.
 
-**A1 — Multi-GPU vLLM Deployment with KV Cache Tuning**
-- Deploy Qwen3.5-9B with tensor parallelism on 2× A5000
-- Experiment with `--gpu-memory-utilization`, `--max-model-len`, `--enable-prefix-caching`
-- Inject compaction at step 10 (simulate context summary after research phase)
-- Grading: Server runs + throughput baseline met + tuning decisions documented
+### Category A: ML/LLM Engineering (5 tasks)
+Inference serving, quantization, RL fine-tuning — the core ML workflows.
+
+### Category B: Research & Synthesis (3 tasks)
+Multi-source web research, arxiv reading, Context7 doc retrieval — research-first tasks where wrong sources mean wrong implementation.
+
+### Category C: DevOps & Infrastructure (3 tasks)
+Docker, RunPod, webhooks, cron, MCP servers — ops tasks that require planning and cross-service coordination.
+
+### Category D: Productivity & Data (3 tasks)
+Email, Notion, Obsidian, Linear, GitHub — information management and cross-platform coordination.
+
+### Category E: Creative & Media (2 tasks)
+Architecture diagrams, Excalidraw, p5js, music generation — creative tool chaining.
+
+### Category F: Cross-Domain Chaining (4 tasks)
+Tasks that require mixing skills from multiple categories — the hardest and most realistic scenarios.
+
+---
+
+### Category A: ML/LLM Engineering (5 tasks)
+Inference serving, quantization, RL fine-tuning — the core ML workflows Hermes ships with skills for.
+
+**A1 — Deploy vLLM with Tensor Parallelism and KV Cache Tuning**
+- Deploy Qwen3.5-9B with tensor_parallel=2 on A5000
+- Experiment with gpu-memory-utilization, max-model-len, enable-prefix-caching
+- Inject compaction at step 12 (context summary after research phase completes)
+- Grading: Server runs + throughput documented + tuning decisions explained in workspace/README.md
+- Tool call estimate: 15–25
 
 **A2 — SGLang + FlashInfer Benchmark on RTX 3060**
-- Get SGLang serving Qwen3.5-9B on local RTX 3060 12GB
-- Benchmark FlashInfer vs eager attention backend
+- Serve Qwen3.5-9B via SGLang on local RTX 3060 12GB
+- Benchmark FlashInfer vs eager attention backend at 3 sequence lengths
 - Inject compaction mid-benchmark
-- Grading: Correct backend selected + benchmark results in table format
+- Grading: Benchmark table populated + correct backend recommendation with justification
+- Tool call estimate: 12–20
 
-**A3 — Debug a Crashed vLLM Server (CUDA OOM)**
-- Reproduce a CUDA out-of-memory crash given a config and error log
-- Agent must research the cause, identify the offending `--max-model-len` setting, fix it, and restart
-- Requires reading vLLM error docs and forum posts
-- Grading: Correct diagnosis + fix applied + server restarts successfully
+**A3 — Debug a Crashed vLLM Server from Error Logs**
+- Given a config file and error log (CUDA OOM), diagnose root cause
+- Must read vLLM error docs before fixing
+- Grading: Diagnosis matches actual root cause + fix applied + server restarts
+- Tool call estimate: 10–18
 
-**A4 — Multi-Node Ray Cluster Setup for vLLM**
-- 2-node Ray cluster with NCCL networking
-- Deploy 70B model across nodes with pipeline parallelism
-- Grading: NCCL connectivity test passes + model generates valid output
+**A4 — AWQ Quantization of Qwen3.5-9B with Accuracy Comparison**
+- Run AWQ calibration at 3 dataset sizes (128, 512, 1024 samples)
+- Compare 2 group sizes (64 vs 128) and save quantized weights
+- Evaluate with lm-evaluation-harness on MMLU + HellaSwag
+- Grading: Perplexity table in workspace + accuracy within 4% of BF16 baseline
+- Tool call estimate: 20–35
 
-**A5 — Prefix Caching Analysis and Optimization**
-- Analyze vLLM prefix caching hit rates for a given workload
-- Tune chunked prefill settings to improve cache hit rate
-- Grading: Cache hit rate improvement quantified
-
----
-
-### Category B: Quantization (5 tasks)
-
-**B1 — AWQ Quantization of Qwen3.5-9B with Accuracy Evaluation**
-- Run AWQ calibration (128, 512, 1024 calibration samples)
-- Compare group sizes: 64 vs 128 vs 256
-- Evaluate against BF16 baseline on MMLU + HellaSwag
-- Grading: Perplexity table + accuracy within 3% threshold per task
-
-**B2 — Qwen3.5 MoE AWQ with Per-Channel vs Per-Token Comparison**
-- Quantize Qwen3.5-35B-A3B MoE (note known AWQ MoE mapping bug)
-- Compare quantization strategies, document known workarounds
-- Grading: Comparison table (file size, perplexity, benchmark scores)
-
-**B3 — INT4 vs INT8 vs BF16 Full Benchmark**
-- Benchmark three formats on a real inference workload
-- Measure: throughput, latency p50/p95/p99, GPU memory, accuracy
-- Grading: All three formats benchmarked + recommendation justified
-
-**B4 — Self-Quantization with Intel AutoRound**
-- Use auto-round to quantize a model without calibration dataset
-- Compare against AWQ with calibration
-- Grading: AutoRound results compared against AWQ baseline
-
-**B5 — GGUF Export for llama.cpp with CPU Inference**
-- Export AWQ model to GGUF format
-- Run llama.cpp server on CPU and measure latency
-- Grading: GGUF generated + CPU inference runs + latency reported
+**A5 — GRPO Training Setup on GSM8K**
+- Configure GRPO with custom accuracy + format reward
+- Train 1.5B model for 50 steps
+- Evaluate before/after against GSM8K
+- Grading: Training completes + eval improvement documented + final config saved
+- Tool call estimate: 18–30
 
 ---
 
-### Category C: RL / Fine-tuning (4 tasks)
+### Category B: Research & Synthesis (3 tasks)
+Multi-source web research, arxiv, Context7 — tasks where the agent must investigate before acting, and wrong sources mean wrong outcomes.
 
-**C1 — GRPO Training Loop on GSM8K**
-- Set up GRPO with custom accuracy + format rewards
-- Train 1.5B model for 100 steps
-- Evaluate against baseline
-- Grading: Training completes + evaluation score improvement documented
+**B1 — Research and Deploy a Model on RunPod from Scratch**
+- Agent must research: which RunPod GPU fits the model, which SDK to use, pricing
+- Then actually deploy it and verify it works
+- No instructions given upfront — agent must find the docs
+- Grading: Running endpoint + research documented in workspace/RESEARCH.md
+- Tool call estimate: 15–25
 
-**C2 — LoRA Fine-tuning with Axolotl**
-- Fine-tune Qwen3.5-9B with LoRA on a coding task dataset
-- Experiment with rank (8, 16, 64) and alpha (16, 32)
-- Grading: All ranks trained + comparison table + best config identified
+**B2 — arxiv Paper Research and Implementation**
+- Given a paper topic (e.g., "Speculative Decoding"), read 2-3 arxiv papers
+- Write a 500-word summary + implementation notes
+- No web search for summaries — must read the actual papers
+- Grading: LLM judge evaluates summary accuracy + implementation feasibility
+- Tool call estimate: 8–15
 
-**C3 — DPO Training with TRL**
-- Run DPO training on preference data
-- Evaluate with and without the DPO-trained model
-- Grading: DPO improves evaluation metric by documented amount
-
-**C4 — Debug a Failing GRPO Training Run**
-- Given a crashed training run with logs, diagnose reward hacking vs. genuine failure
-- Grading: Correct diagnosis + fix applied + training resumes
+**B3 — Multi-Source Technical Research with Citation Tracking**
+- Research a technical question (e.g., "AWQ vs GPTQ for MoE models")
+- Must gather from 3+ distinct sources: arxiv, GitHub issues, blog posts, Context7
+- Synthesize into a recommendation with citations
+- Grading: Research quality (LLM judge) + citations verified + recommendation justified
+- Tool call estimate: 12–20
 
 ---
 
-### Category D: Mixed Debugging / Multi-hop (3 tasks)
+### Category C: DevOps & Infrastructure (3 tasks)
+Docker, RunPod, webhooks, cron, MCP — ops tasks that require planning across services and handling failures gracefully.
 
-**D1 — End-to-End Model Serving Pipeline**
-- Take a model from HuggingFace → quantize → serve with vLLM → benchmark → document
-- Full pipeline: quantization → serving → eval → report
-- Grading: All stages complete + final report with numbers
+**C1 — Dockerize an Existing Model Serving Setup**
+- Given a bare Python script that runs a model, create a production Docker setup
+- Must handle: GPU access, model downloading, health checks, graceful shutdown
+- Inject compaction after Dockerfile is written (agent must remember the plan)
+- Grading: Docker image builds + runs + responds to health check
+- Tool call estimate: 12–20
 
-**D2 — Reproduce and Fix a Known vLLM Issue from GitHub**
-- Given a GitHub issue number, the agent must reproduce it, find the fix, and verify it works
-- Grading: Issue reproduced + fix applied + verified
+**C2 — Set Up a Webhook Pipeline with Cron and Notification**
+- Set up a cron job that runs a script daily, posts results to a webhook
+- Must handle: webhook auth, retry logic, cron timezone, error alerting
+- Grading: Cron runs + webhook receives correct payload + error path tested
+- Tool call estimate: 10–18
 
-**D3 — Build a Quantized Model Benchmarking Suite**
-- Agent must design and implement its own benchmarking framework
-- Must handle 3 quantization formats, 3 benchmarks, produce a comparison dashboard
-- Grading: Framework runs + comparison table + code quality review
+**C3 — MCP Server Discovery and Tool Integration**
+- Given a task that requires a tool not currently available, find and configure an MCP server
+- Must research available MCP servers, configure auth, verify tools are registered
+- Grading: Tools appear in tool list + return valid results
+- Tool call estimate: 10–16
+
+---
+
+### Category D: Productivity & Data (3 tasks)
+Email, Notion, Obsidian, Linear, GitHub — information management and cross-platform workflows.
+
+**D1 — Cross-Platform Research to Document Pipeline**
+- Research a topic via web, save findings to Obsidian note
+- Create a Linear issue for follow-up work
+- Email a summary to a recipient
+- Grading: Obsidian note exists + Linear issue created + email sent (all verified)
+- Tool call estimate: 10–18
+
+**D2 — GitHub Issue Triage and Project Management**
+- Given 10 GitHub issues, triage them: label, assign priority, close duplicates
+- Create Linear issues for the valid ones
+- Grading: Correct triaging + Linear issues match GitHub issues
+- Tool call estimate: 12–20
+
+**D3 — Notion Database Sync with External Data**
+- Pull data from a web source, populate a Notion database
+- Handle: auth, rate limiting, schema mapping, error rows
+- Grading: Notion database populated + rows match source data
+- Tool call estimate: 10–18
+
+---
+
+### Category E: Creative & Media (2 tasks)
+Architecture diagrams, Excalidraw, p5js, music generation — creative tool chaining with iteration.
+
+**E1 — Architecture Diagram with Iterative Refinement**
+- Generate an architecture diagram from a description
+- Iteratively refine based on LLM judge feedback (3 rounds)
+- Each round: generate → judge feedback → revise
+- Grading: Final diagram matches requirements + 3 revision rounds completed
+- Tool call estimate: 8–15
+
+**E2 — Multi-Step Creative Pipeline**
+- Research a music generation topic (HeartMuLa)
+- Generate a song with specific parameters
+- Create a spectrogram visualization (songsee)
+- Produce an architecture diagram of the pipeline
+- Grading: All 3 outputs exist + pipeline is documented
+- Tool call estimate: 10–20
+
+---
+
+### Category F: Cross-Domain Chaining (4 tasks)
+The hardest tasks — mixing skills from multiple Hermes domains in a single coherent workflow.
+
+**F1 — Full ML Pipeline: Research → Deploy → Benchmark → Report**
+- Research which model fits the use case
+- Quantize and deploy to RunPod
+- Benchmark against baseline
+- Write report in Notion
+- Grading: All stages complete + Notion report with numbers + research citations
+- Tool call estimate: 25–45
+
+**F2 — Reproduce a GitHub Bug, Fix It, and Publish the Fix**
+- Given a GitHub issue, reproduce the bug
+- Research the fix across docs and issues
+- Apply fix and verify
+- Grading: Bug reproduced + fix applied + PR opened with explanation
+- Tool call estimate: 15–30
+
+**F3 — VA Management Workflow (Hermes-native use case)**
+- Review VA task results from WhatsApp DMs
+- Triage completed work, identify failures
+- Create follow-up tasks in Linear
+- Send corrective feedback via WhatsApp
+- Grading: VA tasks reviewed + Linear tasks correct + WhatsApp messages sent
+- Tool call estimate: 12–22
+
+**F4 — Complex Research + Creative + Infrastructure Task**
+- Research a technical topic across 3+ sources
+- Generate a creative visualization of the concept
+- Deploy a demo serving the visualization
+- Grading: Research sound + visualization accurate + deployment live
+- Tool call estimate: 20–40
 
 ---
 
@@ -209,25 +296,41 @@ def grade(transcript: list, workspace_path: str) -> dict:
     return scores
 ```
 
-### Compaction Injection
+### Compaction Recovery (Core Metric)
 
-Simulated by injecting a "context summary" tool result at the specified step threshold:
+Compaction is the central long-horizon test. The question is not "did the agent continue after compaction" — it's "did the agent maintain coherent task state and know where it was?"
+
+**Injection mechanism:**
+At the configured step threshold, the agent receives a synthetic "compaction event" message injected as a tool result:
 
 ```
-[COMPACTION EVENT] Previous context summarized. Key state:
-- Task goal: deploy vLLM with tensor_parallel=2
-- Completed steps: 1) researched vLLM docs 2) installed vLLM 3) wrote launch script
-- Pending: benchmark, tune KV cache, document results
+[COMPACTION EVENT] Context has been summarized. Your task state:
+
+Goal: <task goal>
+Completed steps:
+  1. <step 1 summary>
+  2. <step 2 summary>
+  ...
+Pending steps:
+  - <remaining high-level steps>
+
+Key artifacts created:
+  - <file paths if any>
+  - <decisions made>
+
+Resume from where you left off. Do NOT restart the task.
 ```
 
-Agent receives this mid-task and must continue correctly.
+**Grading compaction survival:**
+- Pre-compaction state must be recoverable from the injected summary
+- Post-compaction behavior must be consistent with pre-compaction decisions
+- LLM judge evaluates: did agent know its location in the task? Did it contradict earlier decisions? Did it restart unnecessarily?
 
-### Research Quality Scoring
-
-If `research_required: true`, the grader checks transcript for:
-- At least 5 distinct documentation/API lookups
-- At least 1 source cited in final output
-- Research steps precede implementation steps
+**Compaction failure modes (from LOCA-bench data):**
+- "Impatience" — stops after first result, assumes task is complete
+- Contradiction — makes opposite decisions post-compaction
+- Restart — abandons progress and starts over
+- Hallucination drift — retrieves correct data but distorts values in output
 
 ---
 
@@ -247,31 +350,25 @@ If `research_required: true`, the grader checks transcript for:
 
 ## 7. ARCHITECTURE
 
+Minimal — fork pinchbench/skill structure and extend. The goal is swappable model runners, not a new framework.
+
 ```
 LongHorizonBench/
-├── benchmark.py              # Main runner (extends pinchbench benchmark.py)
-├── lib_grading.py            # Extended grading with compaction + research checks
-├── lib_agent.py              # OpenClaw agent execution + compaction injection
-├── lib_compaction.py         # NEW: compaction simulation engine
-├── lib_research_tracker.py   # NEW: tracks research steps in transcript
-├── tasks/                    # Task definitions
-│   ├── category_a_inference/
-│   │   ├── task_a1_vllm_multigpu.md
-│   │   └── ...
-│   ├── category_b_quantization/
-│   ├── category_c_rl_finetuning/
-│   └── category_d_mixed/
+├── benchmark.py              # Fork of pinchbench benchmark.py
+├── lib_grading.py            # + compaction survival checks, research quality
+├── lib_agent.py              # + compaction injection at step thresholds
+├── tasks/                    # Task .md files (fork pinchbench structure)
+│   ├── category_a_ml_llm/    # A1–A5
+│   ├── category_b_research/  # B1–B3
+│   ├── category_c_devops/    # C1–C3
+│   ├── category_d_productivity/  # D1–D3
+│   ├── category_e_creative/ # E1–E2
+│   └── category_f_crossdomain/   # F1–F4
 ├── assets/                   # Fixture files per task
-│   ├── a1/
-│   │   ├── broken_config.yaml
-│   │   └── sample_workload.jsonl
-│   └── ...
-├── scripts/
-│   ├── run.sh                # Main entry
-│   ├── inject_compaction.py   # Standalone compaction injection tool
-│   └── eval_research.py      # Evaluate research quality
-└── results/                  # Output from runs
+└── results/                  # JSONL output per run
 ```
+
+**Fork strategy:** Start from pinchbench/skill as a base. The task format is the same, the runner is adapted, and new task files are added. The compaction injection lives in `lib_agent.py` as a pre-tool-result hook.
 
 ---
 
@@ -280,12 +377,12 @@ LongHorizonBench/
 | Aspect | PinchBench | LongHorizonBench |
 |--------|-----------|-----------------|
 | Tool calls per task | 1–5 | 10–50 |
-| Compaction | Not tested | First-class metric |
-| Research-first tasks | No | Yes (graded) |
-| Domain focus | General productivity | ML/LLM engineering |
-| Grading | Outcome only | Outcome + process |
-| Compaction recovery | Not measured | Measured per-event |
+| Compaction | Not tested | First-class — survival + state coherence |
+| Research-first tasks | No | Yes, LLM-judged |
+| Domain focus | General productivity | Full Hermes capability surface |
+| Grading | Outcome only | Outcome + process (compaction survival, research quality) |
 | Tool call budget | No | Yes (efficiency scoring) |
+| Swappable models | Yes | Yes — same runner, different model = different Hermes brain |
 
 ---
 
@@ -297,14 +394,14 @@ LongHorizonBench/
 - **GAIA** (ICLR 2024) — "simple for humans, hard for AI" real-world difficulty
 - **TheAgentCompany** (ICML 2025) — real-world workplace task completion
 - **τ-bench** — customer service multi-turn tool-dialogue
-- **SWE-bench** — code bug reproduction and fixing (inspiration for D2/D3)
+- **SWE-bench** — code bug reproduction and fixing
 
 ---
 
-## 10. OPEN QUESTIONS
+## 10. DECISIONS MADE
 
-1. **Compaction injection timing** — hard-coded step count vs. token-threshold? Step count is more predictable but token count is more realistic.
-2. **Grading research quality** — should it be automated (count lookups) or LLM-judged (did the agent read the RIGHT docs)?
-3. **Hardware requirements** — tasks A1–A5 need GPUs. Should the benchmark support a "planning-only" mode where agent produces a plan without executing?
-4. **Baseline models** — which models to run first? Qwen3.5-9B via vLLM on local RTX 3060 is the minimum viable setup.
-5. **Leaderboard** — self-hosted or public? Similar to pinchbench's api.pinchbench.com?
+1. **Compaction injection**: Hard step count — predictable, reproducible, easier to debug
+2. **Research quality**: LLM-judged — counts alone don't measure "right docs read"
+3. **Hardware mode**: Planning-only mode NOT included — all tasks require real execution
+4. **First model to run**: Qwen3.5-9B via vLLM on local RTX 3060 (your existing setup)
+5. **Leaderboard**: None — local results only, model comparison is a local concern
