@@ -48,3 +48,4 @@ package-lock.json
 test-docs-site-tmp/
 __pycache__/
 LongHorizonBench/
+.env.example
