@@ -23,6 +23,9 @@ importers:
       oauth:
         specifier: ^0.10.2
         version: 0.10.2
+      pino:
+        specifier: ^10.3.1
+        version: 10.3.1
     devDependencies:
       '@changesets/changelog-github':
         specifier: ^0.6.0
@@ -145,7 +148,7 @@ importers:
         version: 17.3.0
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -219,7 +222,7 @@ importers:
         version: 2.1.9(vitest@2.1.9(@types/node@25.4.0)(happy-dom@20.8.3)(jsdom@25.0.1)(lightningcss@1.32.0)(msw@2.12.10(@types/node@25.4.0)(typescript@5.9.3))(terser@5.46.0))
       tsup:
         specifier: ^8.0.0
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.0.0
         version: 5.9.3
@@ -391,7 +394,7 @@ importers:
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -418,7 +421,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -446,7 +449,7 @@ importers:
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -492,7 +495,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -541,7 +544,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(jest@29.7.0(@types/node@22.19.11))(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -578,7 +581,7 @@ importers:
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -630,7 +633,7 @@ importers:
         version: 0.3.9
       tsup:
         specifier: 8.4.0
-        version: 8.4.0(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.4.0(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       tsx:
         specifier: 4.19.3
         version: 4.19.3
@@ -666,7 +669,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -755,7 +758,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -798,7 +801,7 @@ importers:
         version: 0.4.0
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -847,7 +850,7 @@ importers:
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@17.0.2))(react@17.0.2)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -919,7 +922,7 @@ importers:
         version: 6.1.3
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -956,7 +959,7 @@ importers:
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1042,7 +1045,7 @@ importers:
         version: 6.0.0
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1076,7 +1079,7 @@ importers:
         version: 10.0.3(jiti@2.6.1)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1121,7 +1124,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1181,7 +1184,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1227,7 +1230,7 @@ importers:
         version: 5.2.0(eslint@9.39.4(jiti@2.6.1))
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1282,7 +1285,7 @@ importers:
         version: 17.0.2(react@17.0.2)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1303,7 +1306,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.57.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(jest@29.7.0(@types/node@22.19.11))(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1315,7 +1318,7 @@ importers:
     devDependencies:
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1366,7 +1369,7 @@ importers:
         version: 2.1.1
       lucide-react:
         specifier: latest
-        version: 1.0.1(react@19.2.4)
+        version: 1.11.0(react@19.2.4)
       next:
         specifier: '>=16.1.7'
         version: 16.2.0(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1391,13 +1394,13 @@ importers:
         version: 19.2.3(@types/react@19.2.14)
       autoprefixer:
         specifier: latest
-        version: 10.4.27(postcss@8.5.8)
+        version: 10.5.0(postcss@8.5.10)
       postcss:
         specifier: latest
-        version: 8.5.8
+        version: 8.5.10
       tailwindcss:
         specifier: latest
-        version: 4.2.2
+        version: 4.2.4
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1425,7 +1428,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.56.1(@typescript-eslint/parser@8.56.1(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.3(jiti@2.6.1))(jest@29.7.0(@types/node@25.4.0))(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1456,7 +1459,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.56.1(@typescript-eslint/parser@8.56.1(eslint@10.0.2(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.2(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.2(jiti@2.6.1))(jest@29.7.0(@types/node@25.4.0))(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1483,7 +1486,7 @@ importers:
         version: 29.15.0(@typescript-eslint/eslint-plugin@8.56.1(@typescript-eslint/parser@8.56.1(eslint@10.0.2(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.2(jiti@2.6.1))(typescript@5.9.3))(eslint@10.0.2(jiti@2.6.1))(jest@29.7.0(@types/node@25.4.0))(typescript@5.9.3)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -3267,6 +3270,9 @@ packages:
   '@pedroslopez/moduleraid@5.0.2':
     resolution: {integrity: sha512-wtnBAETBVYZ9GvcbgdswRVSLkFkYAGv1KzwBBTeRXvGT9sb9cPllOgFFWXCn9PyARQ0H+Ijz6mmoRrGateUDxQ==}
 
+  '@pinojs/redact@0.4.0':
+    resolution: {integrity: sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg==}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -4482,6 +4488,7 @@ packages:
   '@xmldom/xmldom@0.9.8':
     resolution: {integrity: sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -4722,8 +4729,19 @@ packages:
     resolution: {integrity: sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==}
     engines: {node: '>= 4.0.0'}
 
+  atomic-sleep@1.0.0:
+    resolution: {integrity: sha512-kNOjDqAh7px0XWNI+4QbzoiR/nTkHAWNud2uvnJquD1/x5a7EQZMJT0AczqK0Qn67oY/TTQ1LbUKajZpp3I9tQ==}
+    engines: {node: '>=8.0.0'}
+
   autoprefixer@10.4.27:
     resolution: {integrity: sha512-NP9APE+tO+LuJGn7/9+cohklunJsXWiaWEfV3si4Gi/XHDwVNgkwr1J3RQYFIvPy76GmJ9/bW8vyoU1LcxwKHA==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+
+  autoprefixer@10.5.0:
+    resolution: {integrity: sha512-FMhOoZV4+qR6aTUALKX2rEqGG+oyATvwBt9IIzVR5rMa2HRWPkxf+P+PAJLD1I/H5/II+HuZcBJYEFBpq39ong==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -4882,9 +4900,15 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+  baseline-browser-mapping@2.10.22:
+    resolution: {integrity: sha512-6qruVrb5rse6WylFkU0FhBKKGuecWseqdpQfhkawn6ztyk2QlfwSRjsDxMCLJrkfmfN21qvhl9ABgaMeRkuwww==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
   basic-ftp@5.2.0:
     resolution: {integrity: sha512-VoMINM2rqJwJgfdHq6RiUudKt2BV+FY5ZFezP/ypmwayk68+NzzAQy4XXLlqsGD4MCzq3DrmNFD/uUmBJuGoXw==}
     engines: {node: '>=10.0.0'}
+    deprecated: Security vulnerability fixed in 5.2.1, please upgrade
 
   bcrypt@5.1.1:
     resolution: {integrity: sha512-AGBHOG5hPYZ5Xl9KXzU5iKq9516yEmvCKDg3ecP5kX2aB6UqTeXZxk2ELnDgDm6BQSMlLt9rDB4LoSMx0rYwww==}
@@ -4945,6 +4969,11 @@ packages:
 
   browserslist@4.28.1:
     resolution: {integrity: sha512-ZC5Bd0LgJXgwGqUknZY/vkUQ04r8NXnJZ3yYi4vDmSiZmC/pdSN0NbNRPxZpbtO4uAfDUAFffO8IZoM3Gj8IkA==}
+    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
+    hasBin: true
+
+  browserslist@4.28.2:
+    resolution: {integrity: sha512-48xSriZYYg+8qXna9kwqjIVzuQxi+KYWp2+5nCYnYKPTr0LvD89Jqk2Or5ogxz0NUMfIjhh2lIUX/LyX9B4oIg==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -5037,6 +5066,9 @@ packages:
 
   caniuse-lite@1.0.30001774:
     resolution: {integrity: sha512-DDdwPGz99nmIEv216hKSgLD+D4ikHQHjBC/seF98N9CPqRX4M5mSxT9eTV6oyisnJcuzxtZy4n17yKKQYmYQOA==}
+
+  caniuse-lite@1.0.30001791:
+    resolution: {integrity: sha512-yk0l/YSrOnFZk3UROpDLQD9+kC1l4meK/wed583AXrzoarMGJcbRi2Q4RaUYbKxYAsZ8sWmaSa/DsLmdBeI1vQ==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -5919,6 +5951,9 @@ packages:
 
   electron-to-chromium@1.5.302:
     resolution: {integrity: sha512-sM6HAN2LyK82IyPBpznDRqlTQAtuSaO+ShzFiWTvoMJLHyZ+Y39r8VMfHzwbU8MVBzQ4Wdn85+wlZl2TLGIlwg==}
+
+  electron-to-chromium@1.5.344:
+    resolution: {integrity: sha512-4MxfbmNDm+KPh066EZy+eUnkcDPcZ35wNmOWzFuh/ijvHsve6kbLTLURy88uCNK5FbpN+yk2nQY6BYh1GEt+wg==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -7912,8 +7947,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-react@1.0.1:
-    resolution: {integrity: sha512-lih7tKEczCYOQjVEzpFuxEuNzlwf+1yhvlMlEkGWJM3va8Pugv8bYXc/pRtcjPncaP7k84X0Pt/71ufxvqEPtQ==}
+  lucide-react@1.11.0:
+    resolution: {integrity: sha512-UOhjdztXCgdBReRcIhsvz2siIBogfv/lhJEIViCpLt924dO+GDms9T7DNoucI23s6kEPpe988m5N0D2ajnzb2g==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -8454,6 +8489,9 @@ packages:
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
 
+  node-releases@2.0.38:
+    resolution: {integrity: sha512-3qT/88Y3FbH/Kx4szpQQ4HzUbVrHPKTLVpVocKiLfoYvw9XSGOX2FmD2d6DrXbVYyAQTF2HeF6My8jmzx7/CRw==}
+
   node-webpmux@3.1.7:
     resolution: {integrity: sha512-ySkL4lBCto86OyQ0blAGzylWSECcn5I0lM3bYEhe75T8Zxt/BFUMHa8ktUguR7zwXNdS/Hms31VfSsYKN1383g==}
 
@@ -8549,6 +8587,10 @@ packages:
 
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
+
+  on-exit-leak-free@2.1.2:
+    resolution: {integrity: sha512-0eJJY6hXLGf1udHwfNftBqH+g73EU4B504nZeKpz1sYRKafAghwxEJunB2O7rDZkL4PGfsMVnTXZ2EjibbqcsA==}
+    engines: {node: '>=14.0.0'}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -8803,6 +8845,16 @@ packages:
   pify@5.0.0:
     resolution: {integrity: sha512-eW/gHNMlxdSP6dmG6uJip6FXN0EQBwm2clYYd8Wul42Cwu/DK8HEftzsapcNdYe2MfLiIwZqsDk2RDEsTE79hA==}
     engines: {node: '>=10'}
+
+  pino-abstract-transport@3.0.0:
+    resolution: {integrity: sha512-wlfUczU+n7Hy/Ha5j9a/gZNy7We5+cXp8YL+X+PG8S0KXxw7n/JXA3c46Y0zQznIJ83URJiwy7Lh56WLokNuxg==}
+
+  pino-std-serializers@7.1.0:
+    resolution: {integrity: sha512-BndPH67/JxGExRgiX1dX0w1FvZck5Wa4aal9198SrRhZjH3GxKQUKIBnYJTdj2HDN3UQAS06HlfcSbQj2OHmaw==}
+
+  pino@10.3.1:
+    resolution: {integrity: sha512-r34yH/GlQpKZbU1BvFFqOjhISRo1MNx1tWYsYvmj6KIRHSPMT2+yHOEb1SG6NMvRoHRF0a07kCOox/9yakl1vg==}
+    hasBin: true
 
   pirates@4.0.7:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
@@ -9298,6 +9350,10 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.10:
+    resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -9389,6 +9445,9 @@ packages:
   process-warning@4.0.1:
     resolution: {integrity: sha512-3c2LzQ3rY9d0hc1emcsHhfT9Jwz0cChib/QN89oME2R451w5fy3f0afAhERFZAwrbDU43wk12d0ORBpDVME50Q==}
 
+  process-warning@5.0.0:
+    resolution: {integrity: sha512-a39t9ApHNx2L4+HBnQKqxxHNs1r7KF+Intd8Q/g1bUh6q0WIp9voPXJ/x0j+ZL45KF1pJd9+q2jLIRMfvEshkA==}
+
   progress@2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
@@ -9467,6 +9526,7 @@ packages:
     engines: {node: '>=0.6.0', teleport: '>=0.2.0'}
     deprecated: |-
       You or someone you depend on is using Q, the JavaScript Promise library that gave JavaScript developers strong feelings about promises. They can almost certainly migrate to the native JavaScript promise now. Thank you literally everyone for joining me in this bet against the odds. Be excellent to each other.
+
       (For a CapTP with native promises, see @endo/eventual-send and @endo/captp)
 
   qrcode@1.5.4:
@@ -9482,6 +9542,9 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  quick-format-unescaped@4.0.4:
+    resolution: {integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==}
 
   random-bytes@1.0.0:
     resolution: {integrity: sha512-iv7LhNVO047HzYR3InF6pUcUsPQiHTM1Qal51DcGSuZFBil1aBBWG5eHPNek7bvILMaYJ/8RU1e8w1AMdHmLQQ==}
@@ -9601,6 +9664,10 @@ packages:
 
   reading-time@1.5.0:
     resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
+
+  real-require@0.2.0:
+    resolution: {integrity: sha512-57frrGM/OCTLqLOAh0mhVA9VBMHd+9U7Zb2THMGdBUoZVOtGbJzjxsYGDJ3A9AYYCP4hn6y1TVbaOfzWtm5GFg==}
+    engines: {node: '>= 12.13.0'}
 
   recast@0.23.11:
     resolution: {integrity: sha512-YTUo+Flmw4ZXiWfQKGcwwc11KnoRAYgzAE2E7mXKCjSviTKShtxBsN6YUUBB2gtaBzKzeKunxhUwNHQuRryhWA==}
@@ -9927,6 +9994,10 @@ packages:
     resolution: {integrity: sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw==}
     engines: {node: '>= 0.4'}
 
+  safe-stable-stringify@2.5.0:
+    resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
+    engines: {node: '>=10'}
+
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
@@ -10129,6 +10200,9 @@ packages:
     resolution: {integrity: sha512-HLpt+uLy/pxB+bum/9DzAgiKS8CX1EvbWxI4zlmgGCExImLdiad2iCwXT5Z4c9c3Eq8rP2318mPW2c+QbtjK8A==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
+  sonic-boom@4.2.1:
+    resolution: {integrity: sha512-w6AxtubXa2wTXAUsZMMWERrsIRAdrK0Sc+FUytWvYAhBJLyuI4llrMIC1DtlNSdI99EI86KZum2MMq3EAZlF9Q==}
+
   sort-object-keys@1.1.3:
     resolution: {integrity: sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==}
 
@@ -10194,6 +10268,10 @@ packages:
   speech-rule-engine@4.1.2:
     resolution: {integrity: sha512-S6ji+flMEga+1QU79NDbwZ8Ivf0S/MpupQQiIC0rTpU/ZTKgcajijJJb1OcByBQDjrXCN1/DJtGz4ZJeBMPGJw==}
     hasBin: true
+
+  split2@4.2.0:
+    resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
+    engines: {node: '>= 10.x'}
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
@@ -10470,6 +10548,9 @@ packages:
   tailwindcss@4.2.2:
     resolution: {integrity: sha512-KWBIxs1Xb6NoLdMVqhbhgwZf2PGBpPEiwOqgI4pFIYbNTfBXiKYyWoTsXgBQ9WFg/OlhnvHaY+AEpW7wSmFo2Q==}
 
+  tailwindcss@4.2.4:
+    resolution: {integrity: sha512-HhKppgO81FQof5m6TEnuBWCZGgfRAWbaeOaGT00KOy/Pf/j6oUihdvBpA7ltCeAvZpFhW3j0PTclkxsd4IXYDA==}
+
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
@@ -10552,6 +10633,10 @@ packages:
 
   thenify@3.3.1:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
+
+  thread-stream@4.0.0:
+    resolution: {integrity: sha512-4iMVL6HAINXWf1ZKZjIPcz5wYaOdPhtO8ATvZ+Xqp3BTdaqtAwQkNmKORqcIo5YkQqGXq5cwfswDwMqqQNrpJA==}
+    engines: {node: '>=20'}
 
   three-mesh-bvh@0.8.3:
     resolution: {integrity: sha512-4G5lBaF+g2auKX3P0yqx+MJC6oVt6sB5k+CchS6Ob0qvH0YIhuUk1eYr7ktsIpY+albCqE80/FVQGV190PmiAg==}
@@ -13982,6 +14067,8 @@ snapshots:
 
   '@pedroslopez/moduleraid@5.0.2': {}
 
+  '@pinojs/redact@0.4.0': {}
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -14509,7 +14596,7 @@ snapshots:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.2.2
       '@tailwindcss/oxide': 4.2.2
-      postcss: 8.5.8
+      postcss: 8.5.10
       tailwindcss: 4.2.2
 
   '@tanstack/query-core@5.90.20': {}
@@ -15807,6 +15894,8 @@ snapshots:
 
   at-least-node@1.0.0: {}
 
+  atomic-sleep@1.0.0: {}
+
   autoprefixer@10.4.27(postcss@8.5.8):
     dependencies:
       browserslist: 4.28.1
@@ -15814,6 +15903,15 @@ snapshots:
       fraction.js: 5.3.4
       picocolors: 1.1.1
       postcss: 8.5.8
+      postcss-value-parser: 4.2.0
+
+  autoprefixer@10.5.0(postcss@8.5.10):
+    dependencies:
+      browserslist: 4.28.2
+      caniuse-lite: 1.0.30001791
+      fraction.js: 5.3.4
+      picocolors: 1.1.1
+      postcss: 8.5.10
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -16001,6 +16099,8 @@ snapshots:
 
   baseline-browser-mapping@2.10.0: {}
 
+  baseline-browser-mapping@2.10.22: {}
+
   basic-ftp@5.2.0: {}
 
   bcrypt@5.1.1(encoding@0.1.13):
@@ -16077,6 +16177,14 @@ snapshots:
       electron-to-chromium: 1.5.302
       node-releases: 2.0.27
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
+
+  browserslist@4.28.2:
+    dependencies:
+      baseline-browser-mapping: 2.10.22
+      caniuse-lite: 1.0.30001791
+      electron-to-chromium: 1.5.344
+      node-releases: 2.0.38
+      update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
   bser@2.1.1:
     dependencies:
@@ -16164,6 +16272,8 @@ snapshots:
       lodash.uniq: 4.5.0
 
   caniuse-lite@1.0.30001774: {}
+
+  caniuse-lite@1.0.30001791: {}
 
   ccount@2.0.1: {}
 
@@ -17196,6 +17306,8 @@ snapshots:
       jake: 10.9.4
 
   electron-to-chromium@1.5.302: {}
+
+  electron-to-chromium@1.5.344: {}
 
   emittery@0.13.1: {}
 
@@ -20181,7 +20293,7 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-react@1.0.1(react@19.2.4):
+  lucide-react@1.11.0(react@19.2.4):
     dependencies:
       react: 19.2.4
 
@@ -21284,6 +21396,8 @@ snapshots:
 
   node-releases@2.0.27: {}
 
+  node-releases@2.0.38: {}
+
   node-webpmux@3.1.7: {}
 
   nodemailer@8.0.2: {}
@@ -21385,6 +21499,8 @@ snapshots:
       es-object-atoms: 1.1.1
 
   obug@2.1.1: {}
+
+  on-exit-leak-free@2.1.2: {}
 
   once@1.4.0:
     dependencies:
@@ -21628,6 +21744,26 @@ snapshots:
 
   pify@5.0.0: {}
 
+  pino-abstract-transport@3.0.0:
+    dependencies:
+      split2: 4.2.0
+
+  pino-std-serializers@7.1.0: {}
+
+  pino@10.3.1:
+    dependencies:
+      '@pinojs/redact': 0.4.0
+      atomic-sleep: 1.0.0
+      on-exit-leak-free: 2.1.2
+      pino-abstract-transport: 3.0.0
+      pino-std-serializers: 7.1.0
+      process-warning: 5.0.0
+      quick-format-unescaped: 4.0.4
+      real-require: 0.2.0
+      safe-stable-stringify: 2.5.0
+      sonic-boom: 4.2.1
+      thread-stream: 4.0.0
+
   pirates@4.0.7: {}
 
   pkce-challenge@2.2.0: {}
@@ -21790,6 +21926,15 @@ snapshots:
     optionalDependencies:
       jiti: 1.21.7
       postcss: 8.5.8
+      tsx: 4.19.3
+      yaml: 2.8.2
+
+  postcss-load-config@6.0.1(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(yaml@2.8.2):
+    dependencies:
+      lilconfig: 3.1.3
+    optionalDependencies:
+      jiti: 2.6.1
+      postcss: 8.5.10
       tsx: 4.19.3
       yaml: 2.8.2
 
@@ -22104,6 +22249,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  postcss@8.5.10:
+    dependencies:
+      nanoid: 3.3.11
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   postcss@8.5.6:
     dependencies:
       nanoid: 3.3.11
@@ -22188,6 +22339,8 @@ snapshots:
     optional: true
 
   process-warning@4.0.1: {}
+
+  process-warning@5.0.0: {}
 
   progress@2.0.3: {}
 
@@ -22341,6 +22494,8 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  quick-format-unescaped@4.0.4: {}
+
   random-bytes@1.0.0: {}
 
   raw-loader@4.0.2(webpack@5.105.4(@swc/core@1.15.13)):
@@ -22470,6 +22625,8 @@ snapshots:
   readdirp@4.1.2: {}
 
   reading-time@1.5.0: {}
+
+  real-require@0.2.0: {}
 
   recast@0.23.11:
     dependencies:
@@ -22953,6 +23110,8 @@ snapshots:
       es-errors: 1.3.0
       is-regex: 1.2.1
 
+  safe-stable-stringify@2.5.0: {}
+
   safer-buffer@2.1.2: {}
 
   sax@1.5.0: {}
@@ -23202,6 +23361,10 @@ snapshots:
       ip-address: 10.1.0
       smart-buffer: 4.2.0
 
+  sonic-boom@4.2.1:
+    dependencies:
+      atomic-sleep: 1.0.0
+
   sort-object-keys@1.1.3: {}
 
   sort-package-json@2.15.1:
@@ -23272,6 +23435,8 @@ snapshots:
       '@xmldom/xmldom': 0.9.8
       commander: 13.1.0
       wicked-good-xpath: 1.3.0
+
+  split2@4.2.0: {}
 
   sprintf-js@1.0.3: {}
 
@@ -23605,6 +23770,8 @@ snapshots:
 
   tailwindcss@4.2.2: {}
 
+  tailwindcss@4.2.4: {}
+
   tapable@2.3.0: {}
 
   tar-fs@3.1.2:
@@ -23725,6 +23892,10 @@ snapshots:
   thenify@3.3.1:
     dependencies:
       any-promise: 1.3.0
+
+  thread-stream@4.0.0:
+    dependencies:
+      real-require: 0.2.0
 
   three-mesh-bvh@0.8.3(three@0.182.0):
     dependencies:
@@ -23876,7 +24047,7 @@ snapshots:
 
   tsscmp@1.0.6: {}
 
-  tsup@8.4.0(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2):
+  tsup@8.4.0(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.12)
       cac: 6.7.14
@@ -23886,7 +24057,7 @@ snapshots:
       esbuild: 0.25.12
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.6.1)(postcss@8.5.8)(tsx@4.19.3)(yaml@2.8.2)
+      postcss-load-config: 6.0.1(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(yaml@2.8.2)
       resolve-from: 5.0.0
       rollup: 4.59.0
       source-map: 0.8.0-beta.0
@@ -23896,7 +24067,36 @@ snapshots:
       tree-kill: 1.2.2
     optionalDependencies:
       '@swc/core': 1.15.13
-      postcss: 8.5.8
+      postcss: 8.5.10
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - jiti
+      - supports-color
+      - tsx
+      - yaml
+
+  tsup@8.5.1(@swc/core@1.15.13)(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(typescript@5.9.3)(yaml@2.8.2):
+    dependencies:
+      bundle-require: 5.1.0(esbuild@0.25.12)
+      cac: 6.7.14
+      chokidar: 4.0.3
+      consola: 3.4.2
+      debug: 4.4.3
+      esbuild: 0.25.12
+      fix-dts-default-cjs-exports: 1.0.1
+      joycon: 3.1.1
+      picocolors: 1.1.1
+      postcss-load-config: 6.0.1(jiti@2.6.1)(postcss@8.5.10)(tsx@4.19.3)(yaml@2.8.2)
+      resolve-from: 5.0.0
+      rollup: 4.59.0
+      source-map: 0.7.6
+      sucrase: 3.35.1
+      tinyexec: 0.3.2
+      tinyglobby: 0.2.15
+      tree-kill: 1.2.2
+    optionalDependencies:
+      '@swc/core': 1.15.13
+      postcss: 8.5.10
       typescript: 5.9.3
     transitivePeerDependencies:
       - jiti
@@ -24321,6 +24521,12 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
+  update-browserslist-db@1.2.3(browserslist@4.28.2):
+    dependencies:
+      browserslist: 4.28.2
+      escalade: 3.2.0
+      picocolors: 1.1.1
+
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
@@ -24481,7 +24687,7 @@ snapshots:
   vite@5.4.21(@types/node@20.17.24)(lightningcss@1.32.0)(terser@5.46.0):
     dependencies:
       esbuild: 0.25.12
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
     optionalDependencies:
       '@types/node': 20.17.24
@@ -24492,7 +24698,7 @@ snapshots:
   vite@5.4.21(@types/node@22.19.11)(lightningcss@1.32.0)(terser@5.46.0):
     dependencies:
       esbuild: 0.25.12
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
     optionalDependencies:
       '@types/node': 22.19.11
@@ -24503,7 +24709,7 @@ snapshots:
   vite@5.4.21(@types/node@25.4.0)(lightningcss@1.32.0)(terser@5.46.0):
     dependencies:
       esbuild: 0.25.12
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
     optionalDependencies:
       '@types/node': 25.4.0
@@ -24516,7 +24722,7 @@ snapshots:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:
@@ -24533,7 +24739,7 @@ snapshots:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:
@@ -24550,7 +24756,7 @@ snapshots:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
-      postcss: 8.5.8
+      postcss: 8.5.10
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:

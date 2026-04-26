@@ -5,10 +5,15 @@ import { createScaleRegistry, type ScaleRegistry } from './services/scale-reader
 import { readdir, mkdir, rename, writeFile, readFile, stat } from 'fs/promises';
 import { join } from 'path';
 import { randomUUID } from 'crypto';
+import { requestIdMiddleware } from './server/middleware/request-id.js';
+import { httpLogger } from './server/middleware/logger.js';
+import { logger } from './lib/logger.js';
 
 const app = new Hono();
 
 app.use('/*', cors());
+app.use(requestIdMiddleware(app));
+app.use(httpLogger(app));
 
 // Outbox and device storage configuration
 const OUTBOX_DIR = join(process.cwd(), 'outbox');
@@ -140,7 +145,8 @@ async function syncPendingTransactions(): Promise<{ success: number; failed: num
       return { success: 0, failed: pending.length };
     }
   } catch (err) {
-    console.error('Sync error:', err);
+    const log = logger.child({ component: 'service', action: 'outbox.sync' });
+    log.error({ err }, 'sync error');
     state.cloudReachable = false;
     await saveState();
     return { success: 0, failed: pending.length };
@@ -194,7 +200,8 @@ app.get('/events', async (c) => {
           const reading = await scaleRegistry.getReading();
           controller.enqueue(`data: ${JSON.stringify(reading)}\n\n`);
         } catch (err) {
-          console.error('Error reading scale for events:', err);
+          const log = logger.child({ component: 'service', action: 'scale.read' });
+          log.error({ err }, 'error reading scale for events');
         }
       }, 1000);
     },
@@ -286,5 +293,5 @@ app.post('/outbox/cleanup', async (c) => {
 });
 
 const port = parseInt(env.AGENT_PORT, 10);
-console.log(`POSPOS Agent listening on http://localhost:${port}`);
+logger.info({ port }, 'POSPOS Agent listening');
 export default app;

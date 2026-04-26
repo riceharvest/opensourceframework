@@ -1,5 +1,8 @@
 import { SerialPort } from 'serialport';
 import { ReadlineParser } from '@serialport/parser-readline';
+import { logger } from '../lib/logger.js';
+
+const serviceLog = logger.child({ component: 'service' });
 
 export interface ScaleReading {
   scaleId: string;
@@ -66,9 +69,9 @@ class SerialScaleReader implements ScaleReader {
           }
         }
       });
-      console.log(`Scale '${this.scaleId}' connected on ${this.portPath}`);
+      serviceLog.info({ scaleId: this.scaleId, port: this.portPath }, 'scale connected');
     } catch (err) {
-      console.error(`Failed to open scale port ${this.portPath} for '${this.scaleId}':`, err);
+      serviceLog.error({ scaleId: this.scaleId, port: this.portPath, err }, 'failed to open scale port');
     }
   }
 
@@ -158,7 +161,7 @@ export function createScaleRegistry(env: any): CompositeScaleRegistry {
         });
       }
     } catch (err) {
-      console.error('Failed to parse SCALES config:', err);
+      serviceLog.error({ err }, 'failed to parse SCALES config');
     }
   }
 
