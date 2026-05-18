@@ -6,10 +6,11 @@ const {
   appendLoaders,
 } = require('../../lib/loaders');
 const { getConfig } = require('../../lib/config');
+const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
 const imageminPluginPath = path.join(__dirname, '../fixtures/imagemin-plugin.js');
-const testFixturesPath = path.join(__dirname, '../fixtures');
 
 describe('next-optimized-images/loaders', () => {
   it('detects if a module is installed', () => {
@@ -20,17 +21,23 @@ describe('next-optimized-images/loaders', () => {
   });
 
   it('detects installed loaders', () => {
-    expect(detectLoaders(testFixturesPath)).toEqual({
-      jpeg: false,
-      gif: false,
-      svg: false,
-      svgSprite: false,
-      webp: false,
-      png: false,
-      lqip: false,
-      responsive: false,
-      responsiveAdapter: false,
-    });
+    const emptyResolvePath = fs.mkdtempSync(path.join(os.tmpdir(), 'next-optimized-images-'));
+
+    try {
+      expect(detectLoaders(emptyResolvePath)).toEqual({
+        jpeg: false,
+        gif: false,
+        svg: false,
+        svgSprite: false,
+        webp: false,
+        png: false,
+        lqip: false,
+        responsive: false,
+        responsiveAdapter: false,
+      });
+    } finally {
+      fs.rmSync(emptyResolvePath, { recursive: true, force: true });
+    }
   });
 
   it('returns the handled image types', () => {
