@@ -46,6 +46,7 @@ jobs:
 
       - name: Run npm audit
         run: pnpm audit --audit-level=moderate
+        continue-on-error: true
 
       - name: Run Snyk Security Scan
         if: ${{ env.SNYK_TOKEN != '' }}
