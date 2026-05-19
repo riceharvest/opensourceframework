@@ -40,7 +40,7 @@ afterAll(() => {
 test("returns the Cross Site Request Forgery Token (CSRF Token) required to make POST requests", async () => {
   render(<CSRFFlow />)
 
-  userEvent.click(screen.getByRole("button"))
+  await userEvent.click(screen.getByRole("button"))
 
   await waitFor(() => {
     expect(screen.getByTestId("csrf-result").textContent).toEqual(
@@ -61,7 +61,7 @@ test("when there's no CSRF token returned, it'll reflect that", async () => {
 
   render(<CSRFFlow />)
 
-  userEvent.click(screen.getByRole("button"))
+  await userEvent.click(screen.getByRole("button"))
 
   await waitFor(() => {
     expect(screen.getByTestId("csrf-result").textContent).toBe("null-response")
@@ -77,7 +77,7 @@ test("when the fetch fails it'll throw a client fetch error", async () => {
 
   render(<CSRFFlow />)
 
-  userEvent.click(screen.getByRole("button"))
+  await userEvent.click(screen.getByRole("button"))
 
   await waitFor(() => {
     expect(logger.error).toHaveBeenCalledTimes(1)
