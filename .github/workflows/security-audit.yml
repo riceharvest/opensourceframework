@@ -15,6 +15,8 @@ jobs:
   audit:
     name: Security Audit
     runs-on: ubuntu-latest
+    env:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -46,13 +48,13 @@ jobs:
         run: pnpm audit --audit-level=moderate
 
       - name: Run Snyk Security Scan
-        if: ${{ secrets.SNYK_TOKEN != '' }}
+        if: ${{ env.SNYK_TOKEN != '' }}
         uses: snyk/actions/node@master
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          SNYK_TOKEN: ${{ env.SNYK_TOKEN }}
 
       - name: Report missing Snyk configuration
-        if: ${{ secrets.SNYK_TOKEN == '' }}
+        if: ${{ env.SNYK_TOKEN == '' }}
         run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> $GITHUB_STEP_SUMMARY
 
       - name: Generate Security Report
