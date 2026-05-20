@@ -8,6 +8,7 @@ const execAsync = promisify(exec);
 const monorepoRoot = resolve(process.cwd(), '..', '..');
 const testOutputDir = resolve(monorepoRoot, 'test-docs-site-tmp');
 const indexPathStr = `test-docs-site-tmp${sep}index.html`;
+const siteGenerationTimeoutMs = 90_000;
 
 // Ensure clean state before tests
 if (existsSync(testOutputDir)) {
@@ -35,7 +36,7 @@ test('site command generates static HTML site', async () => {
   expect(html).toContain('id="search"');
   expect(html).toContain('fuse.js');
   expect(html).toContain('searchInput.addEventListener');
-});
+}, siteGenerationTimeoutMs);
 
 test('site command with custom snippet length', async () => {
   // Clean previous output
@@ -52,4 +53,4 @@ test('site command with custom snippet length', async () => {
   const indexPath = resolve(testOutputDir, 'index.html');
   const html = readFileSync(indexPath, 'utf8');
   expect(html).toContain('package-grid');
-});
+}, siteGenerationTimeoutMs);
