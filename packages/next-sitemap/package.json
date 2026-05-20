@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "@corex/tsconfig": "^4.0.43",
-    "fast-xml-parser": "^5.5.9",
+    "fast-xml-parser": "^5.8.0",
     "typescript": "^5.2.2"
   }
 }
