@@ -453,7 +453,7 @@ program
   .option('-o, --output <dir>', 'Output directory', './docs-site')
   .option('-r, --root <path>', 'Path to monorepo root', process.cwd())
   .action(async (options: { output: string; root: string }) => {
-    const root = options.root;
+    const root = options.root === process.cwd() ? program.opts().root : options.root;
     const outputDir = options.output;
     const packages = await scanPackages(root, 500); // longer snippets for site
 
