@@ -18,6 +18,15 @@
   ],
   "author": "OpenSource Framework Contributors",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/codemods"
+  },
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+codemods"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/codemods#readme",
   "dependencies": {
     "commander": "^12.0.0",
     "jscodeshift": "^0.15.2"
