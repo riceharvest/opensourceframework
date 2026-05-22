@@ -1,6 +1,14 @@
 {
   "name": "@opensourceframework/react-query-auth",
   "version": "2.4.5",
+  "description": "Authentication hooks and components for React applications using TanStack Query",
+  "keywords": [
+    "auth",
+    "authentication",
+    "react",
+    "react-query",
+    "tanstack-query"
+  ],
   "author": "OpenSource Framework Contributors (fork), Original: alan2207",
   "license": "MIT",
   "publishConfig": {
