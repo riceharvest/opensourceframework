@@ -1,23 +1,26 @@
-"use client";
+'use client';
 
-import { List, AutoSizer, WindowScroller } from "@opensourceframework/react-virtualized";
-import { Layout, Search, Zap, MousePointer2 } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { List, AutoSizer } from '@opensourceframework/react-virtualized';
+import { Zap, MousePointer2 } from 'lucide-react';
+import Link from 'next/link';
 
 // Generate 100,000 items
 const listData = Array.from({ length: 100000 }, (_, index) => ({
   id: index,
   name: `Virtualized Item ${index + 1}`,
   description: `High-performance rendering check for item #${index + 1}.`,
-  color: index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+  color: index % 2 === 0 ? 'bg-white' : 'bg-gray-50',
 }));
 
 export default function VirtualizationDemo() {
   const rowRenderer = ({ index, isScrolling, key, style }: any) => {
     const item = listData[index];
     return (
-      <div key={key} style={style} className={`flex items-center px-6 border-b border-gray-100 ${item.color}`}>
+      <div
+        key={key}
+        style={style}
+        className={`flex items-center px-6 border-b border-gray-100 ${item.color}`}
+      >
         <div className="flex-1">
           <p className={`font-medium ${isScrolling ? 'text-blue-400' : 'text-gray-900'}`}>
             {item.name}
@@ -32,7 +35,9 @@ export default function VirtualizationDemo() {
   return (
     <main className="min-h-screen p-8 max-w-5xl mx-auto font-sans">
       <nav className="mb-8">
-        <Link href="/" className="text-blue-600 hover:underline">← Back to Showcase</Link>
+        <Link href="/" className="text-blue-600 hover:underline">
+          ← Back to Showcase
+        </Link>
       </nav>
 
       <header className="mb-12">
@@ -41,17 +46,20 @@ export default function VirtualizationDemo() {
           <h1 className="text-3xl font-bold">Virtualization Stress Test</h1>
         </div>
         <p className="text-gray-600">
-          Rendering <strong>100,000 items</strong> smoothly using <strong>@opensourceframework/react-virtualized</strong>. 
-          Verified compatibility with React 19 concurrent mode.
+          Rendering <strong>100,000 items</strong> smoothly using{' '}
+          <strong>@opensourceframework/react-virtualized</strong>. Verified compatibility with React
+          19 concurrent mode.
         </p>
       </header>
 
       <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden h-[600px] flex flex-col">
         <div className="p-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center text-sm text-gray-500">
           <span>Virtual List (100k Items)</span>
-          <span className="flex items-center gap-1"><MousePointer2 size={14} /> Try scrolling fast</span>
+          <span className="flex items-center gap-1">
+            <MousePointer2 size={14} /> Try scrolling fast
+          </span>
         </div>
-        
+
         <div className="flex-1">
           <AutoSizer>
             {({ height, width }) => (
@@ -71,9 +79,15 @@ export default function VirtualizationDemo() {
       <section className="mt-12 p-6 bg-cyan-50 rounded-2xl border border-cyan-100">
         <h3 className="font-bold text-cyan-900 mb-2">Performance Metrics:</h3>
         <ul className="text-sm text-cyan-800 list-disc list-inside space-y-1">
-          <li><strong>DOM Nodes</strong>: ~20 (vs 100,000 if not virtualized)</li>
-          <li><strong>Memory Pressure</strong>: Constant, regardless of list size</li>
-          <li><strong>Scroll Jitter</strong>: Zero, using optimized overscan</li>
+          <li>
+            <strong>DOM Nodes</strong>: ~20 (vs 100,000 if not virtualized)
+          </li>
+          <li>
+            <strong>Memory Pressure</strong>: Constant, regardless of list size
+          </li>
+          <li>
+            <strong>Scroll Jitter</strong>: Zero, using optimized overscan
+          </li>
         </ul>
       </section>
     </main>

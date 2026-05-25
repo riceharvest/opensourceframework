@@ -18,6 +18,7 @@
   "bugs": {
     "url": "https://github.com/riceharvest/opensourceframework/issues"
   },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/bcryptjs#readme",
   "keywords": [
     "bcrypt",
     "password",
