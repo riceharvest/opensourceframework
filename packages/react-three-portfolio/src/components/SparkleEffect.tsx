@@ -172,9 +172,13 @@ export const SparkleEffect = () => {
       geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
       geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1)); // Custom attribute
 
-      geo.attributes.position!.needsUpdate = true;
-      geo.attributes.color!.needsUpdate = true;
-      geo.attributes.size!.needsUpdate = true;
+      const positionAttribute = geo.getAttribute('position');
+      const colorAttribute = geo.getAttribute('color');
+      const sizeAttribute = geo.getAttribute('size');
+
+      positionAttribute.needsUpdate = true;
+      colorAttribute.needsUpdate = true;
+      sizeAttribute.needsUpdate = true;
     }
   });
 
