@@ -26,14 +26,7 @@ export interface NextSeoProps {
  * Note: In Next.js App Router, it is recommended to use the `generateMetadata` API
  * instead of this component.
  */
-export const NextSeo: React.FC<NextSeoProps> = ({
-  title,
-  description,
-  canonical,
-  openGraph,
-  noindex,
-  nofollow,
-}) => {
+export const NextSeo: React.FC<NextSeoProps> = (_props) => {
   // In App Router, standard meta tags should be handled by generateMetadata.
   // This component is provided for backwards compatibility and transition safety.
   // It doesn't do anything in App Router as tags are managed by Next.js.

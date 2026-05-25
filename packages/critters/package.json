@@ -64,11 +64,11 @@
     "postcss-media-query-parser": "^0.2.3"
   },
   "devDependencies": {
-    "next": "^16.0.0",
     "@opensourceframework/tsconfig": "*",
+    "@vitest/coverage-v8": "^2.1.9",
+    "next": "^16.2.6",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "@vitest/coverage-v8": "^2.1.9",
     "vitest": "^2.1.9"
   },
   "peerDependencies": {
