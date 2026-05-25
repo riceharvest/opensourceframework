@@ -2,6 +2,7 @@
   "name": "@opensourceframework/next-seo",
   "version": "7.3.6",
   "description": "SEO plugin for Next.js projects",
+  "license": "MIT",
   "sideEffects": false,
   "repository": {
     "type": "git",
