@@ -1,6 +1,15 @@
-import { ArticleJsonLd, OrganizationJsonLd } from "@opensourceframework/next-seo";
-import { Shield, Lock, Zap, MousePointer2, Image as ImageIcon, Layout, Database, Hash, Accessibility } from "lucide-react";
-import Link from "next/link";
+import { ArticleJsonLd, OrganizationJsonLd } from '@opensourceframework/next-seo';
+import {
+  Shield,
+  Lock,
+  Zap,
+  MousePointer2,
+  Image as ImageIcon,
+  Layout,
+  Database,
+  Hash,
+} from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -25,8 +34,8 @@ export default function Home() {
           OpenSource Framework
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Compatibility-first, modernized forks of the packages you love. 
-          Built for Next.js 16 and React 19.
+          Compatibility-first, modernized forks of the packages you love. Built for Next.js 16 and
+          React 19.
         </p>
       </header>
 
@@ -40,7 +49,10 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             Modernized v3 fork with native OAuth 2.x support and structured URL handling.
           </p>
-          <Link href="/auth-demo" className="text-blue-600 font-medium hover:underline inline-flex items-center gap-1">
+          <Link
+            href="/auth-demo"
+            className="text-blue-600 font-medium hover:underline inline-flex items-center gap-1"
+          >
             Try Auth <MousePointer2 size={14} />
           </Link>
         </section>
@@ -53,7 +65,10 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             App Router compatible CSRF protection with async header/cookie support.
           </p>
-          <Link href="/csrf-demo" className="text-red-600 font-medium hover:underline inline-flex items-center gap-1">
+          <Link
+            href="/csrf-demo"
+            className="text-red-600 font-medium hover:underline inline-flex items-center gap-1"
+          >
             View Security <MousePointer2 size={14} />
           </Link>
         </section>
@@ -67,7 +82,10 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             Optimized critical CSS inlining with improved font preloading.
           </p>
-          <Link href="/seo-preview" className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1">
+          <Link
+            href="/seo-preview"
+            className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1"
+          >
             Test SEO <MousePointer2 size={14} />
           </Link>
         </section>
@@ -80,7 +98,10 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             Unified session management supporting both Node.js and Web APIs.
           </p>
-          <Link href="/api/session-info" className="text-green-600 font-medium hover:underline inline-flex items-center gap-1">
+          <Link
+            href="/api/session-info"
+            className="text-green-600 font-medium hover:underline inline-flex items-center gap-1"
+          >
             Check Session <MousePointer2 size={14} />
           </Link>
         </section>
@@ -93,7 +114,10 @@ export default function Home() {
           <p className="text-gray-600 mb-4 text-sm">
             High-performance virtualization for massive datasets on React 18/19.
           </p>
-          <Link href="/virtualization" className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1">
+          <Link
+            href="/virtualization"
+            className="text-cyan-600 font-medium hover:underline inline-flex items-center gap-1"
+          >
             Run Stress Test <MousePointer2 size={14} />
           </Link>
         </section>
