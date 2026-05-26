@@ -24,6 +24,15 @@
   ],
   "author": "OpenSource Framework Contributors",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceharvest/opensourceframework.git",
+    "directory": "packages/sleep-analysis"
+  },
+  "bugs": {
+    "url": "https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+sleep-analysis"
+  },
+  "homepage": "https://github.com/riceharvest/opensourceframework/tree/main/packages/sleep-analysis#readme",
   "devDependencies": {
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",

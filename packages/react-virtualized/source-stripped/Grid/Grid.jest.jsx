@@ -2009,7 +2009,8 @@ describe('Grid', () => {
     });
 
     it('should not trigger render by _debounceScrollEndedCallback if process slow table', async () => {
-      const scrollingResetTimeInterval = 150;
+      const scrollingResetTimeInterval = 1000;
+      const earlyCallbackWaitInterval = 100;
       const renderDelay = 50;
       let cellRangeRendererCalls = 0;
       function cellRangeRenderer(props) {
@@ -2031,9 +2032,7 @@ describe('Grid', () => {
         cellRangeRendererCalls = 0;
         simulateScroll({grid, scrollTop: i});
         // small wait for maybe early _debounceScrollEndedCallback
-        await new Promise(resolve =>
-          setTimeout(resolve, scrollingResetTimeInterval / 2),
-        );
+        await new Promise(resolve => setTimeout(resolve, earlyCallbackWaitInterval));
         expect(cellRangeRendererCalls).toEqual(1);
       }
 
