@@ -1,0 +1,22 @@
+# @opensourceframework/sleep-analysis - AI Summary
+
+Biometric sleep data analysis utility for turning timestamped sleep-stage segments into aggregate duration, efficiency, stage composition, and score metrics. This package is maintained in the OpenSource Framework monorepo as a small TypeScript utility package.
+
+## Maintainer Intent
+
+- Keep the public API compact and predictable for applications that need simple sleep metrics.
+- Preserve low-friction installation and publishing metadata for the package.
+- Prefer clear, deterministic calculations over opaque scoring behavior.
+
+## Installation
+
+```bash
+npm install @opensourceframework/sleep-analysis
+# or
+pnpm add @opensourceframework/sleep-analysis
+```
+
+## Links
+
+- Documentation: https://github.com/riceharvest/opensourceframework/tree/main/packages/sleep-analysis#readme
+- npm: https://www.npmjs.com/package/@opensourceframework/sleep-analysis
