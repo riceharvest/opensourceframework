@@ -237,15 +237,15 @@ class OAuth1Client {
     this.provider = provider
   }
 
-  async getOAuthRequestToken(params = {}) {
+  async getOAuthRequestToken(_params = {}) {
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client. Please use OAuth 2.0 or contact maintainers.")
   }
 
-  async getOAuthAccessToken(oauth_token, oauth_token_secret, oauth_verifier) {
+  async getOAuthAccessToken(_oauth_token, _oauth_token_secret, _oauth_verifier) {
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
   }
 
-  async get(url, oauth_token, oauth_token_secret) {
+  async get(_url, _oauth_token, _oauth_token_secret) {
     throw new Error("OAuth 1.0a is not yet fully implemented in the native client.")
   }
 }
