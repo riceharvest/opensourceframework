@@ -34,8 +34,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Cache pnpm store
         uses: actions/cache@v4
@@ -111,8 +109,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Download tarballs
         uses: actions/download-artifact@v4
@@ -332,8 +328,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
