@@ -6,11 +6,21 @@ const {
   appendLoaders,
 } = require('../../lib/loaders');
 const { getConfig } = require('../../lib/config');
-const fs = require('fs');
-const os = require('os');
+const Module = require('module');
 const path = require('path');
 
 const imageminPluginPath = path.join(__dirname, '../fixtures/imagemin-plugin.js');
+const optionalLoaderNames = new Set([
+  'imagemin-mozjpeg',
+  'imagemin-gifsicle',
+  'imagemin-svgo',
+  'svg-sprite-loader',
+  'webp-loader',
+  'lqip-loader',
+  'imagemin-optipng',
+  'imagemin-pngquant',
+  'responsive-loader',
+]);
 
 describe('next-optimized-images/loaders', () => {
   it('detects if a module is installed', () => {
@@ -21,10 +31,21 @@ describe('next-optimized-images/loaders', () => {
   });
 
   it('detects installed loaders', () => {
-    const emptyResolvePath = fs.mkdtempSync(path.join(os.tmpdir(), 'next-optimized-images-'));
+    const originalResolveFilename = Module._resolveFilename;
+    const resolveSpy = vi.spyOn(Module, '_resolveFilename').mockImplementation(function (...args) {
+      const [request] = args;
+
+      if (optionalLoaderNames.has(request)) {
+        const error = new Error(`Cannot find module '${request}'`);
+        error.code = 'MODULE_NOT_FOUND';
+        throw error;
+      }
+
+      return originalResolveFilename.apply(this, args);
+    });
 
     try {
-      expect(detectLoaders(emptyResolvePath)).toEqual({
+      expect(detectLoaders()).toEqual({
         jpeg: false,
         gif: false,
         svg: false,
@@ -36,7 +57,7 @@ describe('next-optimized-images/loaders', () => {
         responsiveAdapter: false,
       });
     } finally {
-      fs.rmSync(emptyResolvePath, { recursive: true, force: true });
+      resolveSpy.mockRestore();
     }
   });
 
