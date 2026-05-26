@@ -6,13 +6,21 @@ import '@testing-library/jest-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+const createTestQueryClient = () =>
+	new QueryClient({
+		defaultOptions: {
+			queries: { retry: false },
+			mutations: { retry: false },
+		},
+	})
+
 const renderApp = (children: ReactNode) => {
-	const client = new QueryClient()
+	const client = createTestQueryClient()
 	return render(<QueryClientProvider client={client}>{children}</QueryClientProvider>)
 }
 
 const renderAppHook = <Result,>(hook: () => Result) => {
-	const client = new QueryClient()
+	const client = createTestQueryClient()
 	return renderHook(hook, {
 		wrapper: ({ children }) => <QueryClientProvider client={client}>{children}</QueryClientProvider>,
 	})
@@ -73,6 +81,26 @@ describe('useRegister', () => {
 		)
 		expect(result.current.data).toEqual(user)
 	})
+
+	it('calls the provided onSuccess handler after registration succeeds', async () => {
+		config.registerFn.mockResolvedValue(user)
+		const onSuccess = vi.fn()
+
+		const { result } = renderAppHook(() => useRegister({ onSuccess }))
+
+		act(() => {
+			result.current.mutate({ name: 'Test User 2', email: 'user2@mail.com', password: 'password' })
+		})
+
+		await waitFor(() =>
+			expect(onSuccess).toHaveBeenCalledWith(
+				user,
+				{ name: 'Test User 2', email: 'user2@mail.com', password: 'password' },
+				undefined,
+				expect.any(Object)
+			)
+		)
+	})
 })
 
 describe('useLogin', () => {
@@ -98,6 +126,26 @@ describe('useLogin', () => {
 		)
 		expect(result.current.data).toEqual(user)
 	})
+
+	it('calls the provided onSuccess handler after login succeeds', async () => {
+		config.loginFn.mockResolvedValue(user)
+		const onSuccess = vi.fn()
+
+		const { result } = renderAppHook(() => useLogin({ onSuccess }))
+
+		act(() => {
+			result.current.mutate({ email: 'user@mail.com', password: 'password' })
+		})
+
+		await waitFor(() =>
+			expect(onSuccess).toHaveBeenCalledWith(
+				user,
+				{ email: 'user@mail.com', password: 'password' },
+				undefined,
+				expect.any(Object)
+			)
+		)
+	})
 })
 
 describe('useLogout', () => {
@@ -112,6 +160,19 @@ describe('useLogout', () => {
 
 		await waitFor(() => expect(config.logoutFn).toHaveBeenCalled())
 		expect(result.current.data).toEqual(true)
+	})
+
+	it('calls the provided onSuccess handler after logout succeeds', async () => {
+		config.logoutFn.mockResolvedValue(true)
+		const onSuccess = vi.fn()
+
+		const { result } = renderAppHook(() => useLogout({ onSuccess }))
+
+		act(() => {
+			result.current.mutate({})
+		})
+
+		await waitFor(() => expect(onSuccess).toHaveBeenCalledWith(true, {}, undefined, expect.any(Object)))
 	})
 })
 
@@ -146,5 +207,13 @@ describe('AuthLoader', () => {
 		renderApp(<AuthLoader renderLoading={() => <div>Loading...</div>}>{content}</AuthLoader>)
 
 		await waitFor(() => expect(screen.getByText(content)).toBeInTheDocument())
+	})
+
+	it('renders the default error message when loading the user fails', async () => {
+		config.userFn.mockRejectedValue(new Error('network failed'))
+
+		renderApp(<AuthLoader renderLoading={() => <div>Loading...</div>}>Hello {user.name}!</AuthLoader>)
+
+		await waitFor(() => expect(screen.getByText('Something went wrong. Please try again.')).toBeInTheDocument())
 	})
 })

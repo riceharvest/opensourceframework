@@ -47,9 +47,6 @@ jobs:
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
-            if [ -n "${{ github.base_ref }}" ]; then
-              git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
-            fi
           else
             BASE_SHA="${{ github.event.before }}"
             if [ -z "$BASE_SHA" ]; then
@@ -119,9 +116,7 @@ jobs:
           fetch-depth: 1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
@@ -149,7 +144,7 @@ jobs:
             turbo-${{ runner.os }}-${{ matrix.node }}-
 
       - name: Fetch base commit
-        if: needs.detect-affected.outputs.base_sha != ''
+        if: needs.detect-affected.outputs.has_targets == 'true' && needs.detect-affected.outputs.base_sha != ''
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
@@ -203,9 +198,7 @@ jobs:
           fetch-depth: 1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -233,7 +226,7 @@ jobs:
             turbo-${{ runner.os }}-20-
 
       - name: Fetch base commit
-        if: needs.detect-affected.outputs.base_sha != ''
+        if: needs.detect-affected.outputs.has_targets == 'true' && needs.detect-affected.outputs.base_sha != ''
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
@@ -258,9 +251,7 @@ jobs:
           fetch-depth: 1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -288,7 +279,7 @@ jobs:
             turbo-${{ runner.os }}-20-
 
       - name: Fetch base commit
-        if: needs.detect-affected.outputs.base_sha != ''
+        if: needs.detect-affected.outputs.has_targets == 'true' && needs.detect-affected.outputs.base_sha != ''
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
@@ -313,9 +304,7 @@ jobs:
           fetch-depth: 1
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -343,7 +332,7 @@ jobs:
             turbo-${{ runner.os }}-20-
 
       - name: Fetch base commit
-        if: needs.detect-affected.outputs.base_sha != ''
+        if: needs.detect-affected.outputs.has_targets == 'true' && needs.detect-affected.outputs.base_sha != ''
         run: git fetch --no-tags origin "${{ needs.detect-affected.outputs.base_sha }}"
 
       - name: Install dependencies
@@ -371,9 +360,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

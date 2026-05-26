@@ -1,5 +1,4 @@
 import { mkdtemp, rm, writeFile } from 'fs/promises';
-import os from 'os';
 import path from 'path';
 
 import { getConfig } from '../src/get-config';
@@ -13,7 +12,7 @@ afterEach(() => {
 });
 
 test.sequential.skipIf(isWindows)('prefers next-mdx.config.mjs over next-mdx.json', async () => {
-  const tempDir = await mkdtemp(path.join(os.tmpdir(), 'next-mdx-config-'));
+  const tempDir = await mkdtemp(path.join(originalCwd, '.tmp-next-mdx-config-'));
 
   try {
     await writeFile(
