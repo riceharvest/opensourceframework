@@ -2,7 +2,13 @@
   "name": "@opensourceframework/identity-obj-proxy",
   "version": "3.0.0",
   "description": "an identity object using ES6 proxies",
+  "type": "commonjs",
   "main": "src/index.js",
+  "files": [
+    "src/index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "lint": "eslint src",
     "test": "jest",
