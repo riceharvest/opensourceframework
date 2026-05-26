@@ -255,20 +255,6 @@ function defineProperties(obj, properties) {
   }
 }
 
-/**
- * Create a property descriptor defining a getter/setter pair alias for a named attribute.
- * @private
- */
-function reflectedProperty(attributeName) {
-  return {
-    get() {
-      return this.getAttribute(attributeName);
-    },
-    set(value) {
-      this.setAttribute(attributeName, value);
-    }
-  };
-}
 
 function cachedQuerySelector(sel, node) {
   const selectorTokens = selectorParser(sel);
