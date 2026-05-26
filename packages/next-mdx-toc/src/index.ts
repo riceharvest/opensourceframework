@@ -17,20 +17,21 @@ interface Items {
 type TocNode = List | ListItem | Paragraph | null | undefined;
 
 function getTextContent(children: PhrasingContent[]): string | undefined {
-  for (const child of children) {
-    if (child.type === 'text') {
-      return child.value;
-    }
-
-    if ('children' in child) {
-      const nestedText = getTextContent(child.children as PhrasingContent[]);
-      if (nestedText) {
-        return nestedText;
+  const text = children
+    .map((child) => {
+      if ('value' in child && typeof child.value === 'string') {
+        return child.value;
       }
-    }
-  }
 
-  return undefined;
+      if ('children' in child) {
+        return getTextContent(child.children as PhrasingContent[]) ?? '';
+      }
+
+      return '';
+    })
+    .join('');
+
+  return text || undefined;
 }
 
 function isItem(value: Partial<Item> | Items): value is Item {
