@@ -7,7 +7,26 @@
  * @license MIT
  */
 
-import type { SerializeOptions } from 'cookie';
+/**
+ * Cookie serialization options accepted by the underlying `cookie` package.
+ *
+ * Keep this local instead of importing the type from `cookie`: supported cookie
+ * versions expose this shape under different names (`SerializeOptions` in 1.x,
+ * `CookieSerializeOptions` in the DefinitelyTyped 0.x types), but the runtime
+ * option contract is the same for the fields we expose publicly.
+ */
+export interface CookieOptions {
+  domain?: string;
+  encode?: (value: string) => string;
+  expires?: Date;
+  httpOnly?: boolean;
+  maxAge?: number;
+  partitioned?: boolean;
+  path?: string;
+  priority?: 'low' | 'medium' | 'high';
+  sameSite?: boolean | 'lax' | 'strict' | 'none';
+  secure?: boolean;
+}
 
 /**
  * Configuration options for the nextCsrf function
@@ -43,7 +62,7 @@ export interface NextCsrfOptions {
    * Important: The sameSite: 'lax' setting provides additional CSRF protection by
    * preventing cookies from being sent with cross-site POST requests.
    */
-  cookieOptions?: SerializeOptions;
+  cookieOptions?: CookieOptions;
   /** Secret key for signing cookies. Optional but recommended for production. */
   secret?: string;
   /**
@@ -61,7 +80,7 @@ export interface NextCsrfOptions {
  * Extends NextCsrfOptions with required fields
  */
 export interface MiddlewareArgs extends Required<Omit<NextCsrfOptions, 'secret'>> {
-  cookieOptions: SerializeOptions;
+  cookieOptions: CookieOptions;
   secret?: string;
 }
 
@@ -70,7 +89,7 @@ export interface MiddlewareArgs extends Required<Omit<NextCsrfOptions, 'secret'>
  */
 export interface SetupMiddlewareArgs {
   tokenKey: string;
-  cookieOptions: SerializeOptions;
+  cookieOptions: CookieOptions;
   secret?: string;
 }
 
