@@ -1,5 +1,7 @@
-import NextAuth from "@opensourceframework/next-auth";
-import Providers from "@opensourceframework/next-auth/providers";
+process.env.NEXTAUTH_URL ||= "http://localhost:3000";
+
+const NextAuth = require("@opensourceframework/next-auth");
+const Providers = require("@opensourceframework/next-auth/providers");
 
 const handler = NextAuth({
   providers: [
