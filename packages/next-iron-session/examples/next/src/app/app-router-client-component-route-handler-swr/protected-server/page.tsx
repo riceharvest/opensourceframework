@@ -4,7 +4,7 @@ import * as css from "@/app/css";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getIronSession } from "iron-session";
+import { getIronSession } from "@opensourceframework/next-iron-session";
 import { SessionData, sessionOptions } from "../lib";
 import Link from "next/link";
 

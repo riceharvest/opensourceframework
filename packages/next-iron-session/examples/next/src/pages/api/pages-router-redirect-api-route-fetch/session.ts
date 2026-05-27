@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getIronSession } from "iron-session";
+import { getIronSession } from "@opensourceframework/next-iron-session";
 import {
   sessionOptions,
   sleep,

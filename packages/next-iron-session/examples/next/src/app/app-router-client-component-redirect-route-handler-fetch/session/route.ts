@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
-import { getIronSession } from "iron-session";
+import { getIronSession } from "@opensourceframework/next-iron-session";
 import { defaultSession, sessionOptions } from "../lib";
 import { redirect } from "next/navigation";
 import { sleep, SessionData } from "../lib";

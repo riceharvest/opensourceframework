@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { sessionOptions as appRouterClientComponentRouteHandlerSwrIronOptions } from "./app/app-router-client-component-route-handler-swr/lib";
 import { sessionOptions as pagesRouterApiRouteSwrIronOptions } from "./pages-components/pages-router-api-route-swr/lib";
 import { cookies } from "next/headers";
-import { SessionOptions, getIronSession } from "iron-session";
+import { SessionOptions, getIronSession } from "@opensourceframework/next-iron-session";
 
 // Only here for the multi examples demo, in your app this would be imported from elsewhere
 interface SessionData {
