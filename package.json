@@ -5,7 +5,9 @@
   "description": "OpenSourceFramework - A collection of maintained Next.js packages",
   "workspaces": [
     "packages/*",
-    "tools/*"
+    "tools/*",
+    "docs",
+    "showcase"
   ],
   "scripts": {
     "prepare": "husky install",
