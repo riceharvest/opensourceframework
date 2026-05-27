@@ -1,6 +1,6 @@
 import { SessionData } from "./lib";
 import { defaultSession, sessionOptions, sleep } from "./lib";
-import { getIronSession, IronSession } from "iron-session";
+import { getIronSession, IronSession } from "@opensourceframework/next-iron-session";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 

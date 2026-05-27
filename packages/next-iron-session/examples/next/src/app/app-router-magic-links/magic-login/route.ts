@@ -1,4 +1,4 @@
-import { getIronSession, unsealData } from "iron-session";
+import { getIronSession, unsealData } from "@opensourceframework/next-iron-session";
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 import { SessionData, sessionOptions } from "../lib";

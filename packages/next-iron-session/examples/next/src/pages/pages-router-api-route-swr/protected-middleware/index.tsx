@@ -1,7 +1,7 @@
 import { Title } from "@/app/title";
 import * as css from "@/app/css";
 
-import { getIronSession } from "iron-session";
+import { getIronSession } from "@opensourceframework/next-iron-session";
 import {
   SessionData,
   sessionOptions,
