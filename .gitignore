@@ -43,6 +43,7 @@ coverage/
 *.tgz
 .eslintcache
 *.timestamp-*
+package.json.backup
 
 # npm config (contains sensitive tokens)
 package-lock.json

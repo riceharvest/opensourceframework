@@ -148,10 +148,9 @@ echo -e "${GREEN}✓ Files copied${NC}"
 # Step 3: Transform package.json
 echo -e "\n${BLUE}[3/10] Transforming package.json...${NC}"
 if [ -f "$TARGET_DIR/package.json" ]; then
-    # Create a backup
-    cp "$TARGET_DIR/package.json" "$TARGET_DIR/package.json.backup"
-
-    # Use Node.js to transform the package.json
+    # Use Node.js to transform the package.json. The original manifest remains in
+    # the temporary clone for the duration of the run; do not leave backup files
+    # in package directories where they can be accidentally committed.
     node -e "
 const fs = require('fs');
 const path = '$TARGET_DIR/package.json';
