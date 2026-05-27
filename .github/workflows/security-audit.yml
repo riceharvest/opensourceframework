@@ -43,14 +43,25 @@ jobs:
       - name: Run npm audit
         run: pnpm audit --audit-level=moderate
 
+      - name: Check Snyk configuration
+        id: snyk
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          if [ -n "$SNYK_TOKEN" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run Snyk Security Scan
-        if: ${{ secrets.SNYK_TOKEN != '' }}
+        if: ${{ steps.snyk.outputs.configured == 'true' }}
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Report missing Snyk configuration
-        if: ${{ secrets.SNYK_TOKEN == '' }}
+        if: ${{ steps.snyk.outputs.configured == 'false' }}
         run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> $GITHUB_STEP_SUMMARY
 
       - name: Generate Security Report
