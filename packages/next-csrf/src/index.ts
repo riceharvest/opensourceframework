@@ -11,15 +11,14 @@
  * Synchronizer Token Pattern.
  */
 
-import type { SerializeOptions } from 'cookie';
 import type { NextApiHandler } from 'next';
 import { csrf, setup } from './middleware';
-import type { Middleware, NextCSRF, NextCsrfOptions } from './types';
+import type { CookieOptions, Middleware, NextCSRF, NextCsrfOptions } from './types';
 
 /**
  * Default cookie options for CSRF cookies
  */
-const cookieDefaultOptions: SerializeOptions = {
+const cookieDefaultOptions: CookieOptions = {
   httpOnly: false,
   path: '/',
   sameSite: 'lax',
