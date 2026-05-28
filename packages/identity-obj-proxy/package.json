@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/identity-obj-proxy",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "an identity object using ES6 proxies",
   "type": "commonjs",
   "main": "src/index.js",

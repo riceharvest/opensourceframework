@@ -1,5 +1,11 @@
 # next-seo
 
+## 7.3.7
+
+### Patch Changes
+
+- a7a0dc4: Add missing MIT license metadata to the published package manifest.
+
 ## 7.3.6
 
 ### Patch Changes

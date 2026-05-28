@@ -1,5 +1,11 @@
 ## Changelog
 
+## 9.22.10
+
+### Patch Changes
+
+- 73ac04f: Restore the documented `styles.css` file in the published package.
+
 ## 9.22.9
 
 ### Patch Changes

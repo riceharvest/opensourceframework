@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/tailwindcss-animate",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Tailwind CSS plugin for creating beautiful animations. (Maintained fork of jamiebuilds/tailwindcss-animate)",
   "keywords": [
     "tailwind",
