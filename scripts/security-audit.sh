@@ -15,8 +15,6 @@ NC='\033[0m'
 # Configuration
 REPORT_DIR="plans/security-audits"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-REPORT_FILE="$REPORT_DIR/audit-report-$TIMESTAMP.md"
-SUMMARY_FILE="$REPORT_DIR/audit-summary-$TIMESTAMP.json"
 AUDIT_LEVEL="low"  # Options: low, moderate, high, critical
 
 # Usage
@@ -84,6 +82,9 @@ if [[ ! " ${VALID_LEVELS[@]} " =~ " ${AUDIT_LEVEL} " ]]; then
     exit 1
 fi
 
+REPORT_FILE="$REPORT_DIR/audit-report-$TIMESTAMP.md"
+SUMMARY_FILE="$REPORT_DIR/audit-summary-$TIMESTAMP.json"
+
 # Create report directory
 if [ "$DRY_RUN" = false ]; then
     mkdir -p "$REPORT_DIR"
@@ -140,9 +141,12 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
         continue
     fi
 
-    # Run npm audit
+    # Run pnpm audit. Temporarily disable errexit so vulnerability findings
+    # (reported by pnpm as a non-zero exit) can be parsed into the report.
+    set +e
     AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>&1)
     AUDIT_EXIT=$?
+    set -e
 
     # Parse audit results
     if [ $AUDIT_EXIT -eq 0 ]; then
@@ -338,10 +342,10 @@ summary.packages.forEach(pkg => {
     echo "" >> "$REPORT_FILE"
     echo "### Prevention" >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
-    echo "- Use `--audit-level=high` in CI/CD pipelines" >> "$REPORT_FILE"
+    echo '- Use `--audit-level=high` in CI/CD pipelines' >> "$REPORT_FILE"
     echo "- Fail builds on critical/high vulnerabilities" >> "$REPORT_FILE"
     echo "- Regularly update dependencies" >> "$REPORT_FILE"
-    echo "- Use `pnpm audit --fix` to automatically resolve some issues" >> "$REPORT_FILE"
+    echo '- Use `pnpm audit --fix` to automatically resolve some issues' >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
 
     echo -e "${GREEN}✓ Report written to: $REPORT_FILE${NC}"
