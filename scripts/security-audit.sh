@@ -143,10 +143,27 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
 
     # Run pnpm audit. Temporarily disable errexit so vulnerability findings
     # (reported by pnpm as a non-zero exit) can be parsed into the report.
+    AUDIT_ERROR_FILE=$(mktemp)
     set +e
-    AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>&1)
+    AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>"$AUDIT_ERROR_FILE")
     AUDIT_EXIT=$?
     set -e
+    AUDIT_ERROR=$(cat "$AUDIT_ERROR_FILE")
+    rm -f "$AUDIT_ERROR_FILE"
+
+    if ! echo "$AUDIT_OUTPUT" | node -e "JSON.parse(require('fs').readFileSync(0, 'utf8'))" >/dev/null 2>&1; then
+        echo -e "${RED}✗ pnpm audit failed before returning JSON${NC}"
+        if [ -n "$AUDIT_ERROR" ]; then
+            echo "$AUDIT_ERROR"
+        fi
+        if [ -n "$AUDIT_OUTPUT" ]; then
+            echo "$AUDIT_OUTPUT"
+        fi
+        if [ $AUDIT_EXIT -eq 0 ]; then
+            exit 1
+        fi
+        exit $AUDIT_EXIT
+    fi
 
     # Parse audit results
     if [ $AUDIT_EXIT -eq 0 ]; then
