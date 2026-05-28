@@ -165,6 +165,18 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
         exit $AUDIT_EXIT
     fi
 
+    if [ $AUDIT_EXIT -ne 0 ] && ! echo "$AUDIT_OUTPUT" | node -e "
+const data = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+process.exit(data && data.vulnerabilities ? 0 : 1);
+" >/dev/null 2>&1; then
+        echo -e "${RED}✗ pnpm audit failed without vulnerability data${NC}"
+        if [ -n "$AUDIT_ERROR" ]; then
+            echo "$AUDIT_ERROR"
+        fi
+        echo "$AUDIT_OUTPUT"
+        exit $AUDIT_EXIT
+    fi
+
     # Parse audit results
     if [ $AUDIT_EXIT -eq 0 ]; then
         echo -e "${GREEN}✓ No vulnerabilities found${NC}"
