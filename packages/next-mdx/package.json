@@ -19,10 +19,6 @@
   },
   "files": [
     "dist",
-    "server.js",
-    "server.d.ts",
-    "client.js",
-    "client.d.ts",
     "llms.txt"
   ],
   "bugs": {
