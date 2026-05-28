@@ -1,5 +1,11 @@
 # @opensourceframework/next-csrf
 
+## 0.4.2
+
+### Patch Changes
+
+- fc31491: Keep cookie option types local so declaration builds do not depend on the cookie package's exported type alias name.
+
 ## 0.4.1
 
 ### Patch Changes

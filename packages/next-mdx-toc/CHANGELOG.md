@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.6
+
+### Patch Changes
+
+- 38c533c: Preserve inline code and formatted text when generating table-of-contents titles from MDX headings.
+
 ## 0.1.5
 
 ### Patch Changes
