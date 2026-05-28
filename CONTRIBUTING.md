@@ -21,8 +21,8 @@ This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUC
 
 ### Prerequisites
 
-- **Node.js**: Version 20.0.0 or higher
-- **pnpm**: Version 9.0.0 or higher
+- **Node.js**: Version 20.9.0 or higher
+- **pnpm**: Version 9.6.0 via Corepack
 - **Git**: For version control
 
 ### Initial Setup
@@ -35,14 +35,14 @@ This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUC
 
 2. **Install dependencies**
    ```bash
-   pnpm install
+   corepack pnpm@9.6.0 install
    ```
 
 3. **Verify setup**
    ```bash
-   pnpm build
-   pnpm test
-   pnpm lint
+   corepack pnpm@9.6.0 build
+   corepack pnpm@9.6.0 test
+   corepack pnpm@9.6.0 lint
    ```
 
 ### IDE Setup
