@@ -15,8 +15,6 @@ NC='\033[0m'
 # Configuration
 REPORT_DIR="plans/security-audits"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-REPORT_FILE="$REPORT_DIR/audit-report-$TIMESTAMP.md"
-SUMMARY_FILE="$REPORT_DIR/audit-summary-$TIMESTAMP.json"
 AUDIT_LEVEL="low"  # Options: low, moderate, high, critical
 
 # Usage
@@ -84,6 +82,9 @@ if [[ ! " ${VALID_LEVELS[@]} " =~ " ${AUDIT_LEVEL} " ]]; then
     exit 1
 fi
 
+REPORT_FILE="$REPORT_DIR/audit-report-$TIMESTAMP.md"
+SUMMARY_FILE="$REPORT_DIR/audit-summary-$TIMESTAMP.json"
+
 # Create report directory
 if [ "$DRY_RUN" = false ]; then
     mkdir -p "$REPORT_DIR"
@@ -140,9 +141,41 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
         continue
     fi
 
-    # Run npm audit
-    AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>&1)
+    # Run pnpm audit. Temporarily disable errexit so vulnerability findings
+    # (reported by pnpm as a non-zero exit) can be parsed into the report.
+    AUDIT_ERROR_FILE=$(mktemp)
+    set +e
+    AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>"$AUDIT_ERROR_FILE")
     AUDIT_EXIT=$?
+    set -e
+    AUDIT_ERROR=$(cat "$AUDIT_ERROR_FILE")
+    rm -f "$AUDIT_ERROR_FILE"
+
+    if ! echo "$AUDIT_OUTPUT" | node -e "JSON.parse(require('fs').readFileSync(0, 'utf8'))" >/dev/null 2>&1; then
+        echo -e "${RED}✗ pnpm audit failed before returning JSON${NC}"
+        if [ -n "$AUDIT_ERROR" ]; then
+            echo "$AUDIT_ERROR"
+        fi
+        if [ -n "$AUDIT_OUTPUT" ]; then
+            echo "$AUDIT_OUTPUT"
+        fi
+        if [ $AUDIT_EXIT -eq 0 ]; then
+            exit 1
+        fi
+        exit $AUDIT_EXIT
+    fi
+
+    if [ $AUDIT_EXIT -ne 0 ] && ! echo "$AUDIT_OUTPUT" | node -e "
+const data = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+process.exit(data && data.vulnerabilities ? 0 : 1);
+" >/dev/null 2>&1; then
+        echo -e "${RED}✗ pnpm audit failed without vulnerability data${NC}"
+        if [ -n "$AUDIT_ERROR" ]; then
+            echo "$AUDIT_ERROR"
+        fi
+        echo "$AUDIT_OUTPUT"
+        exit $AUDIT_EXIT
+    fi
 
     # Parse audit results
     if [ $AUDIT_EXIT -eq 0 ]; then
@@ -338,10 +371,10 @@ summary.packages.forEach(pkg => {
     echo "" >> "$REPORT_FILE"
     echo "### Prevention" >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
-    echo "- Use `--audit-level=high` in CI/CD pipelines" >> "$REPORT_FILE"
+    echo '- Use `--audit-level=high` in CI/CD pipelines' >> "$REPORT_FILE"
     echo "- Fail builds on critical/high vulnerabilities" >> "$REPORT_FILE"
     echo "- Regularly update dependencies" >> "$REPORT_FILE"
-    echo "- Use `pnpm audit --fix` to automatically resolve some issues" >> "$REPORT_FILE"
+    echo '- Use `pnpm audit --fix` to automatically resolve some issues' >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
 
     echo -e "${GREEN}✓ Report written to: $REPORT_FILE${NC}"
