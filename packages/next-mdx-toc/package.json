@@ -15,8 +15,8 @@
     "test": "vitest run",
     "build": "tsup",
     "dev": "tsup --watch",
-    "prebuild": "pnpm --filter @opensourceframework/next-mdx build",
-    "predev": "pnpm --filter @opensourceframework/next-mdx build"
+    "prebuild": "corepack pnpm --filter @opensourceframework/next-mdx build",
+    "predev": "corepack pnpm --filter @opensourceframework/next-mdx build"
   },
   "files": [
     "dist",
