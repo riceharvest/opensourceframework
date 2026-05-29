@@ -1,13 +1,12 @@
-> **Note**
-> All `@opensourceframework/next-transpile-modules` features have natively landed to Next.js 13.1, you can check [the migration guide here](https://github.com/martpie/@opensourceframework/next-transpile-modules/releases/tag/the-end).
->
-> This package is now officially deprecated and on life-support.
->
-> PRs with fixes are welcome and I will help review them, but that's it. I **highly** recommend contributing to Next.js in case your setup is not working there.
-
----
-
 # Next.js + Transpile `node_modules`
+
+> **Maintenance note**
+> `@opensourceframework/next-transpile-modules` is maintained as a compatibility-first
+> fork for projects that still depend on the plugin API. Next.js 13.1+ includes native
+> `transpilePackages` support for many setups, but this package is not deprecated in the
+> OpenSourceFramework fork. Native Next.js support is a good option for new applications;
+> this package remains available for existing integrations and edge cases that need the
+> original plugin behavior.
 
 ![Build Status](https://github.com/martpie/@opensourceframework/next-transpile-modules/workflows/tests/badge.svg)
 
