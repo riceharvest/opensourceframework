@@ -758,7 +758,7 @@ describe('Collection', () => {
       );
     });
 
-    it.skip('should cache a cell once it has been rendered while scrolling', () => {
+    it('should cache a cell once it has been rendered while scrolling', () => {
       const cellRendererCalls = [];
       function cellRenderer({isScrolling, index, key, style}) {
         cellRendererCalls.push({isScrolling, index});
@@ -767,8 +767,6 @@ describe('Collection', () => {
 
       const props = {
         cellRenderer,
-        scrollLeft: 0,
-        scrollTop: 0,
       };
 
       const collection = render(getMarkup(props));
@@ -777,7 +775,6 @@ describe('Collection', () => {
         expect(call.isScrolling).toEqual(false),
       );
 
-      // FIXME: simulate scroll is not triggering cells to render in cache
       // Scroll a little bit; newly-rendered cells will be cached.
       simulateScroll({collection, scrollTop: 2});
 
