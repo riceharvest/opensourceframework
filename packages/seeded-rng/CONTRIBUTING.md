@@ -22,7 +22,7 @@ This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUC
 ### Prerequisites
 
 - **Node.js**: Version 20.0.0 or higher
-- **pnpm**: Version 9.0.0 or higher
+- **pnpm**: Version 9.6.0 or higher
 - **Git**: For version control
 
 ### Initial Setup

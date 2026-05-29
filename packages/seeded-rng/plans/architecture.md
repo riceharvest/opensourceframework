@@ -163,9 +163,9 @@ coverage/
   "type": "module",
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+    "pnpm": ">=9.6.0"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
