@@ -1,5 +1,11 @@
 # @opensourceframework/next-transpile-modules
 
+## 10.1.2
+
+### Patch Changes
+
+- f240bf0: Clarify that the OpenSourceFramework fork remains maintained as a compatibility package rather than deprecated upstream life-support guidance.
+
 ## 10.1.1
 
 ### Patch Changes
