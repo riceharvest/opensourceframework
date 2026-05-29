@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.1.7
+
+### Patch Changes
+
+- e34f4e2: Remove stale non-existent root entry files from the `@opensourceframework/next-mdx-toc` published package file list.
+- b649f8a: Use Corepack for the package prebuild/predev workspace dependency build so the repo-pinned pnpm version is used even when the shell has an older pnpm on PATH.
+
 ## 0.1.6
 
 ### Patch Changes
