@@ -4,9 +4,17 @@ import { copyFile, mkdtemp, mkdir, readFile, rm, unlink, writeFile } from 'node:
 import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const require = createRequire(import.meta.url);
+const rootManifest = require('../package.json');
+const pnpmSpec = rootManifest.packageManager?.startsWith('pnpm@')
+  ? rootManifest.packageManager
+  : 'pnpm';
+const pnpmCommand = pnpmSpec === 'pnpm' ? 'pnpm' : 'corepack';
+const pnpmArgs = (args) => (pnpmCommand === 'corepack' ? [pnpmSpec, ...args] : args);
 const ciEnv = {
   ...process.env,
   CI: '1',
@@ -14,45 +22,43 @@ const ciEnv = {
 };
 
 function extractTopLevelJsonArray(text) {
-  let start = -1;
-  let depth = 0;
-  let inString = false;
-  let escaped = false;
+  for (let start = text.indexOf('['); start !== -1; start = text.indexOf('[', start + 1)) {
+    const nextNonWhitespace = text.slice(start + 1).match(/\S/);
+    if (nextNonWhitespace?.[0] !== '{') {
+      continue;
+    }
 
-  for (let index = 0; index < text.length; index += 1) {
-    const char = text[index];
+    let depth = 1;
+    let inString = false;
+    let escaped = false;
 
-    if (start === -1) {
+    for (let index = start + 1; index < text.length; index += 1) {
+      const char = text[index];
+
+      if (inString) {
+        if (escaped) {
+          escaped = false;
+        } else if (char === '\\') {
+          escaped = true;
+        } else if (char === '"') {
+          inString = false;
+        }
+        continue;
+      }
+
+      if (char === '"') {
+        inString = true;
+        continue;
+      }
+
       if (char === '[') {
-        start = index;
-        depth = 1;
-      }
-      continue;
-    }
+        depth += 1;
+      } else if (char === ']') {
+        depth -= 1;
 
-    if (inString) {
-      if (escaped) {
-        escaped = false;
-      } else if (char === '\\') {
-        escaped = true;
-      } else if (char === '"') {
-        inString = false;
-      }
-      continue;
-    }
-
-    if (char === '"') {
-      inString = true;
-      continue;
-    }
-
-    if (char === '[') {
-      depth += 1;
-    } else if (char === ']') {
-      depth -= 1;
-
-      if (depth === 0) {
-        return text.slice(start, index + 1);
+        if (depth === 0) {
+          return text.slice(start, index + 1);
+        }
       }
     }
   }
@@ -98,6 +104,10 @@ function run(command, args, options = {}) {
   });
 }
 
+function runPnpm(args, options = {}) {
+  return run(pnpmCommand, pnpmArgs(args), options);
+}
+
 async function writeFiles(rootDir, files) {
   for (const [relativePath, contents] of Object.entries(files)) {
     const filePath = path.join(rootDir, relativePath);
@@ -107,7 +117,7 @@ async function writeFiles(rootDir, files) {
 }
 
 async function buildPackage(filter) {
-  await run('pnpm', ['--filter', filter, 'build'], {
+  await runPnpm(['--filter', filter, 'build'], {
     cwd: repoRoot,
     env: ciEnv,
   });
@@ -150,10 +160,19 @@ async function packPackage(relativeDir, tarballDir) {
 }
 
 async function installAndRun(packageDir, command, args = []) {
-  await run('pnpm', ['install', '--reporter', 'append-only'], {
+  await runPnpm(['install', '--reporter', 'append-only'], {
     cwd: packageDir,
     env: ciEnv,
   });
+
+  if (command === 'pnpm') {
+    await runPnpm(args, {
+      cwd: packageDir,
+      env: ciEnv,
+    });
+    return;
+  }
+
   await run(command, args, {
     cwd: packageDir,
     env: ciEnv,

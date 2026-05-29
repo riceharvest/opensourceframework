@@ -745,8 +745,8 @@ importers:
   packages/next-mdx-toc:
     dependencies:
       '@opensourceframework/next-mdx':
-        specifier: workspace:*
-        version: link:../next-mdx
+        specifier: ^0.6.2
+        version: 0.6.2(@types/react@19.2.14)(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       mdast-util-toc:
         specifier: ^5.1.0
         version: 5.1.0
@@ -3317,6 +3317,13 @@ packages:
 
   '@open-draft/until@2.1.0':
     resolution: {integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==}
+
+  '@opensourceframework/next-mdx@0.6.2':
+    resolution: {integrity: sha512-chySlDAmw+FmqTrZsOmBOkENci0ApX3p5ONiR/IFeYwpMsl7s5drEiGCGBjmdXQEH2l3vqFwTStlM8V3GZ8Tvw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      next: '>=16.2.6'
+      react: '>= 16.8.0'
 
   '@panva/asn1.js@1.0.0':
     resolution: {integrity: sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==}
@@ -14061,6 +14068,20 @@ snapshots:
       outvariant: 1.4.3
 
   '@open-draft/until@2.1.0': {}
+
+  '@opensourceframework/next-mdx@0.6.2(@types/react@19.2.14)(next@16.2.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@mdx-js/react': 3.1.1(@types/react@19.2.14)(react@19.2.4)
+      crypto-hash: 4.0.1
+      fast-glob: 3.3.3
+      gray-matter: 4.0.3
+      next: 16.2.6(@babel/core@7.29.0)(@playwright/test@1.58.2)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      next-mdx-remote: 6.0.0(@types/react@19.2.14)(react@19.2.4)
+      node-cache: 5.1.2
+      react: 19.2.4
+    transitivePeerDependencies:
+      - '@types/react'
+      - supports-color
 
   '@panva/asn1.js@1.0.0': {}
 
