@@ -141,8 +141,8 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 9+
+- Node.js 20.9+
+- pnpm 9.6.0 via Corepack
 
 ### Setup
 
@@ -152,16 +152,16 @@ git clone https://github.com/riceharvest/opensourceframework.git
 cd opensourceframework
 
 # Install dependencies
-pnpm install
+corepack pnpm@9.6.0 install
 
 # Build all packages
-pnpm build
+corepack pnpm@9.6.0 build
 
 # Run tests
-pnpm test
+corepack pnpm@9.6.0 test
 
 # Lint code
-pnpm lint
+corepack pnpm@9.6.0 lint
 ```
 
 ## License
