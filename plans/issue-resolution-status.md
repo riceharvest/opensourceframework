@@ -159,14 +159,14 @@ All 29 tests (including security and functionality) are passing.
 
 ## next-images (Original Package)
 
-### Status: ⚠️ DEPRECATED (Tests Pass)
+### Status: ✅ READY
 
 | Metric | Value |
 |--------|-------|
 | Tests | 40 passed, 0 failed |
 | Security | No known vulnerabilities |
 | TypeScript | Full type definitions |
-| Deprecation | Marked as deprecated in package.json |
+| Compatibility strategy | Maintained drop-in fork; do not steer users to `next/image` by default |
 
 ---
 
@@ -214,7 +214,7 @@ All 29 tests (including security and functionality) are passing.
 | next-compose-plugins | ✅ 29 passed | ✅ Secure | ✅ Updated | ✅ **YES** |
 | next-transpile-modules | ✅ 57 passed | ✅ Secure | ✅ Good | ✅ **YES** |
 | next-mdx | ✅ 8 passed | ✅ Secure | ✅ Good | ✅ **YES** |
-| next-images | ✅ 40 passed | ✅ Secure | ✅ Good | ⚠️ **DEPRECATED** |
+| next-images | ✅ 40 passed | ✅ Secure | ✅ Good | ✅ **YES** |
 | next-cookies | ✅ 12 passed | ✅ Secure | ✅ Updated | ✅ **YES** |
 | next-pwa | ✅ 8 passed | ✅ Secure | ✅ Good | ✅ **YES** |
 
