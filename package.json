@@ -10,7 +10,7 @@
     "showcase"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "turbo run test",
     "test:compat": "node scripts/test-compat.mjs",
     "test:coverage": "turbo run test:coverage",
