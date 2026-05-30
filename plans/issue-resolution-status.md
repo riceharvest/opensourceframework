@@ -8,7 +8,7 @@
 |--------------------|--------|-------------------|
 | Next.js 14.2.24 / React 18.3.1 | ✅ SAFE | next-images, next-compose-plugins, next-optimized-images, next-mdx, next-session, next-auth, react-virtualized |
 | Next.js 15.2.0 / React 19.0.0 | ✅ SAFE | next-images, next-compose-plugins, next-optimized-images, next-mdx, next-session, next-auth, react-virtualized |
-| Next.js 16.1.6 / React 19.2.0 | ✅ SAFE | next-images, next-compose-plugins, next-optimized-images, next-mdx, next-session, next-auth, react-virtualized |
+| Next.js 16.2.6 / React 19.2.0 | ✅ SAFE | next-images, next-compose-plugins, next-optimized-images, next-mdx, next-session, next-auth, react-virtualized |
 
 ---
 
