@@ -38,7 +38,7 @@ interface CookieListItem
  */
 type ResponseCookie = CookieListItem &
   Pick<CookieSerializeOptions, "httpOnly" | "maxAge"> & {
-    priority?: "low" | "medium" | "high";
+    priority?: "low" | "medium" | "high" | undefined;
   };
 
 /**
