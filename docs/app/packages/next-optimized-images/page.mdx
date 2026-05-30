@@ -1,9 +1,8 @@
+# :sunrise: @opensourceframework/next-optimized-images [![npm version](https://badgen.net/npm/v/@opensourceframework/next-optimized-images)](https://www.npmjs.com/package/@opensourceframework/next-optimized-images) [![license](https://badgen.net/npm/license/@opensourceframework/next-optimized-images)](https://github.com/riceharvest/opensourceframework/blob/main/packages/next-optimized-images/LICENSE) [![downloads](https://badgen.net/npm/dt/@opensourceframework/next-optimized-images)](https://www.npmjs.com/package/@opensourceframework/next-optimized-images)
 
 > [!IMPORTANT]
-> **DEPRECATED**: This package is maintained for legacy support only. 
-> Modern Next.js (v10+) includes a built-in [Image Component](https://nextjs.org/docs/api-reference/next/image) that handles optimization automatically using `sharp`.
-> We recommend migrating to the native Next.js `next/image` for all modern applications.
-# :sunrise: next-optimized-images [![npm version](https://badgen.net/npm/v/next-optimized-images)](https://www.npmjs.com/package/next-optimized-images) [![license](https://badgen.net/github/license/cyrilwanner/next-optimized-images)](https://github.com/cyrilwanner/next-optimized-images/blob/master/LICENSE) [![downloads](https://badgen.net/npm/dt/next-optimized-images)](https://www.npmjs.com/package/next-optimized-images)
+> This is a maintained compatibility fork of the original `next-optimized-images` package for teams that want to keep the existing webpack plugin workflow and switch package names with minimal app changes.
+> If Next.js `next/image` fits your app, you can use it, but this package is still actively maintained as a compatibility option.
 
 **:bulb: Version 3 is coming!**
 It introduces a complete rewrite with many new features and bugfixes. If you want to help developing and testing the upcoming major version, please check out the [canary branch](https://github.com/cyrilwanner/next-optimized-images/tree/canary) for installation instructions and more information about the new features. ([RFC issue](https://github.com/cyrilwanner/next-optimized-images/issues/120))
@@ -37,18 +36,20 @@ Image sizes can often get reduced between 20-60%, but this is not the only thing
 
 ## Installation
 
-```
-npm install next-optimized-images
+```bash
+npm install @opensourceframework/next-optimized-images
+# or
+pnpm add @opensourceframework/next-optimized-images
 ```
 
-*Node >= 8 is required for version 2. If you need to support older node versions, you can still use [version 1](https://github.com/cyrilwanner/next-optimized-images/tree/v1#readme) of next-optimized-images.*
+*Node >= 18 is required for this maintained fork.*
 
 Enable the plugin in your Next.js configuration file:
 
 ```javascript
 // next.config.js
 const withPlugins = require('@opensourceframework/next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
+const optimizedImages = require('@opensourceframework/next-optimized-images');
 
 module.exports = withPlugins([
   [optimizedImages, {
@@ -70,7 +71,7 @@ The example above uses [next-compose-plugins](https://github.com/cyrilwanner/nex
 
 ```javascript
 // next.config.js
-const withOptimizedImages = require('next-optimized-images');
+const withOptimizedImages = require('@opensourceframework/next-optimized-images');
 
 module.exports = withOptimizedImages({
   /* config for next-optimized-images */
@@ -717,7 +718,7 @@ So if they are good enough for your use-case, you don't have to specify them to 
 ```javascript
 // next.config.js
 const withPlugins = require('@opensourceframework/next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
+const optimizedImages = require('@opensourceframework/next-optimized-images');
 
 module.exports = withPlugins([
   [optimizedImages, {
