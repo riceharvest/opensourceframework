@@ -6,12 +6,12 @@ It is critical that you look over the guidance for new components [here](ADDING_
 
 ## 🚀 Quick Start
 
-1. Fork the repository
-2. Clone your fork: `git clone git@github.com:your-username/next-seo.git`
-3. Install dependencies: `pnpm install`
+1. Fork the OpenSourceFramework monorepo
+2. Clone your fork: `git clone git@github.com:your-username/opensourceframework.git`
+3. Install dependencies: `corepack pnpm@9.6.0 install`
 4. Create a new branch: `git checkout -b feature/your-feature-name`
-5. Make your changes
-6. Add a changeset: `pnpm changeset`
+5. Make your changes in `packages/next-seo`
+6. Add a changeset when your change affects the published package: `corepack pnpm@9.6.0 changeset`
 7. Submit a pull request
 
 ## 📦 Development Setup
@@ -19,33 +19,33 @@ It is critical that you look over the guidance for new components [here](ADDING_
 ### Prerequisites
 
 - Node.js 20+ (LTS recommended)
-- pnpm 9+ (`npm install -g pnpm`)
+- pnpm 9.6.0 via Corepack
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone git@github.com:garmeeh/next-seo.git
-cd next-seo
+# Clone the OpenSourceFramework monorepo
+git clone git@github.com:riceharvest/opensourceframework.git
+cd opensourceframework
 
 # Install dependencies
-pnpm install
+corepack pnpm@9.6.0 install
 
-# Start development (watch mode)
-pnpm dev
+# Start next-seo development (watch mode)
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo dev
 ```
 
 ### Available Commands
 
 ```bash
-pnpm dev          # Watch mode development
-pnpm build        # Build the library
-pnpm test         # Run type checking and linting
-pnpm test:unit    # Run unit tests
-pnpm test:e2e     # Run E2E tests (requires build first)
-pnpm test:sweep   # Run full test suite (CI equivalent)
-pnpm lint         # Check linting
-pnpm format       # Format code with Prettier
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo dev        # Watch mode development
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo build      # Build the library
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test       # Run type checking and linting
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:unit  # Run unit tests
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:e2e   # Run E2E tests (requires build first)
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:sweep # Run full test suite (CI equivalent)
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo lint       # Check linting
+corepack pnpm@9.6.0 format                                             # Format code with Prettier
 ```
 
 ## 📝 Adding a Changeset
@@ -62,7 +62,7 @@ A changeset is a piece of information about changes made in a branch or commit. 
 
 ### How to add a changeset:
 
-1. After making your changes, run: `pnpm changeset`
+1. After making package changes, run: `corepack pnpm@9.6.0 changeset`
 2. Select the packages affected (usually just `next-seo`)
 3. Choose the type of change:
    - **patch**: Bug fixes, documentation, internal changes (0.0.X) **Rarely use this, generally only for security, since this is an SEO package I don't want patches to slip through for people without validating**
@@ -74,7 +74,7 @@ A changeset is a piece of information about changes made in a branch or commit. 
 ### Example:
 
 ```bash
-$ pnpm changeset
+$ corepack pnpm@9.6.0 changeset
 🦋 Which packages would you like to include? › next-seo
 🦋 Which packages should have a major bump? › (none)
 🦋 Which packages should have a minor bump? › next-seo
@@ -121,11 +121,11 @@ Before submitting a PR, ensure all tests pass:
 
 ```bash
 # Quick checks
-pnpm test         # Type checking and linting
-pnpm test:unit    # Unit tests
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test       # Type checking and linting
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:unit  # Unit tests
 
 # Full validation (what CI runs)
-pnpm test:sweep   # Complete test suite
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:sweep # Complete test suite
 ```
 
 ## 🔄 Pull Request Process
@@ -147,7 +147,7 @@ pnpm test:sweep   # Complete test suite
 
 ## ❓ Questions?
 
-- Open a [Discussion](https://github.com/garmeeh/next-seo/discussions) for general questions
+- Open a [Discussion](https://github.com/riceharvest/opensourceframework/discussions) for general questions
 - Check existing issues and PRs
 - Refer to the [README](./README.md) for usage documentation
 

@@ -17,49 +17,49 @@ You must check these after coming up with a plan
 ### Installation
 
 ```bash
-pnpm install
+corepack pnpm@9.6.0 install
 ```
 
 ### Build & Development
 
 ```bash
-pnpm dev          # Watch mode with tsup
-pnpm build        # Build library code
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo dev    # Watch mode with tsup
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo build  # Build library code
 ```
 
 ### Code Quality
 
 ```bash
-pnpm lint         # Run ESLint
-pnpm lint:fix     # Fix ESLint issues
-pnpm format       # Format with Prettier
-pnpm typecheck    # Type checking with TypeScript
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo lint       # Run ESLint
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo lint:fix   # Fix ESLint issues
+corepack pnpm@9.6.0 format                                             # Format with Prettier
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo typecheck  # Type checking with TypeScript
 ```
 
 ### Testing
 
 ```bash
-pnpm test         # Run typecheck + lint only
-pnpm test:unit    # Run unit tests with Vitest
-pnpm test:unit:watch  # Watch mode for unit tests
-pnpm coverage     # Generate coverage report
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test             # Run typecheck + lint only
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:unit        # Run unit tests with Vitest
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:unit:watch  # Watch mode for unit tests
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo coverage         # Generate coverage report
 # Requires pnpm build to run first
-pnpm test:e2e     # Run E2E tests with Playwright
-pnpm test:e2e:ui  # Run E2E tests with UI
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:e2e     # Run E2E tests with Playwright
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo test:e2e:ui  # Run E2E tests with UI
 ```
 
 ### Example App
 
 ```bash
-pnpm example:dev    # Run example app at localhost:3001
-pnpm example:build  # Build example app
-pnpm example:start  # Start example app
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo example:dev    # Run example app at localhost:3001
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo example:build  # Build example app
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo example:start  # Start example app
 ```
 
 ### Utilities
 
 ```bash
-pnpm clean        # Clean build artifacts
+corepack pnpm@9.6.0 --filter @opensourceframework/next-seo clean  # Clean build artifacts
 ```
 
 ## Project Architecture
