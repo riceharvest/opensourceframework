@@ -21,8 +21,8 @@ Welcome! This document provides guidelines for contributing to any `@opensourcef
 2. **Pick a package** to work on from `packages/`
 3. **Create a branch**: `git checkout -b feat/package-name/feature`
 4. **Make changes** following the guidelines below
-5. **Test thoroughly**: `pnpm --filter @opensourceframework/package-name test`
-6. **Create a changeset**: `pnpm changeset`
+5. **Test thoroughly**: `corepack pnpm@9.6.0 --filter @opensourceframework/package-name test`
+6. **Create a changeset**: `corepack pnpm@9.6.0 changeset`
 7. **Open a PR** with completed checklist
 
 ## Package Status
@@ -112,19 +112,19 @@ All packages must meet these testing standards:
 
 ```bash
 # All packages
-pnpm test
+corepack pnpm@9.6.0 test
 
 # Specific package
-pnpm --filter @opensourceframework/next-csrf test
+corepack pnpm@9.6.0 --filter @opensourceframework/next-csrf test
 
 # With coverage
-pnpm --filter @opensourceframework/package-name test:coverage
+corepack pnpm@9.6.0 --filter @opensourceframework/package-name test:coverage
 
 # Watch mode
-pnpm --filter @opensourceframework/package-name test:watch
+corepack pnpm@9.6.0 --filter @opensourceframework/package-name test:watch
 
 # Type checking
-pnpm --filter @opensourceframework/package-name typecheck
+corepack pnpm@9.6.0 --filter @opensourceframework/package-name typecheck
 ```
 
 ### Test File Location
@@ -176,7 +176,7 @@ List features that are deprecated and alternatives.
 
 ### Upgrade Steps
 
-1. Update package: `pnpm update @opensourceframework/package-name`
+1. Update package: `corepack pnpm@9.6.0 update @opensourceframework/package-name`
 2. Update code according to changes
 3. Run tests
 4. Test your application thoroughly
@@ -206,7 +206,7 @@ Releases are managed via [Changesets](https://github.com/changesets/changesets).
 
 1. **Create a changeset** after merging your PR:
    ```bash
-   pnpm changeset
+   corepack pnpm@9.6.0 changeset
    ```
    - Select affected packages
    - Choose version bump (major/minor/patch)
@@ -229,11 +229,11 @@ Releases are managed via [Changesets](https://github.com/changesets/changesets).
 
 ### For Maintainers
 
-1. **Version bump**: `pnpm changeset version`
-2. **Update lockfile**: `pnpm install`
-3. **Build all packages**: `pnpm build`
-4. **Run tests**: `pnpm test`
-5. **Publish**: `pnpm changeset publish`
+1. **Version bump**: `corepack pnpm@9.6.0 changeset version`
+2. **Update lockfile**: `corepack pnpm@9.6.0 install`
+3. **Build all packages**: `corepack pnpm@9.6.0 build`
+4. **Run tests**: `corepack pnpm@9.6.0 test`
+5. **Publish**: `corepack pnpm@9.6.0 changeset publish`
 6. **Create release notes**: Automatic via changesets
 
 ## Branch Naming
