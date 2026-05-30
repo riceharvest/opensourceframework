@@ -126,24 +126,24 @@ chore(deps): update typescript to v5.4.0
 3. **Test your changes**
    ```bash
    # Run tests for all packages
-   pnpm test
+   corepack pnpm@9.6.0 test
    
    # Run tests for a specific package
-   pnpm --filter @opensourceframework/next-csrf test
+   corepack pnpm@9.6.0 --filter @opensourceframework/next-csrf test
    
    # Run tests with coverage
-   pnpm test:coverage
+   corepack pnpm@9.6.0 test:coverage
    ```
 
 4. **Lint and format**
    ```bash
-   pnpm lint
-   pnpm format
+   corepack pnpm@9.6.0 lint
+   corepack pnpm@9.6.0 format
    ```
 
 5. **Create a changeset** (for user-facing changes)
    ```bash
-   pnpm changeset
+   corepack pnpm@9.6.0 changeset
    ```
    This will prompt you to:
    - Select affected packages
@@ -175,8 +175,8 @@ chore(deps): update typescript to v5.4.0
 
 - Formatting is enforced via Prettier
 - Linting rules are enforced via ESLint
-- Run `pnpm format` before committing
-- Run `pnpm lint` to check for issues
+- Run `corepack pnpm@9.6.0 format` before committing
+- Run `corepack pnpm@9.6.0 lint` to check for issues
 
 ### File Organization
 
@@ -206,16 +206,16 @@ packages/[package-name]/
 
 ```bash
 # All tests
-pnpm test
+corepack pnpm@9.6.0 test
 
 # Watch mode
-pnpm --filter @opensourceframework/next-csrf test:watch
+corepack pnpm@9.6.0 --filter @opensourceframework/next-csrf test:watch
 
 # Coverage report
-pnpm test:coverage
+corepack pnpm@9.6.0 test:coverage
 
 # Specific test file
-pnpm --filter @opensourceframework/next-csrf vitest run src/index.test.ts
+corepack pnpm@9.6.0 --filter @opensourceframework/next-csrf vitest run src/index.test.ts
 ```
 
 ### Writing Tests
