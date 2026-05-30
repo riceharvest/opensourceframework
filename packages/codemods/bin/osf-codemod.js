@@ -4,11 +4,12 @@ const { program } = require('commander');
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const { version } = require('../package.json');
 
 program
   .name('osf-codemod')
   .description('CLI to run OpenSource Framework codemods')
-  .version('0.1.0');
+  .version(version);
 
 program
   .command('next-seo')
