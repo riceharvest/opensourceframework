@@ -31,9 +31,15 @@ interface CookieListItem
 /**
  * Superset of {@link CookieListItem} extending it with
  * the `httpOnly`, `maxAge` and `priority` properties.
+ *
+ * `cookie@0.7` serializes the Priority attribute at runtime, but its DefinitelyTyped
+ * definitions do not expose that option yet. Keep the Next-compatible cookie store
+ * type explicit instead of depending on a missing `CookieSerializeOptions` key.
  */
 type ResponseCookie = CookieListItem &
-  Pick<CookieSerializeOptions, "httpOnly" | "maxAge" | "priority">;
+  Pick<CookieSerializeOptions, "httpOnly" | "maxAge"> & {
+    priority?: "low" | "medium" | "high";
+  };
 
 /**
  * The high-level type definition of the .get() and .set() methods

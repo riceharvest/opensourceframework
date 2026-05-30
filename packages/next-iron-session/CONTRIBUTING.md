@@ -6,22 +6,25 @@ the following guide:
 
 ## Repository Setup
 
+This package is maintained inside the OpenSourceFramework monorepo. Use the
+root-pinned pnpm version so package scripts match CI and the lockfile:
+
 ```sh
 fnm install
 corepack enable
-pnpm install
+corepack pnpm@9.6.0 install
 ```
 
 ## Development
 
 ```sh
-pnpm dev
+corepack pnpm@9.6.0 --filter @opensourceframework/next-iron-session dev
 ```
 
 ## Tests
 
 ```sh
-pnpm test
+corepack pnpm@9.6.0 --filter @opensourceframework/next-iron-session test
 ```
 
 ## Submitting a Contribution
