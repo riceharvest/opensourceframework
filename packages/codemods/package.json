@@ -6,6 +6,13 @@
   "bin": {
     "osf-codemod": "bin/osf-codemod.js"
   },
+  "files": [
+    "bin",
+    "dist",
+    "src/transforms",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests"
