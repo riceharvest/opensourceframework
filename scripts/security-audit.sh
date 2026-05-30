@@ -16,6 +16,7 @@ NC='\033[0m'
 REPORT_DIR="plans/security-audits"
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 AUDIT_LEVEL="low"  # Options: low, moderate, high, critical
+PNPM_CMD=(corepack pnpm@9.6.0)
 
 # Usage
 show_help() {
@@ -25,7 +26,7 @@ show_help() {
     echo "  --level LEVEL        Audit level: low, moderate, high, critical (default: low)"
     echo "  --output DIR         Output directory for reports (default: plans/security-audits)"
     echo "  --packages LIST      Comma-separated list of packages to audit (default: all)"
-    echo "  --fix                Attempt to automatically fix vulnerabilities (pnpm audit --fix)"
+    echo "  --fix                Attempt to automatically fix vulnerabilities (corepack pnpm@9.6.0 audit --fix)"
     echo "  --dry-run            Show what would be audited without auditing"
     echo "  --help               Show this help message"
     echo ""
@@ -136,7 +137,7 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
     echo ""
 
     if [ "$DRY_RUN" = true ]; then
-        echo -e "${YELLOW}[DRY RUN] Would run: pnpm -C $PKG_DIR audit --audit-level=$AUDIT_LEVEL${NC}"
+        echo -e "${YELLOW}[DRY RUN] Would run: ${PNPM_CMD[*]} -C $PKG_DIR audit --audit-level=$AUDIT_LEVEL${NC}"
         echo ""
         continue
     fi
@@ -145,7 +146,7 @@ for pkg_json in "${PACKAGE_JSONS[@]}"; do
     # (reported by pnpm as a non-zero exit) can be parsed into the report.
     AUDIT_ERROR_FILE=$(mktemp)
     set +e
-    AUDIT_OUTPUT=$(pnpm -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>"$AUDIT_ERROR_FILE")
+    AUDIT_OUTPUT=$("${PNPM_CMD[@]}" -C "$PKG_DIR" audit --audit-level="$AUDIT_LEVEL" --json 2>"$AUDIT_ERROR_FILE")
     AUDIT_EXIT=$?
     set -e
     AUDIT_ERROR=$(cat "$AUDIT_ERROR_FILE")
@@ -261,7 +262,7 @@ if (data.vulnerabilities) {
     # Try to fix if requested
     if [ "$FIX_VULNS" = true ] && [ $VULN_COUNT -gt 0 ]; then
         echo -e "${YELLOW}  Attempting to fix vulnerabilities...${NC}"
-        if pnpm -C "$PKG_DIR" audit --fix 2>&1 | tee /tmp/audit-fix.log; then
+        if "${PNPM_CMD[@]}" -C "$PKG_DIR" audit --fix 2>&1 | tee /tmp/audit-fix.log; then
             echo -e "${GREEN}  ✓ Fix attempted. Re-run audit to verify.${NC}"
         else
             echo -e "${YELLOW}  ⚠ Some fixes may require manual intervention${NC}"
@@ -374,7 +375,7 @@ summary.packages.forEach(pkg => {
     echo '- Use `--audit-level=high` in CI/CD pipelines' >> "$REPORT_FILE"
     echo "- Fail builds on critical/high vulnerabilities" >> "$REPORT_FILE"
     echo "- Regularly update dependencies" >> "$REPORT_FILE"
-    echo '- Use `pnpm audit --fix` to automatically resolve some issues' >> "$REPORT_FILE"
+    echo '- Use `corepack pnpm@9.6.0 audit --fix` to automatically resolve some issues' >> "$REPORT_FILE"
     echo "" >> "$REPORT_FILE"
 
     echo -e "${GREEN}✓ Report written to: $REPORT_FILE${NC}"
