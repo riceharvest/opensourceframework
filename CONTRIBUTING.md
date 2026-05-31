@@ -182,16 +182,16 @@ chore(deps): update typescript to v5.4.0
 
 ```
 packages/[package-name]/
-â src/
-â  â index.ts          # Public exports
-â  â [module].ts       # Module implementations
-â  â __tests__/        # Test files (co-located)
-â test/
-â  â index.test.ts     # Integration tests
-â package.json
-â tsconfig.json
-â tsup.config.ts
-â vitest.config.ts
+├ src/
+│  ├ index.ts          # Public exports
+│  ├ [module].ts       # Module implementations
+│  └ __tests__/        # Test files (co-located)
+├ test/
+│  └ index.test.ts     # Integration tests
+├ package.json
+├ tsconfig.json
+├ tsup.config.ts
+└ vitest.config.ts
 ```
 
 ## Testing Requirements
@@ -327,4 +327,4 @@ export function generateToken(options?: { length?: number }): string {
 - **Bugs?** Open an issue with the bug template
 - **Security issues?** Follow our [Security Policy](./SECURITY.md)
 
-Thank you for contributing to OpenSource Framework! ð
+Thank you for contributing to OpenSource Framework! 🎉
