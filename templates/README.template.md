@@ -72,22 +72,22 @@ If you're migrating from the original `{original-name}` package:
 
 ```bash
 # Install dependencies
-pnpm install
+corepack pnpm@9.6.0 install
 
 # Build the package
-pnpm build
+corepack pnpm@9.6.0 build
 
 # Run tests
-pnpm test
+corepack pnpm@9.6.0 test
 
 # Run tests with coverage
-pnpm test:coverage
+corepack pnpm@9.6.0 test:coverage
 
 # Type checking
-pnpm typecheck
+corepack pnpm@9.6.0 typecheck
 
 # Linting
-pnpm lint
+corepack pnpm@9.6.0 lint
 ```
 
 ## Security Considerations
