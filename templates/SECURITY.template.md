@@ -40,9 +40,9 @@ Please include the following information in your report:
 
 When using @opensourceframework packages, please follow these security best practices:
 
-1. **Keep dependencies updated**: Regularly run `pnpm update` to get the latest security patches.
+1. **Keep dependencies updated**: Regularly run `corepack pnpm@9.6.0 update` to get the latest security patches.
 2. **Use environment variables**: Never hardcode secrets in your code. Use environment variables for sensitive configuration.
-3. **Review dependencies**: Regularly audit your dependencies with `pnpm audit`.
+3. **Review dependencies**: Regularly audit your dependencies with `corepack pnpm@9.6.0 audit`.
 4. **Enable HTTPS**: Use HTTPS in production, especially for cookie-based security features.
 5. **Follow principle of least privilege**: Configure packages with minimal necessary permissions.
 

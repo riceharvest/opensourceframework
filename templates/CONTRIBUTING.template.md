@@ -38,17 +38,17 @@ Thank you for your interest in contributing to @opensourceframework/{package-nam
 
 2. **Install dependencies**
    ```bash
-   pnpm install
+   corepack pnpm@9.6.0 install
    ```
 
 3. **Build the package**
    ```bash
-   pnpm --filter @opensourceframework/{package-name} build
+   corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} build
    ```
 
 4. **Run tests**
    ```bash
-   pnpm --filter @opensourceframework/{package-name} test
+   corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} test
    ```
 
 ## Development Workflow
@@ -88,7 +88,7 @@ test({package-name}): add integration tests for edge cases
 For any user-facing changes, create a changeset:
 
 ```bash
-pnpm changeset
+corepack pnpm@9.6.0 changeset
 ```
 
 Select:
@@ -106,16 +106,16 @@ Select:
 Run tests:
 ```bash
 # All tests for this package
-pnpm --filter @opensourceframework/{package-name} test
+corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} test
 
 # Watch mode
-pnpm --filter @opensourceframework/{package-name} test:watch
+corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} test:watch
 
 # Coverage
-pnpm --filter @opensourceframework/{package-name} test:coverage
+corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} test:coverage
 
 # Type checking
-pnpm --filter @opensourceframework/{package-name} typecheck
+corepack pnpm@9.6.0 --filter @opensourceframework/{package-name} typecheck
 ```
 
 ### Pull Request Process
