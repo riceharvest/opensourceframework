@@ -112,6 +112,64 @@ describe('@opensourceframework/turn-based-game-engine', () => {
     vi.useRealTimers();
   });
 
+  it('returns armor durability updates when equipped armor is damaged in combat', () => {
+    vi.useFakeTimers({ now: new Date('2026-01-01T00:00:00.000Z') });
+    const randomSpy = vi
+      .spyOn(Math, 'random')
+      .mockReturnValueOnce(0.99) // player misses
+      .mockReturnValueOnce(0) // enemy attacks
+      .mockReturnValueOnce(0.99) // player does not dodge
+      .mockReturnValueOnce(0); // hit head
+
+    const state = createMinimalGameState({
+      activeRaid: {
+        locationId: 'factory',
+        startTime: Date.now(),
+        elapsedTime: 0,
+        status: 'combat',
+        currentEnemy: { id: 'scav-basic', hp: 100, maxHp: 100 },
+        lootFound: [],
+        raidLogs: [],
+        isScav: false,
+        seed: 1,
+      },
+      equipment: { bodyArmor: 'armor-1', primary: 'weapon-1' },
+      stash: [
+        {
+          instanceId: 'weapon-1',
+          itemId: 'ak-74',
+          x: 0,
+          y: 0,
+          rotated: false,
+          quantity: 1,
+          foundInRaid: false,
+        },
+        {
+          instanceId: 'armor-1',
+          itemId: 'paca',
+          x: 0,
+          y: 0,
+          rotated: false,
+          quantity: 1,
+          foundInRaid: false,
+          durability: 100,
+          maxDurability: 100,
+        },
+      ],
+    });
+
+    vi.advanceTimersByTime(1000);
+    const result = processTick(state);
+
+    expect(result.updates.stash?.find(item => item.instanceId === 'armor-1')?.durability).toBe(
+      93
+    );
+    expect(state.stash.find(item => item.instanceId === 'armor-1')?.durability).toBe(100);
+
+    randomSpy.mockRestore();
+    vi.useRealTimers();
+  });
+
   it('keeps ballistics utilities available from the public entrypoint', () => {
     expect(calculateFirstShotRecoil(10)).toBeGreaterThan(1);
   });

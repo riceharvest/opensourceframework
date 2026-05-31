@@ -591,7 +591,8 @@ function processRaidTick(
 ): RaidProcessResult {
     const events: GameEvent[] = [];
     const raidUpdates: Partial<ActiveRaid> = {
-        elapsedTime: raid.elapsedTime + dt
+        elapsedTime: raid.elapsedTime + dt,
+        raidLogs: [...raid.raidLogs]
     };
     // Only collect new logs, apply at end
     const newLogs: string[] = [];
@@ -810,7 +811,11 @@ function processRaidTick(
         }
     }
 
-    return { raidUpdates, playerStatsUpdates: playerStatsUpdates ?? undefined, events };
+    if (newLogs.length > 0) {
+        raidUpdates.raidLogs = [...(raidUpdates.raidLogs ?? raid.raidLogs), ...newLogs];
+    }
+
+    return { raidUpdates, playerStatsUpdates: playerStatsUpdates ?? undefined, stashUpdates, events };
 }
 
 function formatTime(s: number): string {
