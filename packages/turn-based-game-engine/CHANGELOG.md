@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- 745d68c: Return raid stash updates so equipped armor durability damage is applied after combat ticks.
+
 ## 0.2.0
 
 ### Minor Changes
