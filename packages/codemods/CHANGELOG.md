@@ -1,5 +1,11 @@
 # @opensourceframework/codemods
 
+## 0.1.3
+
+### Patch Changes
+
+- 69e1949: Harden the codemod CLI against shell injection in migration paths and limit the published package contents to runtime files.
+
 ## 0.1.2
 
 ### Patch Changes
