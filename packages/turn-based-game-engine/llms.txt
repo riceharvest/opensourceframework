@@ -1,0 +1,10 @@
+# @opensourceframework/turn-based-game-engine
+
+Framework-agnostic TypeScript game engine primitives extracted from tarkuv.
+
+Public API:
+- `processTick`, `calculateOfflineProgress`, `processRaidExtraction`, `processPlayerDeath`
+- item, map, enemy, encounter, quest, trader, recipe, skill, and RNG utilities
+- serializable TypeScript types for game state, raids, inventory, quests, and hideout systems
+
+The deterministic RNG is for games and simulations, not cryptographic use.
