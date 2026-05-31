@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/turn-based-game-engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn-based extraction game engine primitives with deterministic raids, items, maps, enemies, crafting, quests, and skills.",
   "keywords": [
     "game",
