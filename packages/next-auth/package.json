@@ -149,7 +149,6 @@
     "postcss-cli": "^11.0.1",
     "postcss-nested": "^7.0.2",
     "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tsup": "^8.5.1",
