@@ -1769,7 +1769,11 @@ export function getWeightThreshold(weight: number): WeightThresholdDef {
             return threshold;
         }
     }
-    return WEIGHT_THRESHOLDS[WEIGHT_THRESHOLDS.length - 1]!;
+    const fallbackThreshold = WEIGHT_THRESHOLDS.at(-1);
+    if (!fallbackThreshold) {
+        throw new Error('Weight thresholds are not configured');
+    }
+    return fallbackThreshold;
 }
 
 /**

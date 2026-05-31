@@ -12,9 +12,6 @@ import type { GameState, ActiveRaid, InventoryItem, InsuranceReturn, PlayerStats
 // Maximum delta time to prevent extreme jumps (5 seconds)
 const MAX_DELTA_TIME = 5;
 
-// Maximum offline seconds for passive XP (8 hours)
-const MAX_OFFLINE_SECONDS = 8 * 60 * 60; // 8 hours
-
 export interface TickResult {
     updates: Partial<GameState>;
     events: GameEvent[];
@@ -590,9 +587,10 @@ function processRaidTick(
     rng: SeededRNG
 ): RaidProcessResult {
     const events: GameEvent[] = [];
+    const raidLogs = [...raid.raidLogs];
     const raidUpdates: Partial<ActiveRaid> = {
         elapsedTime: raid.elapsedTime + dt,
-        raidLogs: [...raid.raidLogs]
+        raidLogs
     };
     // Only collect new logs, apply at end
     const newLogs: string[] = [];
@@ -683,12 +681,12 @@ function processRaidTick(
             const weaponName = weaponData.shortName;
 
             if (raidUpdates.elapsedTime !== undefined) {
-                raidUpdates.raidLogs!.push(`[${formatTime(raidUpdates.elapsedTime)}] Engaging hostile. Hit confirmed with ${weaponName}.`);
+                raidLogs.push(`[${formatTime(raidUpdates.elapsedTime)}] Engaging hostile. Hit confirmed with ${weaponName}.`);
             }
 
             if (newHp <= 0) {
                 if (raidUpdates.elapsedTime !== undefined) {
-                    raidUpdates.raidLogs!.push(`[${formatTime(raidUpdates.elapsedTime)}] Target KIA.`);
+                    raidLogs.push(`[${formatTime(raidUpdates.elapsedTime)}] Target KIA.`);
                 }
                 raidUpdates.status = 'searching';
                 // Properly remove currentEnemy by using delete
@@ -723,7 +721,7 @@ function processRaidTick(
             const damage = enemy?.damage || 15;
 
             if (raidUpdates.elapsedTime !== undefined) {
-                raidUpdates.raidLogs!.push(`[${formatTime(raidUpdates.elapsedTime)}] Taking fire! Impact to ${part.toUpperCase()}.`);
+                raidLogs.push(`[${formatTime(raidUpdates.elapsedTime)}] Taking fire! Impact to ${part.toUpperCase()}.`);
             }
 
             // Get current HP values - use type assertion to handle strict narrowing
@@ -799,12 +797,12 @@ function processRaidTick(
             const lootItemData = ITEM_DATABASE[lootId];
             if (lootItemData) {
                 if (raidUpdates.elapsedTime !== undefined) {
-                    raidUpdates.raidLogs!.push(`[${formatTime(raidUpdates.elapsedTime)}] Secured ${lootItemData.shortName}.`);
+                    raidLogs.push(`[${formatTime(raidUpdates.elapsedTime)}] Secured ${lootItemData.shortName}.`);
                 }
             } else {
                 gameLogger.error('Invalid loot ID in raid', { lootId });
                 if (raidUpdates.elapsedTime !== undefined) {
-                    raidUpdates.raidLogs!.push(`[${formatTime(raidUpdates.elapsedTime)}] Secured unknown item.`);
+                    raidLogs.push(`[${formatTime(raidUpdates.elapsedTime)}] Secured unknown item.`);
                 }
             }
             raidUpdates.status = 'searching';
@@ -988,7 +986,7 @@ export function calculateRaidLootValue(
  */
 export function processPlayerDeath(
     state: GameState,
-    cause: string
+    _cause: string
 ): { updates: Partial<GameState>; insuranceReturns: InsuranceReturn[] } {
     const now = Date.now();
     const equippedIds = Object.values(state.equipment).filter(Boolean) as string[];
