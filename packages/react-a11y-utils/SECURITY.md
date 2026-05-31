@@ -23,7 +23,7 @@ Given that we maintain security-critical packages like `next-csrf`, we take secu
 
 Instead, please report them through GitHub Security Advisories:
 
-1. Go to the [Security Advisories page](https://github.com/opensourceframework/opensourceframework/security/advisories/new)
+1. Go to the [Security Advisories page](https://github.com/riceharvest/opensourceframework/security/advisories/new)
 2. Click "Report a vulnerability"
 3. Fill out the form with details about the vulnerability
 

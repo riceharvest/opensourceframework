@@ -30,8 +30,7 @@ pnpm add @opensourceframework/critters
 ## Usage
 
 ```javascript
-// Example usage - will be updated when implementation is complete
-import { /* exports */ } from '@opensourceframework/critters';
+import Critters from '@opensourceframework/critters';
 ```
 
 ## Documentation
@@ -49,5 +48,5 @@ MIT © OpenSource Framework Contributors
 ## Links
 
 - [Original Package](https://www.npmjs.com/package/critters)
-- [Issue Tracker](https://github.com/opensourceframework/opensourceframework/issues)
+- [Issue Tracker](https://github.com/riceharvest/opensourceframework/issues)
 - [Changelog](./CHANGELOG.md)
