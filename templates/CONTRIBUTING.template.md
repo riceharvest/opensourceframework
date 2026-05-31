@@ -163,4 +163,4 @@ packages/{package-name}/
 - **Bugs?** Open an [Issue](https://github.com/riceharvest/opensourceframework/issues)
 - **Security?** See our [Security Policy](./SECURITY.md)
 
-Thank you for contributing! ðŸŽ‰
+Thank you for contributing! 🎉
