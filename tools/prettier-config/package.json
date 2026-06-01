@@ -4,6 +4,7 @@
   "private": false,
   "description": "Shared Prettier config for OpenSourceFramework packages",
   "license": "MIT",
+  "type": "module",
   "main": "index.js",
   "exports": {
     ".": "./index.js"
