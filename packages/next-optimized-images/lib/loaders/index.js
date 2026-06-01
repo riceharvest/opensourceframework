@@ -1,3 +1,5 @@
+const path = require('path');
+const { builtinModules } = require('module');
 const { applyImgLoader } = require('./img-loader');
 const { applyWebpLoader } = require('./webp-loader');
 const { applyResponsiveLoader } = require('./responsive-loader');
@@ -12,7 +14,21 @@ const { applyFileLoader } = require('./file-loader');
  */
 const isModuleInstalled = (name, resolvePath) => {
   try {
-    require.resolve(name, resolvePath ? { paths: [resolvePath] } : undefined);
+    if (resolvePath) {
+      const normalizedName = name.startsWith('node:') ? name.slice(5) : name;
+
+      if (builtinModules.includes(normalizedName)) {
+        return true;
+      }
+
+      const modulePath = name.startsWith('.') || path.isAbsolute(name)
+        ? path.resolve(resolvePath, name)
+        : path.join(resolvePath, 'node_modules', name);
+
+      require.resolve(modulePath);
+    } else {
+      require.resolve(name);
+    }
 
     return true;
   } catch {
