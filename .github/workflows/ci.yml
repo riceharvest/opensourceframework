@@ -85,7 +85,8 @@ jobs:
           fi
           echo "base_sha=${BASE_SHA}" >> "$GITHUB_OUTPUT"
 
-  # Matrix testing across Node versions and OS
+  # Matrix testing across supported Node versions and OS.
+  # The repository and secured Vitest 4.1+ toolchain require Node 20 or newer.
   test-matrix:
     name: Test (Node ${{ matrix.node }}, ${{ matrix.os }})
     needs: [detect-affected]
@@ -97,17 +98,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [18, 20, 22]
+        node: [20, 22]
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
           # Only run full matrix on Linux.
-          # For Windows and macOS, only run the LTS version (Node 20)
-          - node: 18
-            os: windows-latest
+          # For Windows and macOS, only run the active LTS version (Node 20).
           - node: 22
             os: windows-latest
-          - node: 18
-            os: macos-latest
           - node: 22
             os: macos-latest
     steps:
@@ -160,16 +157,6 @@ jobs:
           fi
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20
 
-      - name: Test (Node 18, exclude showcase)
-        run: |
-          TURBO_FILTER="${{ needs.detect-affected.outputs.turbo_filter }}"
-          if [ "${{ needs.detect-affected.outputs.has_targets }}" = "true" ]; then
-            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="...${TURBO_FILTER}..." --filter="!showcase"
-          else
-            pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR" --filter="!showcase"
-          fi
-        if: matrix.node == 18
-
       - name: Test (no coverage)
         run: |
           TURBO_FILTER="${{ needs.detect-affected.outputs.turbo_filter }}"
@@ -178,7 +165,7 @@ jobs:
           else
             pnpm turbo run test --cache-dir="$TURBO_CACHE_DIR"
           fi
-        if: matrix.os != 'ubuntu-latest' || (matrix.node != 20 && matrix.node != 18)
+        if: matrix.os != 'ubuntu-latest' || matrix.node != 20
 
       - name: Upload Coverage
         if: matrix.os == 'ubuntu-latest' && matrix.node == 20

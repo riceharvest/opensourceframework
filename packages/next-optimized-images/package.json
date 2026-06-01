@@ -48,12 +48,12 @@
     "url-loader": "^4.1.1"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/coverage-v8": "^4.1.8",
     "next": "^16.2.6",
     "shx": "^0.4.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^2.1.9",
+    "vitest": "^4.1.8",
     "webpack": "^5.105.4"
   },
   "peerDependencies": {

@@ -76,7 +76,7 @@
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
     "eslint-plugin-jest": "^29.15.0",
     "happy-dom": "^15.11.7",
     "jsdom": "^25.0.1",
@@ -86,7 +86,7 @@
     "react-dom": "^19.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.8"
   },
   "workspaces": [
     ".",

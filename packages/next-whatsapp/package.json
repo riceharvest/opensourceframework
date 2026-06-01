@@ -46,11 +46,11 @@
   "devDependencies": {
     "@types/node": "^25.4.0",
     "@types/qrcode": "^1.5.6",
+    "@vitest/coverage-v8": "^4.1.8",
     "eslint": "^10.0.3",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^2.1.9",
-    "@vitest/coverage-v8": "^2.1.9"
+    "vitest": "^4.1.8"
   },
   "dependencies": {
     "qrcode": "^1.5.3",
