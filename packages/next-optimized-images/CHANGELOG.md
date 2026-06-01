@@ -1,5 +1,11 @@
 # @opensourceframework/next-optimized-images
 
+## 2.6.5
+
+### Patch Changes
+
+- a75fcf9: Restrict explicit loader detection to the target project's node_modules so parent workspaces do not cause false positives.
+
 ## 2.6.4
 
 ### Patch Changes

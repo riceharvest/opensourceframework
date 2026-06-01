@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/eslint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Shared ESLint flat config for OpenSourceFramework packages",
   "license": "MIT",

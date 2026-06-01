@@ -1,6 +1,6 @@
 {
   "name": "@opensourceframework/tsconfig",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "Shared TypeScript config presets for OpenSourceFramework packages",
   "license": "MIT",
