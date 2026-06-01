@@ -40,6 +40,22 @@ describe('next-optimized-images/loaders', () => {
     }
   });
 
+  it('does not detect loaders from parent node_modules when resolvePath is explicit', () => {
+    const parentPath = fs.mkdtempSync(path.join(os.tmpdir(), 'next-optimized-images-parent-'));
+    const projectPath = path.join(parentPath, 'project');
+    const parentLoaderPath = path.join(parentPath, 'node_modules', 'svg-sprite-loader');
+
+    try {
+      fs.mkdirSync(projectPath);
+      fs.mkdirSync(parentLoaderPath, { recursive: true });
+      fs.writeFileSync(path.join(parentLoaderPath, 'index.js'), 'module.exports = {};');
+
+      expect(detectLoaders(projectPath).svgSprite).toEqual(false);
+    } finally {
+      fs.rmSync(parentPath, { recursive: true, force: true });
+    }
+  });
+
   it('returns the handled image types', () => {
     expect(getHandledImageTypes(getConfig({}))).toEqual({
       jpeg: true,
