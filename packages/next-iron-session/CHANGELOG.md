@@ -1,3 +1,9 @@
+## 8.0.7
+
+### Patch Changes
+
+- 72d7103: Fix declaration builds to avoid Node HTTP type export warnings.
+
 ## 8.0.6
 
 ### Patch Changes
