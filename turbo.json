@@ -2,6 +2,7 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": ["NODE_ENV"],
+  "globalPassThroughEnv": ["TMPDIR", "TMP", "TEMP"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
