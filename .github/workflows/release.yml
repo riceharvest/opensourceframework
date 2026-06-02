@@ -132,6 +132,13 @@ jobs:
             ls "$TARBALL_DIR"/opensourceframework-"$pkg"-*.tgz 2>/dev/null | head -1
           }
 
+          next_build_command() {
+            case "$SMOKE_NEXT" in
+              16.*) echo "next build --webpack" ;;
+              *) echo "next build" ;;
+            esac
+          }
+
           # next-mdx also needs next-mdx-toc
           if [ "$SMOKE_PACKAGE" = "next-mdx" ]; then
             MDX_TARBALL=$(find_tarball next-mdx)
@@ -152,8 +159,7 @@ jobs:
             next-images)
               FIXTURE="$TEMP_DIR/next-images"
               mkdir -p "$FIXTURE/assets" "$FIXTURE/pages"
-              BUILD_CMD="next build"
-              [ "$SMOKE_NEXT" = "16.1.6" ] && BUILD_CMD="next build --webpack"
+              BUILD_CMD="$(next_build_command)"
               cat > "$FIXTURE/package.json" <<EOF
           {"name":"compat","private":true,"scripts":{"build":"$BUILD_CMD"},"dependencies":{"@opensourceframework/next-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
           EOF
@@ -188,8 +194,7 @@ jobs:
             next-optimized-images)
               FIXTURE="$TEMP_DIR/next-optimized-images"
               mkdir -p "$FIXTURE/assets" "$FIXTURE/pages"
-              BUILD_CMD="next build"
-              [ "$SMOKE_NEXT" = "16.1.6" ] && BUILD_CMD="next build --webpack"
+              BUILD_CMD="$(next_build_command)"
               cat > "$FIXTURE/package.json" <<EOF
           {"name":"compat","private":true,"scripts":{"build":"$BUILD_CMD"},"dependencies":{"@opensourceframework/next-optimized-images":"file:$TARBALL","next":"$SMOKE_NEXT","react":"$SMOKE_REACT","react-dom":"$SMOKE_REACT"}}
           EOF

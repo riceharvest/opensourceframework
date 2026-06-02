@@ -70,4 +70,16 @@ if (readmePairs.length === 0) {
 assertSamePairs(releasePairs, readmePairs, '.github/workflows/release.yml');
 assertSamePairs(compatPairs, readmePairs, 'scripts/test-compat.mjs');
 
+if (!releaseWorkflow.includes('16.*) echo "next build --webpack" ;;')) {
+  throw new Error(
+    '.github/workflows/release.yml must run webpack-backed image smoke tests with --webpack for every Next.js 16.x matrix entry.'
+  );
+}
+
+if (/SMOKE_NEXT"\s*=\s*"16\.\d+\.\d+"/.test(releaseWorkflow)) {
+  throw new Error(
+    '.github/workflows/release.yml must not pin Next.js 16 webpack smoke-test selection to a single patch version.'
+  );
+}
+
 console.log(`Compatibility matrices are in sync:\n${formatPairs(readmePairs)}`);
