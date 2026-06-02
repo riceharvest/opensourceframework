@@ -48,7 +48,7 @@
     "test": "vitest run",
     "test:cov": "vitest run --coverage",
     "test:coverage": "pnpm test:cov",
-    "postbuild": "npm run check:exports",
+    "postbuild": "pnpm run check:exports",
     "build": "tsup src/index.tsx --config tsup.config.ts",
     "example:dev": "npm run dev -w examples/vite",
     "build:dev": "tsup src/index.tsx --config tsup.dev.config.ts",
