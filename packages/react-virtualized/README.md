@@ -1,18 +1,26 @@
 [<img src="https://cloud.githubusercontent.com/assets/29597/11737732/0ca1e55e-9f91-11e5-97f3-098f2f8ed866.png" alt="React virtualized" data-canonical-src="https://cloud.githubusercontent.com/assets/29597/11737732/0ca1e55e-9f91-11e5-97f3-098f2f8ed866.png" width="330" height="100" />](http://bvaughn.github.io/react-virtualized/)
 
 React components for efficiently rendering large lists and tabular data.
-Check out [the demo](https://bvaughn.github.io/react-virtualized/) for some examples.
+This maintained fork publishes the classic `react-virtualized` API as
+`@opensourceframework/react-virtualized` for projects that need compatibility with the original
+component surface.
+Check out [the original demo](https://bvaughn.github.io/react-virtualized/) for some examples.
 
 ## A word about `react-window`
 
-If you're considering adding `react-virtualized` to a project, take a look at [`react-window`](https://github.com/bvaughn/react-window) as a possible lighter-weight alternative. [Learn more about how the two libraries compare here.](https://github.com/bvaughn/react-window#how-is-react-window-different-from-react-virtualized)
+[`react-window`](https://github.com/bvaughn/react-window) is a lighter-weight library by the same
+original author. It can be a good fit for new projects with simpler virtualization needs, but it is
+not a drop-in replacement for `react-virtualized`. Use this package when you need the established
+`react-virtualized` components, APIs, and migration surface.
 
 ## Getting started
 
-Install `react-virtualized` using npm.
+Install `@opensourceframework/react-virtualized` using your package manager.
 
 ```shell
-npm install react-virtualized --save
+npm install @opensourceframework/react-virtualized --save
+# or
+pnpm add @opensourceframework/react-virtualized
 ```
 
 ES6, CommonJS, and UMD builds are available with each distribution.
@@ -24,39 +32,17 @@ For example:
 // The Table component ships with a few presentational styles as well.
 // They are optional, but if you want them you will need to also import the CSS file.
 // This only needs to be done once; probably during your application's bootstrapping process.
-import 'react-virtualized/styles.css';
+import '@opensourceframework/react-virtualized/styles.css';
 
 // You can import any component you want as a named export from '@opensourceframework/react-virtualized', eg
-import {Column, Table} from '@opensourceframework/react-virtualized';
-
-// But if you only use a few react-virtualized components,
-// And you're concerned about increasing your application's bundle size,
-// You can directly import only the components you need, like so:
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
-import List from 'react-virtualized/dist/commonjs/List';
+import { Column, Table } from '@opensourceframework/react-virtualized';
 ```
 
 Note webpack 4 makes this optimization itself, see the [documentation](https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free).
 
-If the above syntax looks too cumbersome, or you import react-virtualized components from a lot of places, you can also configure a Webpack alias. For example:
-
-```js
-// Partial webpack.config.js
-{
-  alias: {
-    'react-virtualized/List': 'react-virtualized/dist/es/List',
-  },
-  ...rest
-}
-```
-
-Then you can just import like so:
-
-```js
-import List from 'react-virtualized/List';
-
-// Now you can use <List {...props} />
-```
+Named exports are the supported import style for this scoped package. The published package ships a
+single bundled entry point, so do not copy old examples that import from
+`react-virtualized/dist/commonjs/*` or other unscoped subpaths.
 
 You can also use a global-friendly UMD build:
 
@@ -162,13 +148,13 @@ Here are some great components built on top of react-virtualized:
 
 ## Contributions
 
-Use [GitHub issues](https://github.com/bvaughn/react-virtualized/issues) for requests.
+Use [OpenSource Framework issues](https://github.com/riceharvest/opensourceframework/issues?q=is%3Aissue+is%3Aopen+react-virtualized) for requests.
 
-I actively welcome pull requests; learn how to [contribute](https://github.com/bvaughn/react-virtualized/blob/master/CONTRIBUTING.md).
+Pull requests are welcome in the [OpenSource Framework monorepo](https://github.com/riceharvest/opensourceframework).
 
 ## Changelog
 
-Changes are tracked in the [changelog](https://github.com/bvaughn/react-virtualized/blob/master/CHANGELOG.md).
+Changes are tracked in the package [changelog](CHANGELOG.md).
 
 ## License
 
