@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const packageJson = JSON.parse(await readFile(path.join(repoRoot, 'package.json'), 'utf8'));
 
 function formatPair({ next, react }) {
   return `Next.js ${next} / React ${react}`;
@@ -80,6 +81,16 @@ if (/SMOKE_NEXT"\s*=\s*"16\.\d+\.\d+"/.test(releaseWorkflow)) {
   throw new Error(
     '.github/workflows/release.yml must not pin Next.js 16 webpack smoke-test selection to a single patch version.'
   );
+}
+
+if (!releaseWorkflow.includes('publish: pnpm run publish')) {
+  throw new Error(
+    '.github/workflows/release.yml changesets/action must run the root publish script so release PR merges actually publish packages.'
+  );
+}
+
+if (packageJson.scripts?.publish !== 'changeset publish') {
+  throw new Error('package.json publish script must run `changeset publish`.');
 }
 
 console.log(`Compatibility matrices are in sync:\n${formatPairs(readmePairs)}`);
