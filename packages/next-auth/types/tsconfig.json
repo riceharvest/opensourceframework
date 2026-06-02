@@ -17,7 +17,12 @@
       "next-auth/providers": ["./providers"],
       "next-auth/adapters": ["./adapters"],
       "next-auth/client": ["./client"],
-      "next-auth/jwt": ["./jwt"]
+      "next-auth/jwt": ["./jwt"],
+      "@opensourceframework/next-auth": ["."],
+      "@opensourceframework/next-auth/providers": ["./providers"],
+      "@opensourceframework/next-auth/adapters": ["./adapters"],
+      "@opensourceframework/next-auth/client": ["./client"],
+      "@opensourceframework/next-auth/jwt": ["./jwt"]
     }
   }
 }
