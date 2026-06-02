@@ -82,13 +82,16 @@ For emergency releases, you can manually publish:
 pnpm build
 
 # Publish to npm
-pnpm release
+pnpm run publish
 ```
 
-For canary releases (pre-release versions):
+There is no canary publish script configured in this repository today. If a canary release is
+needed, add and review a dedicated script before using it in CI.
+
+For example, a future canary script might publish with a non-latest tag:
 
 ```bash
-pnpm release:canary
+changeset publish --tag canary
 ```
 
 ## Release Workflow
@@ -137,6 +140,12 @@ If you see `EPUBLISHCONFLICT`:
 If you see permission errors for `@opensourceframework`:
 1. Verify your npm account is a member of the organization
 2. Check with org admins for proper permissions
+
+If `changeset publish` reports `E404 Not Found - PUT https://registry.npmjs.org/@opensourceframework%2f...`
+for scoped packages, treat it as a likely npm token/scope permission problem rather than a missing
+package. npm can return 404 for package writes when the token cannot publish to the scope. Verify
+that the GitHub Actions `NPM_TOKEN` secret belongs to an npm account or automation token with write
+access to the `@opensourceframework` organization, then rerun the Release workflow.
 
 ## Additional Resources
 
