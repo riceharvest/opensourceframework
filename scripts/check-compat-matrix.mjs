@@ -39,6 +39,7 @@ function uniquePairs(pairs) {
 }
 
 const readme = await readFile(path.join(repoRoot, 'README.md'), 'utf8');
+const publishingGuide = await readFile(path.join(repoRoot, 'PUBLISHING.md'), 'utf8');
 const releaseWorkflow = await readFile(
   path.join(repoRoot, '.github/workflows/release.yml'),
   'utf8'
@@ -91,6 +92,18 @@ if (!releaseWorkflow.includes('publish: pnpm run publish')) {
 
 if (packageJson.scripts?.publish !== 'changeset publish') {
   throw new Error('package.json publish script must run `changeset publish`.');
+}
+
+if (!publishingGuide.includes('pnpm run publish')) {
+  throw new Error('PUBLISHING.md must document `pnpm run publish` as the manual publish command.');
+}
+
+if (/pnpm release(?:\s|$)/.test(publishingGuide)) {
+  throw new Error('PUBLISHING.md must not document `pnpm release` as a publish command.');
+}
+
+if (/pnpm release:canary/.test(publishingGuide)) {
+  throw new Error('PUBLISHING.md must not document an unconfigured `pnpm release:canary` script.');
 }
 
 console.log(`Compatibility matrices are in sync:\n${formatPairs(readmePairs)}`);
