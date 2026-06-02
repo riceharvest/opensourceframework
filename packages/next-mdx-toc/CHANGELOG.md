@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.1.8
+
+### Patch Changes
+
+- a3aa53c: Align the internal `@opensourceframework/next-mdx` dependency range with the current workspace release.
+
 ## 0.1.7
 
 ### Patch Changes
