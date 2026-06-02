@@ -373,12 +373,27 @@ jobs:
         run: pnpm audit --audit-level=moderate
         continue-on-error: true
 
-      # Snyk security scan for vulnerability detection
-      # Note: The SNYK_TOKEN is automatically masked by GitHub Actions and will not appear in logs.
-      # For detailed vulnerability reports, monitor the Snyk dashboard directly at https://snyk.io
-      # rather than relying solely on CI output.
+      - name: Check Snyk configuration
+        id: snyk
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          if [ -n "$SNYK_TOKEN" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Snyk security scan for vulnerability detection.
+      # Run the CLI through pnpm instead of the Docker-based action so CI does not fail while
+      # pulling snyk/snyk:node before continue-on-error can take effect.
       - name: Run Snyk Security Scan
-        uses: snyk/actions/node@master
+        if: ${{ steps.snyk.outputs.configured == 'true' }}
+        run: pnpm dlx snyk@latest test --all-projects --severity-threshold=medium
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Report missing Snyk configuration
+        if: ${{ steps.snyk.outputs.configured == 'false' }}
+        run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> "$GITHUB_STEP_SUMMARY"

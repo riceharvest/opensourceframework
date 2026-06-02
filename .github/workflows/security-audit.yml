@@ -43,7 +43,7 @@ jobs:
         timeout-minutes: 10
         run: pnpm install --frozen-lockfile --prefer-offline
 
-      - name: Run npm audit
+      - name: Run pnpm audit
         run: pnpm audit --audit-level=moderate
 
       - name: Check Snyk configuration
@@ -59,13 +59,13 @@ jobs:
 
       - name: Run Snyk Security Scan
         if: ${{ steps.snyk.outputs.configured == 'true' }}
-        uses: snyk/actions/node@master
+        run: pnpm dlx snyk@latest test --all-projects --severity-threshold=medium
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Report missing Snyk configuration
         if: ${{ steps.snyk.outputs.configured == 'false' }}
-        run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> $GITHUB_STEP_SUMMARY
+        run: echo "Snyk scan skipped because SNYK_TOKEN is not configured." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Generate Security Report
         if: always()
