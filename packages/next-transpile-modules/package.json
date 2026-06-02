@@ -17,7 +17,7 @@
     "update:next": "npm run setup && bash scripts/next-update.sh",
     "typings": "tsc",
     "prepublishOnly": "npm run build && npm run typings",
-    "pretest": "npm run setup",
+    "pretest": "pnpm run setup",
     "quickie": "node --trace-uncaught src/__tests__/setup.js && yarn --cwd src/__tests__/__apps__/swc/app run dev",
     "test": "vitest run --passWithNoTests",
     "test:coverage": "pnpm test",
