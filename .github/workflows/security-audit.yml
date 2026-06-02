@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         timeout-minutes: 10
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
 
       - name: Run pnpm audit
         run: pnpm audit --audit-level=moderate
