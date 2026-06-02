@@ -501,47 +501,54 @@ async function main() {
     );
     const reactVirtualizedTarball = await packPackage('packages/react-virtualized', tarballDir);
 
-    
-    
-    
-    
-    
-    
-    
-
-    
     const versionMatrix = [
       { next: '14.2.24', react: '18.3.1' },
       { next: '15.2.0', react: '19.0.0' },
-      { next: '16.1.6', react: '19.2.0' }
+      { next: '16.2.6', react: '19.2.0' },
     ];
 
     for (const versions of versionMatrix) {
-      console.log(`\nRunning smoke tests for Next.js ${versions.next} / React ${versions.react}...`);
-      
+      console.log(
+        `\nRunning smoke tests for Next.js ${versions.next} / React ${versions.react}...`
+      );
+
       const versionTempRoot = path.join(tempRoot, versions.next.replace(/\./g, '-'));
       await mkdir(versionTempRoot, { recursive: true });
 
       await smokeNextImages(nextImagesTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-images is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-images is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeNextComposePlugins(nextComposePluginsTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-compose-plugins is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-compose-plugins is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeNextOptimizedImages(nextOptimizedImagesTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-optimized-images is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-optimized-images is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeNextMdx(nextMdxTarball, nextMdxTocTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-mdx is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-mdx is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeNextSession(nextSessionTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-session is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-session is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeNextAuth(nextAuthTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/next-auth is verified safe with Next.js ${versions.next} / React ${versions.react}`);
-      
+      console.log(
+        `[SAFE] @opensourceframework/next-auth is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
+
       await smokeReactVirtualized(reactVirtualizedTarball, versionTempRoot, versions);
-      console.log(`[SAFE] @opensourceframework/react-virtualized is verified safe with Next.js ${versions.next} / React ${versions.react}`);
+      console.log(
+        `[SAFE] @opensourceframework/react-virtualized is verified safe with Next.js ${versions.next} / React ${versions.react}`
+      );
     }
 
     console.log('Compatibility smoke checks passed.');
