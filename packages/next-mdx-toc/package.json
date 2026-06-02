@@ -41,7 +41,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@opensourceframework/next-mdx": "^0.6.2",
+    "@opensourceframework/next-mdx": "^0.7.1",
     "mdast-util-toc": "^5.1.0",
     "remark": "^13.0.0",
     "unist-util-visit": "^2.0.3"
