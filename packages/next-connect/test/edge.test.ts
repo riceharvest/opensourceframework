@@ -37,15 +37,20 @@ describe("EdgeRouter", () => {
 
   test("handler() - handles errors", async () => {
     const error = new Error("💥");
+    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const req = new Request("http://localhost/");
-    const router = createEdgeRouter<Request, any>()
-      .get(() => {
-        throw error;
-      });
-    
-    const res = await router.handler()(req, {});
-    expect(res).toBeInstanceOf(Response);
-    expect((res as Response).status).toBe(500);
+    const router = createEdgeRouter<Request, any>().get(() => {
+      throw error;
+    });
+
+    try {
+      const res = await router.handler()(req, {});
+      expect(res).toBeInstanceOf(Response);
+      expect((res as Response).status).toBe(500);
+      expect(consoleSpy).toHaveBeenCalledWith(error);
+    } finally {
+      consoleSpy.mockRestore();
+    }
   });
 
   test("handler() - custom onError", async () => {
