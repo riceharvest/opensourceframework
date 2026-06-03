@@ -106,24 +106,24 @@ The following tests are failing and need investigation before publication:
 
 **Status: ✅ Ready**
 
-**Package Type:** Fork (MIT license, original by twopluszero)
+**Package Type:** Maintained compatibility fork (MIT license, original by Aref Aslani)
 
 **Metadata:**
 - Name: `@opensourceframework/next-images`
-- Version: `1.8.7`
+- Version: `1.9.3`
 - License: MIT
-- Author: OpenSource Framework Contributors
+- Author: OpenSource Framework Contributors (fork), Original: Aref Aslani
 - Repository: https://github.com/opensourceframework/opensourceframework
 
 **Checklist:**
 - [x] package.json configured correctly
 - [x] LICENSE file present (MIT)
 - [x] Build successful
-- [x] Tests passing (40 tests)
+- [x] Tests passing (11 tests)
 - [x] README with badges
 - [x] Changeset created
 
-**Note:** This package is deprecated. Next.js 10+ includes a built-in Image component.
+**Note:** This package remains actively maintained as a compatibility option for teams that rely on the classic `next-images` plugin workflow. `next/image` may be a good fit for new applications, but the fork is not deprecated solely because Next.js includes a native image component.
 
 **Ready to publish:** Yes
 
