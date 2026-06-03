@@ -26,4 +26,12 @@ describe('@opensourceframework/react-virtualized', () => {
     expect(readme).not.toContain("import 'react-virtualized");
     expect(readme).not.toContain("from 'react-virtualized");
   });
+
+  it('keeps coverage collection focused on runtime sources', async () => {
+    const config = await readFile(join(__dirname, '..', 'vitest.config.mts'), 'utf8');
+
+    expect(config).toContain("'source-stripped/**/*.example.jsx'");
+    expect(config).toContain("'source-stripped/demo/**'");
+    expect(config).toContain("'source-stripped/vendor/**'");
+  });
 });

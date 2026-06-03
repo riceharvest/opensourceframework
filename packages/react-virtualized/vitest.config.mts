@@ -15,7 +15,16 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       include: ['source-stripped/**'],
-      exclude: ['source-stripped/**/*.jest.jsx'],
+      exclude: [
+        'source-stripped/**/*.jest.jsx',
+        'source-stripped/**/*.e2e.jsx',
+        'source-stripped/**/*.example.jsx',
+        'source-stripped/**/*.ssr.jsx',
+        'source-stripped/demo/**',
+        'source-stripped/jest-setup.jsx',
+        'source-stripped/TestUtils.jsx',
+        'source-stripped/vendor/**',
+      ],
     },
   },
 });
