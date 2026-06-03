@@ -12,11 +12,17 @@ describe('next-pwa unit tests', () => {
     expect(typeof nextPwa).toBe('function');
   });
 
-  it('should return a configuration object', () => {
-    const withPWA = nextPwa({ dest: 'public' });
-    const config = withPWA({ basePath: '/test' });
-    expect(typeof config).toBe('object');
-  });
+  it(
+    'should return a configuration object',
+    () => {
+      const withPWA = nextPwa({ dest: 'public' });
+      const config = withPWA({ basePath: '/test' });
+      expect(typeof config).toBe('object');
+    },
+    // The enabled path loads Workbox/globby; V8 coverage on GitHub's Ubuntu
+    // runners can exceed Vitest's 5s default even though there is no hang.
+    15000
+  );
 
   it('should handle disable option', () => {
     const withPWA = nextPwa({ disable: true });
