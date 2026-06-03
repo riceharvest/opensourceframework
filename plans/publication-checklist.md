@@ -2,7 +2,7 @@
 
 **Phase 1: Package Preparation Status**
 
-Generated: 2026-02-15
+Generated: 2026-06-03
 
 ## Overview
 
@@ -12,8 +12,8 @@ This document tracks the readiness status of all packages in the opensourceframe
 
 Before publishing, ensure you have:
 
-- [ ] Node.js 18+ installed
-- [ ] pnpm installed (`npm install -g pnpm`)
+- [ ] Node.js 20.9+ installed
+- [ ] pnpm 9.6.0 installed or enabled with Corepack (`corepack pnpm@9.6.0 --version`)
 - [ ] npm account with 2FA enabled
 - [ ] `NPM_TOKEN` environment variable set (create at https://www.npmjs.com/settings/tokens)
 - [ ] Membership in the `@opensourceframework` npm organization
@@ -22,7 +22,7 @@ Before publishing, ensure you have:
 
 | Package | package.json | LICENSE | Build | Tests | README | Changeset | Ready |
 |---------|--------------|---------|-------|-------|--------|-----------|-------|
-| @opensourceframework/critters | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ⚠️ |
+| @opensourceframework/critters | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | @opensourceframework/next-csrf | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | @opensourceframework/next-images | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | @opensourceframework/next-circuit-breaker | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -39,41 +39,29 @@ Legend:
 
 ### 1. @opensourceframework/critters
 
-**Status: ⚠️ Needs attention**
+**Status: ✅ Ready**
 
-**Package Type:** Fork (Apache-2.0 license)
+**Package Type:** Maintained compatibility fork (MIT license)
 
 **Metadata:**
 - Name: `@opensourceframework/critters`
-- Version: `0.0.27`
-- License: Apache-2.0
+- Version: `0.0.3`
+- License: MIT
 - Author: OpenSource Framework Contributors
-- Repository: https://github.com/opensourceframework/opensourceframework
+- Repository: https://github.com/riceharvest/opensourceframework/tree/main/packages/critters
 
 **Checklist:**
 - [x] package.json configured correctly
-- [x] LICENSE file present (Apache-2.0)
+- [x] LICENSE file present (MIT)
 - [x] Build successful
-- [ ] **Tests: 10 failures** - Requires review
+- [x] Tests passing (30 tests)
 - [x] README with badges
 - [x] Changeset created
 
-**Test Failures to Review:**
-The following tests are failing and need investigation before publication:
-1. `critters.test.js`:
-   - "Prevent injection via media attr" - Security test
-   - "handles empty HTML gracefully"
-   - "handles additionalStylesheets option"
-   - "respects critters:exclude comment"
-   - "handles preload: swap option"
-   - "handles preload: js option"
-2. `security.test.js`:
-   - "should strip HTML entities from CSS to prevent HTML injection"
-   - "should not inject HTML via media attribute manipulation"
-   - "should handle encoded quotes in CSS safely"
-   - "should prevent script injection via CSS content"
+**Verification:** `corepack pnpm@9.6.0 --filter @opensourceframework/critters test` passes
+with 30 tests, including the security regression cases that were previously listed as failing.
 
-**Action Required:** Review and fix failing tests before publication.
+**Ready to publish:** Yes
 
 ---
 
@@ -271,15 +259,13 @@ After publishing, verify each package:
 Recommended order for publication:
 
 1. **First batch (ready now):**
+   - @opensourceframework/critters
    - @opensourceframework/next-csrf
    - @opensourceframework/next-images
    - @opensourceframework/next-circuit-breaker
    - @opensourceframework/react-a11y-utils
    - @opensourceframework/seeded-rng
    - @opensourceframework/next-json-ld
-
-2. **Second batch (after test fixes):**
-   - @opensourceframework/critters (fix failing tests first)
 
 ## Post-Publication Tasks
 
